@@ -1,0 +1,151 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Any Formie form: Formie checks, saves (Formie → Submissions) and emails each submission.'
+fieldLayouts:
+  ec1f18e3-8b17-4279-9483-543b9a99b66a:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: df624304-92d7-4cbd-9bf2-278048320d79 # Form
+            handle: null
+            instructions: 'The form to show. Edit its fields, emails and thank-you message in Formie (the “Edit form fields” link under it).'
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cf3df797-b1d0-4e61-bf6e-f5771f6305f8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'Over the form, e.g. “Contact Us”. Optional.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a5d79891-0f09-4bfd-bfb6-8e37b3a441e7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: 'A line or two under the heading. Optional.'
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b7d87b05-8909-473f-a5f2-079544fccc52
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: 'For links to this form, e.g. “contact” → /page/#contact. Optional.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 56a5b4a1-8189-4777-830a-dcceaa494e8c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: ac1f83a6-f608-4dc0-8ee1-7923b05a4a9c
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 57d1d2c9-ac0f-40ee-8914-36aa14392881 # Space Above
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e90470d7-71cc-49be-9903-ab07defd2f3f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f5aa0ceb-3e8f-47f1-91df-0644c97e3b82 # Space Below
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 658b2948-245d-40e4-a398-d92a1f6a6edd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 78f46f52-ad0b-4ac0-8879-936a8e4bb65d # Background
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 471053fb-ed67-4cfe-b884-f0d5cd15e6c7
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Section Settings'
+        uid: ac717219-7803-4004-a445-63b097202576
+        userCondition: null
+    thumbFieldKey: null
+handle: formBlock
+hasTitleField: false
+icon: envelope
+name: Form
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

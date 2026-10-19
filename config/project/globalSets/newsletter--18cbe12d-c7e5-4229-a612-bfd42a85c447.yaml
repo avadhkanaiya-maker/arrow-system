@@ -1,0 +1,173 @@
+fieldLayouts:
+  12586012-eeca-4668-acfb-e7b2c7ed372d:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: e9eb2598-10fc-427c-a196-c6547e465723 # Show Newsletter
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c9bfcd30-46c0-4fbd-8585-47b11ca67d55
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3e29c535-cf93-479d-a6f9-57655d7ba935
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 62a4cca2-13d9-4c85-a60a-8db53e5fa974
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 782eb571-943e-4ca4-b880-4a0afc810158 # Email Placeholder
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2102243b-7184-45c5-a746-d4baab211935
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 352e96fd-a10e-4c39-86e3-35a8e220a959 # Button Label
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 76fd7be3-a38a-4517-8d8f-8b02b6243b6c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: d6b87abd-3aac-4bb1-8350-02376ad8bb51 # Note Text
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: eedc5a64-ecdf-4bf5-9933-5e622305acda
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 86c8618c-9777-4c2f-bef4-0a61d63d9a7b # Note Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 16584740-97fa-4015-be5b-e84ec11cc63e
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 6780540e-f518-4379-adbf-7a4769081535
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c2550039-cd39-4429-a99c-27e7268241a2 # HubSpot Portal ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1b3eff81-112a-4199-817c-784ecb14020e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:47:05+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 564e94db-5bf1-424f-80da-9c6d0c891891 # HubSpot Form GUID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 29ff6918-65eb-45c8-bcf8-1cf47c32e048
+            userCondition: null
+            warning: null
+            width: 100
+        name: HubSpot
+        uid: a34f5cd6-2665-41f9-aa13-13d3b0033a75
+        userCondition: null
+    thumbFieldKey: null
+handle: newsletter
+name: Newsletter
+sortOrder: 2

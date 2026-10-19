@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Label / value rows (outside the tabs).'
+fieldLayouts:
+  827722da-97be-4926-b470-6684882ed89c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'e.g. “Technical Specifications”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: db94f860-bc30-4dc8-94f0-e18a53651b20
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b9225e97-f40f-4ff5-87eb-1115692b0d1b # Terms
+            handle: null
+            instructions: null
+            label: Specifications
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f2fb66a3-ca1e-46f5-b6e7-e111d945405d
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: dab314f7-e981-47c4-9d53-57f5373b165e
+        userCondition: null
+    thumbFieldKey: null
+handle: specsBlock
+hasTitleField: false
+icon: table-list
+name: Specifications
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

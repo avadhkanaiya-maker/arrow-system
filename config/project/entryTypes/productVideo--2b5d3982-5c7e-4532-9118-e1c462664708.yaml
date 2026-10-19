@@ -1,0 +1,94 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A click-to-play YouTube video.'
+fieldLayouts:
+  c062d540-0f12-4489-af8b-160dd2071593:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
+            handle: null
+            instructions: 'YouTube link. Shown as a still with a play button; the video loads on click.'
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 774faf6f-0c4f-4a37-a09f-b79edb36477f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b6c6513e-722f-4c79-8940-687ec0ce936f # Video Cover Image
+            handle: null
+            instructions: "The still shown before the video plays (16:9). Empty = YouTube's own still."
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1f44bedf-42c4-4e29-8ccc-4468795ae97c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 55eb5891-8e8d-495e-afcf-eed5a49a4487 # Video Caption
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 85f25dce-698c-4fe6-899d-60b3ca98b8b0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 6805077a-554f-47fb-94f9-b53436671aaa # Show In
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5a2d6583-a56f-40d7-bc77-47ccbb836ee4
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 6cda33d4-381c-4d51-bdbc-d4afe374b375
+        userCondition: null
+    thumbFieldKey: null
+handle: productVideo
+hasTitleField: false
+icon: circle-play
+name: 'Product Video'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{videoCaption}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

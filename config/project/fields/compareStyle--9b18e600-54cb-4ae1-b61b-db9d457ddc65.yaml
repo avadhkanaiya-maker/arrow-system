@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: compareStyle
+instructions: null
+name: 'Column Style'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Pros (✓ ticks, white card)'
+        -
+          - value
+          - pro
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Cons / limits (✕ crosses, grey card)'
+        -
+          - value
+          - con
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -1,0 +1,350 @@
+[
+    {
+        "slug": "arrowjet-eco-330r",
+        "title": "ArrowJet Eco 330R",
+        "tagline": "Entry-level commercial inkjet label printer. Robust build, low operating cost.",
+        "image": "../assets/products/web/listing-arrowjet-eco-330r.webp",
+        "alt": "ArrowJet Eco 330R",
+        "specs": [
+            [
+                "Colors",
+                "CMYK"
+            ],
+            [
+                "Print technology",
+                "Memjet DuraFlex"
+            ],
+            [
+                "Max printing width",
+                "12.75 inches (324 mm)"
+            ],
+            [
+                "Resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Ink",
+                "Waterbased Pigment Inks"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "product-detail.html",
+        "title": "ArrowJet Aqua 330R Lite",
+        "tagline": "High-resolution digital label printer with production-grade speed up to 150 ft/min.",
+        "image": "../assets/products/web/listing-arrowjet-aqua-330r-lite.webp",
+        "alt": "ArrowJet Aqua 330R Lite",
+        "specs": [
+            [
+                "Colors",
+                "CMYK"
+            ],
+            [
+                "Print speed",
+                "90 ft or 150 ft/min"
+            ],
+            [
+                "Max printing width",
+                "12.75 inches (324 mm)"
+            ],
+            [
+                "Resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Ink",
+                "Waterbased Pigment Inks"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-aqua-330r-ii",
+        "title": "ArrowJet Aqua 330R II",
+        "tagline": "Advanced inkjet label printing system — rugged build, unrivalled CMYK output quality.",
+        "image": "../assets/products/web/listing-arrowjet-aqua-330r-ii.webp",
+        "alt": "ArrowJet Aqua 330R II",
+        "specs": [
+            [
+                "Colors",
+                "CMYK"
+            ],
+            [
+                "Print speed",
+                "90 ft/min"
+            ],
+            [
+                "Max printing width",
+                "12.69 inches (322 mm)"
+            ],
+            [
+                "Resolution",
+                "Up to 1600 × 1600 dpi"
+            ],
+            [
+                "Technology",
+                "DuraCore™ Inkjet with Memjet Aqueous Pigment"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-aqua-800m",
+        "title": "ArrowJet Aqua 800M",
+        "tagline": "25″ wide web inkjet solution for wider flexible packaging.",
+        "image": "../assets/products/web/listing-arrowjet-aqua-800m.webp",
+        "alt": "ArrowJet Aqua 800M",
+        "specs": [
+            [
+                "Colors",
+                "CMYK"
+            ],
+            [
+                "Print speed",
+                "195 ft/min"
+            ],
+            [
+                "Max printing width",
+                "25.39 inches (645 mm)"
+            ],
+            [
+                "Resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Ink",
+                "Waterbased Pigment Inks"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-bolt",
+        "title": "Arrow Bolt 330R Hybrid Pro M",
+        "tagline": "Designed for unmatched speed, up to 150 meters/min.",
+        "image": "../assets/products/web/listing-arrow-bolt-330r-hybrid-pro-m.webp",
+        "alt": "Arrow Bolt 330R Hybrid Pro M",
+        "specs": [
+            [
+                "Colors",
+                "Priming + CMYK + Varnish"
+            ],
+            [
+                "Print speed",
+                "150 meters/min"
+            ],
+            [
+                "Max printing width",
+                "12.75 inches (324 mm)"
+            ],
+            [
+                "Resolution",
+                "1600 × 1280 dpi"
+            ],
+            [
+                "Ink",
+                "Waterbased Pigment Inks"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-hybrid-m-pro-plus",
+        "title": "ArrowJet Aqua 330R Hybrid Pro+ M",
+        "tagline": "Experience the ultimate blend of digital speed and analog finesse for premium labels.",
+        "image": "../assets/products/web/listing-arrowjet-aqua-330r-hybrid-pro-plus-m.webp",
+        "alt": "ArrowJet Aqua 330R Hybrid Pro+ M",
+        "specs": [
+            [
+                "Colors",
+                "CMYK + White (Flexo)"
+            ],
+            [
+                "Max print speed",
+                "Up to 195 ft/min (59.4 m/min)"
+            ],
+            [
+                "Max print width",
+                "12.75 inches (324 mm)"
+            ],
+            [
+                "Resolution",
+                "Up to 1600 × 1600 dpi"
+            ],
+            [
+                "Modular flexo options",
+                "Primer, Matt Varnish, Gloss Varnish & Cold Foiling"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrow-overjet-pro-700",
+        "title": "Arrow OverJet Pro 700",
+        "tagline": "High speed direct-to-package inkjet printer.",
+        "image": "../assets/products/web/listing-arrow-overjet-pro-700.webp",
+        "alt": "Arrow OverJet Pro 700",
+        "specs": [
+            [
+                "Colors",
+                "CMYK"
+            ],
+            [
+                "Belt speed",
+                "Up to 195 ft/min"
+            ],
+            [
+                "Max width",
+                "25.75″ (654 mm), media flexibility up to 31.5″"
+            ],
+            [
+                "Resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Ink",
+                "Waterbased Pigment Inks"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-nova-250",
+        "title": "ArrowJet Nova 250R+",
+        "tagline": "Inline digital printer and laser die-cutter.",
+        "image": "../assets/products/web/listing-arrowjet-nova-250r-plus.webp",
+        "alt": "ArrowJet Nova 250R+",
+        "specs": [
+            [
+                "Max media width",
+                "250 mm"
+            ],
+            [
+                "Print resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Print speed",
+                "5–20 m/min (based on substrate)"
+            ],
+            [
+                "Cutting system",
+                "Optional laser or rotary cutter"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-nova250r-inline-digital-printer-and-laser-die-cutter-2",
+        "title": "ArrowJet Nova 250R",
+        "tagline": "Inline digital printer and laser die-cutter.",
+        "image": "../assets/products/web/listing-arrowjet-nova-250r.webp",
+        "alt": "ArrowJet Nova 250R",
+        "specs": [
+            [
+                "Max media width",
+                "250 mm"
+            ],
+            [
+                "Print resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Print speed",
+                "3 m/min to 18 m/min"
+            ],
+            [
+                "Cutting speed",
+                "8.8″ (225 mm) × unlimited length"
+            ],
+            [
+                "Cutting mode",
+                "Full-cut, half-cut, perforation, and more at one process"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-nova-330r",
+        "title": "ArrowJet Nova 330R",
+        "tagline": "High resolution inkjet printing using Duraflex engine & in-line laser finishing.",
+        "image": "../assets/products/web/listing-arrowjet-nova-330r.webp",
+        "alt": "ArrowJet Nova 330R",
+        "specs": [
+            [
+                "Max media width",
+                "330 mm"
+            ],
+            [
+                "Print resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Print speed",
+                "27 m/min"
+            ],
+            [
+                "Cutting speed",
+                "45 m/min"
+            ],
+            [
+                "Technology",
+                "Waterbased Inkjet Inks"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-lumina-48f",
+        "title": "ArrowJet Lumina 48F",
+        "tagline": "The smartest entry in UV flatbed technology. Low on budget, high on value.",
+        "image": "../assets/products/web/listing-arrowjet-lumina-48f.webp",
+        "alt": "ArrowJet Lumina 48F",
+        "specs": [
+            [
+                "Print speed",
+                "Up to 870 ft²/hr"
+            ],
+            [
+                "Max printing width",
+                "2500 × 1300 mm"
+            ],
+            [
+                "Resolution",
+                "1200 dpi"
+            ]
+        ],
+        "filters": ""
+    },
+    {
+        "slug": "arrowjet-aqua-330r-hybrid-pro-m",
+        "title": "ArrowJet Hybrid Pro M",
+        "tagline": "Elevate your prints, redefine possibilities.",
+        "image": "../assets/products/web/listing-arrowjet-hybrid-pro-m.webp",
+        "alt": "ArrowJet Hybrid Pro M",
+        "specs": [
+            [
+                "Colors",
+                "Priming + CMYK + Varnish"
+            ],
+            [
+                "Print speed",
+                "150 ft/min"
+            ],
+            [
+                "Max printing width",
+                "12.75 inches (324 mm)"
+            ],
+            [
+                "Resolution",
+                "1600 × 1600 dpi"
+            ],
+            [
+                "Ink",
+                "Waterbased Pigment Inks"
+            ]
+        ],
+        "filters": ""
+    }
+]

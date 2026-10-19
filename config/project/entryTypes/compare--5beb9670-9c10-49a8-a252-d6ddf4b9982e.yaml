@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Two columns side by side, e.g. pros and cons'
+fieldLayouts:
+  1b37f035-2319-43e0-933e-70f17b2b4b2d:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2663b822-43f0-48c5-a077-83b90c6d5529 # Columns
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ad4a0e52-2c0a-4d1e-9ec6-f82fb863f7b6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: efec084e-a8bd-405f-8dff-667cda8ec77c
+        userCondition: null
+    thumbFieldKey: null
+handle: compare
+hasTitleField: false
+icon: table-columns
+name: Comparison
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

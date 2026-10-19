@@ -1,0 +1,27 @@
+{#
+  Helpers for Navigation plugin menu items (nodes).
+  - An item without a destination (Passive) renders href="#" data-todo="… page", the design's convention for links
+    whose page doesn't exist yet (site.js stops them jumping to the top of the page).
+  - getUrl() is used rather than the raw url property, so items linked to an entry get that entry's URL.
+#}
+
+{# href (+ target/rel, or data-todo) attributes for a node #}
+{%- macro attrs(node) -%}
+  {%- set url = node.getUrl() -%}
+  {%- if url -%}
+    href="{{ url }}"{% if node.newWindow %} target="_blank" rel="noopener"{% endif %}
+  {%- else -%}
+    href="#" data-todo="{{ node.title }} page"
+  {%- endif -%}
+{%- endmacro -%}
+
+{# Second line under a mega menu product link: typed on the item, else the linked entry's Menu Description #}
+{%- macro description(node) -%}
+  {{- node.itemDescription ?? '' ?: (node.element.menuDescription ?? '') -}}
+{%- endmacro -%}
+
+{# Icon of an Industries menu link: chosen on the item, else the linked entry's Menu Icon #}
+{%- macro icon(node) -%}
+  {%- set own = node.menuIcon.value ?? '' -%}
+  {{- own ?: (node.element.menuIcon.value ?? '') -}}
+{%- endmacro -%}

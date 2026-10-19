@@ -1,0 +1,51 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Custom HTML code (admins only)'
+fieldLayouts:
+  c0e42b98-556f-4176-a7b3-ebc2174fe52b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 18b6daf0-afd3-4e27-abbd-f341c7160f1b # HTML Code
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b63c96f0-fa39-4b05-9d83-79d7f0f9a601
+            userCondition:
+              class: craft\elements\conditions\users\UserCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\users\AdminConditionRule
+                  uid: 01279102-214b-46c8-9bba-d6a98c3a1d43
+                  value: true
+              elementType: craft\elements\User
+              fieldContext: global
+            warning: null
+            width: 100
+        name: Content
+        uid: dc749841-144d-4300-a508-48935bba9a4e
+        userCondition: null
+    thumbFieldKey: null
+handle: html
+hasTitleField: false
+icon: code
+name: HTML
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: newsletterEnabled
+instructions: 'Turn off to hide the newsletter band on every page.'
+name: 'Show Newsletter'
+searchable: false
+settings:
+  default: true
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

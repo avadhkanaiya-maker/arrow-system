@@ -1,0 +1,194 @@
+{#
+  /upcoming-exhibitions/ (Upcoming Exhibitions Page single; design: Arrowsystem_local/exhibitions/upcoming.html). D1.
+  The year's shows: Exhibitions with exact dates in the schedule year (this year; or the next show's year when this year
+  has none), by start date. js/exhibitions/upcoming.js marks each show past / on now / next from today and moves the
+  ones that have ended into "Took place earlier".
+  Texts and buttons: Entries → Upcoming Exhibitions Page.
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% import '_macros/exhibitions' as ex %}
+
+{% set listingPage = craft.entries.section('exhibitionsPage').one() %}
+{% set today = now|date('Y-m-d') %}
+{% set dated = craft.entries.section('exhibitions').with(['showLogo']).all()|filter(s => (s.datePrecision.value ?? 'exact') == 'exact' and s.startDate)|sort((a, b) => a.startDate <=> b.startDate) %}
+{% set nextShow = dated|filter(s => (s.endDate ?? s.startDate)|date('Y-m-d') >= today)|first %}
+{% set year = now|date('Y') %}
+{% if not (dated|filter(s => s.startDate|date('Y') == year)|length) and nextShow %}{% set year = nextShow.startDate|date('Y') %}{% endif %}
+{% set shows = dated|filter(s => s.startDate|date('Y') == year) %}
+{% set months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] %}
+
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.url,
+    noindex: entry.seoNoIndex,
+    ogType: 'article',
+    image: entry.socialImage.one(),
+    schema: [
+      {'@type': 'CollectionPage', '@id': entry.url ~ '#webpage', url: entry.url, name: pageTitle, inLanguage: currentSite.language},
+      {'@type': 'BreadcrumbList', itemListElement: [
+        {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl},
+        {'@type': 'ListItem', position: 2, name: listingPage.title ?? 'Exhibitions', item: listingPage.url ?? siteUrl},
+        {'@type': 'ListItem', position: 3, name: entry.title, item: entry.url},
+      ]},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/exhibitions/exhibitions.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/css/exhibitions/upcoming.css') }}">
+  <script src="{{ url('assets/js/exhibitions/upcoming.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <section class="page-hero up-hero" aria-labelledby="page-title">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          {% if listingPage %}<li><a href="{{ listingPage.url }}">{{ listingPage.title }}</a></li>{% endif %}
+          <li><a href="{{ entry.url }}" aria-current="page">{{ entry.title }}</a></li>
+        </ol>
+      </nav>
+      <div class="page-hero__grid">
+        <div class="page-hero__body">
+          {% if entry.eyebrow %}<p class="eyebrow">{{ entry.eyebrow }}</p>{% endif %}
+          <h1 class="page-hero__title" id="page-title">{{ text.highlight(entry.sectionHeading ?: entry.title) }}</h1>
+          <svg class="arrow-line" viewBox="0 0 132 14" aria-hidden="true" focusable="false"><path d="M1 7h126M120 1.5 127 7l-7 5.5"/></svg>
+          {% if entry.sectionLead %}<p class="page-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
+          <div class="btn-row">
+            {% if entry.ctaLink and entry.ctaLink.url %}<a class="btn btn--primary btn--lg" {{ links.attrs(entry.ctaLink) }}>{{ entry.ctaLink.label }}</a>{% endif %}
+            <a class="btn btn--outline btn--lg" href="#schedule">View {{ year }} Schedule</a>
+          </div>
+          <dl class="hero-stats">
+            <div class="hero-stat">
+              <dt>Shows in {{ year }}</dt>
+              <dd>{{ shows|length }}</dd>
+            </div>
+            {% if nextShow %}
+            <div class="hero-stat" data-next-stat>
+              <dt>Next show</dt>
+              <dd><span data-next-date>{{ nextShow.startDate|date('M j') }}</span><span class="hero-stat__sub" data-next-name>{{ nextShow.title }}</span></dd>
+            </div>
+            {% endif %}
+          </dl>
+        </div>
+        <nav class="track-card" aria-label="{{ year }} show calendar">
+          <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
+          <span class="rings rings--hero" aria-hidden="true"></span>
+          <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
+          <span class="crop crop--bl" aria-hidden="true"></span><span class="crop crop--br" aria-hidden="true"></span>
+          <div class="track-card__head">
+            <p class="track-card__title">{{ year }} at a glance</p>
+            <ul class="track-legend" aria-hidden="true">
+              <li class="track-legend__item track-legend__item--past">Took place</li>
+              <li class="track-legend__item track-legend__item--next">Upcoming</li>
+            </ul>
+          </div>
+          <ol class="cal-grid" data-cal>
+            {% for name in months %}
+            {% set m = loop.index %}
+            {% set inMonth = shows|filter(s => s.startDate|date('n') == m) %}
+            {% if inMonth|length %}
+            <li class="cal-month has-shows" data-month="{{ m }}">
+              <a class="cal-month__link" href="#show-{{ (inMonth|first).slug }}" data-month-link="{{ m }}" data-month-name="{{ name }}">
+                <span class="cal-month__name"><abbr title="{{ name }}">{{ name|slice(0, 3) }}</abbr></span>
+                <span class="cal-month__count"><strong>{{ inMonth|length }}</strong> show{{ inMonth|length != 1 ? 's' }}</span>
+                <span class="cal-month__dots" aria-hidden="true">{% for s in inMonth|slice(0, 6) %}<span class="cal-dot" data-dot="{{ s.slug }}"></span>{% endfor %}{% if inMonth|length > 6 %}<span class="cal-dot cal-dot--more">+{{ inMonth|length - 6 }}</span>{% endif %}</span>
+                <span class="visually-hidden">: show {{ name }}'s exhibitions</span>
+              </a>
+            </li>
+            {% else %}
+            <li class="cal-month is-empty" data-month="{{ m }}">
+              <span class="cal-month__name"><abbr title="{{ name }}">{{ name|slice(0, 3) }}</abbr></span>
+              <span class="cal-month__count">No shows</span>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ol>
+          <p class="track-card__note">Select a month to jump to its shows.</p>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="section schedule" id="schedule" aria-labelledby="schedule-title">
+    <span class="rings rings--upcoming" aria-hidden="true"></span>
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Schedule</p>
+          <h2 class="section-title" id="schedule-title">{{ year }} <span class="hl">Show</span> Schedule</h2>
+        </div>
+        {% if listingPage %}<a class="text-link" href="{{ listingPage.url }}#past">Past exhibitions <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+      </header>
+      <div class="show-list-wrap">
+        <span class="dot-grid dot-grid--list" aria-hidden="true"></span>
+        <h3 class="show-group__title" data-upcoming-title hidden><span class="show-group__dot show-group__dot--next" aria-hidden="true"></span>Upcoming</h3>
+        <ol class="show-list" data-upcoming-list>
+        {% for show in shows %}
+        {% set logo = show.showLogo.one() %}
+        <li class="show-row" id="show-{{ show.slug }}" data-show data-start="{{ show.startDate|date('Y-m-d') }}" data-end="{{ (show.endDate ?? show.startDate)|date('Y-m-d') }}">
+          <div class="show-row__stub">
+            <span class="ticket__notch show-row__notch--a" aria-hidden="true"></span>
+            <span class="ticket__notch show-row__notch--b" aria-hidden="true"></span>
+            <span class="show-row__num" aria-hidden="true">{{ '%02d'|format(loop.index) }}</span>
+            <p class="show-row__date" aria-hidden="true"><span class="show-row__month">{{ show.startDate|date('M') }}</span><span class="show-row__days">{{ ex.days(show) }}</span><span class="show-row__yr">{{ show.startDate|date('Y') }}</span></p>
+            <p class="show-row__countdown" data-countdown hidden><span data-countdown-num></span> <span data-countdown-label></span></p>
+          </div>
+          <div class="show-row__main">
+            <div class="show-row__logo">{% if logo %}<img src="{{ logo.url }}" width="{{ logo.width }}" height="{{ logo.height }}" loading="lazy" decoding="async" alt="{{ logo.alt }}">{% endif %}</div>
+            <div class="show-row__info">
+              <p class="show-row__status"><span class="badge" data-status hidden></span></p>
+              <h3 class="show-row__title">{{ show.title }}</h3>
+              <ul class="show-facts show-row__facts">
+                <li class="show-fact"><span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span><span><span class="show-fact__label">Dates</span> <time datetime="{{ show.startDate|date('Y-m-d') }}">{{ ex.dates(show, 'long') }}</time></span></li>
+                <li class="show-fact"><span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></span><span><span class="show-fact__label">Location</span> {{ show.city ?: 'To be announced' }}</span></li>
+                <li class="show-fact"><span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg></span><span><span class="show-fact__label">Booth</span> {{ show.boothNumber ?: 'To be announced' }}</span></li>
+                <li class="show-fact"><span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg></span><span><span class="show-fact__label">Tech Spotlight</span> {{ show.techSpotlight ?: 'To be announced' }}</span></li>
+              </ul>
+              <div class="btn-row">
+                {% if entry.ctaLink and entry.ctaLink.url %}<a class="btn btn--primary" {{ links.attrs(entry.ctaLink) }} data-cta-upcoming>{{ entry.ctaLink.label }}<span class="visually-hidden"> at {{ show.title }}</span></a>{% endif %}
+                {% if show.url %}
+                <a class="text-link" href="{{ show.url }}" data-cta-past hidden>See the photos <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                {% elseif listingPage %}
+                <a class="text-link" href="{{ listingPage.url }}#past" data-cta-past hidden>See past exhibitions <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+        </ol>
+        <p class="show-group__empty" data-upcoming-empty hidden>More shows will be announced soon. {% if entry.ctaLink and entry.ctaLink.url %}<a class="text-link" {{ links.attrs(entry.ctaLink) }}>Contact us <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}</p>
+      </div>
+      <div class="show-group show-group--past" data-past-group hidden>
+        <h3 class="show-group__title"><span class="show-group__dot" aria-hidden="true"></span>Took place earlier in {{ year }}</h3>
+        <ol class="show-list show-list--past" data-past-list></ol>
+      </div>
+    </div>
+  </section>
+
+  {% if entry.helpTitle %}
+  <section class="sustain up-cta" aria-labelledby="cta-title">
+    <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
+    <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
+    <div class="container sustain__inner">
+      <h2 id="cta-title">{{ entry.helpTitle }}</h2>
+      {% if entry.helpText %}<p>{{ entry.helpText }}</p>{% endif %}
+      <div class="btn-row up-cta__actions">
+        {% if entry.helpLink and entry.helpLink.url %}<a class="btn btn--light btn--lg" {{ links.attrs(entry.helpLink) }}>{{ entry.helpLink.label }}</a>{% endif %}
+        {% if entry.quoteLink and entry.quoteLink.url %}<a class="btn btn--outline-light btn--lg" {{ links.attrs(entry.quoteLink) }}>{{ entry.quoteLink.label }}</a>{% endif %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}

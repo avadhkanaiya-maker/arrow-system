@@ -1,0 +1,17 @@
+{# Video block: the design's click-to-play video (aside.pd-video, js/site.js). In the header (Show In: Header) or in the
+   details section (Show In: Page, craft.css .pd-details__grid > .pd-video). Vars: block #}
+{% import '_macros/text' as text %}
+{% set videoId = text.youtubeId(block.videoUrl)|trim %}
+{% set poster = block.videoPoster.one() %}
+{% if videoId|length == 11 %}
+        <aside class="pd-video" aria-label="Product video">
+          <div class="video" data-video="{{ videoId }}">
+            {% if poster %}<img src="{{ poster.url }}" width="{{ poster.width }}" height="{{ poster.height }}" loading="lazy" alt="">{% else %}<img src="https://i.ytimg.com/vi/{{ videoId }}/hqdefault.jpg" width="480" height="360" loading="lazy" alt="">{% endif %}
+            <button class="video__play" type="button" data-video-play>
+              <span class="video__icon" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+              <span class="video__label">Play video{% if block.videoCaption %}<span class="visually-hidden">: {{ block.videoCaption|replace({' | ': ', '}) }}</span>{% endif %}</span>
+            </button>
+          </div>
+          {% if block.videoCaption %}<p class="video__caption">{{ block.videoCaption }}</p>{% endif %}
+        </aside>
+{% endif %}

@@ -1,0 +1,110 @@
+columnSuffix: null
+handle: brand
+instructions: null
+name: Brand
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - (none)
+        -
+          - value
+          - ''
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Arrow Systems'
+        -
+          - value
+          - arrow
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 3M
+        -
+          - value
+          - 3m
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Anytron
+        -
+          - value
+          - anytron
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Gerber
+        -
+          - value
+          - gerber
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Limitronic
+        -
+          - value
+          - limitronic
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Trojan Label'
+        -
+          - value
+          - trojan
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Matan
+        -
+          - value
+          - matan
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - QuickLabel
+        -
+          - value
+          - quicklabel
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: placement
+instructions: "Header = beside the product photo, under the buttons (as the design). Page = a full-width video at this block's place."
+name: 'Show In'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Header (under the buttons, as the design)'
+        -
+          - value
+          - header
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Page (full width, in block order)'
+        -
+          - value
+          - page
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

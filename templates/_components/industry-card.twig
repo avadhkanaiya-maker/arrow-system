@@ -1,0 +1,21 @@
+{#
+  Industry card (design: industries/index.html grid and industry-detail.html "Other Industries").
+    {% include '_components/industry-card' with { industry: entry, number: 1, headingTag: 'h2' } only %}
+  industry     an Industries entry (eager-load featuredImage)
+  number       the listing number (01, 02 …); empty on "Other Industries"
+  headingTag   h2 on the listing, h3 under a section heading
+#}
+{% set image = industry.featuredImage.one() %}
+{% set icon = industry.menuIcon.value ?? '' %}
+{% set tag = headingTag ?? 'h3' %}
+        <li class="ind-card">
+          <article class="ind-card__inner">
+            <div class="ind-card__media">{% if image %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async" alt="{{ image.alt }}">{% endif %}</div>
+            <div class="ind-card__body">
+              <p class="ind-card__top">{% if icon %}<span class="ind-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ icon }}"/></svg></span>{% endif %}{% if number ?? null %}<span class="ind-card__num" aria-hidden="true">{{ '%02d'|format(number) }}</span>{% endif %}</p>
+              <{{ tag }} class="ind-card__title"><a class="stretched-link" href="{{ industry.url }}">{{ industry.title }}</a></{{ tag }}>
+              {% if industry.cardTagline %}<p class="ind-card__text">{{ industry.cardTagline }}</p>{% endif %}
+              <span class="ind-card__more" aria-hidden="true">Explore industry <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+            </div>
+          </article>
+        </li>

@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'The large opening paragraph'
+fieldLayouts:
+  9bf4b712-f10a-4d93-bfc1-fe4910962baf:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 50687014-91de-4012-983d-c6d2b75b6414 # Short Text
+            handle: null
+            instructions: null
+            label: Text
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f8b6ce2f-b06f-4657-a3ee-1bb832d56d71
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: d6cd3a54-4c01-4fa9-b70a-4cfc8a1225f2
+        userCondition: null
+    thumbFieldKey: null
+handle: intro
+hasTitleField: false
+icon: paragraph
+name: Intro
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

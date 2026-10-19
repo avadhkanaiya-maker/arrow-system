@@ -1,0 +1,42 @@
+{#
+  N. Newsletter band (design: index.html, "NEWSLETTER"), at the end of <main> on every page (included by base.twig).
+  Content: Globals → Newsletter. "Show Newsletter" off hides it everywhere.
+  The form does NOT send data yet: site.js checks the email and says sign-up isn't connected. When the client sends
+  the HubSpot portal ID + form GUID (Globals → Newsletter → HubSpot tab), data-integration switches to "hubspot" and
+  both IDs are exposed as data attributes for the integration.
+  Keep the ids (nl-email, nl-note, nl-status) and data-newsletter: site.js uses them.
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% if newsletter.newsletterEnabled ?? false %}
+  {% set portal = newsletter.hubspotPortalId|trim %}
+  {% set formId = newsletter.hubspotFormId|trim %}
+  {% set placeholder = newsletter.emailPlaceholder ?: 'Your email' %}
+  {% set link = newsletter.noteLink %}
+  <section class="newsletter" aria-labelledby="newsletter-title">
+    <div class="container newsletter__inner">
+      <div class="newsletter__intro">
+        <h2 id="newsletter-title">{{ text.highlight(newsletter.sectionHeading) }}</h2>
+        {% if newsletter.sectionLead %}<p>{{ newsletter.sectionLead }}</p>{% endif %}
+      </div>
+      <form class="newsletter__form" novalidate data-newsletter data-integration="{{ portal and formId ? 'hubspot' : 'hubspot-pending' }}"
+            {%- if portal %} data-hubspot-portal="{{ portal }}"{% endif %}
+            {%- if formId %} data-hubspot-form="{{ formId }}"{% endif %}>
+        <div class="newsletter__row">
+          <div class="field">
+            <label class="visually-hidden" for="nl-email">{{ placeholder }}</label>
+            <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="{{ placeholder }}" aria-describedby="nl-status nl-note">
+          </div>
+          <button class="btn btn--primary" type="submit">{{ newsletter.buttonLabel ?: 'Subscribe' }}</button>
+        </div>
+        {% if newsletter.noteText or (link and link.url) %}
+          <p class="newsletter__note" id="nl-note">
+            {{- newsletter.noteText -}}
+            {%- if link and link.url %}{{ newsletter.noteText ? ' ' }}See our <a {{ links.attrs(link) }}>{{ link.label }}</a>.{% endif -%}
+          </p>
+        {% endif %}
+        <p class="form-status" id="nl-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+{% endif %}

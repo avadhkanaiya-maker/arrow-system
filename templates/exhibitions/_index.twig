@@ -1,0 +1,231 @@
+{#
+  /exhibitions/ (Exhibitions Page single; design: Arrowsystem_local/exhibitions/index.html).
+    1. Header: texts, stats (past shows, next show), the two header photos
+    2. Upcoming Exhibitions: a ticket for the next show (the first show with exact dates that hasn't ended); hidden
+       when none is announced. Countdown: js/exhibitions/exhibitions.js
+    3. Where We Have Exhibited: the shows with a page, in the Exhibitions structure order, grouped by year (the 5 latest
+       years, then one "earlier" group), with the year filter (js)
+  Texts: Entries → Exhibitions Page. Shows: Entries → Exhibitions.
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% import '_macros/exhibitions' as ex %}
+
+{% set upcomingPage = craft.entries.section('upcomingExhibitionsPage').one() %}
+{% set today = now|date('Y-m-d') %}
+{% set allShows = craft.entries.section('exhibitions').with(['featuredImage', 'showLogo']).all() %}
+{% set upcoming = allShows|filter(s => (s.datePrecision.value ?? 'exact') == 'exact' and (s.endDate ?? s.startDate)|date('Y-m-d') >= today)|sort((a, b) => a.startDate <=> b.startDate) %}
+{% set upcomingIds = upcoming|map(s => s.id) %}
+{% set nextShow = upcoming|first %}
+{% set pastShows = allShows|filter(s => s.hasPage and s.id not in upcomingIds) %}
+
+{# Year groups: the 5 latest years each get a group, older shows share one "earlier" group #}
+{% set years = pastShows|map(s => s.startDate|date('Y'))|reduce((carry, y) => y in carry ? carry : carry|merge([y]), [])|sort|reverse %}
+{% set ownYears = years|slice(0, 5) %}
+{% set earlierYears = years|slice(5) %}
+{% set groups = [] %}
+{% for y in ownYears %}
+  {% set groups = groups|merge([{key: y, shows: pastShows|filter(s => s.startDate|date('Y') == y)}]) %}
+{% endfor %}
+{% if earlierYears|length %}
+  {% set groups = groups|merge([{key: 'earlier', min: earlierYears|last, max: earlierYears|first, shows: pastShows|filter(s => s.startDate|date('Y') in earlierYears)}]) %}
+{% endif %}
+
+{% set photos = entry.exhibitionPhotos.all() %}
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.url,
+    noindex: entry.seoNoIndex,
+    ogType: 'article',
+    image: entry.socialImage.one(),
+    schema: [
+      {'@type': 'CollectionPage', '@id': entry.url ~ '#webpage', url: entry.url, name: pageTitle, inLanguage: currentSite.language},
+      {'@type': 'BreadcrumbList', itemListElement: [
+        {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl},
+        {'@type': 'ListItem', position: 2, name: entry.title, item: entry.url},
+      ]},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/exhibitions/exhibitions.css') }}">
+  {% if photos|length %}<link rel="preload" as="image" href="{{ photos[0].url }}" fetchpriority="high">{% endif %}
+  <script src="{{ url('assets/js/exhibitions/exhibitions.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          <li><a href="{{ entry.url }}" aria-current="page">{{ entry.title }}</a></li>
+        </ol>
+      </nav>
+
+      <div class="page-hero__grid">
+        <div class="page-hero__body">
+          {% if entry.eyebrow %}<p class="eyebrow">{{ entry.eyebrow }}</p>{% endif %}
+          <h1 class="page-hero__title" id="page-title">{{ text.highlight(entry.sectionHeading ?: entry.title) }}</h1>
+          <svg class="arrow-line" viewBox="0 0 132 14" aria-hidden="true" focusable="false"><path d="M1 7h126M120 1.5 127 7l-7 5.5"/></svg>
+          {% if entry.sectionLead %}<p class="page-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
+          <div class="btn-row">
+            {% if nextShow %}<a class="btn btn--primary btn--lg" href="#upcoming">Upcoming Exhibitions</a>{% endif %}
+            <a class="btn btn--outline btn--lg" href="#past">Past Exhibitions</a>
+          </div>
+          <dl class="hero-stats">
+            <div class="hero-stat">
+              <dt>Past exhibitions</dt>
+              <dd>{{ pastShows|length }}</dd>
+            </div>
+            {% if nextShow %}
+            <div class="hero-stat">
+              <dt>Next show</dt>
+              <dd>{{ nextShow.startDate|date('M j') }}<span class="hero-stat__sub">{{ nextShow.title }}</span></dd>
+            </div>
+            {% endif %}
+          </dl>
+        </div>
+
+        {% if photos|length %}
+        <div class="collage" aria-label="Arrow Systems at recent exhibitions" role="group">
+          <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
+          <span class="rings rings--hero" aria-hidden="true"></span>
+          <figure class="collage__main">
+            <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
+            <span class="crop crop--bl" aria-hidden="true"></span><span class="crop crop--br" aria-hidden="true"></span>
+            <img src="{{ photos[0].url }}" width="{{ photos[0].width }}" height="{{ photos[0].height }}" fetchpriority="high"
+                 alt="{{ photos[0].alt }}">
+            {% if entry.caption %}<figcaption class="photo-tag"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>{{ entry.caption }}</figcaption>{% endif %}
+          </figure>
+          {% if photos[1] ?? null %}
+          <figure class="collage__inset">
+            <img src="{{ photos[1].url }}" width="{{ photos[1].width }}" height="{{ photos[1].height }}" loading="lazy"
+                 alt="{{ photos[1].alt }}">
+            {% if photos[1].title %}<figcaption class="visually-hidden">{{ photos[1].title }}</figcaption>{% endif %}
+          </figure>
+          {% endif %}
+          <svg class="reg-mark reg-mark--hero" aria-hidden="true" focusable="false"><use href="#i-reg"/></svg>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% if nextShow %}
+  <section class="section upcoming" id="upcoming" aria-labelledby="upcoming-title">
+    <span class="rings rings--upcoming" aria-hidden="true"></span>
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Upcoming</p>
+          <h2 class="section-title" id="upcoming-title">Upcoming <span class="hl">Exhibitions</span></h2>
+          <p class="section-head__lead upcoming__lead">Meet the Arrow Systems team at these industry events.</p>
+        </div>
+        {% if upcomingPage %}<a class="text-link" href="{{ upcomingPage.url }}">All upcoming exhibitions <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+      </header>
+
+      {% set logo = nextShow.showLogo.one() %}
+      <div class="ticket-wrap">
+        <span class="dot-grid dot-grid--ticket" aria-hidden="true"></span>
+        <article class="ticket" aria-labelledby="next-show-title" data-show data-start="{{ nextShow.startDate|date('Y-m-d') }}" data-end="{{ (nextShow.endDate ?? nextShow.startDate)|date('Y-m-d') }}">
+          <div class="ticket__main">
+            <div class="ticket__logo">
+              {% if logo %}<img src="{{ logo.url }}" width="{{ logo.width }}" height="{{ logo.height }}" loading="lazy"
+                   alt="{{ logo.alt }}">{% endif %}
+            </div>
+            <div class="ticket__info">
+              <p><span class="badge badge--accent">Next show</span></p>
+              <h3 class="ticket__title" id="next-show-title">{{ nextShow.title }}</h3>
+              <ul class="show-facts">
+                <li class="show-fact">
+                  <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+                  <span><span class="show-fact__label">Dates</span> <time datetime="{{ nextShow.startDate|date('Y-m-d') }}">{{ ex.dates(nextShow, 'long') }}</time></span>
+                </li>
+                {% if nextShow.city %}
+                <li class="show-fact">
+                  <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></span>
+                  <span><span class="show-fact__label">Location</span> {{ nextShow.city }}</span>
+                </li>
+                {% endif %}
+                <li class="show-fact">
+                  <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg></span>
+                  <span><span class="show-fact__label">Booth</span> {{ nextShow.boothNumber ?: 'To be announced' }}</span>
+                </li>
+              </ul>
+              <div class="btn-row">
+                {% if upcomingPage %}<a class="btn btn--primary" href="{{ upcomingPage.url }}">Explore Upcoming Exhibitions</a>{% endif %}
+                {% if entry.ctaLink and entry.ctaLink.url %}<a class="btn btn--outline" {{ links.attrs(entry.ctaLink) }}>{{ entry.ctaLink.label }}</a>{% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="ticket__stub">
+            <span class="ticket__notch ticket__notch--a" aria-hidden="true"></span>
+            <span class="ticket__notch ticket__notch--b" aria-hidden="true"></span>
+            <p class="ticket__date" aria-hidden="true">
+              <span class="ticket__month">{{ nextShow.startDate|date('M') }}</span>
+              <span class="ticket__days">{{ ex.days(nextShow) }}</span>
+              <span class="ticket__yr">{{ nextShow.startDate|date('Y') }}</span>
+            </p>
+            <p class="ticket__countdown" data-countdown hidden>
+              <span class="ticket__count" data-countdown-num></span>
+              <span class="ticket__count-label" data-countdown-label></span>
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section section--surface past" id="past" aria-labelledby="past-title">
+    <div class="container">
+      <header class="section-head section-head--split past__head">
+        <div>
+          <p class="eyebrow">Past exhibitions</p>
+          <h2 class="section-title" id="past-title">Where We Have <span class="hl">Exhibited</span></h2>
+        </div>
+        <span class="dot-grid dot-grid--past" aria-hidden="true"></span>
+      </header>
+
+      <div class="year-filter" data-year-filter hidden>
+        <div class="year-filter__group" role="group" aria-label="Filter exhibitions by year">
+          <button class="year-filter__btn" type="button" data-filter="all" aria-pressed="true">All</button>
+          {% for g in groups %}
+          <button class="year-filter__btn" type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ g.key == 'earlier' ? g.min ~ '–' ~ g.max : g.key }}</button>
+          {% endfor %}
+        </div>
+        <p class="year-filter__status" role="status" aria-live="polite" data-filter-status></p>
+      </div>
+
+      <div class="timeline" data-timeline>
+      {% for g in groups %}
+      <section class="tl-group" data-group="{{ g.key }}" aria-labelledby="year-{{ g.key }}">
+        <header class="tl-year">
+          <span class="tl-year__node" aria-hidden="true"></span>
+          {% if g.key == 'earlier' %}
+          <h3 id="year-earlier"><span class="tl-year__num tl-year__num--range">{{ g.min }}<span class="hl">–{{ g.max }}</span></span><span class="visually-hidden"> exhibitions</span></h3>
+          {% else %}
+          <h3 id="year-{{ g.key }}"><span class="tl-year__num">{{ g.key|slice(0, 2) }}<span class="hl">{{ g.key|slice(2) }}</span></span><span class="visually-hidden"> exhibitions</span></h3>
+          {% endif %}
+          <p class="tl-year__count">{{ g.shows|length }} exhibition{{ g.shows|length != 1 ? 's' }}</p>
+        </header>
+        <ul class="tl-grid">
+          {% for show in g.shows %}
+            {% include '_components/exhibition-card' with { show: show, variant: 'timeline', withYear: g.key == 'earlier' } only %}
+          {% endfor %}
+        </ul>
+      </section>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

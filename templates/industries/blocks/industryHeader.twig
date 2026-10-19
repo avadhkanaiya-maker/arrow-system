@@ -1,0 +1,39 @@
+{# 1. Industry header (design: ".ind-detail-hero"): breadcrumb, small heading, H1 ([red] words), intro (a blank line = a new paragraph),
+   applications, image (empty = the industry's Card Photo, else its Social Image), buttons. Vars: block, entry, listingPage #}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% set image = block.mediaImage.one() ?? entry.featuredImage.one() ?? entry.socialImage.one() %}
+  <section class="page-hero ind-detail-hero" aria-labelledby="page-title">
+    <div class="container">
+      {% include 'industries/blocks/_breadcrumb' with { entry: entry, listingPage: listingPage } only %}
+      <div class="ind-detail-hero__grid">
+        <div class="ind-detail-hero__body">
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          <h1 class="ind-detail-hero__title" id="page-title">{{ text.highlight(block.sectionHeading ?: entry.title) }}</h1>
+          {% for para in (block.sectionLead ?? '')|split('\n\n')|map(p => p|trim)|filter(p => p) %}<p class="ind-detail-hero__lead">{{ para }}</p>{% endfor %}
+          {% set apps = (block.listItems ?? [])|filter(row => row.text|trim) %}
+          {% if apps|length %}
+          <ul class="app-tags" aria-label="Applications">
+            {% for row in apps %}
+            <li>{{ row.text }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if (block.primaryCta and block.primaryCta.url) or (block.secondaryCta and block.secondaryCta.url) %}
+          <div class="btn-row">
+            {% if block.primaryCta and block.primaryCta.url %}<a class="btn btn--primary btn--lg" {{ links.attrs(block.primaryCta) }}>{{ block.primaryCta.label }}</a>{% endif %}
+            {% if block.secondaryCta and block.secondaryCta.url %}<a class="btn btn--outline btn--lg" {{ links.attrs(block.secondaryCta) }}>{{ block.secondaryCta.label }}</a>{% endif %}
+          </div>
+          {% endif %}
+        </div>
+        {% if image %}
+        <figure class="ind-detail-hero__media">
+          <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
+          <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
+          <span class="crop crop--bl" aria-hidden="true"></span><span class="crop crop--br" aria-hidden="true"></span>
+          <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" fetchpriority="high" alt="{{ image.alt }}">
+        </figure>
+        {% endif %}
+      </div>
+    </div>
+  </section>

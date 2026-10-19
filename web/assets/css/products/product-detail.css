@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Arrow Systems — Product detail (demo: ArrowJet Aqua 330R)
+   Loaded after ../css/home.css (design system, video facade, carousel arrows) and css/digital-label-printers.css (shared
+   inner-page layer, product cards, help band, newsletter). Only this page's own components are here.
+   Section order follows the client's product page prototype (2026-10-14). Every block comes from fields on the product
+   entry (see the comment at the top of <main>).
+   ========================================================================== */
+
+/* ==========================================================================
+   Spacing: tighter vertical rhythm between sections (same as the Digital Flexible Packaging page)
+   (home.css default: --section-y up to 104px per side, 48px under section headings). Help band and newsletter keep theirs.
+   ========================================================================== */
+main { --section-y: clamp(36px, 4vw, 56px); }
+main .section-head { margin-bottom: clamp(20px, 2.4vw, 28px); }
+
+/* ==========================================================================
+   1. Product header: gallery | eyebrow, name, subtitle, description, key specs, actions
+   ========================================================================== */
+.pd-hero { padding-block: clamp(18px, 2.5vw, 28px) clamp(28px, 3.5vw, 44px); }
+.pd-hero .breadcrumb { margin-bottom: clamp(16px, 2.5vw, 28px); }
+.pd-hero__grid { display: grid; gap: 32px; }
+.pd-gallery, .pd-hero__body { min-width: 0; }
+@media (min-width: 64em) {
+  .pd-hero__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); column-gap: 56px; align-items: start; }
+}
+
+/* Gallery: stage (one slide at a time with JS) + thumbnails */
+.pd-gallery { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.pd-media {
+  position: relative; isolation: isolate; display: grid; place-items: center; aspect-ratio: 4 / 3; padding: clamp(18px, 3vw, 36px);
+  border: 1px solid var(--c-line); border-radius: 16px;
+  background: radial-gradient(120% 90% at 50% 0%, #FFFFFF 0%, #F6F6F6 70%, #EFEFEF 100%);
+}
+.pd-media[hidden] { display: none; }
+.pd-media, .pd-thumb { min-width: 0; }
+.pd-media > img { width: 100%; height: 100%; object-fit: contain; }
+.pd-media .dot-grid--hero { --cols: 8; --rows: 5; top: -22px; left: -22px; }
+.pd-media__label {
+  position: absolute; left: 14px; bottom: 14px; padding: 4px 10px; border: 1px solid var(--c-line); border-radius: 999px;
+  background: rgba(255, 255, 255, .92); font-size: .75rem; font-weight: 600; color: var(--c-muted);
+}
+.pd-media--video { padding: 0; overflow: hidden; }
+.pd-media--video .video { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; }
+
+.pd-thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pd-thumbs[hidden] { display: none; }
+.pd-thumb {
+  position: relative; display: grid; place-items: center; aspect-ratio: 4 / 3; padding: 6px; overflow: hidden; cursor: pointer;
+  border: 1px solid var(--c-line); border-radius: 10px; background: #F6F6F6; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.pd-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; padding: 6px; object-fit: contain; }
+.pd-thumb--video img { padding: 0; object-fit: cover; }
+.pd-thumb:hover { border-color: var(--c-line-strong); }
+.pd-thumb[aria-pressed="true"] { border-color: var(--c-maroon); box-shadow: 0 0 0 1px var(--c-maroon); }
+.pd-thumb__play {
+  position: absolute; inset: 0; display: grid; place-items: center; width: 34px; height: 34px; margin: auto; border-radius: 50%;
+  background: var(--c-maroon); color: var(--c-white);
+}
+.pd-thumb__play .icon { width: 14px; height: 14px; margin-left: 2px; fill: currentColor; stroke: none; }
+
+/* Name, subtitle, description */
+.pd-hero__body .eyebrow { margin-bottom: 10px; }
+.pd-hero__title { font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; color: var(--c-ink); }
+.pd-hero__subtitle { margin-top: 10px; font-family: var(--font-display); font-size: clamp(1.0625rem, 1rem + .4vw, 1.25rem); font-weight: 700; line-height: 1.35; color: var(--c-red); }
+.pd-hero__intro { max-width: 60ch; margin-top: 16px; font-size: 1rem; line-height: 1.7; color: var(--c-muted); }
+
+/* Key specs: 4 tiles (value on top, label under it) */
+.pd-keyspecs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+@media (min-width: 48em) and (max-width: 63.99em) { .pd-keyspecs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.pd-keyspecs > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 14px 16px; border-radius: 12px; background: var(--c-surface); }
+.pd-keyspecs dd { order: -1; display: flex; align-items: center; gap: 10px; margin: 0; }
+.pd-keyspecs dd .icon { flex-shrink: 0; width: 20px; height: 20px; color: var(--c-maroon); }
+.pd-keyspecs strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; line-height: 1.2; letter-spacing: -.01em; color: var(--c-ink); }
+.pd-keyspecs dt { font-size: .8125rem; font-weight: 600; line-height: 1.4; color: var(--c-ink); }
+.pd-keyspecs dt span { display: block; font-weight: 400; color: var(--c-muted); }
+
+/* Buttons and quick links */
+.pd-hero__actions { margin-top: 26px; }
+.pd-quicklinks { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 14px; }
+.pd-quicklinks a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: .9375rem; font-weight: 600; color: var(--c-maroon); text-decoration: none; }
+.pd-quicklinks a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pd-quicklinks .icon { width: 18px; height: 18px; }
+@media (max-width: 29.99em) { .pd-hero__actions .btn { flex: 1 1 100%; } }
+
+/* ==========================================================================
+   2. Stats strip (global block)
+   ========================================================================== */
+.pd-stats { border-block: 1px solid var(--c-line); background: var(--c-surface); }
+.pd-stats__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 64em) { .pd-stats__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.pd-stats__list li { display: flex; align-items: center; gap: 14px; min-width: 0; padding: clamp(18px, 2.5vw, 28px) 8px; }
+@media (min-width: 64em) { .pd-stats__list li + li { padding-left: 28px; border-left: 1px solid var(--c-line); } }
+.pd-stats__list .icon { flex-shrink: 0; width: 44px; height: 44px; padding: 11px; border-radius: 50%; background: var(--c-white); color: var(--c-maroon); }
+.pd-stats__list strong { display: block; font-family: var(--font-display); font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem); font-weight: 800; line-height: 1.1; color: var(--c-ink); }
+.pd-stats__list span { display: block; margin-top: 2px; font-size: .8125rem; line-height: 1.4; color: var(--c-muted); }
+
+/* ==========================================================================
+   3. Details: tabs (Overview / Features / Brochure)
+   ========================================================================== */
+.tab-panel { padding: clamp(22px, 3vw, 36px); background: var(--c-white); border: 1px solid var(--c-line); border-radius: 12px; }
+.no-js .tabs > .tab-panel + .tab-panel { margin-top: 20px; }
+.pd-panel-title { margin-bottom: 20px; font-size: 1.25rem; color: var(--c-ink); }
+
+/* Highlights (Overview): icon + title + text, two columns */
+.pd-hl { display: grid; gap: 24px 48px; }
+@media (min-width: 48em) { .pd-hl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pd-hl li { display: flex; align-items: flex-start; gap: 16px; min-width: 0; }
+.pd-hl__icon { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: var(--c-maroon-tint); color: var(--c-maroon); }
+.pd-hl__icon .icon { width: 20px; height: 20px; }
+.pd-hl h4 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.35; color: var(--c-ink); }
+.pd-hl p { margin-top: 4px; font-size: .9375rem; line-height: 1.6; color: var(--c-muted); }
+.pd-hl__more { margin-top: 24px; }
+
+/* Specifications (Features): label / value rows, two columns on wide screens */
+.spec-list { border-top: 2px solid var(--c-ink); }
+.spec-list > div { display: grid; gap: 2px 24px; padding: 12px 0; border-bottom: 1px solid var(--c-line); }
+.spec-list dt { font-size: .875rem; color: var(--c-muted); }
+.spec-list dd { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--c-ink); }
+@media (min-width: 36em) { .spec-list > div { grid-template-columns: minmax(0, 220px) minmax(0, 1fr); align-items: baseline; } }
+@media (min-width: 64em) { .spec-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; } }
+
+/* Brochures (Brochure): download rows */
+.downloads { display: grid; gap: 12px; }
+.download {
+  display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--c-line); border-radius: 10px;
+  background: var(--c-white); color: var(--c-ink); text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.download__icon { position: relative; display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 52px; border-radius: 8px; background: var(--c-maroon-tint); color: var(--c-maroon); }
+.download__icon .icon { width: 24px; height: 24px; }
+.download__icon span { position: absolute; bottom: -6px; padding: 1px 5px; border-radius: 3px; background: var(--c-maroon); color: var(--c-white); font-size: .5625rem; font-weight: 800; letter-spacing: .06em; }
+.download__text { display: grid; flex: 1; min-width: 0; }
+.download__text strong { font-size: .9375rem; line-height: 1.35; }
+.download__text span { font-size: .8125rem; color: var(--c-muted); }
+.download__arrow { width: 20px; height: 20px; flex-shrink: 0; color: var(--c-maroon); transition: transform .15s ease; }
+.download:hover { border-color: var(--c-maroon-line); box-shadow: var(--shadow-sm); }
+.download:hover .download__arrow { transform: translateY(2px); }
+
+/* ==========================================================================
+   4. What You Can Print (applications carousel; arrows reuse .industries__arrow from ../css/home.css)
+   ========================================================================== */
+.pd-apps__lead { max-width: 60ch; margin-top: 12px; font-size: 1.0625rem; color: var(--c-muted); }
+.pd-apps__aside { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+@media (min-width: 48em) { .pd-apps__aside { align-items: flex-end; } }
+.pd-apps__track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 82%; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 6px;
+}
+@media (min-width: 40em) { .pd-apps__track { grid-auto-columns: calc((100% - 20px) / 2); } }
+@media (min-width: 64em) { .pd-apps__track { grid-auto-columns: calc((100% - 40px) / 3); } }
+@media (min-width: 80em) { .pd-apps__track { grid-auto-columns: calc((100% - 60px) / 4); } }
+.js .pd-apps__track { scrollbar-width: none; } /* without JS the scrollbar is the only way across on desktop */
+.js .pd-apps__track::-webkit-scrollbar { display: none; }
+.pd-app { min-width: 0; scroll-snap-align: start; }
+.pd-app__inner {
+  position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden;
+  border: 1px solid var(--c-line); border-radius: 14px; background: var(--c-white); transition: box-shadow .2s ease;
+}
+.pd-app__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--c-surface); }
+.pd-app__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.pd-app__body { display: flex; flex-direction: column; flex: 1; padding: 18px 20px 20px; }
+.pd-app__title { font-size: 1.125rem; line-height: 1.3; color: var(--c-ink); }
+.pd-app__title a { color: inherit; }
+.pd-app__text { margin-top: 8px; font-size: .9375rem; line-height: 1.55; color: var(--c-muted); }
+.pd-app__more { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 14px; font-size: .9375rem; font-weight: 600; color: var(--c-maroon); }
+.pd-app__more .icon { width: 16px; height: 16px; transition: transform .15s ease; }
+.pd-app__inner:hover { box-shadow: var(--shadow-sm); }
+.pd-app__inner:hover .pd-app__media img { transform: scale(1.04); }
+.pd-app__inner:hover .pd-app__more .icon { transform: translateX(3px); }
+.pd-app__inner:has(.stretched-link:focus-visible) { outline: 3px solid var(--c-focus); outline-offset: 3px; }
+
+/* ==========================================================================
+   5. Related printers (product cards from the listing)
+   ========================================================================== */
+.pd-related .section-head--split { align-items: flex-end; }
+
+/* ==========================================================================
+   6. Tabs (same tab bar as the Gerber Foils and Arrow Materials pages; keep in sync)
+   Without JS the tab lists stay hidden and every panel is shown in order.
+   ========================================================================== */
+.tabs__list {
+  display: flex; gap: 4px; margin-bottom: 24px; overflow-x: auto; scrollbar-width: none;
+  border-bottom: 1px solid var(--c-line-strong);
+}
+.tabs__list[hidden] { display: none; }
+.tabs__list::-webkit-scrollbar { display: none; }
+.tabs__tab {
+  position: relative; flex-shrink: 0; display: inline-flex; align-items: center; min-height: 50px; padding: 12px 16px;
+  border: 0; background: none; font-size: .9375rem; font-weight: 600; color: var(--c-muted); white-space: nowrap;
+  transition: color .15s ease;
+}
+.tabs__tab::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0;
+  background: var(--c-red); transform: scaleX(0); transition: transform .2s ease;
+}
+.tabs__tab:hover { color: var(--c-ink); }
+.tabs__tab[aria-selected="true"] { color: var(--c-ink); }
+.tabs__tab[aria-selected="true"]::after { transform: scaleX(1); }
+.tabs__tab:focus-visible { outline-offset: -3px; }
+.tabs__count { margin-left: 8px; padding: 1px 8px; border-radius: 10px; background: var(--c-surface); font-size: .75rem; font-weight: 600; color: var(--c-muted); }
+.tabs__tab[aria-selected="true"] .tabs__count { background: var(--c-maroon-tint); color: var(--c-maroon); }
+[data-panel][hidden] { display: none; }
+[data-panel].is-entering { animation: panel-in .25s ease both; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Motion preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .tabs__tab::after, .download__arrow, .pd-app__media img, .pd-app__more .icon { transition: none; }
+  .pd-apps__track { scroll-behavior: auto; }
+  [data-panel].is-entering { animation: none; }
+}
+
+/* ---------- Print: every tab ---------- */
+@media print {
+  .tabs__list { display: none !important; }
+  [data-panel][hidden] { display: block !important; }
+}

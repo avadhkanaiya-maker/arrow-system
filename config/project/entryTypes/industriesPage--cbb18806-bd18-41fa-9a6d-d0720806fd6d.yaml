@@ -1,0 +1,230 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  f9ab345a-52d4-4214-acf6-3014a3a53b19:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Page Title'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: e9e7b83b-ced2-43fa-bea4-7a2788e798f4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a04535c0-26b8-4ec4-a13c-dec2cfd342da
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: '[brackets] = red, e.g. “Industries [We Serve]”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 47b848e5-8a5c-4f07-919d-7f6a9edaec07
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0a27afaa-0f8a-49af-b5d6-d1f4de0d0cab
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 949825d6-8b89-49af-bbe5-59b2f56ac6c9 # Caption
+            handle: null
+            instructions: 'Shown after “10 industries”, e.g. “Labels, packaging and industrial printing”.'
+            label: 'Count Line'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8c7f965d-813a-4455-8b5b-91ccdf6dbdca
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0b27468b-ea05-46f4-92f9-4e618131d1f7 # CTA Heading
+            handle: null
+            instructions: 'The maroon band under the cards. Its buttons use the phone and quote link from Site Settings.'
+            label: 'Help Band Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d134090d-295d-4864-97b1-666ce03ac55e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8cbe334a-5712-4c17-b3be-40923a1c8aa0 # CTA Text
+            handle: null
+            instructions: null
+            label: 'Help Band Text'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ef3a4969-3b7f-4850-8656-a61260ec61ab
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: aaae7b3c-2486-448d-be1f-a914d5eb5524
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7dfa34b6-1551-4035-8187-cbc68182a20b # SEO Title
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5a70adc3-d8b5-48d5-81aa-d9999fbe549d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 27b666a4-f7ec-4a58-ae34-d68b27259f94 # Meta Description
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: be50efaf-775a-4ab1-8bb7-49be6bf1b1bd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8d76c0a8-d4cf-4569-bd5f-69ed28122130 # Social Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3c2ddbf6-158d-4dd4-ab0c-4f9160a61e5c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1e40dc65-7d54-45b8-b533-3709d3c2087e # Hide from Search Engines
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cfbbd830-e078-451b-98de-f55b7356501d
+            userCondition: null
+            warning: null
+            width: 100
+        name: SEO
+        uid: 1a1cdff6-2edf-48df-a5e1-7fa0652a237a
+        userCondition: null
+    thumbFieldKey: null
+handle: industriesPage
+hasTitleField: true
+icon: industry
+name: 'Industries Page'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

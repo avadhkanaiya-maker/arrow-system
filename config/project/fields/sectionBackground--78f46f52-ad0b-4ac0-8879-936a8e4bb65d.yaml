@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: sectionBackground
+instructions: null
+name: Background
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - White
+        -
+          - value
+          - white
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Light grey'
+        -
+          - value
+          - surface
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

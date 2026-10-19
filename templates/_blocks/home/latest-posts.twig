@@ -1,0 +1,45 @@
+{#
+  K. Latest blog posts (design: index.html "K. INDUSTRY INSIGHTS / BLOG"): 3 Blog entries as cards.
+  Which posts: Posts to Show (up to 3 picked in the CP, in that order); empty = the newest 3; fewer than 3 picked = the
+  newest posts (not already picked) fill the rest.
+  Fields: Small Heading, Heading ([red] words), Posts to Show, View All Link, Anchor ID. Excerpt: the post's Meta
+  Description, else its Lead. Vars: block
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set posts = (block.relatedPosts ?? null) ? block.relatedPosts.with(['featuredImage']).limit(3).all() : [] %}
+{% if posts|length < 3 %}
+  {% set posts = posts|merge(craft.entries.section('blog')
+    .id(posts|length ? ['not']|merge(posts|map(p => p.id)) : null)
+    .with(['featuredImage']).limit(3 - posts|length).all()) %}
+{% endif %}
+{% if posts|length %}
+  <section class="section" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          <h2 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+        </div>
+        {% if block.ctaLink and block.ctaLink.url %}<a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+      </header>
+      <ul class="post-grid">
+        {% for post in posts %}
+        {% set image = post.featuredImage.one() %}
+        <li class="post-card">
+          <div class="post-card__media">{% if image %}<img src="{{ image.getUrl({width: 900, height: 506, mode: 'crop'}) }}" width="900" height="506" loading="lazy" alt="">{% endif %}</div>
+          <div class="post-card__body">
+            <p class="post-card__meta"><time datetime="{{ post.postDate|date('Y-m-d') }}">{{ post.postDate|date('F j, Y') }}</time></p>
+            <h3 class="post-card__title"><a class="stretched-link" href="{{ post.url }}">{{ text.plain(post.title) }}</a></h3>
+            {% set excerpt = post.seoDescription ?: post.sectionLead %}
+            {% if excerpt %}<p class="post-card__excerpt">{{ excerpt }}</p>{% endif %}
+            <span class="post-card__more" aria-hidden="true">Read More <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

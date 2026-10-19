@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Product cards: add a Product for each one'
+fieldLayouts:
+  1c0b0225-fa6c-467d-83d2-cc0788d994b0:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 06540dd4-4fea-4ea5-b353-aa2b7c21f024 # Products
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 71507e12-7b62-48ed-91fa-d0be611c864a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e351be0c-c6c6-4236-97d8-1f092d5ca495
+        userCondition: null
+    thumbFieldKey: null
+handle: productList
+hasTitleField: false
+icon: boxes-stacked
+name: 'Product List'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

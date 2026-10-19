@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: showInContents
+instructions: 'Lists this H2 in the article’s contents box. Ignored for H3 / H4.'
+name: 'Show in “On this page”'
+searchable: false
+settings:
+  default: true
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

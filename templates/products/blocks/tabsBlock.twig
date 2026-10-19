@@ -1,0 +1,41 @@
+{# Tabs block: the design's tab set (div.tabs[data-tabs], js/products/product-detail.js). Vars: block, tabs (its tab entries), tabIds ({'t' ~ tab.id: id})
+   Panels: Highlights (icon cards + "View full specifications" → the first Specifications tab), Specifications, Downloads,
+   text. Each panel has a heading (Highlights: its Panel Heading; text tabs: the tab title, shown only without JS). #}
+{% set specsTab = tabs|filter(t => t.type.handle == 'specsTab')|first %}
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="Product details" data-tablist hidden>
+            {% for tab in tabs %}
+            {% set id = tabIds['t' ~ tab.id] %}
+            <button class="tabs__tab" type="button" role="tab" id="tab-{{ id }}" aria-controls="{{ id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ tab.headingText }}</button>
+            {% endfor %}
+          </div>
+          {% for tab in tabs %}
+          {% set id = tabIds['t' ~ tab.id] %}
+
+          <div class="tab-panel" id="{{ id }}" role="tabpanel" aria-labelledby="tab-{{ id }}" data-panel>
+            {% switch tab.type.handle %}
+              {% case 'highlightsTab' %}
+            <h3 class="pd-panel-title">{{ tab.sectionHeading ?: tab.headingText }}</h3>
+            <ul class="pd-hl">
+              {% for row in tab.highlightItems|filter(row => row.title|trim or row.text|trim) %}
+              <li><span class="pd-hl__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h4>{{ row.title }}</h4>{% endif %}{% if row.text %}<p>{{ row.text }}</p>{% endif %}</div></li>
+              {% endfor %}
+            </ul>
+            {% if specsTab %}{% set specsId = tabIds['t' ~ specsTab.id] %}
+            <a class="text-link pd-hl__more" href="#{{ specsId }}" data-open-tab="tab-{{ specsId }}">View full {{ specsTab.headingText|lower == 'features' ? 'specifications' : specsTab.headingText|lower }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+            {% endif %}
+              {% case 'specsTab' %}
+            <h3 class="pd-panel-title">Specifications</h3>
+            {% include 'products/blocks/_spec-list' with { rows: tab.specItems } only %}
+              {% case 'downloadsTab' %}
+            <h3 class="pd-panel-title">Downloads</h3>
+            {% include 'products/blocks/_downloads' with { items: tab.downloadItems.with(['downloadFile']).all() } only %}
+              {% default %}
+            <h3 class="tab-panel__title">{{ tab.headingText }}</h3>
+            <div class="rich-text">
+              {{ tab.richText }}
+            </div>
+            {% endswitch %}
+          </div>
+          {% endfor %}
+        </div>

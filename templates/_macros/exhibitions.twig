@@ -1,0 +1,40 @@
+{# Exhibition helpers (templates/exhibitions/, homepage section G). A "show" is an Exhibitions entry. #}
+
+{#
+  The show's dates as text.
+    style 'short': "Sep 16–19, 2025"   style 'long': "September 16–19, 2025"
+  Different months: "Sep 30 – Oct 2, 2026"; different years: "Dec 30, 2026 – Jan 2, 2027"; one day: "Oct 18, 2026".
+  "Year only" shows (Show Dates As): just the year, e.g. "2025".
+#}
+{%- macro dates(show, style = 'short') -%}
+  {%- set start = show.startDate -%}
+  {%- set end = show.endDate ?? null -%}
+  {%- set m = style == 'long' ? 'F' : 'M' -%}
+  {%- if not start -%}
+  {%- elseif (show.datePrecision.value ?? 'exact') == 'year' -%}
+    {{- start|date('Y') -}}
+  {%- elseif not end or end|date('Y-m-d') == start|date('Y-m-d') -%}
+    {{- start|date(m ~ ' j, Y') -}}
+  {%- elseif start|date('Y-m') == end|date('Y-m') -%}
+    {{- start|date(m ~ ' j') }}–{{ end|date('j, Y') -}}
+  {%- elseif start|date('Y') == end|date('Y') -%}
+    {{- start|date(m ~ ' j') }} – {{ end|date(m ~ ' j, Y') -}}
+  {%- else -%}
+    {{- start|date(m ~ ' j, Y') }} – {{ end|date(m ~ ' j, Y') -}}
+  {%- endif -%}
+{%- endmacro -%}
+
+{# Day range for the ticket stubs: "18–21" (or "18") #}
+{%- macro days(show) -%}
+  {%- set start = show.startDate -%}
+  {%- set end = show.endDate ?? null -%}
+  {{- start|date('j') }}{% if end and end|date('Y-m-d') != start|date('Y-m-d') %}–{{ end|date('j') }}{% endif -%}
+{%- endmacro -%}
+
+{# Title with its year in red: "[brackets]" if the editor used them, else the year at the end ("Label Expo [2026]") #}
+{%- macro title(show) -%}
+  {%- import '_macros/text' as text -%}
+  {%- set t = show.title -%}
+  {%- if '[' not in t -%}{%- set t = t|replace('/(\\d{4})(?!.*\\d{4})/', '[$1]') -%}{%- endif -%}
+  {{- text.highlight(t) -}}
+{%- endmacro -%}

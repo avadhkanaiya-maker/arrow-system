@@ -1,0 +1,85 @@
+defaultEnabledForPropagatedSites: true
+defaultPlacement: end
+fieldLayouts:
+  965eb7ee-b30a-41cd-b139-b379924dc41c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: 'Text visitors see. For a page or product, it follows that page’s title unless you change it here.'
+            label: Label
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            uid: 55727989-bcb0-4bd1-97bc-06651f22ff91
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            elementCondition: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: verbb\navigation\fieldlayoutelements\NodeTypeElements
+            uid: 5f746532-e22c-4a3a-902f-1cbb31a1462b
+            userCondition: null
+            warning: null
+          -
+            attribute: newWindow
+            dateAdded: null
+            elementCondition: null
+            id: null
+            instructions: null
+            label: null
+            mandatory: false
+            orientation: null
+            requirable: true
+            required: false
+            tip: null
+            translatable: false
+            type: verbb\navigation\fieldlayoutelements\NewWindowField
+            uid: f47de2a2-fc79-4595-86cd-146f396f8130
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Menu item'
+        uid: 57a9d123-eee1-4a60-a8b0-50242cab5840
+        userCondition: null
+    thumbFieldKey: null
+handle: footerMenu
+instructions: 'Level 1: column headings (Group / Column). Level 2: the links in each column.'
+maxNodes: null
+name: 'Footer Menu'
+propagationMethod: all
+showSiteMenu: true
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabled: true
+sortOrder: 3
+structure:
+  maxLevels: 2
+  uid: 77b50489-738b-4189-8ed1-5ef2ac313d32
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

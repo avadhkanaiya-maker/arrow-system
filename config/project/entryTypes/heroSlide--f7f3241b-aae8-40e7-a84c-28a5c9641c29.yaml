@@ -1,0 +1,111 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  e14c0ab3-ed01-4b5d-b4b2-2d1b5ec6a7e4:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-12T10:09:26+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: cf2f7a05-3513-4370-85bf-521a72260189 # Banner Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 69e8beb7-e373-4af4-981f-b14219a28ebf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fb1bcbe6-aac5-47e7-b60b-6d1971337623 # Category Label
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 81e55800-2abe-4018-94ac-dfc2711615c3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: a4104688-9fd2-429a-876b-fd752fc5426c # Product Name
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c9f023bb-f1d4-485b-855f-22447bbed454
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-12T10:44:29+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 08984390-4496-459b-9a5d-d4224d3088f1 # Primary Button
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 84b7d34f-b6fb-43e0-859d-3e2125a765b3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-12T10:44:29+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 07b3f269-283c-4222-8ac8-460da64575f6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: fbb7e339-d2a9-40bc-b4da-ccd3ce0911dd
+        userCondition: null
+    thumbFieldKey: null
+handle: heroSlide
+hasTitleField: false
+icon: null
+name: 'Hero SLide'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: "{{ object.bannerImage.one().title ?? 'Slide' }}"
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

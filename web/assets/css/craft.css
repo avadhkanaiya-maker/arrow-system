@@ -1,0 +1,254 @@
+/*
+  Fixes and additions for the Craft templates, loaded after the design's site.css (which stays unchanged).
+*/
+
+/* Hero slider: on desktop the controls bar (arrows, dots, pause) is absolutely positioned across the full width of
+   the caption row, on top of the buttons, so clicks on "Explore Product" / the second button never reached them.
+   Let clicks pass through the empty part of the bar; the controls themselves stay clickable. */
+.hero__controls { pointer-events: none; }
+.hero__controls > * { pointer-events: auto; }
+
+/* ==========================================================================
+   Blog articles: blocks the design (blogs/css/blog-detail.css) has no styles for. Used by imported posts and the
+   Article Body blocks Quote, Image (width), Gallery, Video, Button, Divider, and plain numbered lists / H4 in Rich Text.
+   ========================================================================== */
+.prose h4 { margin-top: 28px; font-size: 1.0625rem; line-height: 1.35; color: var(--c-ink); }
+.prose h3 + p, .prose h4 + p { margin-top: 10px; }
+.prose ol:not([class]) { padding-left: 1.4em; list-style: decimal; }
+.prose ol:not([class]) li + li { margin-top: 8px; }
+.prose ol:not([class]) li::marker { font-weight: 600; color: var(--c-maroon); }
+.prose li > ul, .prose li > ol { margin-top: 8px; }
+.prose blockquote:not(.prose-quote blockquote) { margin: 18px 0 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--c-line-strong); font-style: italic; }
+
+.prose-quote { margin: 28px 0 0; padding: 22px 24px; border-left: 3px solid var(--c-red); border-radius: 0 8px 8px 0; background: var(--c-maroon-tint); }
+.prose-quote blockquote { margin: 0; font-size: 1.125rem; line-height: 1.6; color: var(--c-ink); }
+.prose-quote blockquote p { margin: 0; }
+.prose-quote figcaption { margin-top: 10px; font-size: .875rem; color: var(--c-muted); }
+.prose-quote figcaption::before { content: "— "; }
+
+.prose-figure--large, .prose-figure--medium, .prose-figure--small { margin-left: auto; margin-right: auto; }
+.prose-figure--large { max-width: 75%; }
+.prose-figure--medium { max-width: 50%; }
+.prose-figure--small { max-width: 33%; }
+@media (max-width: 47.99em) { .prose-figure--medium, .prose-figure--small { max-width: 100%; } }
+
+.prose-gallery { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 18px; }
+.prose-gallery figure { margin: 0; }
+.prose-gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--c-line); border-radius: 8px; background: var(--c-white); }
+@media (min-width: 48em) {
+  .prose-gallery--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .prose-gallery--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.prose-video { margin-top: 18px; }
+.prose-video__frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 10px; background: var(--c-black); }
+.prose-video__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.prose-video figcaption { margin-top: 10px; text-align: center; font-size: .8125rem; line-height: 1.5; color: var(--c-muted); }
+
+.prose .prose-button { margin-top: 22px; }
+/* Button block: the design's ".prose a" link colour (maroon) is more specific than the button colours, which made the
+   red button's text maroon on maroon. The design only resets .btn--light (blog-detail.css); same fix for the others. */
+.prose .btn--primary, .prose .btn--primary:hover, .prose .btn--primary:active { color: var(--c-white); }
+.prose .btn--outline { color: var(--c-ink); }
+.prose .btn--outline:hover { color: var(--c-white); }
+.prose-divider { margin: 36px 0 0; border: 0; border-top: 1px solid var(--c-line); }
+
+/* Homepage section G (exhibitions): the faint world map behind the cards. site.css points to
+   "../assets/maps/…" (right for the design folder); from web/assets/css/ the file is at ../maps/. */
+.events::before { background-image: url("../maps/world-land-clean.svg"); }
+
+/* Exhibition cards: an upcoming show without a Card Photo shows its Show Logo instead, whole (not cropped) on white */
+.event-card__media.event-card__media--logo { background: var(--c-white); box-shadow: inset 0 0 0 1px var(--c-line); }
+.event-card__media.event-card__media--logo img { object-fit: contain; padding: 6%; }
+.event-card:hover .event-card__media.event-card__media--logo img { transform: none; }
+
+/* Product Page Builder (templates/products/blocks/): blocks other than Tabs, stacked in the design's .pd-details__grid.
+   Specifications / Downloads and runs of common blocks (_builder/, .prose) sit in a white panel like a tab panel. */
+.pd-block { padding: clamp(22px, 3vw, 36px); background: var(--c-white); border: 1px solid var(--c-line); border-radius: 12px; }
+.pd-block__title { margin-bottom: 14px; font-size: 1.25rem; color: var(--c-ink); }
+.pd-details__grid > .pd-video { width: 100%; max-width: 880px; margin: 0 auto; }
+
+.content-block__text ul, .content-block__text ol { margin-top: 12px; padding-left: 1.25em; color: var(--c-muted); }
+.content-block__text ul { list-style: disc; }
+.content-block__text ol { list-style: decimal; }
+.content-block__text li + li { margin-top: 6px; }
+.content-block__text h3, .content-block__text h4 { margin-top: 18px; font-size: 1.0625rem; color: var(--c-ink); }
+.content-block__text a { color: var(--c-maroon); font-weight: 600; }
+
+/* Content Block without image / video (the design's blocks always have one): heading left, text right on a white panel
+   like the design's other cards, so the row stays two columns; without a heading the text spans the panel */
+.content-block.content-block--text {
+  align-items: start; padding: clamp(22px, 3vw, 36px); background: var(--c-white);
+  border: 1px solid var(--c-line); border-radius: 14px; border-top: 3px solid var(--c-maroon);
+}
+@media (min-width: 64em) {
+  .content-block.content-block--text, .content-block.content-block--text:nth-child(even) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .content-block.content-block--plain, .content-block.content-block--plain:nth-child(even) { grid-template-columns: minmax(0, 1fr); }
+}
+.content-block--text .content-block__text { max-width: none; margin-top: 0; }
+.content-block--plain .content-block__text { columns: 2 22em; column-gap: 48px; }
+.content-block--plain .content-block__text :is(h3, h4, li) { break-inside: avoid; }
+/* Content Block with a video instead of an image: the video fills the media box (no padding, 16:9) */
+.content-block__media.content-block__media--video { display: block; padding: 0; overflow: hidden; background: var(--c-black); }
+.content-block__media--video .video { height: 100%; border-radius: 0; }
+/* Photo Gallery with 1–2 photos: side by side at 4:3 instead of the 8-photo rhythm's big tile */
+.gallery.gallery--few { grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); grid-auto-rows: auto; max-width: calc(var(--n, 2) * 440px); }
+.gallery.gallery--few .gallery__link { aspect-ratio: 4 / 3; }
+@media (max-width: 35.99em) { .gallery.gallery--few { grid-template-columns: minmax(0, 1fr); } }
+
+/* Industry header: an intro of several paragraphs (Intro field, blank line between) */
+.ind-detail-hero__lead + .ind-detail-hero__lead { margin-top: 10px; }
+
+/* Recommended Products with a single product: one wide card (photo left, details right) instead of 1 of 3 columns */
+@media (min-width: 48em) {
+  .pgrid.pgrid--one { grid-template-columns: minmax(0, 1fr); }
+  .pgrid--one .pcard__inner { flex-direction: row; }
+  .pgrid--one .pcard__media { flex: 0 0 42%; aspect-ratio: auto; min-height: 280px; border-bottom: 0; border-right: 1px solid var(--c-line); }
+  .pgrid--one .pcard__body { padding: 28px 32px; justify-content: center; }
+  .pgrid--one .pcard__title { font-size: 1.5rem; }
+  .pgrid--one .pcard__specs { max-width: 560px; }
+}
+
+/* Comparison block: the design's general ".prose ul:not([class]) li::before" (red dot) is more specific than its
+   ".compare__col--pro/--con li::before" (tick / cross), so the columns showed red dots. Same rules, more specific. */
+.prose .compare .compare__col li { padding-left: 28px; }
+.prose .compare .compare__col li + li { margin-top: 10px; }
+.prose .compare .compare__col li::before { left: 0; top: .2em; width: 18px; height: 18px; border-radius: 50%; background-position: center; background-size: 10px; background-repeat: no-repeat; }
+.prose .compare .compare__col--pro li::before { background-color: var(--c-maroon-tint); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239C2226' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+.prose .compare .compare__col--con li::before { background-color: #EAEAEA; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235E5E5E' stroke-width='3.5' stroke-linecap='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E"); }
+
+/* [red] words in a maroon band (CTA Band, homepage "J"): red on maroon was unreadable → white, underlined */
+.sustain .hl { color: inherit; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+
+/* ".spec-list" is styled by both blog-detail.css (cards) and products/product-detail.css (rows). A product page that uses
+   common blocks loads both, so each look is pinned to its place: cards in the common-block column (.prose), rows in the
+   product's own Tabs / Specifications blocks. */
+.prose .spec-list { border-top: 0; }
+.prose .spec-list > div { display: block; }
+.prose .spec-list dd { font-weight: 400; }
+.pd-details :not(.prose) > .spec-list { display: block; border-top: 2px solid var(--c-ink); }
+.pd-details :not(.prose) > .spec-list > div { padding: 12px 0; background: none; border: 0; border-bottom: 1px solid var(--c-line); border-radius: 0; }
+.pd-details :not(.prose) > .spec-list dt { font-size: .875rem; font-weight: 400; color: var(--c-muted); }
+.pd-details :not(.prose) > .spec-list dt::before { content: none; }
+.pd-details :not(.prose) > .spec-list dd { margin: 0; font-weight: 600; color: var(--c-ink); }
+
+/* Blog post: several categories, the author and the tags (the design shows one category and no tags / author) */
+.post-hero__meta, .post-foot__filed { flex-wrap: wrap; }
+.prose .post-foot__tags { flex-basis: 100%; order: 1; }
+.prose .post-tag { font-size: .8125rem; font-weight: 600; color: var(--c-maroon); text-decoration: none; }
+.prose .post-tag:hover { text-decoration: underline; }
+
+/* Blog search (/blog/?q=…): the "no results" hint under the empty grid */
+.blog-noresults { margin-top: 8px; padding: 28px; border: 1px dashed var(--c-line-strong); border-radius: 12px; text-align: center; color: var(--c-muted); }
+.blog-noresults a, .blog-toolbar__count a { color: var(--c-maroon); font-weight: 600; }
+
+/* Stats Strip (Globals → Stats Strip; _partials/stats-strip.twig): the design's product-page strip, here so it works on any page */
+.pd-stats { border-block: 1px solid var(--c-line); background: var(--c-surface); }
+.pd-stats__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 64em) { .pd-stats__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.pd-stats__list li { display: flex; align-items: center; gap: 14px; min-width: 0; padding: clamp(18px, 2.5vw, 28px) 8px; }
+@media (min-width: 64em) { .pd-stats__list li + li { padding-left: 28px; border-left: 1px solid var(--c-line); } }
+.pd-stats__list .icon { flex-shrink: 0; width: 44px; height: 44px; padding: 11px; border-radius: 50%; background: var(--c-white); color: var(--c-maroon); }
+.pd-stats__list strong { display: block; font-family: var(--font-display); font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem); font-weight: 800; line-height: 1.1; color: var(--c-ink); }
+.pd-stats__list span { display: block; margin-top: 2px; font-size: .8125rem; line-height: 1.4; color: var(--c-muted); }
+.prose .pd-stats { margin-block: 28px; border: 1px solid var(--c-line); border-radius: 12px; } /* inside a blog post */
+.prose .pd-stats__list { margin: 0; padding: 0 16px; list-style: none; }
+.prose .pd-stats__list li::before { content: none; }
+.prose .pd-stats__list p { margin: 0; }
+
+/* Product pages: the previous product design (product-detail-backup.css), still used by imported products until they get
+   the new fields (Headline without Short Description, bullet Highlights, text tabs, Video blocks) */
+.pd-hero__headline { font-size: clamp(1.25rem, 1.1rem + .6vw, 1.625rem); line-height: 1.3; letter-spacing: -.015em; color: var(--c-ink); }
+.pd-highlights { display: grid; gap: 10px; margin-top: 22px; padding: 20px 22px; border: 1px solid var(--c-line); border-radius: 12px; background: var(--c-white); }
+@media (min-width: 36em) { .pd-highlights { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; } }
+.pd-highlights li { position: relative; padding-left: 28px; font-size: .9375rem; font-weight: 600; line-height: 1.45; color: var(--c-ink); }
+.pd-highlights li::before, .rich-text ul li::before { /* check mark */
+  content: ""; position: absolute; left: 0; top: .15em; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--c-maroon-tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239C2226' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 11px no-repeat;
+}
+.pd-video { margin-top: 24px; }
+.pd-video .video { border: 1px solid var(--c-line); }
+.pd-details__grid { display: grid; gap: 28px; }
+
+/* Rich text (Overview): headings, paragraphs, check-mark lists */
+.rich-text > * + * { margin-top: 14px; }
+.rich-text h4 { margin-bottom: 0; margin-top: 22px; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; color: var(--c-ink); }
+.rich-text h4:first-child { margin-top: 0; }
+.rich-text p { max-width: 85ch; font-size: 1rem; line-height: 1.7; color: var(--c-muted); }
+.rich-text ul { display: grid; gap: 9px; }
+@media (min-width: 48em) { .tab-panel .rich-text ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }
+.rich-text ul li { position: relative; padding-left: 28px; font-size: .9375rem; line-height: 1.5; color: var(--c-text); }
+.js .tab-panel__title { display: none; } /* text tabs: the tab label is the heading; shown without JS (every panel in order) */
+.tab-panel__title { margin-bottom: 14px; font-size: 1.25rem; color: var(--c-ink); }
+
+/* Form block (_builder/formBlock.twig, full width: industries/blocks/formBlock.twig): a Formie form in the design's form
+   card. Formie's own theme, set to the site's colours / type through its --fui-* variables. */
+.form-section__inner { max-width: 820px; }
+.formie-block { padding: clamp(22px, 3vw, 36px); background: var(--c-white); border: 1px solid var(--c-line); border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 18px 36px -26px rgba(0, 0, 0, .35); }
+.prose .formie-block { margin-block: 28px; }
+.cols__col--card .formie-block, .cols__col--panel .formie-block { padding: 0; border: 0; box-shadow: none; background: none; margin: 0; }
+.formie-block__title { margin: 0 0 8px; font-size: clamp(1.375rem, 1.15rem + .8vw, 1.75rem); color: var(--c-ink); letter-spacing: -.02em; }
+.formie-block__lead { margin: 0 0 18px; color: var(--c-muted); }
+.formie-block .fui-i {
+  --fui-font: inherit; --fui-color: var(--c-text); --fui-font-size: 1rem;
+  --fui-primary-color: var(--c-maroon); --fui-primary-color-hover: var(--c-maroon-hover);
+  --fui-border-color: #CFCFCF; --fui-border-radius: 8px; --fui-focus-border-color: var(--c-maroon);
+  --fui-focus-shadow: 0 0 0 3px var(--c-maroon-tint);
+  --fui-label-font-size: .875rem; --fui-label-font-weight: 600; --fui-input-font-size: 1rem; --fui-input-padding: .75rem .875rem;
+  --fui-btn-font-weight: 600; --fui-btn-padding: .875rem 1.75rem; --fui-btn-border-radius: 8px;
+}
+.formie-block .fui-label { color: var(--c-ink); }
+.formie-block .fui-btn-wrapper { margin-top: 8px; }
+.prose .formie-block ul li::before { content: none; }   /* Formie's lists (errors, options) aren't article bullets */
+.prose .formie-block ul { padding: 0; }
+
+/* Columns (industries/blocks/columnsBlock.twig): two columns, stacked on phones; styles plain / white card / maroon panel */
+.cols { display: grid; gap: clamp(24px, 3vw, 40px); align-items: start; }
+@media (min-width: 64em) {
+  .cols--1-1 { grid-template-columns: 1fr 1fr; } .cols--2-3 { grid-template-columns: 2fr 3fr; } .cols--3-2 { grid-template-columns: 3fr 2fr; }
+  .cols--1-2 { grid-template-columns: 1fr 2fr; } .cols--2-1 { grid-template-columns: 2fr 1fr; }
+}
+.cols__col { position: relative; min-width: 0; }
+.cols__col .prose { max-width: none; }
+.cols__col .prose > :first-child { margin-top: 0; }
+.cols__col--card { padding: clamp(22px, 3vw, 36px); background: var(--c-white); border: 1px solid var(--c-line); border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 18px 36px -26px rgba(0, 0, 0, .35); }
+.cols__col--panel { padding: clamp(24px, 3vw, 40px); background: var(--c-maroon); border-radius: 14px; color: var(--c-white); overflow: hidden; }
+.cols__col--panel .prose, .cols__col--panel .prose :is(h2, h3, h4, p, li, strong) { color: var(--c-white); }
+.cols__col--panel .prose a { color: var(--c-white); text-decoration-color: rgba(255, 255, 255, .55); }
+.cols__col--panel .prose iframe { border-radius: 10px; }
+.prose iframe { display: block; max-width: 100%; border: 0; }
+
+/* Card Grid (industries/blocks/cardGrid.twig): 2 / 3 / 4 per row on large screens, 2 on tablets, 1 on phones */
+.card-grid__list { display: grid; gap: 20px; }
+@media (min-width: 40em) { .card-grid__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64em) { .card-grid__list--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .card-grid__list--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.g-card { position: relative; padding: 22px 24px; background: var(--c-white); border: 1px solid var(--c-line); border-radius: 12px; min-width: 0; }
+.g-card--link:hover { border-color: var(--c-maroon-line); box-shadow: var(--shadow-md); }
+.g-card__media { margin: -22px -24px 18px; border-radius: 12px 12px 0 0; overflow: hidden; }
+.g-card__media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.g-card__title { font-size: 1.125rem; color: var(--c-ink); }
+.g-card__title a { color: inherit; text-decoration: none; }
+.g-card__subtitle { margin-top: 4px; font-weight: 700; color: var(--c-maroon); }
+.g-card__text { margin-top: 12px; font-size: .9375rem; line-height: 1.6; color: var(--c-text); overflow-wrap: anywhere; }
+.g-card__text > * + * { margin-top: 10px; }
+.g-card__text a { position: relative; z-index: 2; color: var(--c-maroon); font-weight: 600; }
+.prose .formie-block__title { margin-top: 0; }
+.section.ind-prose + .card-grid { padding-top: 0; }   /* a heading / text right before a Card Grid belongs to it: no double gap */
+
+/* Section Settings (_macros/layout.twig sectionClass): the admin's Space Above / Below on a section block */
+.section--pt-none { padding-top: 0; } .section--pt-small { padding-top: calc(var(--section-y) / 2.5); } .section--pt-large { padding-top: calc(var(--section-y) * 1.5); }
+.section--pb-none { padding-bottom: 0; } .section--pb-small { padding-bottom: calc(var(--section-y) / 2.5); } .section--pb-large { padding-bottom: calc(var(--section-y) * 1.5); }
+/* Columns: Vertical Alignment (default top) */
+.cols--align-center { align-items: center; }
+.cols--align-stretch { align-items: stretch; }
+/* Columns styled as a card or a panel hold compact content: the design's contact panel / form card scale, not an article's */
+.cols__col--card .prose, .cols__col--panel .prose { font-size: .9375rem; line-height: 1.6; }
+.cols__col--card .prose > * + *, .cols__col--panel .prose > * + * { margin-top: 14px; }
+.cols__col--card .prose :is(h2, h3), .cols__col--panel .prose :is(h2, h3) { margin-top: 24px; font-size: clamp(1.375rem, 1.15rem + .8vw, 1.75rem); }
+.cols__col--card .prose :is(h2, h3)::before, .cols__col--panel .prose :is(h2, h3)::before { content: none; }
+.cols__col--card .prose p, .cols__col--panel .prose p { font-size: inherit; line-height: inherit; }
+.cols__col--card .prose iframe, .cols__col--panel .prose iframe { width: 100%; height: auto; aspect-ratio: 4 / 3; margin-top: 22px; border-radius: 10px; }
+.cols--one .prose iframe { width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: 560px; border-radius: 12px; }
+.prose .formie-block__title::before { content: none; }

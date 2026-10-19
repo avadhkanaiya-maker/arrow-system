@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: hasPage
+instructions: 'On = the show gets its own page at /its-slug/ (photos, intro). Off = it is only listed (e.g. an announced show).'
+name: 'Has a Page'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

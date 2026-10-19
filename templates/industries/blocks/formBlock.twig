@@ -1,0 +1,10 @@
+{# Form block as a full-width section (Pages / industries builder): the inline form card (_builder/formBlock), centred.
+   Section Settings: Space Above / Below, Background. Vars: block #}
+{% import '_macros/layout' as layout %}
+{% if block.formieForm.exists() %}
+  <section class="section form-section{{ layout.sectionClass(block) }}">
+    <div class="container form-section__inner">
+      {% include '_builder/formBlock' with { block: block } only %}
+    </div>
+  </section>
+{% endif %}

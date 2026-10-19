@@ -1,0 +1,244 @@
+{#
+  An exhibition page: /{slug}/ (only shows with "Has a Page" on). Design: Arrowsystem_local/exhibitions/exhibition-detail.html
+    1. Header: eyebrow (past / upcoming), title (year in red), subtitle, intro, facts (location, year or dates, photos),
+       the first two photos as the collage
+    2. Gallery: all photos, lightbox (js/exhibitions/detail.js; the <dialog> is in {% block afterFooter %})
+    3. More Exhibitions: all exhibitions + the newer / older show (the Exhibitions structure order)
+    4. "Meet us at the next show" band: the next announced show (hides itself after its end date, js)
+  Schema: ExhibitionEvent (D4).
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% import '_macros/exhibitions' as ex %}
+
+{% set listingPage = craft.entries.section('exhibitionsPage').one() %}
+{% set upcomingPage = craft.entries.section('upcomingExhibitionsPage').one() %}
+{% set today = now|date('Y-m-d') %}
+{% set allShows = craft.entries.section('exhibitions').with(['featuredImage']).all() %}
+{% set upcoming = allShows|filter(s => (s.datePrecision.value ?? 'exact') == 'exact' and (s.endDate ?? s.startDate)|date('Y-m-d') >= today)|sort((a, b) => a.startDate <=> b.startDate) %}
+{% set nextShow = upcoming|filter(s => s.id != entry.id)|first %}
+{% set isUpcoming = entry.id in upcoming|map(s => s.id) %}
+{# re-indexed (filter keeps the original keys), so [index ± 1] finds the neighbours #}
+{% set pageShows = []|merge(allShows|filter(s => s.hasPage)) %}
+{% set myIndex = null %}
+{% for s in pageShows %}{% if s.id == entry.id %}{% set myIndex = loop.index0 %}{% endif %}{% endfor %}
+{% set newer = myIndex is not null and myIndex > 0 ? pageShows[myIndex - 1] : null %}
+{% set older = myIndex is not null ? (pageShows[myIndex + 1] ?? null) : null %}
+{% set firstYear = (allShows|map(s => s.startDate|date('Y'))|sort|first) %}
+
+{% set photos = entry.exhibitionPhotos.all() %}
+{% set plainTitle = entry.title|replace({'[': '', ']': ''}) %}
+{% set pageTitle = entry.seoTitle ?: plainTitle ~ ' - ' ~ siteName %}
+{% set yearOnly = (entry.datePrecision.value ?? 'exact') == 'year' %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% set social = entry.socialImage.one() ?? entry.featuredImage.one() %}
+  {% set event = {
+    '@type': 'ExhibitionEvent',
+    '@id': entry.url ~ '#event',
+    name: plainTitle,
+    description: entry.seoDescription ?: entry.sectionLead,
+    url: entry.url,
+    startDate: entry.startDate|date(yearOnly ? 'Y' : 'Y-m-d'),
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+    location: {'@type': 'Place', name: entry.city ?: plainTitle},
+    organizer: {'@type': 'Organization', name: siteName, url: siteUrl},
+  } %}
+  {% if entry.endDate and not yearOnly %}{% set event = event|merge({endDate: entry.endDate|date('Y-m-d')}) %}{% endif %}
+  {% if social %}{% set event = event|merge({image: social.url}) %}{% endif %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.seoCanonical ? url(entry.seoCanonical) : entry.url,
+    noindex: entry.seoNoIndex,
+    ogType: 'article',
+    image: social,
+    schema: [
+      event,
+      {'@type': 'BreadcrumbList', itemListElement: [
+        {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl},
+        {'@type': 'ListItem', position: 2, name: listingPage.title ?? 'Exhibitions', item: listingPage.url ?? siteUrl},
+        {'@type': 'ListItem', position: 3, name: plainTitle, item: entry.url},
+      ]},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/exhibitions/exhibitions.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/css/exhibitions/detail.css') }}">
+  {% if photos|length %}<link rel="preload" as="image" href="{{ photos[0].url }}" fetchpriority="high">{% endif %}
+  <script src="{{ url('assets/js/exhibitions/detail.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <section class="page-hero detail-hero" aria-labelledby="page-title">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          {% if listingPage %}<li><a href="{{ listingPage.url }}">{{ listingPage.title }}</a></li>{% endif %}
+          <li><a href="{{ entry.url }}" aria-current="page">{{ plainTitle }}</a></li>
+        </ol>
+      </nav>
+      <div class="page-hero__grid">
+        <div class="page-hero__body">
+          <p class="eyebrow">{{ isUpcoming ? 'Upcoming exhibition' : 'Past exhibition' }}</p>
+          <h1 class="page-hero__title" id="page-title">{{ ex.title(entry) }}</h1>
+          <svg class="arrow-line" viewBox="0 0 132 14" aria-hidden="true" focusable="false"><path d="M1 7h126M120 1.5 127 7l-7 5.5"/></svg>
+          {% if entry.subheading %}<h2 class="detail-hero__subtitle">{{ entry.subheading }}</h2>{% endif %}
+          {% if entry.sectionLead %}<p class="page-hero__lead detail-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
+          <ul class="detail-facts">
+            {% if entry.city %}
+            <li class="detail-fact">
+              <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></span>
+              <span><span class="show-fact__label">Location</span> {{ entry.city }}</span>
+            </li>
+            {% endif %}
+            <li class="detail-fact">
+              <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+              <span><span class="show-fact__label">{{ yearOnly ? 'Year' : 'Dates' }}</span> {{ ex.dates(entry, 'long') }}</span>
+            </li>
+            {% if photos|length %}
+            <li class="detail-fact">
+              <span class="fact__icon"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg></span>
+              <span><span class="show-fact__label">Gallery</span> <a href="#gallery">{{ photos|length }} photo{{ photos|length != 1 ? 's' }}</a></span>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% if photos|length %}
+        <div class="collage" role="group" aria-label="Photos from {{ plainTitle }}">
+          <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
+          <span class="rings rings--hero" aria-hidden="true"></span>
+          <figure class="collage__main">
+            <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
+            <span class="crop crop--bl" aria-hidden="true"></span><span class="crop crop--br" aria-hidden="true"></span>
+            <img src="{{ photos[0].url }}" width="{{ photos[0].width }}" height="{{ photos[0].height }}" fetchpriority="high"
+                 alt="{{ photos[0].alt }}">
+            <figcaption class="photo-tag"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>{{ plainTitle }}{{ entry.city ? ', ' ~ entry.city }}</figcaption>
+          </figure>
+          {% if photos[1] ?? null %}
+          <figure class="collage__inset">
+            <img src="{{ photos[1].url }}" width="{{ photos[1].width }}" height="{{ photos[1].height }}" loading="lazy" alt="{{ photos[1].alt }}">
+          </figure>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% if photos|length %}
+  <section class="section section--surface gallery-section" id="gallery" aria-labelledby="gallery-title">
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Gallery</p>
+          <h2 class="section-title" id="gallery-title">From the <span class="hl">Show Floor</span></h2>
+        </div>
+        <p class="gallery-count"><strong>{{ photos|length }}</strong> photo{{ photos|length != 1 ? 's' }}</p>
+      </header>
+      <div class="gallery-wrap">
+        <span class="dot-grid dot-grid--gallery" aria-hidden="true"></span>
+        <ul class="gallery" data-gallery>
+          {% for photo in photos %}
+          {# the design's rhythm: a big tile, then a wide tile five photos later, every 8 photos #}
+          {% set size = loop.index0 % 8 == 0 ? ' gallery__item--big' : (loop.index0 % 8 == 5 ? ' gallery__item--wide' : '') %}
+          {% set thumb = {width: 800, height: 600, mode: 'crop'} %}
+          <li class="gallery__item{{ size }}">
+            <a class="gallery__link" href="{{ photo.url }}" data-gallery-index="{{ loop.index0 }}">
+              <img src="{{ photo.getUrl(thumb) }}" width="{{ thumb.width }}" height="{{ thumb.height }}" loading="lazy" decoding="async" alt="{{ photo.alt }}">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section more-shows" aria-labelledby="more-title">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Keep exploring</p>
+        <h2 class="section-title" id="more-title">More <span class="hl">Exhibitions</span></h2>
+      </header>
+      <nav class="pager" aria-label="More exhibitions">
+        {% if listingPage %}
+        <a class="pager__card pager__card--all" href="{{ listingPage.url }}#past">
+          <span class="pager__icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>
+          <span class="pager__text">
+            <span class="pager__kicker">Browse</span>
+            <span class="pager__title">All exhibitions</span>
+            <span class="pager__meta">{{ pageShows|length }} shows since {{ firstYear }}</span>
+          </span>
+          <svg class="icon pager__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+        {% endif %}
+        {% for item in [{show: newer, kicker: 'Next exhibition', rel: 'next'}, {show: older, kicker: 'Previous exhibition', rel: 'prev'}] %}
+          {% if item.show %}
+          {% set thumb = item.show.featuredImage.one() %}
+          <a class="pager__card" href="{{ item.show.url }}" rel="{{ item.rel }}">
+            <span class="pager__thumb">{% if thumb %}<img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" loading="lazy" alt="">{% endif %}</span>
+            <span class="pager__text">
+              <span class="pager__kicker">{{ item.kicker }}</span>
+              <span class="pager__title">{{ item.show.title }}</span>
+              <span class="pager__meta">{{ item.show.startDate|date('Y') }}</span>
+            </span>
+            <svg class="icon pager__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    </div>
+  </section>
+
+  {% if nextShow %}
+  <section class="sustain next-band" aria-labelledby="next-title" data-next-band data-end="{{ (nextShow.endDate ?? nextShow.startDate)|date('Y-m-d') }}">
+    <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
+    <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
+    <div class="container next-band__inner">
+      <div class="next-band__date" aria-hidden="true">
+        <span class="next-band__month">{{ nextShow.startDate|date('M') }}</span>
+        <span class="next-band__days">{{ ex.days(nextShow) }}</span>
+        <span class="next-band__yr">{{ nextShow.startDate|date('Y') }}</span>
+      </div>
+      <div class="next-band__body">
+        <p class="next-band__kicker">Meet us at the next show</p>
+        <h2 id="next-title">{{ nextShow.title }}</h2>
+        <p class="next-band__meta">{{ ex.dates(nextShow, 'long') }}{{ nextShow.city ? ' · ' ~ nextShow.city }}</p>
+      </div>
+      <div class="btn-row next-band__actions">
+        {% if upcomingPage %}<a class="btn btn--light btn--lg" href="{{ upcomingPage.url }}">Explore Upcoming Exhibitions</a>{% endif %}
+        {% if upcomingPage and upcomingPage.ctaLink and upcomingPage.ctaLink.url %}<a class="btn btn--outline-light btn--lg" {{ links.attrs(upcomingPage.ctaLink) }}>{{ upcomingPage.ctaLink.label }}</a>{% endif %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}
+
+{% block afterFooter %}
+{% if photos|length %}
+<!-- Gallery lightbox (js/exhibitions/detail.js). Native <dialog>: Escape closes, focus stays inside and returns to the thumbnail. -->
+<dialog class="lightbox" data-lightbox aria-label="Photo viewer">
+  <div class="lightbox__frame">
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="" data-lightbox-img>
+      <figcaption class="lightbox__caption">
+        <span data-lightbox-alt></span>
+        <span class="lightbox__count" data-lightbox-count></span>
+      </figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__btn--prev" type="button" data-lightbox-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg><span class="visually-hidden">Previous photo</span></button>
+    <button class="lightbox__btn lightbox__btn--next" type="button" data-lightbox-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="visually-hidden">Next photo</span></button>
+    <button class="lightbox__btn lightbox__btn--close" type="button" data-lightbox-close><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg><span class="visually-hidden">Close photo viewer</span></button>
+  </div>
+</dialog>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Numbered steps: add a Step for each one'
+fieldLayouts:
+  7c94a926-eca5-4d51-a605-158269ebe0a4:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 18e0e446-9775-483b-a2ed-9939ddd402e6 # Steps
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 275d49ab-9b83-47eb-be48-1cbeac0d1b0e
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e6fc39c0-4d7d-44aa-a2f7-2b0afd500933
+        userCondition: null
+    thumbFieldKey: null
+handle: steps
+hasTitleField: false
+icon: list-ol
+name: Steps
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

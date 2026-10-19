@@ -1,0 +1,25 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'The company figures from Globals → Stats Strip (edit them there; they are the same everywhere).'
+fieldLayouts:
+  9173501f-e962-48ae-a411-b7fee7ceb670:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        name: Content
+        uid: e71faf3f-d180-4fe7-8546-4a20737b8a10
+        userCondition: null
+    thumbFieldKey: null
+handle: statsStrip
+hasTitleField: false
+icon: chart-simple
+name: 'Stats Strip'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: 'Stats strip'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

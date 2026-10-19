@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A link button'
+fieldLayouts:
+  5a897d3a-6fc3-41cb-a309-29291e2bdd2c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: null
+            label: Button
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4176d23d-3e94-454a-88a4-adca7fd61778
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: a8fa3b9a-94c0-4e6f-a2c0-ad32f2b98f31 # Button Style
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e455d3e0-b94c-413a-af61-8b1fbf893e7e
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c656d53a-e225-42dc-bc8d-54ae63521eff
+        userCondition: null
+    thumbFieldKey: null
+handle: button
+hasTitleField: false
+icon: arrow-pointer
+name: Button
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

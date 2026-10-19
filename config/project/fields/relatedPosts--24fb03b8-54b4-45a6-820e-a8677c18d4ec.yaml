@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: relatedPosts
+instructions: 'Optional: up to 3 articles shown under the post. Empty = the latest articles from the same category.'
+name: 'More Insights'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 3
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:e16953b7-125d-4187-9ad1-2e876d2bd062' # Blog
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

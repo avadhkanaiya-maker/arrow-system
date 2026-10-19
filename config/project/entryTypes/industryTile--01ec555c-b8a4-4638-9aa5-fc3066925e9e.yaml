@@ -1,0 +1,77 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  4b58bc0c-0c94-49fd-92f0-74e1c57bbd98:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'An industry (pick an entry) or any URL.'
+            label: Link
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5825cdad-1c35-4d53-ac4b-59cd9e4696b9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: "Empty = the linked industry's name."
+            label: Name
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7c5edfe7-6cb9-4152-8af5-015a215ea3eb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
+            handle: null
+            instructions: "600 × 390 works best. Empty = the linked industry's card photo."
+            label: Photo
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b5885a87-7833-4423-b77a-d585b4d34798
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: dbb2bfc8-6911-4266-b394-22f16520c8fb
+        userCondition: null
+    thumbFieldKey: null
+handle: industryTile
+hasTitleField: false
+icon: image
+name: 'Industry Tile'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

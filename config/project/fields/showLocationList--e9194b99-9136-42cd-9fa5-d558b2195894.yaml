@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: showLocationList
+instructions: 'The list always exists for screen readers and builds the map pins; this also shows it on screen.'
+name: 'Show city list'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

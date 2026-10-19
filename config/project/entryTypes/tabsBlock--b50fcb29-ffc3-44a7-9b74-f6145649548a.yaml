@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A set of tabs (e.g. Overview / Features / Brochure).'
+fieldLayouts:
+  9d0c2377-aba6-4fec-8b8a-d293ba29b35d:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b4566e1d-d86f-4db9-982f-160559e04bf4 # Tabs
+            handle: null
+            instructions: 'One tab per block, in this order. Text = rich text (e.g. Overview); Specifications = label / value rows (e.g. Features); Downloads = PDFs (e.g. Brochure).'
+            label: Tabs
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5e3a731f-7828-48cb-9ca2-c0e408c3e357
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: ec83cd12-359a-4346-ad1a-eac4d4a512fc
+        userCondition: null
+    thumbFieldKey: null
+handle: tabsBlock
+hasTitleField: false
+icon: folder-open
+name: Tabs
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

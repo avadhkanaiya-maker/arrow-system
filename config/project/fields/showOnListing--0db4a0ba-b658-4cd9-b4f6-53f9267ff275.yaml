@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: showOnListing
+instructions: "Off = the page works, but it isn't a card on /industries/ (e.g. Corrugation Printing, as live)."
+name: 'Show on Listing'
+searchable: false
+settings:
+  default: true
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

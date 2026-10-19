@@ -1,0 +1,46 @@
+{#
+  "Category:" filter (design: blogs/index.html, details.cat-filter). Native <details>; js/blog.js adds the search box.
+  Lists every Blog Category with posts (except "Uncategorized", as in the design), in the structure's order (top level A–Z, sub-categories under their parent),
+  with post counts. "Popular" = the 6 categories with the most posts. Empty categories are left out, as in the design.
+    current    the Blog Category of this page, or null (= All articles)
+    allCount   number of posts in the blog
+#}
+{% set rows = [] %}
+{% for cat in craft.entries.section('blogCategories').with(['parent']).all() %}
+  {% set n = craft.entries.section('blog').relatedTo({targetElement: cat, field: 'blogCategories'}).count() %}
+  {% if n and cat.slug != 'uncategorized' %}{% set rows = rows|merge([{cat: cat, count: n}]) %}{% endif %}
+{% endfor %}
+{% set popular = rows|sort((a, b) => b.count <=> a.count)|slice(0, 6) %}
+<details class="cat-filter" data-cat-filter>
+  <summary class="cat-filter__toggle">
+    <svg class="icon cat-filter__icon" aria-hidden="true"><use href="#i-tag"/></svg>
+    <span class="cat-filter__label">Category:</span>
+    <span class="cat-filter__current">{{ current ? current.title : 'All articles' }}</span>
+    <svg class="icon cat-filter__chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+  </summary>
+  <div class="cat-filter__panel">
+    <div class="cat-filter__search" data-cat-search hidden>
+      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+      <label class="visually-hidden" for="cat-search-input">Search categories</label>
+      <input id="cat-search-input" type="search" placeholder="Search {{ rows|length }} categories" autocomplete="off" data-cat-search-input>
+    </div>
+    <div class="cat-filter__popular" data-cat-popular>
+      <p class="cat-filter__heading">Popular</p>
+      <div class="cat-filter__chips">
+      {% for row in popular %}
+      <a class="cat-chip" href="{{ row.cat.url }}">{{ row.cat.title }}<span>{{ row.count }}</span></a>
+      {% endfor %}
+      </div>
+    </div>
+    <p class="cat-filter__heading cat-filter__heading--list" data-cat-list-heading>All categories <span>A–Z</span></p>
+    <ul class="cat-filter__list" data-cat-list>
+      <li class="cat-filter__item cat-filter__item--all" data-cat-name="all articles"><a class="cat-filter__link" href="{{ url('blog') }}"{{ not current ? ' aria-current="page"' }}><span class="cat-filter__name">All articles</span><span class="cat-filter__num">{{ allCount }}</span></a></li>
+      {% for row in rows %}
+        {% set cat = row.cat %}
+        {% set depth = cat.level - 1 %}
+        <li class="cat-filter__item{{ depth ? ' cat-filter__item--child cat-filter__item--d' ~ depth }}" data-cat-name="{{ cat.title|lower }}"><a class="cat-filter__link" href="{{ cat.url }}"{{ current and current.id == cat.id ? ' aria-current="page"' }}><span class="cat-filter__name">{{ cat.title }}{% if depth and cat.parent %}<span class="cat-filter__parent">in {{ cat.parent.title }}</span>{% endif %}</span><span class="cat-filter__num">{{ row.count }}</span></a></li>
+      {% endfor %}
+    </ul>
+    <p class="cat-filter__empty" data-cat-empty hidden role="status"></p>
+  </div>
+</details>

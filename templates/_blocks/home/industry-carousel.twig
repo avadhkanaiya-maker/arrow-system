@@ -1,0 +1,53 @@
+{#
+  E. Industries (design: index.html "E. INDUSTRIES"): heading, "View all industries", a carousel of tiles with chips and
+  arrows (js/site.js reveals the controls; without JS the row scrolls).
+  Tiles (Industry Tile): Link = an industry entry or any URL; Name / Photo empty = the linked industry's name / card photo.
+  Fields: Small Heading, Heading ([red] words), Tiles, View All Link, Anchor ID. Vars: block
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set tiles = [] %}
+{% for tile in block.industryTiles.all() %}
+  {% set link = tile.ctaLink %}
+  {% set linked = link ? link.element : null %}
+  {% set name = tile.headingText ?: (linked ? linked.title : (link ? link.label : '')) %}
+  {% set photo = tile.mediaImage.one() ?? (linked and linked.featuredImage is defined ? linked.featuredImage.one() : null) %}
+  {% if name and link and link.url %}
+    {% set tiles = tiles|merge([{name: name, photo: photo, link: link}]) %}
+  {% endif %}
+{% endfor %}
+
+{% if tiles|length %}
+  <section class="section industries" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+    <div class="container">
+      <header class="industries__head">
+        <div>
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          <h2 class="section-title industries__title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+        </div>
+        <div class="industries__aside">
+          {% if block.ctaLink and block.ctaLink.url %}<a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+          <div class="industries__nav" data-ind-controls hidden>
+            <button class="industries__arrow" type="button" data-ind-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg><span class="visually-hidden">Previous industries</span></button>
+            <button class="industries__arrow industries__arrow--next" type="button" data-ind-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="visually-hidden">Next industries</span></button>
+          </div>
+        </div>
+      </header>
+      <div class="industries__chips" data-ind-chips hidden>
+        {% for tile in tiles %}
+        <button class="industries__chip" type="button" aria-controls="industry-{{ loop.index }}" data-ind-chip>{{ tile.name }}</button>
+        {% endfor %}
+      </div>
+      <ul class="industries__track" data-ind-track>
+        {% for tile in tiles %}
+        <li class="industry-card" id="industry-{{ loop.index }}" data-ind-slide>
+          {% if tile.photo %}<img class="industry-card__img" src="{{ tile.photo.url }}" width="{{ tile.photo.width }}" height="{{ tile.photo.height }}" loading="lazy" alt="">{% endif %}
+          <h3 class="industry-card__title"><a class="stretched-link" {{ links.attrs(tile.link) }}>{{ tile.name }}</a><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></h3>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

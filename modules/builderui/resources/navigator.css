@@ -1,0 +1,36 @@
+/* Page-builder navigator (navigator.js): the "Outline" panel, first in the entry's right sidebar (Craft keeps it sticky).
+   navigator.js makes it reach the window bottom; only its list scrolls */
+.bui-nav {
+    margin-bottom: 18px; padding: 12px 12px 8px;
+    background: var(--white, #fff); border-radius: var(--large-border-radius, 8px);
+    box-shadow: 0 0 0 1px var(--hairline-color, #e3e5e8), 0 2px 12px rgba(31, 41, 51, .08);
+    display: flex; flex-direction: column;
+}
+.bui-nav__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.bui-nav__title { margin: 0; font-size: 14px; }
+.bui-nav__count { font-size: 11px; color: var(--gray-550, #606d7b); }
+.bui-nav__search { margin-bottom: 8px; }
+.bui-nav__tools { display: flex; gap: 6px; margin-bottom: 8px; }
+.bui-nav__tools .btn { flex: 1; }
+.bui-nav__list { flex: 1; min-height: 0; overflow-y: auto; margin: 0 -4px; padding: 0 4px; list-style: none; }
+.bui-nav__item { margin: 0; }
+.bui-nav__item--nested { padding-left: 14px; }
+.bui-nav__link {
+    display: flex; align-items: center; gap: 6px; width: 100%; padding: 5px 6px; border: 0; border-radius: 4px;
+    background: none; text-align: left; font-size: 12px; line-height: 1.3; color: var(--text-color, #3f4d5a); cursor: pointer;
+}
+.bui-nav__link:hover, .bui-nav__link:focus-visible { background: var(--gray-050, #f3f7fc); }
+.bui-nav__link .cp-icon { flex: 0 0 auto; width: 14px; height: 14px; color: var(--gray-500, #7b8793); }
+.bui-nav__type { flex: 0 0 auto; font-weight: 600; color: var(--gray-700, #3f4d5a); }
+.bui-nav__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--gray-550, #606d7b); }
+.bui-nav__item--h2 { margin-top: 6px; }
+.bui-nav__item--h2 .bui-nav__link { background: var(--gray-050, #f3f7fc); }
+.bui-nav__item--h2 .bui-nav__type { color: var(--red-600, #cf1124); }
+.bui-nav__item--h2 .bui-nav__text { font-weight: 600; color: var(--text-color, #1f2933); }
+.bui-nav__item.is-open .bui-nav__link { box-shadow: inset 2px 0 0 var(--link-color, #2563eb); }
+.bui-nav__item.is-current .bui-nav__link { background: #fff4d6; }
+/* the block just jumped to */
+.matrixblock.bui-nav-current { box-shadow: 0 0 0 3px #f5b100; transition: box-shadow .3s ease; }
+
+/* while Craft is still setting up the blocks: only their title bars (navigator.js removes this when ready) */
+.bui-precollapse .blocks > .matrixblock { height: 30px; overflow: hidden; }

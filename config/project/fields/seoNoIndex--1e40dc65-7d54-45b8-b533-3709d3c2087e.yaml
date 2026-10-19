@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: seoNoIndex
+instructions: 'Adds “noindex”, so Google does not list this page. Leave off for normal pages.'
+name: 'Hide from Search Engines'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

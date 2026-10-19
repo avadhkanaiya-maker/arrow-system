@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: textMediaLayout
+instructions: 'Text + image: text left, photo right, grey background. Heading + text: heading left, text right, no image, white background.'
+name: Layout
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Text + image (photo on the right)'
+        -
+          - value
+          - textImage
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Heading + text (no image)'
+        -
+          - value
+          - headingText
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -1,0 +1,30 @@
+columnSuffix: null
+handle: sampleLink
+instructions: 'Default destination of “Try a Free Sample” buttons. Interim: email to sales.'
+name: 'Free Sample Link'
+searchable: false
+settings:
+  fullGraphqlData: true
+  maxLength: 255
+  showLabelField: true
+  typeSettings:
+    __assoc__:
+      -
+        - url
+        -
+          __assoc__:
+            -
+              - allowRootRelativeUrls
+              - true
+            -
+              - allowAnchors
+              - true
+  types:
+    - entry
+    - url
+    - email
+    - tel
+    - asset
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Link

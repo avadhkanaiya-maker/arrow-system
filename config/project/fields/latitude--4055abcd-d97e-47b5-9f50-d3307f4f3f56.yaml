@@ -1,0 +1,19 @@
+columnSuffix: null
+handle: latitude
+instructions: 'City centre is enough, e.g. 43.0964. North is positive, south is negative. The map pin is placed from latitude/longitude automatically.'
+name: Latitude
+searchable: false
+settings:
+  decimals: 4
+  defaultValue: null
+  max: 90
+  min: -90
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  step: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

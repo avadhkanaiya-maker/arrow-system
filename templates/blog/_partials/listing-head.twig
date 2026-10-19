@@ -1,0 +1,10 @@
+{# <head> assets of the listing pages (/blog/, categories, tags): the design's blog.css + blog.js and its page-level style #}
+  <link rel="stylesheet" href="{{ url('assets/css/blog.css') }}">
+  <!-- Listing sidebar scroll fix (from the design): the sidebar scrolls normally and only the help box stays in view (desktop). -->
+  <style>
+    @media (min-width: 64em) {
+      .blog-layout > .blog-sidebar { position: static; align-self: stretch; align-content: start; }
+      .blog-sidebar > .side-cta { position: sticky; top: 104px; }
+    }
+  </style>
+  <script src="{{ url('assets/js/blog.js') }}" defer></script>

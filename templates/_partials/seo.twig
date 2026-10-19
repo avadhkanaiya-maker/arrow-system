@@ -1,0 +1,61 @@
+{#
+  SEO tags in <head>, matching what the live site (Rank Math) outputs. Used by the blog templates in {% block seo %}:
+    {% include '_partials/seo' with { title: …, description: …, canonical: …, ogType: 'article', image: asset, … } %}
+
+  title        the full page title (also og:title / twitter:title); the template's {% block title %} uses the same value
+  description  meta description (omitted when empty, as live)
+  canonical    absolute URL of the page (paginated pages: their own URL, as live)
+  noindex      true → robots "follow, noindex" (tag pages, or the entry's “Hide from Search Engines” switch)
+  robots       optional: an exact robots value instead (a product's “Robots (advanced)” field, copied from live)
+  ogType       website | article
+  image        an Asset (og:image + size + alt), optional
+  prev / next  URLs of the previous / next listing page, optional
+  extraMeta    [{property|name, content}] added after og:url (e.g. article:published_time), optional
+  schema       a list of schema.org objects, output as one JSON-LD @graph, optional
+#}
+{%- set robots = (robots ?? null) ?: ((noindex ?? false) ? 'follow, noindex' : 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large') -%}
+{%- set image = image ?? null -%}
+{%- set siteTitle = siteName -%}
+{% if description ?? null %}
+  <meta name="description" content="{{ description }}">
+{% endif %}
+  <meta name="robots" content="{{ robots }}">
+{% if not (noindex ?? false) and (canonical ?? null) %}
+  <link rel="canonical" href="{{ canonical }}">
+{% endif %}
+{% if prev ?? null %}
+  <link rel="prev" href="{{ prev }}">
+{% endif %}
+{% if next ?? null %}
+  <link rel="next" href="{{ next }}">
+{% endif %}
+  <meta property="og:locale" content="{{ currentSite.language|replace('-', '_') }}">
+  <meta property="og:type" content="{{ ogType ?? 'website' }}">
+  <meta property="og:title" content="{{ title }}">
+{% if description ?? null %}
+  <meta property="og:description" content="{{ description }}">
+{% endif %}
+  <meta property="og:url" content="{{ canonical ?? craft.app.request.absoluteUrl }}">
+  <meta property="og:site_name" content="{{ siteTitle }}">
+{% for meta in extraMeta ?? [] %}
+  <meta {{ meta.name is defined ? 'name' : 'property' }}="{{ meta.name ?? meta.property }}" content="{{ meta.content }}">
+{% endfor %}
+{% if image %}
+  <meta property="og:image" content="{{ image.url }}">
+  <meta property="og:image:secure_url" content="{{ image.url }}">
+  {% if image.width %}<meta property="og:image:width" content="{{ image.width }}">
+  <meta property="og:image:height" content="{{ image.height }}">{% endif %}
+  {% if image.alt %}<meta property="og:image:alt" content="{{ image.alt }}">{% endif %}
+  <meta property="og:image:type" content="{{ image.mimeType }}">
+{% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+{% if description ?? null %}
+  <meta name="twitter:description" content="{{ description }}">
+{% endif %}
+{% if image %}
+  <meta name="twitter:image" content="{{ image.url }}">
+{% endif %}
+{% if schema ?? null %}
+  <script type="application/ld+json">{{ {'@context': 'https://schema.org', '@graph': schema}|json_encode(constant('JSON_UNESCAPED_SLASHES') b-or constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_TAG'))|raw }}</script>
+{% endif %}

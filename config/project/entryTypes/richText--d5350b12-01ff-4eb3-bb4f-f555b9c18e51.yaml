@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Paragraphs, lists, links, tables'
+fieldLayouts:
+  1d9da079-53fb-4080-a154-0ee64f4c7245:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 165a5425-18d7-4566-a557-6e0a6e9a64f1 # Rich Text
+            handle: null
+            instructions: null
+            label: Text
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6e22d3af-3d1a-4728-b752-d6de18e1f8a1
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: f24bdd9e-5ed9-487c-a1d4-0158d4368e27
+        userCondition: null
+    thumbFieldKey: null
+handle: richText
+hasTitleField: false
+icon: align-left
+name: 'Rich Text'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

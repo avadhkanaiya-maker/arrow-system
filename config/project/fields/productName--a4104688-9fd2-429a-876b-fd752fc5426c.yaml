@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: productName
+instructions: 'Large name shown under the banner, e.g. “ArrowJet MTS-48”. Also names the slide for screen readers.'
+name: 'Product Name'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

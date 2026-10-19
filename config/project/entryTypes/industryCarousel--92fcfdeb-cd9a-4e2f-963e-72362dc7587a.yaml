@@ -1,0 +1,139 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Section E: a carousel of industry tiles (photo + name) with chips and arrows.'
+fieldLayouts:
+  d1141f6a-bd03-480a-95d2-7af4dbfc9378:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Name in the list'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: d09ec6f0-0723-4854-a493-07a559b12ded
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f982ecb9-3fa0-4138-a2e3-426e17fbdaf5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 80357c06-c841-4c21-8962-f5aee65dd6ca
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: cb80df95-1cff-4dd2-9e1f-f66e4da2571b # Tiles
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fba0d600-a759-48ca-abae-fbe6c787e393
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'e.g. “View all industries” → the Industries Page.'
+            label: 'View All Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a91f1dbc-5dd6-406c-963d-592cd31366e1
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c6d8c397-3bf3-4b49-ba98-6050aed5b65c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 595d98ee-9705-4022-9acd-54cbd2a088ad
+        userCondition: null
+    thumbFieldKey: null
+handle: industryCarousel
+hasTitleField: true
+icon: industry
+name: 'Industries Carousel'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

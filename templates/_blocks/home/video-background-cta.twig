@@ -1,0 +1,32 @@
+{#
+  I. One stop solution (design: index.html, "ONE STOP SOLUTION"): full-section background video with a dark overlay
+  and white text on top. The video is a muted YouTube embed that loops with no controls; it's decorative (inert,
+  hidden from assistive tech). site.js plays it from data-bg-video (the YouTube ID) into [data-bg-video-frame], only
+  when the section nears the viewport, and never for reduced-motion / Save-Data visitors, who keep the poster.
+  site.js handles one background-video section per page (the first data-bg-video).
+  Fields: Small Heading, Heading ([red] words), Subheading, Body Text, Button Intro, Button · Video Link, Video Cover
+  Image · Anchor ID. Vars: block (Background Video Section entry)
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set videoId = text.youtubeId(block.videoUrl)|trim %}
+{% set poster = block.videoPoster.one() %}
+<section class="onestop" id="{{ anchor }}" aria-labelledby="{{ titleId }}"{% if videoId %} data-bg-video="{{ videoId }}"{% endif %}>
+  <div class="onestop__bg" aria-hidden="true">
+    {% if poster %}<img class="onestop__poster" src="{{ poster.url }}" width="{{ poster.width }}" height="{{ poster.height }}" loading="lazy" alt="">{% endif %}
+    <div class="onestop__frame" inert data-bg-video-frame></div>
+  </div>
+  <div class="onestop__overlay" aria-hidden="true"></div>
+  <div class="container onestop__inner">
+    <div class="onestop__body">
+      {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+      <h2 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+      {% if block.subheading %}<p class="onestop__sub">{{ block.subheading }}</p>{% endif %}
+      {% if block.sectionBody %}<p>{{ block.sectionBody|nl2br }}</p>{% endif %}
+      {% if block.ctaLead %}<p class="onestop__cta-lead">{{ block.ctaLead }}</p>{% endif %}
+      {% if block.ctaLink and block.ctaLink.url %}<a class="btn btn--primary btn--lg" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }}</a>{% endif %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,5 @@
+{# Quote block (styles: web/assets/css/craft.css) #}
+<figure class="prose-quote">
+  <blockquote><p>{{ block.quoteText|nl2br }}</p></blockquote>
+  {% if block.quoteSource %}<figcaption>{{ block.quoteSource }}</figcaption>{% endif %}
+</figure>

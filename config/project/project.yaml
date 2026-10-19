@@ -1,0 +1,399 @@
+dateModified: 1792410580
+email:
+  fromEmail: arrowsysadmin@yopmail.com
+  fromName: 'Arrow Systems (Local Staging)'
+  replyToEmail: null
+  template: ''
+  transportSettings:
+    host: smtp.gmail.com
+    password: $SMTP_PASSWORD
+    port: '587'
+    useAuthentication: '1'
+    username: $SMTP_USERNAME
+  transportType: craft\mail\transportadapters\Smtp
+fs:
+  uploads:
+    hasUrls: true
+    name: Uploads
+    settings:
+      path: '@webroot/uploads'
+    type: craft\fs\Local
+    url: '@web/uploads'
+meta:
+  __names__:
+    0a3d4baf-556a-4687-915b-ed414863dba9: Button # Button
+    0b27468b-ea05-46f4-92f9-4e618131d1f7: 'CTA Heading' # CTA Heading
+    0bd7d6dd-3026-467e-a78e-e40d7852693e: 'Call to Action' # Call to Action
+    0db4a0ba-b658-4cd9-b4f6-53f9267ff275: 'Show on Listing' # Show on Listing
+    0de3d35a-404a-48e9-8d0d-25d2eaabb7af: 'Tag Line' # Tag Line
+    1a052a88-6591-4eaf-91e0-31d2a757eabe: Quote # Quote
+    1a39ba89-00c3-4c11-9898-9cd0ba598be9: 'Top Bar' # Top Bar
+    1b40bd1b-a8c7-4208-882e-c96459dffc80: Exhibitions # Exhibitions
+    1c6b12e9-2f3d-4251-8c9b-b1916b92ae33: Page # Page
+    1c29af44-a759-4095-90c2-ea536560d0d1: Homepage # Homepage
+    1c82b38b-a11c-41e3-b257-4cb3ce43d0cf: Show # Show
+    1c2748fc-6dc8-4720-80e3-fad0a83163de: 'Featured Image' # Featured Image
+    1cf537dd-80ca-4d3d-a774-ccd2e5e23b09: 'Request a Quote Link' # Request a Quote Link
+    1d118cfc-2af2-403e-b53a-17583a66076d: Divider # Divider
+    1e40dc65-7d54-45b8-b533-3709d3c2087e: 'Hide from Search Engines' # Hide from Search Engines
+    01ec555c-b8a4-4638-9aa5-fc3066925e9e: 'Industry Tile' # Industry Tile
+    1f972162-4019-4b4f-9f5f-2e902f0a71b0: Image # Image
+    2a3a0908-8956-4112-9e48-722319b57ef1: 'Secondary Button' # Secondary Button
+    2af357ab-38c2-4e85-9609-4bf82ec09e84: Cards # Cards
+    2b5d3982-5c7e-4532-9118-e1c462664708: 'Product Video' # Product Video
+    2c86f3fb-3899-4738-a756-3b1b4456fc52: 'Homepage Sections' # Homepage Sections
+    2dc1a6a0-3996-4d72-8513-321b88d4c946: Level # Level
+    2e4c99f9-7844-4051-942e-0fb350ac475d: Industries # Industries
+    2f088e9c-9d5e-453e-9468-003c0b662257: 'Industries Page' # Industries Page
+    3a146d79-623e-4443-9485-ce8d03c902b5: Longitude # Longitude
+    3bbec4e9-b141-4e48-bedd-5e22df221055: 'Contact Form' # Contact Form
+    3c8d23d6-dac1-4e44-9f35-4067cecd6f95: 'Robots (advanced)' # Robots (advanced)
+    3cb6f238-7c92-4d4f-ac52-81f5bf882f80: 'Right Column' # Right Column
+    3cba1260-baab-4373-8f27-5cb10e8aa6c8: 'What You Can Print' # What You Can Print
+    3de2cd86-be98-460d-859e-830591a73e08: 'End Date' # End Date
+    3de74144-5e32-4f98-a9cb-e138a84a3776: 'Free Sample Link' # Free Sample Link
+    3f27e164-a203-43c7-b2e1-5f9c18aac05f: 'Column Style' # Column Style
+    3f7390df-90cc-4925-8948-2ad582cb0032: 'Start Date' # Start Date
+    4aa2e10e-5601-4b48-888b-b506fd4696a0: 'View All Text' # View All Text
+    4b6e83c0-ac6b-4f9e-b50c-d35913b6dd9b: Categories # Categories
+    4c3cd3c5-fb90-4f59-a91e-0f74d2ab336f: Homepage # Homepage
+    4e9af120-df8e-42bd-a334-4b558cf31628: 'Photo Gallery' # Photo Gallery
+    4f755e6d-b9fc-43e0-9a95-50180e51ae8d: Exhibitions # Exhibitions
+    5aebccbc-8873-463b-97af-83306971fa76: Illustration # Illustration
+    5b4cc340-ab3b-462f-8e17-a756fc6a6854: 'Blog Categories' # Blog Categories
+    5beb9670-9c10-49a8-a252-d6ddf4b9982e: Comparison # Comparison
+    5cd88f47-8b53-4c42-a0a1-7328db8c729c: 'Blog Tag' # Blog Tag
+    5e1b2291-9cc8-4555-ae96-dcc41456bc4b: Region # Region
+    5e99a3d3-f5ae-48c4-9805-ba1493d629a4: 'Equipment Categories' # Equipment Categories
+    5f9d7dc7-7c28-491b-b2b3-e4c6605eaf88: 'Featured Text' # Featured Text
+    6b4c568b-508c-4466-bb1c-037b61e4e6b4: 'Featured Title' # Featured Title
+    6d421415-7f3a-4c3a-ac8a-0668e1ddb6cc: File # File
+    6e2aa812-e2f6-41fc-9911-4d24a44e513b: 'How Many' # How Many
+    6ef05b4c-6cc1-4741-9291-e1b5780dd494: Checklist # Checklist
+    6fc3eb31-d21a-43a8-af39-ed3916f72a2a: 'Menu Style' # Menu Style
+    7bbe8361-b6da-451a-ae3f-5eba0250025f: Layout # Layout
+    7c8145c6-3331-456d-88f9-301975abb3a7: 'Social Links' # Social Links
+    7d168617-1541-4be0-b60b-8f51c99b81af: 'Text + Media' # Text + Media
+    7dbe18e9-a4e7-4adf-a418-e02992f14f9a: 'Text Tab' # Text Tab
+    7dfa34b6-1551-4035-8187-cbc68182a20b: 'SEO Title' # SEO Title
+    7e1cfbd5-d179-4bf5-9dfa-258ac1f2e8b9: Products # Products
+    8c117c80-cf06-494a-b509-c89bbda50314: 'Show Dates As' # Show Dates As
+    8cbe334a-5712-4c17-b3be-40923a1c8aa0: 'CTA Text' # CTA Text
+    8d76c0a8-d4cf-4569-bd5f-69ed28122130: 'Social Image' # Social Image
+    8ed0b3c6-196a-4b83-b67b-946a4f5aebdd: Link # Link
+    8f40862c-c55a-4bef-830e-b3e5ff88faf4: 'Card Tagline' # Card Tagline
+    9b18e600-54cb-4ae1-b61b-db9d457ddc65: 'Column Style' # Column Style
+    9c1a9914-b101-45b3-b078-86bd22e99bc2: 'Button Intro' # Button Intro
+    9c9e47de-8c60-428c-a49c-8c4a209c15b5: 'Tech Spotlight' # Tech Spotlight
+    9c9716b5-7de2-45b7-b2e5-7ee937bb273b: Images # Images
+    9ea88aa5-524c-4ab0-bbc6-19cc33fa453d: 'Blog Page' # Blog Page
+    10aebab9-e4c3-4e9b-b45b-3e84ff8c2d73: 'Product List' # Product List
+    16dde185-f39f-406d-b493-119ccf64bd1e: 'Card Grid' # Card Grid
+    18b6daf0-afd3-4e27-abbd-f341c7160f1b: 'HTML Code' # HTML Code
+    18cbe12d-c7e5-4229-a612-bfd42a85c447: Newsletter # Newsletter
+    18e0e446-9775-483b-a2ed-9939ddd402e6: Steps # Steps
+    21a8f5d0-0739-4515-8707-7cc048950503: Specifications # Specifications
+    23f78dd7-9116-413c-a91f-65e760a7bcb6: 'Featured Link' # Featured Link
+    24fb03b8-54b4-45a6-820e-a8677c18d4ec: 'More Insights' # More Insights
+    26cbacfc-2ce9-46ab-8bb6-b3fdc17d3331: Width # Width
+    26f00ef3-5144-45ce-8180-2e1bd5dab42a: Favicon # Favicon
+    27b666a4-f7ec-4a58-ae34-d68b27259f94: 'Meta Description' # Meta Description
+    28b51163-205f-4ad6-8b16-59c3c2633aa0: 'Accessible Name' # Accessible Name
+    39ac01db-5a9c-4da2-8949-c547207a56d6: 'Help Box Button' # Help Box Button
+    41e079be-7a19-4826-9ae8-5c462e78c2a8: 'Categories to Display' # Categories to Display
+    43a7134f-2531-4cb4-b69f-5517aa9c56ef: 'CTA Band' # CTA Band
+    46b0b4d9-6f90-4bbe-91dc-4f93a1195d0d: Columns # Columns
+    55eb5891-8e8d-495e-afcf-eed5a49a4487: 'Video Caption' # Video Caption
+    55ef28f6-ebbb-4837-a0e4-a87bff36ad18: Subscriber # Subscriber
+    56b569ff-7906-477c-9f6c-51e386e35ec8: 'Contents Label' # Contents Label
+    57d1d2c9-ac0f-40ee-8914-36aa14392881: 'Space Above' # Space Above
+    60b8fa30-2623-4698-b82c-b9513123547c: Heading # Heading
+    62fd6cf9-891c-40c1-9c6e-caf5e136eeee: 'Page Builder' # Page Builder
+    65d20f8d-4a99-4354-8459-6753ee53a68d: 'Background Video Section' # Background Video Section
+    74a49bbb-d965-45df-b62b-a72545041eb9: 'Exhibitions Page' # Exhibitions Page
+    78a83a17-bbc3-46ba-854e-4273f7f3e061: Downloads # Downloads
+    78f46f52-ad0b-4ac0-8879-936a8e4bb65d: Background # Background
+    78fc289e-e24b-4db2-b6ce-b13a18a98a2c: 'Product Categories' # Product Categories
+    83b9bca3-2c30-4135-874b-14101aad0437: Description # Description
+    083fe4b9-d706-4910-be20-68e30cff734e: Pages # Pages
+    86c8618c-9777-4c2f-bef4-0a61d63d9a7b: 'Note Link' # Note Link
+    88ced113-ac3b-4f02-b14f-131a91f3b3c3: Subheading # Subheading
+    89da0225-2bd5-4858-8ce4-5c5f420fe0e1: 'Locations Map' # Locations Map
+    091f14d6-1eb1-4b48-9acf-199dacb727cf: Editor # Editor
+    92fcfdeb-cd9a-4e2f-963e-72362dc7587a: 'Industries Carousel' # Industries Carousel
+    99fe24ac-d2ff-481e-9b10-a4ea8792c5bb: Brand # Brand
+    165a5425-18d7-4566-a557-6e0a6e9a64f1: 'Rich Text' # Rich Text
+    331d7548-f88e-47fa-b1b7-5bc3af0e3d50: 'Menu Icon' # Menu Icon
+    352e96fd-a10e-4c39-86e3-35a8e220a959: 'Button Label' # Button Label
+    373ec168-076c-4db6-9f3d-4deb3aafa827: 'Contact Form' # Contact Form
+    00382b16-98dd-418f-bccd-195a99f066de: 'Highlights Tab' # Highlights Tab
+    388b8d0a-484b-4366-b172-47e67b4a1219: 'Has a Page' # Has a Page
+    425db5e9-3514-4839-8447-35a581617982: New # New
+    452de8ec-bc47-4217-86f2-8a49d669bfb6: Style # Style
+    0461f32e-dd41-4876-9bb5-3fe4439fa7dd: 'Main Menu' # Main Menu
+    491afbc7-446a-4aa0-9497-f20affd8ef65: 'Page Header' # Page Header
+    564e94db-5bf1-424f-80da-9c6d0c891891: 'HubSpot Form GUID' # HubSpot Form GUID
+    0629efb4-df17-4a29-8eb8-cd6e24da4cff: 'Show in “On this page”' # Show in “On this page”
+    657bfa5b-da12-4233-84b8-a4c2cb5ab3c8: Intro # Intro
+    0682eca3-5e9f-4b5d-941d-13299d495921: 'Video Link' # Video Link
+    720c5ac7-9fed-453a-80b3-ac85342a6e52: 'Stats Strip' # Stats Strip
+    774c8a49-7473-43f4-93b7-2ddd78e1224c: Facts # Facts
+    782eb571-943e-4ca4-b880-4a0afc810158: 'Email Placeholder' # Email Placeholder
+    830dfb89-3efb-43f1-b7d0-dfc9f570f200: Downloads # Downloads
+    910f8d08-fa12-41d3-8fc9-df2b1636f21f: Logo # Logo
+    923daa95-33ab-4cac-b7bf-5107cc130090: 'Specifications Tab' # Specifications Tab
+    935e3101-88f3-4a61-a974-2659a9989ad3: Step # Step
+    0982c37c-37b2-46da-b915-41fc7a89f1f3: 'FAQ Item' # FAQ Item
+    1677ef19-8fae-4238-8483-cdc7862cbcfb: 'Blog Post' # Blog Post
+    2663b822-43f0-48c5-a077-83b90c6d5529: Columns # Columns
+    4055abcd-d97e-47b5-9f50-d3307f4f3f56: Latitude # Latitude
+    4307aaf7-f83f-4d28-98ef-a4305e405976: 'Left Column' # Left Column
+    4324bf77-8b8a-40d1-8758-fd26b223c037: Tagline # Tagline
+    5478b72c-864d-42de-89ce-e5d3eb52759b: 'Toll-free Phone' # Toll-free Phone
+    6318cb98-edfc-4071-82af-2983ace0118a: Callout # Callout
+    06540dd4-4fea-4ea5-b353-aa2b7c21f024: Products # Products
+    27700ccc-93c9-4400-890c-e467e6a5c958: Documents # Documents
+    61266fd8-e371-4796-b8e5-b6d420d01f94: Location # Location
+    71736ea4-0de2-4c02-9ebe-5cbf489571fd: Button # Button
+    93083a6e-cf78-4691-a4b0-c263f8361437: SKU # SKU
+    93414c4d-92c9-47bc-8af1-64b0c34be564: Columns # Columns
+    360233b1-dacd-47b0-829b-05ebe99d64e9: Intro # Intro
+    440240ff-b6a2-406b-a724-12b1848e5d7c: Questions # Questions
+    461968e6-aa9e-4856-8271-890d431235ae: 'Related Products' # Related Products
+    610374ab-5885-4260-824c-81d2b283e8ac: 'Page Builder' # Page Builder
+    704585f6-ce27-4737-aff7-090d130125a7: 'Direct Phone' # Direct Phone
+    819165d7-06c3-43ce-9e01-71bc6e2c55f9: Exhibition # Exhibition
+    949825d6-8b89-49af-bbe5-59b2f56ac6c9: Caption # Caption
+    3032854d-b4e5-46a9-add5-2e914d0ee46d: Slides # Slides
+    6805077a-554f-47fb-94f9-b53436671aaa: 'Show In' # Show In
+    7775817e-d249-4e0d-9ba6-3546bb8709c9: 'Latest Blog Posts' # Latest Blog Posts
+    08984390-4496-459b-9a5d-d4224d3088f1: 'Primary Button' # Primary Button
+    9672015d-43cf-4ffb-a80e-792777e09714: 'Cards per Row' # Cards per Row
+    16519104-d110-42b1-905c-abb07a5e505c: 'Body Text' # Body Text
+    43611044-6e59-4fd9-9510-8ead8bfc17f4: 'Column Widths' # Column Widths
+    50687014-91de-4012-983d-c6d2b75b6414: 'Short Text' # Short Text
+    62511633-848a-4c46-a3dc-93dff754212a: 'Downloads Tab' # Downloads Tab
+    63722637-4d0b-4fb0-8cd3-ad27ae01e535: Benefit # Benefit
+    97004007-b7e5-48df-aa4e-88991f7e2f9e: 'Answer Lead' # Answer Lead
+    a0ece179-707a-4d3d-9d10-e57516deb61c: 'Article Body' # Article Body
+    a0f03dd6-5837-4abf-80ef-8e941d2b8acb: 'Hero Slider' # Hero Slider
+    a3f9c4a3-0b5b-44a4-91f5-de17dc5dbd18: Locations # Locations
+    a6f2c663-0e16-4b45-8606-e297d96a0670: Country # Country
+    a8fa3b9a-94c0-4e6f-a2c0-ad32f2b98f31: 'Button Style' # Button Style
+    a23cd63b-8bdf-4d2d-aec0-42ea1f9e1621: 'Page Builder' # Page Builder
+    a688c7ca-d4a2-4292-9c6f-efaa74d2af4f: Steps # Steps
+    a22495d9-f01f-4004-9b3d-7d6b7b264c62: Relationship # Relationship
+    a2857477-2cb2-4a92-8eb3-996c9084ceb8: 'Product Category' # Product Category
+    a4104688-9fd2-429a-876b-fd752fc5426c: 'Product Name' # Product Name
+    aa9d048f-d09d-4ce3-85cc-ef9decb870e1: 'Blog Category' # Blog Category
+    aac0dbaa-d211-4433-93eb-4c8ea2bd7d8d: 'On-Demand Feature' # On-Demand Feature
+    abe62c78-12b2-4371-a8ef-a922ff0dc7fd: 'Show Logo' # Show Logo
+    acf593c8-6526-4672-b50e-775959c47098: 'Site Settings' # Site Settings
+    ae05869d-2cd8-4e20-8b22-83b99c725ce1: 'Panel Title' # Panel Title
+    ae8d9f3a-f387-46e2-9d8f-799ea7fb328b: 'Other Industries' # Other Industries
+    aed81651-8b94-4d06-8cbe-f894ceef91f3: 'Sales Email' # Sales Email
+    afabdab0-fcbc-4be4-8676-eef04e6a7083: Items # Items
+    b0857f7a-e2f5-44ef-8163-1b59942677cb: Tags # Tags
+    b1be5682-6cd0-4dc2-86a9-96841d04805e: Heading # Heading
+    b2ac1849-b531-44c4-bc8d-c2a286528fec: 'Partner group' # Partner group
+    b3b70498-0206-4b1d-a0a5-d8dd21371549: Images # Images
+    b6c6513e-722f-4c79-8940-687ec0ce936f: 'Video Cover Image' # Video Cover Image
+    b6d5b53f-57c1-4ca1-9cf3-5fb5d343dbd9: 'Blog Tags' # Blog Tags
+    b50fcb29-ffc3-44a7-9b74-f6145649548a: Tabs # Tabs
+    b73af3ed-22e8-43fe-a762-1930d3b40723: Gallery # Gallery
+    b2042cd0-3cc5-4b44-bb8e-7cfb850740ee: Categories # Categories
+    b4566e1d-d86f-4db9-982f-160559e04bf4: Tabs # Tabs
+    b9225e97-f40f-4ff5-87eb-1115692b0d1b: Terms # Terms
+    b63055b8-e3b0-4630-b424-2fa96b00b566: Quote # Quote
+    b1814641-3e80-4fe2-ba43-2c6913b5b1df: Card # Card
+    b3633347-da11-4afd-948f-d9270cec8150: Booth # Booth
+    bb6610c8-94e6-4226-9654-5e1663cfabbc: 'Comparison Column' # Comparison Column
+    bd58b1f3-0078-40dc-af1e-df423b0f3cd2: HTML # HTML
+    c0dba6b7-0116-4bd7-80b4-dae679f9ac30: 'Upcoming Exhibitions Page' # Upcoming Exhibitions Page
+    c062ee6d-7608-48d2-8faa-f9aa15094ebd: 'Blog Page' # Blog Page
+    c6b3cd74-346e-44ed-87fd-e656cbc77636: City # City
+    c28cb0bb-637c-4069-8162-871afa0f7937: 'Anchor ID' # Anchor ID
+    c42b6543-8b75-403b-b77e-8d8d6ecb64a3: Photos # Photos
+    c61fceff-5553-4508-af12-baa63e9417ee: Source # Source
+    c2550039-cd39-4429-a99c-27e7268241a2: 'HubSpot Portal ID' # HubSpot Portal ID
+    c9114061-45a4-44b1-b467-f026aa6985b5: Products # Products
+    cadcb586-eb7c-4e47-a731-676272a14c75: 'Key Specs' # Key Specs
+    cb3fdfcd-8a1d-4238-8285-511c9b1ab63f: Video # Video
+    cb80df95-1cff-4dd2-9e1f-f66e4da2571b: Tiles # Tiles
+    cbb18806-bd18-41fa-9a6d-d0720806fd6d: 'Industries Page' # Industries Page
+    cf2f7a05-3513-4370-85bf-521a72260189: 'Banner Image' # Banner Image
+    cf87c31a-d7f7-4661-ba62-0ad940e4ff68: Download # Download
+    cf169567-e457-4e36-a713-ebe1b0da1255: 'Upcoming Exhibitions Page' # Upcoming Exhibitions Page
+    d5fb0934-c311-4b15-8104-d8d6dcc6f69a: 'Spec List' # Spec List
+    d6b87abd-3aac-4bb1-8350-02376ad8bb51: 'Note Text' # Note Text
+    d8cd41fc-0228-46f0-ac03-4af3d3ef450a: 'Recommended Products' # Recommended Products
+    d8d97595-0ea4-434f-af5f-ae4efe3bcb32: 'Footer Menu' # Footer Menu
+    d9d18808-fef0-46e0-a0aa-dfdcb731362a: FAQ # FAQ
+    d248f647-1709-454c-9274-ecdcd2c37261: 'Facts Note' # Facts Note
+    d405de3d-f022-409c-8580-c0c04d47c333: 'Canonical URL' # Canonical URL
+    d691eb4f-4368-4e54-8e72-df2109ae352e: Product # Product
+    d2510ae3-b398-4a9b-8fca-a97ecc89b447: 'Arrow Systems (Local Staging)' # Arrow Systems (Local Staging)
+    d5350b12-01ff-4eb3-bb4f-f555b9c18e51: 'Rich Text' # Rich Text
+    da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6: 'Small Heading' # Small Heading
+    df624304-92d7-4cbd-9bf2-278048320d79: Form # Form
+    dfff6f49-bf7b-4ed6-b4de-5080c07efd72: 'Arrow Systems (Local Staging)' # Arrow Systems (Local Staging)
+    e2d4a840-f234-432d-a296-8a79a4672bf3: 'Legal Menu' # Legal Menu
+    e2edd105-bfb6-4051-afee-87080c91709c: 'Other Industries' # Other Industries
+    e8dba96c-e499-4d93-af1e-b030f0b6c672: Industry # Industry
+    e9eb2598-10fc-427c-a196-c6547e465723: 'Show Newsletter' # Show Newsletter
+    e29ee041-db7d-4246-82e4-3cb95532f2e4: 'Shows to Display' # Shows to Display
+    e67c4745-1656-4852-ab67-69edc9a6b23e: 'Exhibitions Page' # Exhibitions Page
+    e594f21b-f6bd-417e-9f60-6ab8c5808653: Product # Product
+    e2894ff5-27a2-4f2c-b8a0-d25989c168a9: 'Data Table' # Data Table
+    e9194b99-9136-42cd-9fa5-d558b2195894: 'Show city list' # Show city list
+    e16953b7-125d-4187-9ad1-2e876d2bd062: Blog # Blog
+    ebc55264-1f5f-49e0-86ae-6ab767c1e4fd: 'Logo Alt Text' # Logo Alt Text
+    ed288829-5da8-4673-9365-42f158a1dbfd: 'Vertical Alignment' # Vertical Alignment
+    ef2e910d-9e45-4559-add7-0785e2305898: Benefits # Benefits
+    ef62ce36-1c75-41b7-9cf2-70f67569f670: Address # Address
+    f05d48db-4c92-4585-a705-0f84d3a43e81: 'Help Box Title' # Help Box Title
+    f5aa0ceb-3e8f-47f1-91df-0644c97e3b82: 'Space Below' # Space Below
+    f7f3241b-aae8-40e7-a84c-28a5c9641c29: 'Hero SLide' # Hero SLide
+    f9c6211e-be8e-4171-8676-bb2a76f56faf: Table # Table
+    f31f712f-738e-472b-b848-9fef9a4ad724: Form # Form
+    f34a66a3-41a4-4b33-bdd7-8f9a7e744471: Image # Image
+    f502a820-04b4-44ab-b1a6-c2bdaf06675c: 'Public Schema' # Public Schema
+    f690e105-0883-4315-86a2-bd19a514e926: 'Content Block' # Content Block
+    fa8edeab-e3dc-42db-a9ba-2a5f48f327a3: 'Key Takeaways' # Key Takeaways
+    fb1bcbe6-aac5-47e7-b60b-6d1971337623: 'Category Label' # Category Label
+    fd7d5248-e909-48c5-9758-673cc8499ef8: 'Help Box Text' # Help Box Text
+    fee06267-06c3-47c7-849b-44302f0313fb: 'Heading Text' # Heading Text
+    ff07a059-8f67-404c-b8aa-d4fbdef1dd95: 'Benefit Cards' # Benefit Cards
+plugins:
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 5.6.0.0
+  formie:
+    edition: standard
+    enabled: true
+    licenseKey: 1DDQFQZOKEHGA81CZDOWZMV8
+    schemaVersion: 3.4.13
+    settings:
+      ajaxTimeout: 10
+      alertEmails: null
+      allowLegacySignatureImageUrls: true
+      allowPublicVolumes: true
+      captchas:
+        __assoc__:
+          -
+            - honeypot
+            -
+              __assoc__:
+                -
+                  - type
+                  - verbb\formie\integrations\captchas\Honeypot
+                -
+                  - enabled
+                  - true
+                -
+                  - settings
+                  -
+                    __assoc__:
+                      -
+                        - handle
+                        - honeypot
+          -
+            - recaptcha
+            -
+              __assoc__:
+                0:
+                  - type
+                  - verbb\formie\integrations\captchas\Recaptcha
+                1:
+                  - enabled
+                  - $RECAPTCHA_ENABLED
+                3:
+                  - settings
+                  -
+                    __assoc__:
+                      -
+                        - handle
+                        - recaptcha
+                      -
+                        - secretKey
+                        - $RECAPTCHA_SECRET_KEY
+                      -
+                        - siteKey
+                        - $RECAPTCHA_SITE_KEY
+                      -
+                        - type
+                        - v2_checkbox
+                      -
+                        - size
+                        - normal
+                      -
+                        - theme
+                        - light
+                      -
+                        - badge
+                        - bottomright
+                      -
+                        - language
+                        - en
+                      -
+                        - minScore
+                        - 0.5
+                      -
+                        - scriptLoadingMethod
+                        - asyncDefer
+                      -
+                        - enterpriseType
+                        - score
+      defaultDateDisplayType: calendar
+      defaultDateTime: null
+      defaultDateValueOption: ''
+      defaultEmailTemplate: ''
+      defaultExportFolder: '@storage/formie-export'
+      defaultFileUploadVolume: ''
+      defaultFormTemplate: ''
+      defaultInstructionsPosition: verbb\formie\positions\AboveInput
+      defaultLabelPosition: verbb\formie\positions\AboveInput
+      defaultPage: forms
+      emptyValuePlaceholder: 'No response.'
+      enableBackSubmission: true
+      enableCsrfValidationForGuests: true
+      enableLargeFieldStorage: false
+      enableUnloadWarning: true
+      filterIntegrationMapping: true
+      includeDraftElementUsage: false
+      includeRevisionElementUsage: false
+      maxIncompleteSubmissionAge: 30
+      maxSentNotificationsAge: 30
+      outputConsoleMessages: true
+      pdfPaperOrientation: portrait
+      pdfPaperSize: letter
+      pluginName: Formie
+      queuePriority: null
+      redirectUri: null
+      saveSpam: true
+      sendEmailAlerts: false
+      sentNotifications: true
+      setOnlyCurrentPagePayload: false
+      spamBehaviour: showSuccess
+      spamBehaviourMessage: ''
+      spamEmailNotifications: false
+      spamKeywords: ''
+      spamLimit: 500
+      submissionSidebarFormOrder: dateCreatedDesc
+      submissionsBehaviour: all
+      useCssLayers: false
+      useQueueForIntegrations: true
+      useQueueForNotifications: true
+      validateCustomTemplates: true
+  navigation:
+    edition: standard
+    enabled: true
+    licenseKey: MEQ2C7QPNKZLH179QC796EH3
+    schemaVersion: 4.0.10
+system:
+  edition: pro
+  live: true
+  name: 'Arrow Systems (Local Staging)'
+  schemaVersion: 5.11.0.2
+  timeZone: America/New_York

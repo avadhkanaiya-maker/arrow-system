@@ -1,0 +1,15 @@
+columnSuffix: null
+handle: endDate
+instructions: 'The last day. Leave empty for a one-day show.'
+name: 'End Date'
+searchable: false
+settings:
+  max: null
+  min: null
+  minuteIncrement: 30
+  showDate: true
+  showTime: false
+  showTimeZone: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Date

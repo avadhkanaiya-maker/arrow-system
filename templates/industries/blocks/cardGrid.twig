@@ -1,0 +1,33 @@
+{#
+  Card Grid (Pages / industries builder): heading ([red] words), intro, cards (title, subtitle, image, text, link),
+  2 / 3 / 4 per row on large screens. A card with a link is clickable as a whole. Section Settings: Space Above / Below,
+  Background. Vars: block
+#}
+{% import '_macros/text' as text %}
+{% import '_macros/layout' as layout %}
+{% set items = block.cardItems.with(['mediaImage']).all() %}
+{% set id = 'cards-' ~ block.id %}
+{% if items|length %}
+  <section class="section card-grid{{ layout.sectionClass(block) }}"{% if block.sectionHeading %} aria-labelledby="{{ id }}"{% endif %}>
+    <div class="container">
+      {% if block.sectionHeading or block.sectionLead %}
+      <header class="section-head">
+        {% if block.sectionHeading %}<h2 class="section-title" id="{{ id }}">{{ text.highlight(block.sectionHeading) }}</h2>{% endif %}
+        {% if block.sectionLead %}<p class="section-lead">{{ block.sectionLead }}</p>{% endif %}
+      </header>
+      {% endif %}
+      <ul class="card-grid__list card-grid__list--{{ block.cardColumns.value ?: '3' }}">
+        {% for item in items %}
+        {% set image = item.mediaImage.one() %}
+        {% set link = item.ctaLink and item.ctaLink.url ? item.ctaLink : null %}
+        <li class="g-card{{ link ? ' g-card--link' }}">
+          {% if image %}<div class="g-card__media"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}"></div>{% endif %}
+          <h3 class="g-card__title">{% if link %}<a class="stretched-link" href="{{ link.url }}"{% if link.target %} target="{{ link.target }}" rel="noopener"{% endif %}>{{ item.headingText }}</a>{% else %}{{ item.headingText }}{% endif %}</h3>
+          {% if item.subheading %}<p class="g-card__subtitle">{{ item.subheading }}</p>{% endif %}
+          {% if (item.richText ?? '')|striptags|trim %}<div class="g-card__text">{{ item.richText }}</div>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

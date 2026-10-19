@@ -1,0 +1,41 @@
+columnSuffix: null
+handle: productTabs
+instructions: 'The tabs under the product header, in this order. Text = rich text (e.g. Overview); Specifications = label / value rows (e.g. Features); Downloads = PDFs (e.g. Brochure).'
+name: Tabs
+searchable: false
+settings:
+  createButtonLabel: 'Add tab'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 00382b16-98dd-418f-bccd-195a99f066de # Highlights Tab
+    -
+      __assoc__:
+        -
+          - uid
+          - 7dbe18e9-a4e7-4adf-a418-e02992f14f9a # Text Tab
+    -
+      __assoc__:
+        -
+          - uid
+          - 923daa95-33ab-4cac-b7bf-5107cc130090 # Specifications Tab
+    -
+      __assoc__:
+        -
+          - uid
+          - 62511633-848a-4c46-a3dc-93dff754212a # Downloads Tab
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

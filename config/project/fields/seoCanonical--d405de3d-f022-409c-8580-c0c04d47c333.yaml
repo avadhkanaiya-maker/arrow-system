@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: seoCanonical
+instructions: 'Leave empty (normal): the page’s own URL. Only for a page that should point search engines to another page, e.g. “/exhibitions/”.'
+name: 'Canonical URL'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

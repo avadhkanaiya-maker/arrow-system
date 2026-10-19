@@ -1,0 +1,77 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  27ddf04c-59ac-4cca-ad43-bbbd75573b52:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'e.g. “ArrowJet Aqua 330R Brochure”.'
+            label: Label
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ba77c554-66cc-496b-b157-71a587369000
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 6d421415-7f3a-4c3a-ac8a-0668e1ddb6cc # File
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 455f6dc6-3d66-4a6c-a1d8-c93cc38a3a46
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 949825d6-8b89-49af-bbe5-59b2f56ac6c9 # Caption
+            handle: null
+            instructions: 'Small text under the label, e.g. “English” or “Español”.'
+            label: Note
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1b96562d-63df-4942-bd04-234d6c66aee1
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 511426bf-e79a-44bc-b349-71d7d9d62fd7
+        userCondition: null
+    thumbFieldKey: null
+handle: downloadItem
+hasTitleField: false
+icon: file-pdf
+name: Download
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

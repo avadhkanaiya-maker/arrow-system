@@ -1,0 +1,69 @@
+{#
+  A. Hero slider (design: index.html, "HERO SLIDER + FREE SAMPLE CTA"). Each slide is a ready-made banner image;
+  the banner already carries the machine, logo and headline, so nothing is overlaid on it. Under the banner the
+  caption bar shows the Category Label + Product Name (left) and the buttons.
+  The Product Name (else the banner's Alt Text) names the slide for screen readers (slide label and dot label).
+  Buttons are fully editable: link + text come from the slide's Primary / Secondary Button fields (text = the Label;
+  if the Label is empty, Craft uses the linked entry's title or the URL). Secondary button: the slide's own, or
+  Globals → Site Settings → Free Sample Link.
+  Class names and data-carousel attributes match the design, so site.js runs the carousel unchanged.
+  Vars: block (Hero Slider entry)
+#}
+{% set slides = block.slides.all() %}
+{% if slides|length %}
+<section class="hero" aria-roledescription="carousel" aria-label="{{ block.ariaLabel ?: 'Featured equipment' }}" data-carousel>
+  <div class="hero__track" aria-live="off" data-carousel-track>
+    {% for slide in slides %}
+      {% set image = slide.bannerImage.one() %}
+      {% set name = slide.productName ?: (image.alt ?? null) ?: (image.title ?? 'Slide ' ~ loop.index) %}
+      {% set primary = slide.primaryCta %}
+      {% set secondary = slide.secondaryCta ?: siteSettings.sampleLink %}
+      <div class="hero-slide{{ loop.first ? ' is-active' }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}: {{ name }}" data-slide>
+        <div class="hero-slide__stage">
+          {% if image %}
+            <img class="hero-slide__art" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"
+              {{- loop.first ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low" decoding="async"' }} alt="{{ image.alt }}">
+          {% endif %}
+          {# The whole banner is a pointer shortcut to the primary link (duplicate of the button, hidden from keyboard/AT). #}
+          {% if primary %}<a class="hero-slide__hit" href="{{ primary.url }}" tabindex="-1" aria-hidden="true"></a>{% endif %}
+        </div>
+        {% if slide.categoryLabel or slide.productName or primary or secondary %}
+          <div class="container hero-caption">
+            {% if slide.categoryLabel or slide.productName %}
+              <div class="hero-caption__text">
+                {% if slide.categoryLabel %}<p class="hero-slide__kicker">{{ slide.categoryLabel }}</p>{% endif %}
+                {% if slide.productName %}<p class="hero-slide__title">{{ slide.productName }}</p>{% endif %}
+              </div>
+            {% endif %}
+            <div class="btn-row hero-caption__actions">
+              {% if primary %}
+                <a class="btn btn--primary" href="{{ primary.url }}"{{ primary.target ? ' target="_blank" rel="noopener"' }}>{{ primary.label }}
+                  {%- if slide.productName %}<span class="visually-hidden">: {{ slide.productName }}</span>{% endif %}</a>
+              {% endif %}
+              {% if secondary %}
+                <a class="btn btn--outline" href="{{ secondary.url }}"{{ secondary.target ? ' target="_blank" rel="noopener"' }}>{{ secondary.label }}</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="container hero__controls" data-carousel-controls hidden>
+    <button class="hero__ctrl" type="button" data-carousel-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg><span class="visually-hidden">Previous slide</span></button>
+    <div class="hero__dots" role="group" aria-label="Choose slide">
+      {% for slide in slides %}
+        {% set image = slide.bannerImage.one() %}
+        <button class="hero__dot" type="button"{{ loop.first ? ' aria-current="true"' }} data-carousel-dot><span class="visually-hidden">Slide {{ loop.index }}: {{ slide.productName ?: (image.alt ?? null) ?: (image.title ?? '') }}</span></button>
+      {% endfor %}
+    </div>
+    <button class="hero__ctrl" type="button" data-carousel-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="visually-hidden">Next slide</span></button>
+    <button class="hero__ctrl hero__ctrl--pause" type="button" aria-pressed="false" data-carousel-pause>
+      <svg class="icon icon--pause" aria-hidden="true"><use href="#i-pause"/></svg>
+      <svg class="icon icon--play" aria-hidden="true"><use href="#i-play"/></svg>
+      <span class="visually-hidden" data-carousel-pause-label>Pause slideshow</span>
+    </button>
+  </div>
+</section>
+{% endif %}

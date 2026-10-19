@@ -1,0 +1,3 @@
+{# Callout block: p.callout (key point, red bar) or p.note (small print) #}
+{% set style = block.calloutStyle.value ?: 'callout' %}
+{{ (block.shortRichText ?? '')|string|replace({'<p>': '<p class="' ~ style ~ '">'})|raw }}

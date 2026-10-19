@@ -1,0 +1,91 @@
+{#
+  Global header: utility bar + main header, built from the Navigation plugin menus (CP → Navigation → Menus):
+    Top Bar    → utility bar (and the extra links at the bottom of the mobile menu)
+    Main Menu  → main menu; each level-1 item's "Menu Style" picks its panel template:
+                 Simple dropdown → dropdown.twig · Products mega menu → mega-products.twig · Industries → mega-industries.twig
+  Logo, phone and Request a Quote come from Globals → Site Settings.
+  Markup is the approved design's (Arrowsystem_local/index.html), so site.css and site.js work unchanged.
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/nav' as nav %}
+{% set logo = siteSettings.logo.one() %}
+{% set brandName = siteSettings.logoAlt ?: siteName %}
+{% set phone = siteSettings.tollFreePhone %}
+{% set quote = siteSettings.quoteLink %}
+{% set topBar = craft.navigation.nodes('topBar').level(1).all() %}
+{% set mainMenu = craft.navigation.menu('mainMenu').one() %}
+{% set partials = { dropdown: 'dropdown', productsMega: 'mega-products', industriesMega: 'mega-industries' } %}
+
+<div class="utility-bar">
+  <div class="container utility-bar__inner">
+    <nav aria-label="Utility">
+      <ul class="utility-nav">
+        {% for node in topBar %}
+          <li><a {{ nav.attrs(node) }}>{{ node.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="{{ siteUrl }}">
+      {% if logo %}
+        <img src="{{ logo.url }}" width="{{ logo.width }}" height="{{ logo.height }}" alt="{{ brandName }} home">
+      {% else %}
+        {{ brandName }}
+      {% endif %}
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main" data-site-nav>
+      <div class="site-nav__mobile-cta">
+        <a class="btn btn--primary btn--block" {{ links.attrs(quote, 'Request a Quote page') }}>{{ quote.label ?? 'Request a Quote' }}</a>
+        {% if phone %}
+          <a class="btn btn--outline btn--block" href="tel:{{ links.tel(phone) }}">
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {{ phone }}
+          </a>
+        {% endif %}
+      </div>
+
+      <ul class="nav-list">
+        {% set items = craft.navigation.nodes('mainMenu').level(1).all() %}
+        {% for item in items %}
+          {% include '_partials/navigation/' ~ (partials[item.menuStyle.value ?? 'dropdown'] ?? 'dropdown') with {
+            item: item,
+            menu: mainMenu,
+            panelId: 'panel-' ~ (item.title|kebab),
+            isLast: loop.last,
+          } only %}
+        {% endfor %}
+      </ul>
+
+      <ul class="site-nav__utility" aria-label="More links">
+        {% for node in topBar %}
+          <li><a {{ nav.attrs(node) }}>{{ node.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <button class="icon-btn" type="button" aria-expanded="false" aria-controls="site-search" data-search-toggle>
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <span class="visually-hidden">Search</span>
+      </button>
+      {% if phone %}
+        <a class="header-phone" href="tel:{{ links.tel(phone) }}">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+          <span class="header-phone__number"><span class="visually-hidden">Call toll-free </span>{{ phone }}</span>
+        </a>
+      {% endif %}
+      <a class="btn btn--primary header-cta" {{ links.attrs(quote, 'Request a Quote page') }}>{{ quote.label ?? 'Request a Quote' }}</a>
+      <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <svg class="icon nav-toggle__open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon nav-toggle__close" aria-hidden="true"><use href="#i-close"/></svg>
+        <span class="visually-hidden" data-nav-toggle-label>Open menu</span>
+      </button>
+    </div>
+  </div>
+
+  {% include '_partials/navigation/search' %}
+</header>

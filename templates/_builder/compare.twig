@@ -1,0 +1,13 @@
+{# Comparison block: div.compare with the two Comparison Columns in its nested field (compareColumns) (pro / con) #}
+<div class="compare">
+  {% for col in block.compareColumns.all() %}
+  <div class="compare__col compare__col--{{ col.compareStyle.value ?: 'pro' }}">
+    <h3>{{ col.headingText }}</h3>
+    <ul>
+      {% for row in col.listItems ?? [] %}
+      <li>{{ row.text|md(inlineOnly=true, encode=true) }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>

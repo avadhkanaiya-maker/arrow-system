@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  a02548ad-b573-4a59-b0a4-969c1afc6042:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-12T10:47:27+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 28b51163-205f-4ad6-8b16-59c3c2633aa0 # Accessible Name
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ec01501e-4bdc-4533-9991-292c20722b3c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-12T10:47:27+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3032854d-b4e5-46a9-add5-2e914d0ee46d # Slides
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9d677c02-181e-4780-a81f-48b5344c2c53
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: cbae2f65-cebf-450c-b344-62dc98caf699
+        userCondition: null
+    thumbFieldKey: null
+handle: heroSlider
+hasTitleField: false
+icon: null
+name: 'Hero Slider'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: 'Hero slider'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

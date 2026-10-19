@@ -1,0 +1,42 @@
+{#
+  Exhibition card (design: exhibitions/index.html timeline cards and index.html section G).
+    {% include '_components/exhibition-card' with { show: entry, variant: 'timeline' | 'home', withYear: false } only %}
+  show       an Exhibitions entry (eager-load featuredImage)
+  variant    'timeline' = the /exhibitions/ year timeline card · 'home' = homepage section G card (tag + dates)
+  withYear   timeline only: a year badge before the location (the "earlier" group)
+  Image: the Card Photo (D7: no fallback to a gallery photo). Exception: an upcoming show without a Card Photo shows
+  its Show Logo, whole on white (.event-card__media--logo in craft.css), since it has no photos yet.
+  Link: the show's page, else its row on the upcoming page.
+#}
+{% import '_macros/exhibitions' as ex %}
+{% set variant = variant ?? 'timeline' %}
+{% set image = show.featuredImage.one() %}
+{% set isUpcoming = (show.datePrecision.value ?? 'exact') == 'exact' and (show.endDate ?? show.startDate)|date('Y-m-d') >= now|date('Y-m-d') %}
+{% set logo = not image and isUpcoming ? show.showLogo.one() : null %}
+{% set image = image ?? logo %}
+{% set mediaClass = logo ? 'event-card__media event-card__media--logo' : 'event-card__media' %}
+{% set upcomingPage = upcomingPage ?? craft.entries.section('upcomingExhibitionsPage').one() %}
+{% set href = show.url ?: (upcomingPage ? upcomingPage.url ~ '#show-' ~ show.slug : null) %}
+{% if variant == 'home' %}
+        <li class="event-card">
+          <div class="{{ mediaClass }}">{% if image %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">{% endif %}</div>
+          <div class="event-card__body">
+            <p class="event-card__tag"><span class="event-card__tag-icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>{{ isUpcoming ? 'Upcoming exhibition' : 'Past exhibition' }}</p>
+            <h3 class="event-card__title">{% if href %}<a class="stretched-link" href="{{ href }}">{{ show.title }}</a>{% else %}{{ show.title }}{% endif %}</h3>
+            <ul class="event-card__meta">
+              {% if show.city %}<li><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg><span class="visually-hidden">Location: </span>{{ show.city }}</li>{% endif %}
+              <li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><span class="visually-hidden">Dates: </span><time datetime="{{ show.startDate|date((show.datePrecision.value ?? 'exact') == 'year' ? 'Y' : 'Y-m-d') }}">{{ ex.dates(show, 'short') }}</time></li>
+            </ul>
+            <span class="event-card__go" aria-hidden="true"><svg class="icon"><use href="#i-arrow-right"/></svg></span>
+          </div>
+        </li>
+{% else %}
+          <li class="event-card xcard">
+            <div class="{{ mediaClass }}">{% if image %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async" alt="{{ image.alt }}">{% endif %}</div>
+            <div class="event-card__body">
+              {% if (withYear ?? false) or show.city %}<p class="event-card__meta">{% if withYear ?? false %}<span class="badge">{{ show.startDate|date('Y') }}</span>{% endif %}{% if (withYear ?? false) and show.city %} {% endif %}{% if show.city %}<span class="xcard__loc"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>{{ show.city }}</span>{% endif %}</p>{% endif %}
+              <h4 class="event-card__title">{% if href %}<a class="stretched-link" href="{{ href }}">{{ show.title }}</a>{% else %}{{ show.title }}{% endif %}</h4>
+              <span class="xcard__more" aria-hidden="true">Explore <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+            </div>
+          </li>
+{% endif %}

@@ -1,0 +1,31 @@
+columnSuffix: null
+handle: listItems
+instructions: 'One point per row. Use \*text\* for italic and \*\*text\*\* for bold.'
+name: Items
+searchable: true
+settings:
+  addRowLabel: 'Add item'
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - Item
+            -
+              - handle
+              - text
+            -
+              - type
+              - multiline
+            -
+              - width
+              - ''
+  maxRows: null
+  minRows: null
+  staticRows: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

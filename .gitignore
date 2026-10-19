@@ -1,0 +1,16 @@
+/.env
+/.idea
+/vendor
+.DS_Store
+
+# Local / generated (not code). Shared separately when needed: web/uploads (zip), the database (craft db/backup).
+/web/uploads/
+/web/cpresources/
+/storage/backups/
+/storage/runtime/
+/storage/logs/
+/storage/composer-backups/
+/storage/config-deltas/
+# copies of live pages saved by the import scripts (fetched again when needed); the scripts' data/ folders are kept
+/storage/imports/*/cache/
+.env.*.local

@@ -1,0 +1,41 @@
+{#
+  Photo Gallery: the exhibition page's gallery (design: exhibitions/exhibition-detail.html, css/js exhibitions/detail.*):
+  a big tile, then a wide tile five photos later, every 8 photos (1–2 photos: side by side, craft.css .gallery--few);
+  each photo opens the lightbox (the <dialog> is in
+  industries/_entry). startIndex = photos before this gallery on the page (the lightbox numbers all photos together).
+  Vars: block, startIndex
+#}
+{% import '_macros/text' as text %}
+{% set photos = block.galleryImages.all() %}
+{% set anchor = block.anchorId|trim ?: 'gallery-' ~ block.id %}
+{% if photos|length %}
+  <section class="section section--surface gallery-section" id="{{ anchor }}"{% if block.sectionHeading %} aria-labelledby="{{ anchor }}-title"{% else %} aria-label="Photo gallery"{% endif %}>
+    <div class="container">
+      {% if block.sectionHeading or block.eyebrow %}
+      <header class="section-head section-head--split">
+        <div>
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          {% if block.sectionHeading %}<h2 class="section-title" id="{{ anchor }}-title">{{ text.highlight(block.sectionHeading) }}</h2>{% endif %}
+        </div>
+        <p class="gallery-count"><strong>{{ photos|length }}</strong> photo{{ photos|length != 1 ? 's' }}</p>
+      </header>
+      {% endif %}
+      <div class="gallery-wrap">
+        <span class="dot-grid dot-grid--gallery" aria-hidden="true"></span>
+        {% set few = photos|length < 3 %}
+        <ul class="gallery{{ few ? ' gallery--few' }}" data-gallery{% if few %} style="--n: {{ photos|length }}"{% endif %}>
+          {% for photo in photos %}
+          {% set size = few ? '' : (loop.index0 % 8 == 0 ? ' gallery__item--big' : (loop.index0 % 8 == 5 ? ' gallery__item--wide' : '')) %}
+          {% set thumb = {width: 800, height: 600, mode: 'crop'} %}
+          <li class="gallery__item{{ size }}">
+            <a class="gallery__link" href="{{ photo.url }}" data-gallery-index="{{ startIndex + loop.index0 }}">
+              <img src="{{ photo.getUrl(thumb) }}" width="{{ thumb.width }}" height="{{ thumb.height }}" loading="lazy" decoding="async" alt="{{ photo.alt }}">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+{% endif %}

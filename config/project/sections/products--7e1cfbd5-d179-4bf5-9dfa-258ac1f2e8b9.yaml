@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: e594f21b-f6bd-417e-9f60-6ab8c5808653 # Product
+handle: products
+maxAuthors: 1
+minAuthors: 1
+name: Products
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: products/_entry
+    uriFormat: 'product/{slug}'
+type: channel

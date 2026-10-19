@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: productCategories
+instructions: 'The first one is the main category (breadcrumb, small heading, “More …” products).'
+name: Categories
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:78fc289e-e24b-4db2-b6ce-b13a18a98a2c' # Product Categories
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

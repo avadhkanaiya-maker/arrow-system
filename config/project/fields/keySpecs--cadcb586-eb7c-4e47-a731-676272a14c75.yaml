@@ -1,0 +1,47 @@
+columnSuffix: null
+handle: keySpecs
+instructions: 'Up to 4 specs shown on the product card, e.g. Colors / CMYK.'
+name: 'Key Specs'
+searchable: false
+settings:
+  addRowLabel: 'Add spec'
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - Label
+            -
+              - handle
+              - label
+            -
+              - type
+              - singleline
+            -
+              - width
+              - 40%
+      -
+        - col2
+        -
+          __assoc__:
+            -
+              - heading
+              - Value
+            -
+              - handle
+              - value
+            -
+              - type
+              - singleline
+            -
+              - width
+              - ''
+  maxRows: null
+  minRows: null
+  staticRows: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

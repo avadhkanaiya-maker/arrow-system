@@ -1,0 +1,14 @@
+{# Search panel under the header (opened by the search icon). Markup from the design.
+   TODO(client): the new site's search endpoint is unconfirmed. Interim: the current site's search (?s=). #}
+<div class="site-search" id="site-search" hidden>
+  <form class="container site-search__form" role="search" action="https://arrsys.com/" method="get">
+    <label class="visually-hidden" for="site-search-input">Search Arrow Systems</label>
+    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+    <input id="site-search-input" type="search" name="s" placeholder="Search products, materials and guides" autocomplete="off">
+    <button class="btn btn--primary btn--sm" type="submit">Search</button>
+    <button class="icon-btn" type="button" data-search-close>
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      <span class="visually-hidden">Close search</span>
+    </button>
+  </form>
+</div>

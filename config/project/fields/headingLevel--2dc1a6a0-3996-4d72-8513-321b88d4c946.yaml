@@ -1,0 +1,44 @@
+columnSuffix: null
+handle: headingLevel
+instructions: 'H2 = a main section (listed in “On this page”). H3 / H4 = a sub-heading inside a section.'
+name: Level
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'H2: section'
+        -
+          - value
+          - h2
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'H3: sub-heading'
+        -
+          - value
+          - h3
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'H4: small heading'
+        -
+          - value
+          - h4
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

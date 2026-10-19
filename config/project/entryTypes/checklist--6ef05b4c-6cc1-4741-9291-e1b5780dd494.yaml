@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A list with red ticks'
+fieldLayouts:
+  3b5c07b1-985d-4452-9dce-ae075faf0a87:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: afabdab0-fcbc-4be4-8676-eef04e6a7083 # Items
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1ee371bc-b971-436c-a66a-3465ffc4b4d0
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 042eee47-e36d-4cd2-9197-3b3404cd004c
+        userCondition: null
+    thumbFieldKey: null
+handle: checklist
+hasTitleField: false
+icon: check
+name: Checklist
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

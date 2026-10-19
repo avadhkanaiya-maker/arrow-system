@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: itemDescription
+instructions: 'Optional second line (e.g. “Laser die cutter”). For products, leave empty to use the product’s Menu Description.'
+name: Description
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

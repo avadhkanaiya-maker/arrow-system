@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: stepItems
+instructions: null
+name: Steps
+searchable: true
+settings:
+  createButtonLabel: 'Add step'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 935e3101-88f3-4a61-a974-2659a9989ad3 # Step
+  includeTableView: false
+  maxEntries: null
+  minEntries: 1
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

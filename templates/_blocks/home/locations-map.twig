@@ -1,0 +1,70 @@
+{#
+  H. Worldwide locations (design: index.html, "WORLDWIDE LOCATIONS"): world map + text + button.
+  The pins, "nearby" clusters and tooltips are drawn by site.js from the location list below (data-loc items);
+  the list is in the page even when hidden, so screen readers and the map script can use it.
+  Locations come from the Locations section (Entries → Locations): map position from latitude/longitude, using the
+  same equirectangular projection as the map artwork: longitude -180…180 → x 0…100 %, latitude 85…-60 → y 0…100 %.
+  Grouped by Region (design order), Headquarters first, then in the order they were added.
+  Anchor ID → the section's id (the Benefit card "See our locations" links to #locations). Vars: block
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set locations = craft.entries().section('locations').orderBy('dateCreated asc, id asc').all() %}
+{% set regions = {
+  'north-america': 'North America',
+  'central-america': 'Central America & Caribbean',
+  'south-america': 'South America',
+  'europe': 'Europe',
+  'mea': 'Middle East & Africa',
+  'asia-pacific': 'Asia Pacific',
+} %}
+<section class="section section--surface" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+  <div class="container locations">
+    <div class="locations__map">
+      <div class="world-map" data-world-map>
+        <img class="world-map__land" src="{{ url('assets/maps/world-land-clean.svg') }}" width="1000" height="450" loading="lazy" alt="">
+        {# Pins, clusters and the tooltip are added by site.js from the list below. #}
+      </div>
+      <p class="world-map__legend" data-world-map-legend hidden>
+        <span class="world-map__legend-item"><span class="world-map__key world-map__key--hq" aria-hidden="true"></span>Headquarters</span>
+        <span class="world-map__legend-item"><span class="world-map__key" aria-hidden="true"></span>Partner location</span>
+        <span class="world-map__legend-item" data-legend-cluster><span class="world-map__key world-map__key--cluster" aria-hidden="true">3</span>Nearby locations, select to list</span>
+      </p>
+    </div>
+    <div class="locations__body">
+      {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+      <h2 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+      {% if block.sectionLead %}<p class="locations__lead">{{ block.sectionLead }}</p>{% endif %}
+      {% if block.sectionBody %}<p>{{ block.sectionBody|nl2br }}</p>{% endif %}
+      {% if block.ctaLink and block.ctaLink.url %}<a class="btn btn--primary" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }}</a>{% endif %}
+    </div>
+    {% if locations|length %}
+      <details class="locations__list" open data-locations-list{{ not block.showLocationList ? ' hidden' }}>
+        <summary>Headquarters &amp; partner locations <span class="locations__count">({{ locations|length }})</span><svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+        <div class="locations__groups">
+          {% set groupIndex = 0 %}
+          {% for region, regionLabel in regions %}
+            {% set inRegion = locations|filter(l => l.region.value == region) %}
+            {% set inRegion = (inRegion|filter(l => l.relationship.value == 'headquarters'))|merge(inRegion|filter(l => l.relationship.value != 'headquarters')) %}
+            {% if inRegion|length %}
+              {% set groupIndex = groupIndex + 1 %}
+              <div class="loc-group">
+                <p class="loc-group__title" id="loc-g{{ groupIndex }}">{{ regionLabel }}</p>
+                <ul class="loc-list" aria-labelledby="loc-g{{ groupIndex }}">
+                  {% for loc in inRegion %}
+                    {% set x = ((loc.longitude + 180) / 360 * 100)|number_format(3, '.', '') %}
+                    {% set y = ((85 - loc.latitude) / 145 * 100)|number_format(3, '.', '') %}
+                    {% set hq = loc.relationship.value == 'headquarters' %}
+                    <li data-loc data-x="{{ x }}" data-y="{{ y }}"{{ hq ? ' data-hq' }}><span data-loc-label>{{ loc.city }}, {{ loc.country }}</span>{% if hq %} <span class="loc-list__hq">Headquarters</span>{% endif %}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </details>
+    {% endif %}
+  </div>
+</section>

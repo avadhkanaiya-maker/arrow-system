@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Terms with explanations'
+fieldLayouts:
+  a924b37c-04f8-4010-a254-64e643cbab51:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b9225e97-f40f-4ff5-87eb-1115692b0d1b # Terms
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 49f826a4-3d68-404e-acc6-01f38b12c35c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 921e1045-8f00-4ae4-9f38-a53dd8ca5f8f
+        userCondition: null
+    thumbFieldKey: null
+handle: specList
+hasTitleField: false
+icon: clipboard-list
+name: 'Spec List'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

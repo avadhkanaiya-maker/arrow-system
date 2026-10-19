@@ -1,0 +1,179 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Product cards: picked products, or products from categories (dynamic).'
+fieldLayouts:
+  513faa25-69d5-420d-b7b0-a68b80ecb5df:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'e.g. “Recommended equipment”.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1f614885-03ec-4349-8942-9c6cad4edcb0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: '[brackets] = red, e.g. “Printers for [Flexible Packaging]”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 077afd8b-a21e-4109-8ed4-e2f39d5d21a5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fa7e391c-7fd5-4db2-88fd-07ee5051159f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1c82b38b-a11c-41e3-b257-4cb3ce43d0cf # Show
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cfde84b2-f2cd-4e3a-8501-db88b2d83a7b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c9114061-45a4-44b1-b467-f026aa6985b5 # Products
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bb1da958-9ab5-465b-86df-832651f30399
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 41e079be-7a19-4826-9ae8-5c462e78c2a8 # Categories to Display
+            handle: null
+            instructions: 'For “Products from the categories”: the product categories to take products from.'
+            label: Categories
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 865dfa5a-36a1-4647-b9f2-b60239130fed
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 6e2aa812-e2f6-41fc-9911-4d24a44e513b # How Many
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3bfa4225-a762-42f2-80f5-faae9ddc502a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'e.g. “All flexible packaging printers”.'
+            label: 'View All Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4b1b1b37-10d5-4ec4-b03c-a3ceda616e5f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: 'e.g. “equipment”, so a button can link to #equipment.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6cca9fdb-3b9d-4117-b230-ba4aafa1c358
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: d16de020-08a1-43fc-b9a0-bb0b2b5dac11
+        userCondition: null
+    thumbFieldKey: null
+handle: productShowcase
+hasTitleField: false
+icon: print
+name: 'Recommended Products'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

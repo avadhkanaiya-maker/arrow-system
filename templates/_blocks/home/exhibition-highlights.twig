@@ -1,0 +1,46 @@
+{#
+  G. Innovation / Events (design: index.html "G. INNOVATION / EVENTS"): 3 exhibition cards.
+  Which shows: Shows to Display (up to 3 picked, in that order); empty or fewer than 3 = filled with the next announced
+  shows (by date), then the latest past shows with a page (the Exhibitions structure order). D6.
+  Fields: Small Heading, Heading ([red] words, " | " = line break), Intro, Shows to Display, All Exhibitions Link,
+  Anchor ID. Vars: block
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set today = now|date('Y-m-d') %}
+
+{% set shows = block.selectedExhibitions.with(['featuredImage']).limit(3).all() %}
+{% if shows|length < 3 %}
+  {% set all = craft.entries.section('exhibitions').with(['featuredImage']).all() %}
+  {% set upcoming = all|filter(s => (s.datePrecision.value ?? 'exact') == 'exact' and (s.endDate ?? s.startDate)|date('Y-m-d') >= today)|sort((a, b) => a.startDate <=> b.startDate) %}
+  {% set upcomingIds = upcoming|map(s => s.id) %}
+  {% set fill = upcoming|merge(all|filter(s => s.hasPage and s.id not in upcomingIds)) %}
+  {% set pickedIds = shows|map(s => s.id) %}
+  {% set shows = shows|merge(fill|filter(s => s.id not in pickedIds)|slice(0, 3 - shows|length)) %}
+{% endif %}
+{% set upcomingPage = craft.entries.section('upcomingExhibitionsPage').one() %}
+
+{% if shows|length %}
+  <section class="section events" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+    <div class="events__decor" aria-hidden="true">
+      <svg class="events__route" viewBox="0 0 300 140" fill="none"><path d="M2 136C40 96 70 72 120 74s70 6 110-10 54-46 62-58" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 6" stroke-linecap="round"/></svg>
+      <svg class="icon events__plane"><use href="#i-plane"/></svg>
+    </div>
+    <div class="container events__layout">
+      <header class="events__intro">
+        {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+        <h2 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading)|replace({' | ': '<br> ', '|': '<br>'})|raw }}</h2>
+        {% if block.sectionLead %}<p class="events__lead">{{ block.sectionLead }}</p>{% endif %}
+        {% if block.ctaLink and block.ctaLink.url %}<a class="events__cta" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+        <span class="events__dots" aria-hidden="true"></span>
+      </header>
+      <ul class="event-grid">
+        {% for show in shows %}
+          {% include '_components/exhibition-card' with { show: show, variant: 'home', upcomingPage: upcomingPage } only %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

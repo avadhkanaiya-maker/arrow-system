@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: slides
+instructions: null
+name: Slides
+searchable: false
+settings:
+  createButtonLabel: 'Add slide'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - f7f3241b-aae8-40e7-a84c-28a5c9641c29 # Hero SLide
+        -
+          - group
+          - General
+  includeTableView: false
+  maxEntries: null
+  minEntries: 1
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

@@ -1,0 +1,6 @@
+{# Steps block: ol.steps, one li per Step in its nested field (stepItems) (title + text) #}
+<ol class="steps">
+  {% for step in block.stepItems.all() %}
+  <li><strong>{{ step.headingText }}</strong><span>{{ step.sectionBody }}</span></li>
+  {% endfor %}
+</ol>

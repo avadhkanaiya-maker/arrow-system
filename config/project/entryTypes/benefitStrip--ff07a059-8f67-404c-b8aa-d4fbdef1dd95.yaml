@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  8681fff1-58fa-4ba8-b4be-cd588505d7d2:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 28b51163-205f-4ad6-8b16-59c3c2633aa0 # Accessible Name
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aae6bc83-9b40-4b90-8497-e5be5c6dda1a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: ef2e910d-9e45-4559-add7-0785e2305898 # Benefits
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d4a31c61-e82e-4366-a3f5-2409a7c051a5
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 98917524-1306-4589-857b-36dfc59faf95
+        userCondition: null
+    thumbFieldKey: null
+handle: benefitStrip
+hasTitleField: false
+icon: null
+name: 'Benefit Cards'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: 'B · Benefit cards'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,0 +1,9 @@
+{# Layout helpers for the page-builder section blocks #}
+
+{# The admin's Section Settings (Space Above / Below, Background) as classes on a block's <section> (craft.css).
+   Blocks without those fields get none. #}
+{%- macro sectionClass(block) -%}
+  {%- set top = block.spacingTop.value ?? '' -%}
+  {%- set bottom = block.spacingBottom.value ?? '' -%}
+  {{- (top and top != 'normal' ? ' section--pt-' ~ top) ~ (bottom and bottom != 'normal' ? ' section--pb-' ~ bottom) ~ ((block.sectionBackground.value ?? '') == 'surface' ? ' section--surface') -}}
+{%- endmacro -%}

@@ -1,0 +1,94 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'The maroon contact panel (phones, email, address from Site Settings) and the contact form.'
+fieldLayouts:
+  c847b503-a50b-4844-ade9-f3f7a19e974b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'e.g. “Flexible packaging”.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bf926778-023e-4fc7-ae87-b662f06ab866
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'e.g. “Contact With Our Team Now”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2c44260b-7c5f-4d9a-85a4-62097e3dabba
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Text
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1d05f53b-7364-441d-bfe2-23554f01971f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: 'e.g. “contact”, so a button can link to #contact.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bf745567-f7ff-4e5b-aaaa-bd662535bcab
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: bce9bb27-8c8a-4a83-ba53-7fa01110466d
+        userCondition: null
+    thumbFieldKey: null
+handle: contactBlock
+hasTitleField: false
+icon: envelope
+name: 'Contact Form'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

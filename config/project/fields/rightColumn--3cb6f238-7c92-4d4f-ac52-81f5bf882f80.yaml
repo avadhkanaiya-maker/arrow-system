@@ -1,0 +1,189 @@
+columnSuffix: null
+handle: rightColumn
+instructions: 'The blocks in this column, top to bottom.'
+name: 'Right Column'
+searchable: false
+settings:
+  createButtonLabel: 'Add block'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - b1be5682-6cd0-4dc2-86a9-96841d04805e # Heading
+        -
+          - group
+          - Text
+    -
+      __assoc__:
+        -
+          - uid
+          - d5350b12-01ff-4eb3-bb4f-f555b9c18e51 # Rich Text
+        -
+          - group
+          - Text
+    -
+      __assoc__:
+        -
+          - uid
+          - 657bfa5b-da12-4233-84b8-a4c2cb5ab3c8 # Intro
+        -
+          - group
+          - Text
+    -
+      __assoc__:
+        -
+          - uid
+          - 6318cb98-edfc-4071-82af-2983ace0118a # Callout
+        -
+          - group
+          - Text
+    -
+      __assoc__:
+        -
+          - uid
+          - 1a052a88-6591-4eaf-91e0-31d2a757eabe # Quote
+        -
+          - group
+          - Text
+    -
+      __assoc__:
+        -
+          - uid
+          - fa8edeab-e3dc-42db-a9ba-2a5f48f327a3 # Key Takeaways
+        -
+          - group
+          - Lists
+    -
+      __assoc__:
+        -
+          - uid
+          - 6ef05b4c-6cc1-4741-9291-e1b5780dd494 # Checklist
+        -
+          - group
+          - Lists
+    -
+      __assoc__:
+        -
+          - uid
+          - a688c7ca-d4a2-4292-9c6f-efaa74d2af4f # Steps
+        -
+          - group
+          - Lists
+    -
+      __assoc__:
+        -
+          - uid
+          - d5fb0934-c311-4b15-8104-d8d6dcc6f69a # Spec List
+        -
+          - group
+          - Lists
+    -
+      __assoc__:
+        -
+          - uid
+          - 5beb9670-9c10-49a8-a252-d6ddf4b9982e # Comparison
+        -
+          - group
+          - Lists
+    -
+      __assoc__:
+        -
+          - uid
+          - f34a66a3-41a4-4b33-bdd7-8f9a7e744471 # Image
+        -
+          - group
+          - Media
+    -
+      __assoc__:
+        -
+          - uid
+          - b73af3ed-22e8-43fe-a762-1930d3b40723 # Gallery
+        -
+          - group
+          - Media
+    -
+      __assoc__:
+        -
+          - uid
+          - cb3fdfcd-8a1d-4238-8285-511c9b1ab63f # Video
+        -
+          - group
+          - Media
+    -
+      __assoc__:
+        -
+          - uid
+          - e2894ff5-27a2-4f2c-b8a0-d25989c168a9 # Data Table
+        -
+          - group
+          - Media
+    -
+      __assoc__:
+        -
+          - uid
+          - 10aebab9-e4c3-4e9b-b45b-3e84ff8c2d73 # Product List
+        -
+          - group
+          - 'Products & CTA'
+    -
+      __assoc__:
+        -
+          - uid
+          - 0a3d4baf-556a-4687-915b-ed414863dba9 # Button
+        -
+          - group
+          - 'Products & CTA'
+    -
+      __assoc__:
+        -
+          - uid
+          - 0bd7d6dd-3026-467e-a78e-e40d7852693e # Call to Action
+        -
+          - group
+          - 'Products & CTA'
+    -
+      __assoc__:
+        -
+          - uid
+          - d9d18808-fef0-46e0-a0aa-dfdcb731362a # FAQ
+        -
+          - group
+          - 'Q&A'
+    -
+      __assoc__:
+        -
+          - uid
+          - 1d118cfc-2af2-403e-b53a-17583a66076d # Divider
+        -
+          - group
+          - Other
+    -
+      __assoc__:
+        -
+          - uid
+          - bd58b1f3-0078-40dc-af1e-df423b0f3cd2 # HTML
+        -
+          - group
+          - Other
+    -
+      __assoc__:
+        -
+          - uid
+          - f31f712f-738e-472b-b848-9fef9a4ad724 # Form
+        -
+          - group
+          - 'Products & CTA'
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

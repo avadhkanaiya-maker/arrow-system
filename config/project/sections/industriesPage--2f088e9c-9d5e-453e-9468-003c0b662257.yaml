@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: cbb18806-bd18-41fa-9a6d-d0720806fd6d # Industries Page
+handle: industriesPage
+maxAuthors: 1
+minAuthors: 1
+name: 'Industries Page'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: industries/_index
+    uriFormat: industries
+type: single

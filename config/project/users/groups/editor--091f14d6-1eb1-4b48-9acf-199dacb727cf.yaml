@@ -1,0 +1,7 @@
+description: null
+handle: editor
+name: Editor
+permissions:
+  - accesscp
+  - accesscpwhensystemisoff
+  - performupdates

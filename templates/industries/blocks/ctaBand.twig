@@ -1,0 +1,17 @@
+{# CTA Band (shared with the homepage: Heading, Intro, Button, Anchor ID) as the industries' maroon help band (design: industries/index.html "HELP BAND"); first button = phone from Site Settings. Vars: block #}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set phone = siteSettings.tollFreePhone ?? null %}
+  <section class="sustain ind-cta" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
+    <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
+    <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
+    <div class="container sustain__inner">
+      <h2 id="{{ anchor }}-title">{{ text.highlight(block.sectionHeading) }}</h2>
+      {% if block.sectionLead %}<p>{{ block.sectionLead }}</p>{% endif %}
+      <div class="btn-row ind-cta__actions">
+        {% if phone %}<a class="btn btn--light btn--lg" href="tel:{{ links.tel(phone) }}">Talk to a Specialist</a>{% endif %}
+        {% if block.ctaLink and block.ctaLink.url %}<a class="btn btn--outline-light btn--lg" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }}</a>{% endif %}
+      </div>
+    </div>
+  </section>

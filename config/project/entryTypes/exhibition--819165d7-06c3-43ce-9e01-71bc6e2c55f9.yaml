@@ -1,0 +1,355 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'One trade show: dates, location, booth, then its photos and page. URL: /slug/ when “Has a Page” is on.'
+fieldLayouts:
+  86b7c429-c85f-4827-9847-6b75bc22904c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Show Name'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: f9101838-c9e8-45df-a9ab-4611d5b104d0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3f7390df-90cc-4925-8948-2ad582cb0032 # Start Date
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f1e83ab1-456f-4131-9c64-2cce1beedf43
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3de2cd86-be98-460d-859e-830591a73e08 # End Date
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d32f7471-f049-4792-bc46-caf216f7b896
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8c117c80-cf06-494a-b509-c89bbda50314 # Show Dates As
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 046d5a74-8130-4828-8b34-e7abc236be77
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c6b3cd74-346e-44ed-87fd-e656cbc77636 # City
+            handle: null
+            instructions: 'e.g. “Chicago, IL, USA”. Leave empty if not known.'
+            label: Location
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 41900624-34e7-40df-ae62-24abdd79e3e9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b3633347-da11-4afd-948f-d9270cec8150 # Booth
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 213d19b0-1f61-42c6-a4a3-e5afc75b535f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c9e47de-8c60-428c-a49c-8c4a209c15b5 # Tech Spotlight
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b72f00a2-ae80-451e-ac17-0837734e30ef
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: abe62c78-12b2-4371-a8ef-a922ff0dc7fd # Show Logo
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f460c0f7-aa19-49d3-95a8-7035095686e5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1c2748fc-6dc8-4720-80e3-fad0a83163de # Featured Image
+            handle: null
+            instructions: 'The photo on the show’s card (homepage, Exhibitions page, “More Exhibitions”). 4:3 works best. An upcoming show without one shows its Show Logo instead.'
+            label: 'Card Photo'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4b82181c-8947-494d-a2e9-a78ce3917ead
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c51c7d83-b8c5-49ce-bca8-fa2e4bab143d
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 388b8d0a-484b-4366-b172-47e67b4a1219 # Has a Page
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0c6de939-7bc8-4db3-95a8-4bc4f9b7db73
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 88ced113-ac3b-4f02-b14f-131a91f3b3c3 # Subheading
+            handle: null
+            instructions: 'e.g. “Arrow Systems, Inc. at Labelexpo Europe (Barcelona)”.'
+            label: Subtitle
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 146cae10-9723-4625-95e9-c77a48f390b2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: 'The paragraph under the title.'
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: af406af1-6a32-43f5-8bbc-48b4755339f5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c42b6543-8b75-403b-b77e-8d8d6ecb64a3 # Photos
+            handle: null
+            instructions: 'The gallery. The first two photos are also the large photos at the top of the page; drag to reorder.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ce785f09-b707-4b61-ac28-388e17c409be
+            userCondition: null
+            warning: null
+            width: 100
+        name: Page
+        uid: 1b2db333-8b87-45bf-a391-7943fc22d236
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7dfa34b6-1551-4035-8187-cbc68182a20b # SEO Title
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9e432dc5-5ce7-4a1d-920e-2ce7de1bbf4b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 27b666a4-f7ec-4a58-ae34-d68b27259f94 # Meta Description
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d376de56-e7bb-4bad-85b0-5ea99cd90240
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8d76c0a8-d4cf-4569-bd5f-69ed28122130 # Social Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 212f7184-bcd0-477a-9cd2-924d337d0500
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1e40dc65-7d54-45b8-b533-3709d3c2087e # Hide from Search Engines
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 744426c5-9caa-44b7-a943-6b89926d55c2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: d405de3d-f022-409c-8580-c0c04d47c333 # Canonical URL
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6ad71ae9-299e-450b-b265-d0bea7a698dc
+            userCondition: null
+            warning: null
+            width: 100
+        name: SEO
+        uid: ac888d11-b254-41f5-b4f6-cd377f11353d
+        userCondition: null
+    thumbFieldKey: null
+handle: exhibition
+hasTitleField: true
+icon: calendar-days
+name: Exhibition
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

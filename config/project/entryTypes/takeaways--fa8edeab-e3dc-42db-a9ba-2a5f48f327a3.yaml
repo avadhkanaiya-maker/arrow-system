@@ -1,0 +1,77 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A boxed summary list with a heading'
+fieldLayouts:
+  d1616f6a-2e4f-49dc-bca7-ac14c59715bc:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'e.g. “Key Takeaways”. Listed in “On this page”.'
+            label: Heading
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c98bf842-3cde-47ea-85ef-68170b07ca69
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: afabdab0-fcbc-4be4-8676-eef04e6a7083 # Items
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d9fcce94-aedf-496c-a5a0-427b377d9946
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: 'Optional: the #link name. Leave empty to make it from the heading.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 741e6c69-eb78-47b3-b0fe-8e246f0ffc6d
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: a0077d56-2cdd-4f69-92b8-afde62d0164d
+        userCondition: null
+    thumbFieldKey: null
+handle: takeaways
+hasTitleField: false
+icon: list-check
+name: 'Key Takeaways'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

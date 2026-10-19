@@ -1,0 +1,3 @@
+{# Data Table block: .table-wrap > table.data-table with a caption #}
+{% import '_macros/blog' as blog %}
+{{ blog.tables(block.tableText, block.caption, block.caption ? 'table-' ~ block.id ~ '-caption' : null) }}

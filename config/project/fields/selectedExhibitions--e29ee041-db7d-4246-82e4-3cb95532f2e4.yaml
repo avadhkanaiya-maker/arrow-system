@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: selectedExhibitions
+instructions: 'Optional: pick up to 3 shows and drag them into order. Leave empty to show the next upcoming show first, then the latest past shows; with 1 or 2 picked, those fill the rest.'
+name: 'Shows to Display'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 3
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:4f755e6d-b9fc-43e0-9a95-50180e51ae8d' # Exhibitions
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

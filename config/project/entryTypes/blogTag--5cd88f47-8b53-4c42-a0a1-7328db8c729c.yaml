@@ -1,0 +1,54 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A blog tag (/tag/slug/). Tag pages are hidden from search engines, as on the live site.'
+fieldLayouts:
+  48cd8503-3d02-4c55-af81-60fb36025c7c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 6259778d-018a-4892-a98b-e26780b08b87
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 08c5ef41-abdf-4b75-b162-fabdae01de84
+        userCondition: null
+    thumbFieldKey: null
+handle: blogTag
+hasTitleField: true
+icon: tag
+name: 'Blog Tag'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

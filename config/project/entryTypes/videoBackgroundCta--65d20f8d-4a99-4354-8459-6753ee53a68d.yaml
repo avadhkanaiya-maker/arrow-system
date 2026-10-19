@@ -1,0 +1,191 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  a1f28d19-8643-4e7d-8520-348bcd165015:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:18:04+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e7c2df36-4635-4e42-90e0-06564cf195e6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:18:04+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 245eab1a-e15d-41b7-a7a7-4976032bf5b9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:20:18+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 88ced113-ac3b-4f02-b14f-131a91f3b3c3 # Subheading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 219a917a-8ec8-49ac-96c4-e86b8ed4ecc3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:20:18+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 16519104-d110-42b1-905c-abb07a5e505c # Body Text
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aa760011-f7d8-48da-a4fc-8ccd4391c5d6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:20:18+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c1a9914-b101-45b3-b078-86bd22e99bc2 # Button Intro
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 37e6faf6-fd97-4a5a-b303-ad7070cfb232
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:20:18+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 86bc8f20-52ee-4e18-b1ae-bef6d14e985f
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: fba345ec-637e-481e-bbee-712cd7ddb1ed
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:18:04+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1cff8934-fee8-42d6-a1b6-a4f1fc914192
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:18:04+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b6c6513e-722f-4c79-8940-687ec0ce936f # Video Cover Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3a4c821f-94df-4c71-8c20-9354cce20958
+            userCondition: null
+            warning: null
+            width: 100
+        name: Video
+        uid: 65108c87-86e2-4d4f-b3fc-caaa16fca3aa
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:18:04+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0e75f1fa-b954-4e21-8ffa-0792f435d6c6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: 046f03c3-74b5-4c70-8285-03943b43ef46
+        userCondition: null
+    thumbFieldKey: null
+handle: videoBackgroundCta
+hasTitleField: false
+icon: null
+name: 'Background Video Section'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: 'I · One stop solution'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

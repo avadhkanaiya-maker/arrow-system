@@ -1,0 +1,24 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 1c6b12e9-2f3d-4251-8c9b-b1916b92ae33 # Page
+handle: pages
+maxAuthors: 1
+minAuthors: 1
+name: Pages
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: pages/_entry
+    uriFormat: "{{ object.parent ? object.parent.uri ~ '/' }}{{ object.slug }}"
+structure:
+  maxLevels: 3
+  uid: 6c730011-8249-4df9-96e3-a116c15fdd17
+type: structure

@@ -1,0 +1,77 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Icon cards (title + short text) and a link to the Specifications tab.'
+fieldLayouts:
+  60cddd49-c486-417c-8081-e971fa9a9409:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'e.g. “Overview”.'
+            label: 'Tab Title'
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ee335276-47e2-4ed4-8b5d-10ba3f7df2bb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'e.g. “Highlights”.'
+            label: 'Panel Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 71dd4105-9223-4a1c-921e-b818176b8333
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3173d625-786e-4c0d-9024-eff97060aeb7
+            handle: null
+            instructions: null
+            label: Highlights
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 39790309-f63e-42e9-9379-b852d7d3d4a7
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 2b15ab1c-46f2-4b65-8a4d-8ec7877afed1
+        userCondition: null
+    thumbFieldKey: null
+handle: highlightsTab
+hasTitleField: false
+icon: star
+name: 'Highlights Tab'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

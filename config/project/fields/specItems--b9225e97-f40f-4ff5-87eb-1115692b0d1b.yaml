@@ -1,0 +1,47 @@
+columnSuffix: null
+handle: specItems
+instructions: 'A term and its explanation per row. Use \*text\* for italic and \*\*text\*\* for bold.'
+name: Terms
+searchable: true
+settings:
+  addRowLabel: 'Add term'
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - Term
+            -
+              - handle
+              - term
+            -
+              - type
+              - singleline
+            -
+              - width
+              - 30%
+      -
+        - col2
+        -
+          __assoc__:
+            -
+              - heading
+              - Description
+            -
+              - handle
+              - description
+            -
+              - type
+              - multiline
+            -
+              - width
+              - ''
+  maxRows: null
+  minRows: null
+  staticRows: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

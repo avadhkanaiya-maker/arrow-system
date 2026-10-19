@@ -1,0 +1,55 @@
+{#
+  Text + Media section, two layouts (Settings tab → Layout):
+    textImage   = L. End-of-line marking / coding: text left, photo right, grey background (.marking)
+    headingText = M. Industrial printer distributor: heading left, text right, no image, white background (.distributor)
+  Body Text: each block separated by an empty line becomes its own paragraph. The Button field is shown as a red text
+  link with an arrow, as in the design.
+  Fields: Small Heading, Heading ([red] words), Body Text, Button ("Link"), Image · Layout, Anchor ID. Vars: block
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set layout = block.textMediaLayout.value ?? '' ?: 'textImage' %}
+{% set paragraphs = (block.sectionBody ?? '')|replace('/\\r\\n?/', "\n")|split("\n\n")|map(p => p|trim)|filter(p => p) %}
+
+{% set headingHtml %}
+  {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+  <h2 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+{% endset %}
+{% set bodyHtml %}
+  {% for p in paragraphs %}
+    <p>{{ p|nl2br }}</p>
+  {% endfor %}
+  {% if block.ctaLink and block.ctaLink.url %}
+    <a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+  {% endif %}
+{% endset %}
+
+{% if layout == 'headingText' %}
+  <section class="section" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+    <div class="container distributor">
+      <div class="distributor__head">
+        {{ headingHtml }}
+      </div>
+      <div class="distributor__body">
+        {{ bodyHtml }}
+      </div>
+    </div>
+  </section>
+{% else %}
+  {% set image = block.mediaImage.one() %}
+  <section class="section section--surface" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+    <div class="container marking">
+      <div class="marking__body">
+        {{ headingHtml }}
+        {{ bodyHtml }}
+      </div>
+      {% if image %}
+        <figure class="marking__media">
+          <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">
+        </figure>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

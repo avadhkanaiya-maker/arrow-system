@@ -1,0 +1,145 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Breadcrumb, small heading, H1 ([red] words), intro, tags, image, 2 buttons. Put it first.'
+fieldLayouts:
+  84344f92-0ebf-4afd-9721-8ed8c9fc298e:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'e.g. “Flexible Packaging”.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c1345e32-9584-419a-8175-aeee7b814804
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'Put [brackets] around the red words, e.g. “Flexible Solutions for Your [Flexible Packaging]”.'
+            label: 'Heading (H1)'
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 02fa3c8f-fb2c-4208-aee4-c9fe115be986
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 08746e26-16eb-478e-94fc-9dcadf44f47c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: afabdab0-fcbc-4be4-8676-eef04e6a7083 # Items
+            handle: null
+            instructions: 'Short tags under the intro, e.g. “Coffee bags”.'
+            label: Applications
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 64b48586-a061-483f-9a11-721b6aa7c542
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
+            handle: null
+            instructions: '16:9 photo (e.g. 1280 × 720). Set its alt text.'
+            label: Image
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8834eac2-4c66-4b10-8796-9c8ed6afbc3c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 08984390-4496-459b-9a5d-d4224d3088f1 # Primary Button
+            handle: null
+            instructions: 'e.g. “Talk to a Specialist” → #contact.'
+            label: 'Button 1'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fd16e8c7-490d-40de-bdfa-82be0a94c0fb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
+            handle: null
+            instructions: 'e.g. “Recommended Equipment” → #equipment.'
+            label: 'Button 2'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0ff66383-07fa-4b63-825f-c604bc0792f4
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 6f6b521c-0d2a-4287-b19b-8ce66e79776f
+        userCondition: null
+    thumbFieldKey: null
+handle: industryHeader
+hasTitleField: false
+icon: heading
+name: 'Page Header'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

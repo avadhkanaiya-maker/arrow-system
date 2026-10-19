@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: relatedIndustries
+instructions: 'Optional: up to 3 industries. Empty = the next industries in the listing order (never this page).'
+name: 'Other Industries'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 3
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:2e4c99f9-7844-4051-942e-0fb350ac475d' # Industries
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: benefits
+instructions: null
+name: Benefits
+searchable: false
+settings:
+  createButtonLabel: 'Add benefit'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 63722637-4d0b-4fb0-8cd3-ad27ae01e535 # Benefit
+  includeTableView: false
+  maxEntries: 3
+  minEntries: 1
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

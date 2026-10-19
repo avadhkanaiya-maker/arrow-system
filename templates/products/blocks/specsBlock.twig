@@ -1,0 +1,5 @@
+{# Specifications block: heading + dl.spec-list in a white panel. Vars: block #}
+        <div class="pd-block" id="block-{{ block.id }}">
+          {% if block.headingText %}<h3 class="pd-block__title">{{ block.headingText }}</h3>{% endif %}
+          {% include 'products/blocks/_spec-list' with { rows: block.specItems } only %}
+        </div>

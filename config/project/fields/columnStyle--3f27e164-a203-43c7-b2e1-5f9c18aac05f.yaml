@@ -1,0 +1,44 @@
+columnSuffix: null
+handle: columnStyle
+instructions: null
+name: 'Column Style'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Plain
+        -
+          - value
+          - plain
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'White card'
+        -
+          - value
+          - card
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Maroon panel (white text)'
+        -
+          - value
+          - panel
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

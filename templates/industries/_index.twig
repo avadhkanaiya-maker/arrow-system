@@ -1,0 +1,91 @@
+{#
+  /industries/ (Industries Page single). Design: Arrowsystem_local/industries/index.html
+    1. Header: breadcrumb, small heading, heading ([red] words), intro, "N industries" + the count line, and the design's
+       decorative mosaic of industry icons (fixed)
+    2. Grid: the industries with "Show on Listing" on, in the Industries structure order, numbered 01, 02 …
+    3. Help band (maroon): heading + text from this page; buttons = phone + quote link from Site Settings
+  SEO: CollectionPage + BreadcrumbList.
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+
+{% set industries = craft.entries.section('industries').showOnListing(true).with(['featuredImage']).all() %}
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+{% set phone = siteSettings.tollFreePhone ?? null %}
+{% set quote = siteSettings.quoteLink ?? null %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.url,
+    noindex: entry.seoNoIndex,
+    ogType: 'article',
+    image: entry.socialImage.one(),
+    schema: [
+      {'@type': 'CollectionPage', '@id': entry.url ~ '#webpage', url: entry.url, name: pageTitle,
+        mainEntity: {'@type': 'ItemList', itemListElement: industries|map((i, k) => {'@type': 'ListItem', position: k + 1, url: i.url, name: i.title})}},
+      {'@type': 'BreadcrumbList', itemListElement: [
+        {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl},
+        {'@type': 'ListItem', position: 2, name: entry.title, item: entry.url},
+      ]},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/industries/industries.css') }}">
+{% endblock %}
+
+{% block content %}
+  <!-- ============ 1. PAGE HEADER ============ -->
+  <section class="page-hero ind-hero" aria-labelledby="page-title">
+    {# Decorative mosaic of industry icons: a fixed design element (as the design draws it), not content #}
+    {% set mosaic = [['plane', 'solid'], ['wine', 'tint'], ['flask', 'outline'], ['package', 'tint'], ['pill', 'solid'], ['factory', 'tint'], ['shield', 'outline'], ['tag', 'tint'], ['layers', 'solid']] %}
+    <div class="ind-mosaic" aria-hidden="true">{% for tile in mosaic %}<span class="ind-mosaic__tile ind-mosaic__tile--{{ tile[1] }}"><svg class="icon"><use href="#i-{{ tile[0] }}"/></svg></span>{% endfor %}</div>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          <li><a href="{{ entry.url }}" aria-current="page">{{ entry.title }}</a></li>
+        </ol>
+      </nav>
+      <div class="ind-hero__intro">
+        {% if entry.eyebrow %}<p class="eyebrow">{{ entry.eyebrow }}</p>{% endif %}
+        <h1 class="page-hero__title" id="page-title">{{ text.highlight(entry.sectionHeading ?: entry.title) }}</h1>
+        {% if entry.sectionLead %}<p class="page-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
+        <p class="ind-hero__meta"><span><strong>{{ industries|length }}</strong> {{ industries|length == 1 ? 'industry' : 'industries' }}</span>{% if entry.caption %}<span>{{ entry.caption }}</span>{% endif %}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. INDUSTRY GRID ============ -->
+  <section class="section section--surface ind-body" aria-label="Industries">
+    <div class="container">
+      <ul class="ind-grid">
+        {% for industry in industries %}
+        {% include '_components/industry-card' with { industry: industry, number: loop.index, headingTag: 'h2' } only %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  {% if entry.ctaHeading %}
+  <!-- ============ 3. HELP BAND (maroon) ============ -->
+  <section class="sustain ind-cta" aria-labelledby="ind-cta-title">
+    <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
+    <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
+    <div class="container sustain__inner">
+      <h2 id="ind-cta-title">{{ text.highlight(entry.ctaHeading) }}</h2>
+      {% if entry.ctaText %}<p>{{ entry.ctaText }}</p>{% endif %}
+      <div class="btn-row ind-cta__actions">
+        {% if phone %}<a class="btn btn--light btn--lg" href="tel:{{ links.tel(phone) }}">Talk to a Specialist</a>{% endif %}
+        <a class="btn btn--outline-light btn--lg" {{ links.attrs(quote, 'Quote page not set (Site Settings)') }}>Request a Quote</a>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}

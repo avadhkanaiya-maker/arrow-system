@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: blogCategories
+instructions: 'The first one is the main category (breadcrumb, card label and “Filed under”).'
+name: Categories
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:5b4cc340-ab3b-462f-8e17-a756fc6a6854' # Blog Categories
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

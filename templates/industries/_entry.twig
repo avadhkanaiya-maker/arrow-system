@@ -1,0 +1,126 @@
+{#
+  An industry page: /{slug}/ (the live root URLs). Design: Arrowsystem_local/industries/industry-detail.html
+  Also every page of the Pages section (pages/_entry extends this): its Page Builder (pageBuilder) offers the same
+  section blocks (minus Other Industries) and the breadcrumb is Home › the parent pages › this page.
+  The page is the industry's Page Builder (industryBuilder), top to bottom; each block type has its partial in
+  industries/blocks/ (named after the entry type handle):
+    industryHeader    1. "Page Header": breadcrumb, small heading, H1 ([red] words), intro, applications, image, 2 buttons
+    productShowcase   2. Recommended products: picked products or products from categories (dynamic), product cards
+    contentBlock      3. image + text blocks; consecutive ones share one section and alternate the image side (design CSS)
+    contactBlock      4. contact panel (Site Settings) + form (js/industries/industry-detail.js; not connected yet)
+    otherIndustries   5. three industry cards: picked, else the next listed industries after this one
+    photoGallery · ctaBand · statsStrip (full width, _partials/stats-strip): the industry's other own blocks
+    formBlock         any Formie form (+ heading, intro), centred (inline version: _builder/formBlock, also in Columns)
+    columnsBlock      two columns, each with its own common blocks and style (plain / white card / maroon panel)
+    cardGrid          heading, intro, cards (title, subtitle, image, text, link), 2-4 per row
+    common blocks (shared with the blog and products, _builder/: Heading, Rich Text, Lists, Image, Gallery, Video,
+    FAQ …): consecutive ones share one text column (blog-detail.css)
+  Without an Industry Header block, a plain header (breadcrumb + name as H1) keeps the page titled.
+  Styles: css/industries/{industries,industry-detail}.css; a Photo Gallery adds the exhibition gallery + lightbox
+  (css/js exhibitions/detail.*). SEO: WebPage + BreadcrumbList; og:type article (as live).
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/text' as text %}
+
+{% set isPage = entry.section.handle == 'pages' %}
+{% set listingPage = isPage ? null : craft.entries.section('industriesPage').one() %}
+{% set trail = isPage ? entry.ancestors.all() : (listingPage ? [listingPage] : []) %}{# breadcrumb between Home and this page #}
+{% set blocks = (isPage ? entry.pageBuilder : entry.industryBuilder).all() %}
+{% set hasGallery = blocks|filter(b => b.type.handle == 'photoGallery')|length > 0 %}
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+
+{# Group consecutive Content Blocks (the design puts them in one section, where :nth-child alternates the image side) and
+   consecutive common blocks (the page-builder blocks shared with the blog, _builder/: one text column) #}
+{% set own = ['industryHeader', 'productShowcase', 'contentBlock', 'contactBlock', 'otherIndustries', 'ctaBand', 'photoGallery', 'statsStrip', 'formBlock', 'columnsBlock', 'cardGrid'] %}
+{% set groups = [] %}
+{% for block in blocks %}
+  {% set key = block.type.handle in own ? block.type.handle : 'common' %}
+  {% set last = groups|last %}
+  {% if key in ['contentBlock', 'common'] and last and last.type == key %}
+    {% set groups = groups|slice(0, groups|length - 1)|merge([last|merge({blocks: last.blocks|merge([block])})]) %}
+  {% else %}
+    {% set groups = groups|merge([{type: key, blocks: [block]}]) %}
+  {% endif %}
+{% endfor %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% set header = blocks|filter(b => b.type.handle == 'industryHeader')|first %}
+  {% set social = entry.socialImage.one() ?: (header ? header.mediaImage.one() : null) ?: entry.featuredImage.one() %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.seoCanonical ? url(entry.seoCanonical) : entry.url,
+    noindex: entry.seoNoIndex,
+    robots: entry.seoRobots ?? null,
+    ogType: 'article',
+    image: social,
+    schema: [
+      {'@type': 'WebPage', '@id': entry.url ~ '#webpage', url: entry.url, name: pageTitle, datePublished: entry.postDate|atom, dateModified: entry.dateUpdated|atom},
+      {'@type': 'BreadcrumbList', '@id': entry.url ~ '#breadcrumb', itemListElement: [{'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl}]
+        |merge(trail|map((p, i) => {'@type': 'ListItem', position: i + 2, name: p.title, item: p.url}))
+        |merge([{'@type': 'ListItem', position: trail|length + 2, name: entry.title, item: entry.url}])},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/industries/industries.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/css/industries/industry-detail.css') }}">
+  {% if hasGallery %}<link rel="stylesheet" href="{{ url('assets/css/exhibitions/detail.css') }}">{% endif %}
+  {% if groups|filter(g => g.type in ['common', 'columnsBlock'])|length %}<link rel="stylesheet" href="{{ url('assets/css/blog-detail.css') }}">{% endif %}
+  {% set first = blocks|first %}
+  {% set heroImage = first and first.type.handle == 'industryHeader' ? (first.mediaImage.one() ?: entry.featuredImage.one()) : null %}
+  {% if heroImage %}<link rel="preload" as="image" href="{{ heroImage.url }}" fetchpriority="high">{% endif %}
+  <script src="{{ url('assets/js/industries/industry-detail.js') }}" defer></script>
+  {% if hasGallery %}<script src="{{ url('assets/js/exhibitions/detail.js') }}" defer></script>{% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if not blocks|length or (blocks|first).type.handle != 'industryHeader' %}
+  <section class="page-hero ind-detail-hero" aria-labelledby="page-title">
+    <div class="container">
+      {% include 'industries/blocks/_breadcrumb' with { entry: entry, listingPage: listingPage } only %}
+      <h1 class="ind-detail-hero__title" id="page-title">{{ entry.title }}</h1>
+    </div>
+  </section>
+  {% endif %}
+  {% set photoIndex = 0 %}
+  {% for group in groups %}
+    {% if group.type == 'contentBlock' %}
+      {% include 'industries/blocks/contentBlock' with { blocks: group.blocks, entry: entry } only %}
+    {% elseif group.type == 'common' %}
+  <section class="section ind-prose">
+    <div class="container"><div class="prose">
+      {% for block in group.blocks %}{% include '_builder/' ~ block.type.handle ignore missing with { block: block, anchors: {} } only %}{% endfor %}
+    </div></div>
+  </section>
+    {% elseif group.type == 'photoGallery' %}
+      {% include 'industries/blocks/photoGallery' with { block: group.blocks[0], startIndex: photoIndex } only %}
+      {% set photoIndex = photoIndex + group.blocks[0].galleryImages.count() %}
+    {% else %}
+      {% include 'industries/blocks/' ~ group.type ignore missing with { block: group.blocks[0], entry: entry, listingPage: listingPage } only %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block afterFooter %}
+{% if hasGallery %}
+<!-- Gallery lightbox (js/exhibitions/detail.js). Native <dialog>: Escape closes, focus stays inside and returns to the thumbnail. -->
+<dialog class="lightbox" data-lightbox aria-label="Photo viewer">
+  <div class="lightbox__frame">
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="" data-lightbox-img>
+      <figcaption class="lightbox__caption">
+        <span data-lightbox-alt></span>
+        <span class="lightbox__count" data-lightbox-count></span>
+      </figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__btn--prev" type="button" data-lightbox-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg><span class="visually-hidden">Previous photo</span></button>
+    <button class="lightbox__btn lightbox__btn--next" type="button" data-lightbox-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="visually-hidden">Next photo</span></button>
+    <button class="lightbox__btn lightbox__btn--close" type="button" data-lightbox-close><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg><span class="visually-hidden">Close photo viewer</span></button>
+  </div>
+</dialog>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'PDFs and other files to download (outside the tabs).'
+fieldLayouts:
+  f897aacc-4a32-4064-b06c-e393892e1759:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'e.g. “Brochures”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1eb445e7-f852-47ce-be43-9808f2782e68
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 78a83a17-bbc3-46ba-854e-4273f7f3e061 # Downloads
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 155293a3-b18a-44db-8221-2b45275cd6df
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: d262b30b-5347-4394-af2f-3e797179f4f2
+        userCondition: null
+    thumbFieldKey: null
+handle: downloadsBlock
+hasTitleField: false
+icon: download
+name: Downloads
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

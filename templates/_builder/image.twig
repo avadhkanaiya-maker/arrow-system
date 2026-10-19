@@ -1,0 +1,9 @@
+{# Image block: figure.prose-figure (+ caption). Width other than full: craft.css .prose-figure--large/--medium/--small #}
+{% set image = block.mediaImage.one() %}
+{% if image %}
+{% set width = block.imageWidth.value ?: 'full' %}
+<figure class="prose-figure{{ width != 'full' ? ' prose-figure--' ~ width }}">
+  <img src="{{ image.url }}"{% if image.width %} width="{{ image.width }}" height="{{ image.height }}"{% endif %} loading="lazy" decoding="async" alt="{{ image.alt }}">
+  {% if block.caption %}<figcaption>{{ block.caption }}</figcaption>{% endif %}
+</figure>
+{% endif %}

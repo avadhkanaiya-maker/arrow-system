@@ -1,0 +1,139 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Blog post cards: up to 3 hand-picked posts, or the newest 3 automatically. Posts: Entries → Blog.'
+fieldLayouts:
+  d91f31d2-93f7-4760-a107-810512ec72b7:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Name in the list'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: bb25be7d-7115-43d4-818c-2367741372eb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e51027ef-1196-4089-97e5-f1cf2b35d7bc
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 55e18899-04b4-4d2b-9a23-8b599e72ac76
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 24fb03b8-54b4-45a6-820e-a8677c18d4ec # More Insights
+            handle: null
+            instructions: 'Optional: pick up to 3 blog posts and drag them into order. Leave empty to show the newest 3 automatically; with 1 or 2 picked, the newest posts fill the rest.'
+            label: 'Posts to Show'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fa682809-7a96-49b9-9a2d-6230ad96b0c9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'The link at the top right, e.g. “View all articles” → Blog Page.'
+            label: 'View All Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5a4df23c-c0f2-49a3-8073-e43865f75be3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ec0c021c-9db7-4bd3-be9f-2e5e8d1828db
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: fcc2ad5f-e77d-41d2-9420-76800271112a
+        userCondition: null
+    thumbFieldKey: null
+handle: latestPosts
+hasTitleField: true
+icon: newspaper
+name: 'Latest Blog Posts'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

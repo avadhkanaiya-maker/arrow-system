@@ -1,0 +1,24 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: a2857477-2cb2-4a92-8eb3-996c9084ceb8 # Product Category
+handle: productCategories
+maxAuthors: 1
+minAuthors: 1
+name: 'Product Categories'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+structure:
+  maxLevels: 2
+  uid: d380488f-0cf8-4544-b6b5-8cc6bc4e7392
+type: structure

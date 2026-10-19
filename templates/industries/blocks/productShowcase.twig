@@ -1,0 +1,35 @@
+{#
+  2. Recommended products (design: ".ind-equipment"): heading, intro, "View all" link, product cards (_components/product-card).
+  Which products: Show = Picked products → the picked ones in their order; Show = Products from the categories → products
+  in those product categories (newest first), How Many of them. One product: a wide card (craft.css .pgrid--one).
+  Left out when there are none. Vars: block
+#}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% if (block.productSource.value ?: 'picked') == 'category' %}
+  {% set products = block.selectedCategories.ids()|length
+    ? craft.entries.section('products').relatedTo({targetElement: block.selectedCategories.ids(), field: 'productCategories'}).with(['featuredImage', 'mediaImage']).limit(block.productLimit ?: 3).all()
+    : [] %}
+{% else %}
+  {% set products = block.selectedProducts.with(['featuredImage', 'mediaImage']).all() %}
+{% endif %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% if products|length %}
+  <section class="section section--surface ind-equipment" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          <h2 class="section-title" id="{{ anchor }}-title">{{ text.highlight(block.sectionHeading ?: 'Recommended [Equipment]') }}</h2>
+          {% if block.sectionLead %}<p class="ind-equipment__intro">{{ block.sectionLead }}</p>{% endif %}
+        </div>
+        {% if block.ctaLink and block.ctaLink.url %}<a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+      </header>
+      <ul class="pgrid{{ products|length == 1 ? ' pgrid--one' }}">
+        {% for product in products %}
+        {% include '_components/product-card' with { product: product } only %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

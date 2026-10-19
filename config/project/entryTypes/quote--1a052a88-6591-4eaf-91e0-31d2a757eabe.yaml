@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A quotation'
+fieldLayouts:
+  795d0f3f-884a-4557-ac89-c697b8cb3a99:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b63055b8-e3b0-4630-b424-2fa96b00b566 # Quote
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c0ced862-fa1d-4f24-8882-e8bcaa9aec0a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c61fceff-5553-4508-af12-baa63e9417ee # Source
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 056ea32c-2b8d-4bfd-a9fb-cc82aab891ea
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 7b50a8da-41b1-4ec5-bcd0-903d4d125f33
+        userCondition: null
+    thumbFieldKey: null
+handle: quote
+hasTitleField: false
+icon: quote-left
+name: Quote
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

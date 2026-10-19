@@ -1,0 +1,50 @@
+{#
+  Page shell from the homepage design (Arrowsystem_local/index.html): <head>, icon sprite, header, <main> (page content +
+  newsletter band), footer.
+  Header and footer menus come from the Navigation plugin (CP → Navigation → Menus): _partials/navigation/.
+  Styles and behaviour are the design's own files, unchanged: web/assets/css/site.css and web/assets/js/site.js.
+  web/assets/css/craft.css (loaded after site.css) holds fixes and additions for the Craft templates.
+  Blocks for child templates:
+    {% block title %}  <title> (default: entry title | site name)
+    {% block seo %}    meta description, canonical, robots, Open Graph, JSON-LD (blog pages: include '_partials/seo')
+    {% block head %}   extra tags in <head> (e.g. the homepage preloads its first banner)
+    {% block beforeMain %} between the header and <main> (e.g. the blog post's reading-progress bar)
+    {% block content %} the page content inside <main id="main">
+    {% block afterFooter %} after the footer (e.g. the exhibition gallery's lightbox <dialog>)
+#}
+{% set favicon = siteSettings.favicon.one() ?? null %}
+<!doctype html>
+<html lang="{{ currentSite.language|slice(0, 2) }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ (entry.title ?? null) ? entry.title ~ ' | ' }}{{ siteName }}{% endblock %}</title>
+  {% block seo %}{% endblock %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap">
+  <link rel="icon" href="{{ favicon ? favicon.url : 'data:,' }}">
+  <link rel="stylesheet" href="{{ url('assets/css/site.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/css/craft.css') }}">
+  {% block head %}{% endblock %}
+  <script src="{{ url('assets/js/site.js') }}" defer></script>
+</head>
+<body>
+{% include '_partials/icon-sprite' %}
+
+<a class="skip-link" href="#main">Skip to main content</a>
+{% include '_partials/navigation/header' %}
+{% block beforeMain %}{% endblock %}
+
+<main id="main">
+  {% block content %}{% endblock %}
+
+  {# Newsletter band on every page, above the footer (Globals → Newsletter) #}
+  {% include '_partials/newsletter' %}
+</main>
+
+{% include '_partials/navigation/footer' %}
+{% block afterFooter %}{% endblock %}
+</body>
+</html>

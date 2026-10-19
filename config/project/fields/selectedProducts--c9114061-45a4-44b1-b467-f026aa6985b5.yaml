@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: selectedProducts
+instructions: 'Pick the products and drag them into order (used when “Show” = Picked products).'
+name: Products
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 12
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:7e1cfbd5-d179-4bf5-9dfa-258ac1f2e8b9' # Products
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

@@ -1,0 +1,16 @@
+{# Link helpers for Link field values (Site Settings links, the Main Menu's box links). #}
+
+{# href (+ target/rel) for a Link field value; no link → href="#" data-todo (site.js stops those jumping to the top) #}
+{%- macro attrs(link, todo = null) -%}
+  {%- if link and link.url -%}
+    href="{{ link.url }}"{% if link.target %} target="{{ link.target }}" rel="noopener"{% endif %}
+  {%- else -%}
+    href="#" data-todo="{{ todo ?: 'Destination not set' }}"
+  {%- endif -%}
+{%- endmacro -%}
+
+{# tel: value from a displayed number: "1-888-697-2749" → "+18886972749", "+1-716-285-2974" → "+17162852974" #}
+{%- macro tel(number) -%}
+  {%- set digits = number|replace('/[^0-9]/', '') -%}
+  {{- number|trim starts with '+' ? '+' ~ digits : (digits|length == 11 and digits starts with '1' ? '+' ~ digits : '+1' ~ digits) -}}
+{%- endmacro -%}

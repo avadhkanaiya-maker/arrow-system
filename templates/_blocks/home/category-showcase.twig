@@ -1,0 +1,43 @@
+{#
+  C. Equipment category showcase (design: index.html "C. EQUIPMENT CATEGORY SHOWCASE"): product category cards.
+  Which categories: Categories to Display (picked in the block, in that order); empty = the first 3 in the Product
+  Categories structure. Card: the category's Card Title (else its name) and Card Photo; link = the category's page
+  once category pages exist, else its Card Link.
+  Fields: Small Heading, Heading ([red] words), Categories to Display, View All Link, Anchor ID. Vars: block
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set categories = block.selectedCategories.with(['featuredImage']).all() %}
+{% if not categories|length %}
+  {% set categories = craft.entries.section('productCategories').level(1).with(['featuredImage']).limit(3).all() %}
+{% endif %}
+
+{% if categories|length %}
+  <section class="section" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+    <div class="container">
+      <header class="section-head section-head--center">
+        {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+        <h1 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h1>
+      </header>
+      <ul class="category-grid">
+        {% for category in categories %}
+        {% set image = category.featuredImage.one() %}
+        {% set href = category.url ?: (category.ctaLink and category.ctaLink.url ? category.ctaLink.url : null) %}
+        {% set name = category.headingText ?: category.title %}
+        <li class="category-card">
+          <div class="category-card__media">{% if image %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">{% endif %}</div>
+          <div class="category-card__body">
+            <h2 class="category-card__title">{% if href %}<a class="stretched-link" href="{{ href }}">{{ name }}</a>{% else %}{{ name }}{% endif %}</h2>
+            <span class="arrow-btn" aria-hidden="true"><svg class="icon"><use href="#i-arrow-right"/></svg></span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if block.ctaLink and block.ctaLink.url %}
+      <p class="section-foot"><a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></p>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

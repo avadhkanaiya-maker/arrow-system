@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'One question and its answer'
+fieldLayouts:
+  fd59b15f-48ac-47c6-b700-2aa95b3c7c05:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: null
+            label: Question
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 72ca2430-272d-48a5-9744-cd669a395296
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 165a5425-18d7-4566-a557-6e0a6e9a64f1 # Rich Text
+            handle: null
+            instructions: 'The answer shown when the question is opened.'
+            label: Answer
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aa915d25-0296-4ba6-a7c9-d9138c6a2e8a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c9ceb995-ebaf-4bee-8561-71c0faa68645
+        userCondition: null
+    thumbFieldKey: null
+handle: faqItem
+hasTitleField: false
+icon: chevron-down
+name: 'FAQ Item'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

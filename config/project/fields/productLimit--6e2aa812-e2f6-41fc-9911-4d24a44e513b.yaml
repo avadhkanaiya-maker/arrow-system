@@ -1,0 +1,19 @@
+columnSuffix: null
+handle: productLimit
+instructions: 'For “Products from the categories”: how many cards (3 per row).'
+name: 'How Many'
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: 3
+  max: 24
+  min: 1
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  step: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

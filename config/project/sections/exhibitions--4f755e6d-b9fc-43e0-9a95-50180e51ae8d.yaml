@@ -1,0 +1,24 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 819165d7-06c3-43ce-9e01-71bc6e2c55f9 # Exhibition
+handle: exhibitions
+maxAuthors: 1
+minAuthors: 1
+name: Exhibitions
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: exhibitions/_entry
+    uriFormat: '{% if object.hasPage %}{{ object.slug }}{% endif %}'
+structure:
+  maxLevels: 1
+  uid: 1307dcf2-20b9-4543-8c70-795cc7270da2
+type: structure

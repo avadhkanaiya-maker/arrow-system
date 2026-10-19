@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A YouTube video'
+fieldLayouts:
+  6c0bc9e2-e0f9-47ac-9dcd-b2439a23e05f:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f16e1cfa-5b8f-474f-8352-1f21bb347e07
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 949825d6-8b89-49af-bbe5-59b2f56ac6c9 # Caption
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0262197f-bf1c-4729-a660-d2d104bb650d
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 206da237-471b-4aa3-bbe2-d12f5841fb14
+        userCondition: null
+    thumbFieldKey: null
+handle: video
+hasTitleField: false
+icon: circle-play
+name: Video
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,0 +1,56 @@
+{#
+  /category/{slug}/ and /category/{parent}/{slug}/ (+ /page/N/): a Blog Category's posts, including its
+  sub-categories' posts (as the live WordPress archive). Same layout as /blog/.
+#}
+{% extends '_layouts/base' %}
+
+{% set categoryIds = [entry.id]|merge(craft.entries.section('blogCategories').descendantOf(entry).ids()) %}
+{% paginate craft.entries.section('blog').relatedTo({targetElement: categoryIds, field: 'blogCategories'}).with(['featuredImage', 'blogCategories']).limit(10) as pageInfo, posts %}
+{# Craft shows the last page for a page number past the end; the live site answers 404 #}
+{% if craft.app.request.pageNum > max(1, pageInfo.totalPages) %}{% exit 404 %}{% endif %}
+
+{% set blogPage = craft.entries.section('blogPage').one() %}
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% set canonical = pageInfo.getPageUrl(pageInfo.currentPage) %}
+  {% set crumbs = [{'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl}] %}
+  {% for cat in entry.ancestors.all()|merge([entry]) %}
+    {% set crumbs = crumbs|merge([{'@type': 'ListItem', position: loop.index + 1, name: cat.title, item: cat.url}]) %}
+  {% endfor %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription ?: entry.title ~ ' Category',
+    canonical: canonical,
+    noindex: entry.seoNoIndex,
+    ogType: 'article',
+    image: entry.socialImage.one(),
+    prev: pageInfo.prevUrl,
+    next: pageInfo.nextUrl,
+    schema: [
+      {'@type': 'CollectionPage', '@id': canonical ~ '#webpage', url: canonical, name: pageTitle, inLanguage: currentSite.language},
+      {'@type': 'BreadcrumbList', itemListElement: crumbs},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  {% include 'blog/_partials/listing-head' %}
+{% endblock %}
+
+{% block content %}
+  {% set crumbs = [{title: blogPage.title, url: blogPage.url}] %}
+  {% for cat in entry.ancestors.all()|merge([entry]) %}
+    {% set crumbs = crumbs|merge([{title: cat.title, url: cat.url}]) %}
+  {% endfor %}
+  {% include 'blog/_partials/listing' with {
+    blogPage: blogPage,
+    eyebrow: 'Category',
+    heading: entry.title,
+    lead: entry.sectionLead,
+    crumbs: crumbs,
+    category: entry,
+  } %}
+{% endblock %}

@@ -1,0 +1,128 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A section heading (H2) or sub-heading (H3/H4)'
+fieldLayouts:
+  487771cc-eab8-4e14-8265-0b57918dc559:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: null
+            label: Heading
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a6b60539-7f85-444a-bff7-3378c61d22fe
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2dc1a6a0-3996-4d72-8513-321b88d4c946 # Level
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c96c412c-28ea-48f5-96af-4f73e28df113
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 97004007-b7e5-48df-aa4e-88991f7e2f9e # Answer Lead
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 64f6cc82-1a1f-4693-9066-7c376b5d6794
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0629efb4-df17-4a29-8eb8-cd6e24da4cff # Show in “On this page”
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 07a56784-b0f7-4b8b-a09a-90b49f4cdb9f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 56b569ff-7906-477c-9f6c-51e386e35ec8 # Contents Label
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 717249f9-dc67-4598-8d12-d216a867758a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: 'Optional: the #link name. Leave empty to make it from the heading.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 325c42d1-f448-43fc-94d0-1dcb9d8d65bc
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 67a9cb3f-50d0-43bf-9a96-c05202900733
+        userCondition: null
+    thumbFieldKey: null
+handle: heading
+hasTitleField: false
+icon: heading
+name: Heading
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: cf169567-e457-4e36-a713-ebe1b0da1255 # Upcoming Exhibitions Page
+handle: upcomingExhibitionsPage
+maxAuthors: 1
+minAuthors: 1
+name: 'Upcoming Exhibitions Page'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: exhibitions/_upcoming
+    uriFormat: upcoming-exhibitions
+type: single

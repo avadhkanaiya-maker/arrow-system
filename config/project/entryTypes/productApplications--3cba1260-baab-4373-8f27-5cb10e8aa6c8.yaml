@@ -1,0 +1,111 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Industry cards (photo, name, summary): picked, else the industries recommending this product.'
+fieldLayouts:
+  2ea2b7db-4c4a-40d7-bbb3-5ede2889cb1a:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'e.g. “Applications”.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 648093ed-3028-42b3-a28d-9c34b3069137
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: '[brackets] = red, e.g. “What You [Can Print]”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 70e73f3a-1d5e-4287-8c83-aae24b8b889b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: '{name} = the product name.'
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 405fe9d3-49ee-48dc-9ab4-8b17ea6f8b73
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b5a374ed-b58b-4ecc-b6cb-d53b0b355185
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 75f2b09a-9708-4de2-a836-a9d5b5ab7abf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'Empty = “View all industries” → the Industries page.'
+            label: 'View All Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 425bde86-3b7a-462d-891d-e22ef97ee965
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e9505f3e-86cb-4e0f-a1bd-71db5e331a87
+        userCondition: null
+    thumbFieldKey: null
+handle: productApplications
+hasTitleField: false
+icon: grip
+name: 'What You Can Print'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

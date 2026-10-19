@@ -1,0 +1,85 @@
+defaultEnabledForPropagatedSites: true
+defaultPlacement: end
+fieldLayouts:
+  6cd6d16a-91e2-44c2-83d8-9429ac00c178:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: 'Text visitors see. For a page or product, it follows that page’s title unless you change it here.'
+            label: Label
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            uid: 1423db85-b13c-46ef-bb22-885e2e3eee98
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            elementCondition: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: verbb\navigation\fieldlayoutelements\NodeTypeElements
+            uid: 5eb9e550-d3f0-4df0-be94-e59438744b0f
+            userCondition: null
+            warning: null
+          -
+            attribute: newWindow
+            dateAdded: null
+            elementCondition: null
+            id: null
+            instructions: null
+            label: null
+            mandatory: false
+            orientation: null
+            requirable: true
+            required: false
+            tip: null
+            translatable: false
+            type: verbb\navigation\fieldlayoutelements\NewWindowField
+            uid: 45a20bad-738c-4809-80b2-50be5a8a63e4
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Menu item'
+        uid: 2857960b-e46f-48a4-a2e7-6468deae4e40
+        userCondition: null
+    thumbFieldKey: null
+handle: legalMenu
+instructions: 'Links in the bottom bar of the footer, after the © text.'
+maxNodes: null
+name: 'Legal Menu'
+propagationMethod: all
+showSiteMenu: true
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabled: true
+sortOrder: 4
+structure:
+  maxLevels: 1
+  uid: 11f1b916-078a-4e09-b574-5b6281620874
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,0 +1,17 @@
+{# Text helpers #}
+
+{# "Transform Your Label Production with [On-Demand Efficiency]" → … <span class="hl">On-Demand Efficiency</span>
+   (the design's red highlight). The text is escaped first, so only the brackets become HTML. #}
+{%- macro highlight(text) -%}
+  {{- (text ?? '')|e|replace('/\\[(.+?)\\]/', '<span class="hl">$1</span>')|raw -}}
+{%- endmacro -%}
+
+{# Same text without the brackets (for plain-text uses, e.g. titles) #}
+{%- macro plain(text) -%}
+  {{- (text ?? '')|replace({'[': '', ']': ''}) -}}
+{%- endmacro -%}
+
+{# YouTube video ID from any YouTube link (youtu.be/ID, watch?v=ID, embed/ID, shorts/ID) or a bare ID #}
+{%- macro youtubeId(url) -%}
+  {{- (url ?? '')|trim|replace('/^.*(?:youtu\\.be\\/|[?&]v=|embed\\/|shorts\\/)([\\w-]{11}).*$/', '$1') -}}
+{%- endmacro -%}

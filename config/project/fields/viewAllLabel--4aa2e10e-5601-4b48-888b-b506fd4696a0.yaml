@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: viewAllLabel
+instructions: 'Products menu categories: text of the “View all” link at the bottom of the panel. It goes to this item’s own link. Leave empty for no “View all” link.'
+name: 'View All Text'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

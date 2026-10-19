@@ -1,0 +1,14 @@
+{# Main Menu item with Menu Style "Simple dropdown": its child items as a list. #}
+{% import '_macros/nav' as nav %}
+<li class="nav-item nav-item--dropdown{{ isLast ? ' nav-item--end' }}" data-nav-item>
+  <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="{{ panelId }}" data-nav-trigger>
+    {{ item.title }} <svg class="icon nav-trigger__chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+  </button>
+  <div class="nav-panel nav-panel--dropdown" id="{{ panelId }}">
+    <ul class="dropdown-links">
+      {% for node in item.children.all() %}
+        <li><a {{ nav.attrs(node) }}>{{ node.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</li>

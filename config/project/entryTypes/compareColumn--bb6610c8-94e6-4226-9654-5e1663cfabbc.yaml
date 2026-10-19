@@ -1,0 +1,77 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'One column of a comparison'
+fieldLayouts:
+  3fd3e86a-21d4-49d2-9b12-156822c2f90e:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: null
+            label: Heading
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9b9c4b91-7c00-4cf9-a4a8-4a4b6da7e1b6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: afabdab0-fcbc-4be4-8676-eef04e6a7083 # Items
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5b194cbf-03fd-4079-828a-c78e288a35ad
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9b18e600-54cb-4ae1-b61b-db9d457ddc65 # Column Style
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f9cecbae-37d7-48e2-8a7b-dac3b6715789
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 0b1b7665-b6a2-454e-a0b3-db97649919cc
+        userCondition: null
+    thumbFieldKey: null
+handle: compareColumn
+hasTitleField: false
+icon: square
+name: 'Comparison Column'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

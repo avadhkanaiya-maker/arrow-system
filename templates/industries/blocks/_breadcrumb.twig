@@ -1,0 +1,9 @@
+{# Home › Industries › this industry, or for a page: Home › its parent pages › this page. Vars: entry, listingPage #}
+{% set trail = entry.section.handle == 'pages' ? entry.ancestors.all() : (listingPage ? [listingPage] : []) %}
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          {% for crumb in trail %}<li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>{% endfor %}
+          <li><a href="{{ entry.url }}" aria-current="page">{{ entry.title }}</a></li>
+        </ol>
+      </nav>

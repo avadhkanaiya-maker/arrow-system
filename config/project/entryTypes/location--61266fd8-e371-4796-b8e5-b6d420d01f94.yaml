@@ -1,0 +1,128 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  2c74e19d-d13a-426e-8fc1-32f9c37eea61:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T05:54:15+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c6b3cd74-346e-44ed-87fd-e656cbc77636 # City
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e022356e-9116-4b35-b4e8-e20ff703a683
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T05:54:15+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: a6f2c663-0e16-4b45-8606-e297d96a0670 # Country
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e43cdef6-61c0-4f38-b5b1-04c390eeb840
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T05:54:15+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5e1b2291-9cc8-4555-ae96-dcc41456bc4b # Region
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 19954e37-5eeb-4c0f-9979-5bcb28000ba7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T05:54:15+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: a22495d9-f01f-4004-9b3d-7d6b7b264c62 # Relationship
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2245a528-b234-45a1-8de7-5c6a35a481f6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T05:54:15+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 4055abcd-d97e-47b5-9f50-d3307f4f3f56 # Latitude
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b9230bdb-4562-43fe-b132-6e945af6e13b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T05:54:15+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3a146d79-623e-4443-9485-ce8d03c902b5 # Longitude
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e517ebec-fd48-42b9-8560-11a1d71968c5
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: f7e0dea4-9df9-403c-8b49-c6bc95c24f1e
+        userCondition: null
+    thumbFieldKey: null
+handle: location
+hasTitleField: false
+icon: null
+name: Location
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{city}, {country}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

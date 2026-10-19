@@ -1,0 +1,19 @@
+columnSuffix: null
+handle: longitude
+instructions: 'East is positive, west is negative, e.g. -79.0380.'
+name: Longitude
+searchable: false
+settings:
+  decimals: 4
+  defaultValue: null
+  max: 180
+  min: -180
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  step: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

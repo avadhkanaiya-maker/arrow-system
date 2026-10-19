@@ -1,0 +1,5 @@
+description: null
+handle: subscriber
+name: Subscriber
+permissions:
+  - accesscp

@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: calloutStyle
+instructions: null
+name: Style
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Callout (red bar, key point)'
+        -
+          - value
+          - callout
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Note (grey, small print)'
+        -
+          - value
+          - note
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

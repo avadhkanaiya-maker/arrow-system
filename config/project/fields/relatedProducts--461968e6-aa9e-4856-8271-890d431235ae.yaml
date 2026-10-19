@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: relatedProducts
+instructions: 'Optional: up to 3 products under this one. Empty = other products in the main category.'
+name: 'Related Products'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 3
+  minRelations: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:7e1cfbd5-d179-4bf5-9dfa-258ac1f2e8b9' # Products
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

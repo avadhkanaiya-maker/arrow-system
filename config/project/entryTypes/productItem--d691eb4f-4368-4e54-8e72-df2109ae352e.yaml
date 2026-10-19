@@ -1,0 +1,94 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'One product in a product list'
+fieldLayouts:
+  323f6327-99fb-44ee-9381-1be3dc65aaa6:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0de3d35a-404a-48e9-8d0d-25d2eaabb7af # Tag Line
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8afbf56b-039b-43de-a706-b8eabed5fb75
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: a4104688-9fd2-429a-876b-fd752fc5426c # Product Name
+            handle: null
+            instructions: 'e.g. “ArrowJet Eco 330R”.'
+            label: Name
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 74ce21ad-2706-4db2-a63e-227e77f4edf8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'The product page.'
+            label: Link
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e91e6f7e-e03e-494a-a3ba-c0547a40f216
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 16519104-d110-42b1-905c-abb07a5e505c # Body Text
+            handle: null
+            instructions: 'A short paragraph about the product.'
+            label: Description
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 56564156-34ae-4b9f-a151-b67b7f4f9ae6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b9271040-1c7f-4c01-a293-766dbb5d67fb
+        userCondition: null
+    thumbFieldKey: null
+handle: productItem
+hasTitleField: false
+icon: box
+name: Product
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{productName}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,0 +1,28 @@
+{#
+  Blog post card (design: blogs/index.html "post-tiles"). Used by the blog listing, category and tag pages, the post's
+  "More Insights" and the homepage blog section.
+    {% include '_components/post-card' with { post: entry, feature: loop.first } only %}
+  post      a Blog Post entry (eager-load featuredImage + blogCategories in the query)
+  feature   true → the large first card with the "Latest article" chip and a full-size, high-priority image
+  Cards get a "New" chip from js/blog.js (data-date). Images: 16:9 crops (CSS object-fit covers any size).
+#}
+{% import '_macros/text' as text %}
+{% set feature = feature ?? false %}
+{% set image = post.featuredImage.one() %}
+{% set category = post.blogCategories.one() %}
+{% set transform = feature ? {width: 1280, height: 720, mode: 'crop'} : {width: 640, height: 360, mode: 'crop'} %}
+<li class="post-tile{{ feature ? ' post-tile--feature' }}" data-date="{{ post.postDate|date('Y-m-d') }}">
+  <article class="post-tile__card">
+    <div class="post-tile__media">
+      {%- if image -%}
+        <img src="{{ image.getUrl(transform) }}" width="{{ transform.width }}" height="{{ transform.height }}" {{ feature ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"' }} alt="{{ image.alt }}">
+      {%- endif -%}
+    </div>
+    <div class="post-tile__body">
+      <p class="post-tile__meta">{% if feature %}<span class="post-tile__new post-tile__latest">Latest article</span>{% endif %}{% if category %}<a class="post-tile__cat" href="{{ category.url }}">{{ category.title }}</a>{% endif %}<time datetime="{{ post.postDate|date('Y-m-d') }}">{{ post.postDate|date('M j, Y') }}</time></p>
+      <h3 class="post-tile__title"><a class="stretched-link" href="{{ post.url }}">{{ text.plain(post.title) }}</a></h3>
+      {% if post.sectionLead %}<p class="post-tile__excerpt">{{ post.sectionLead }}</p>{% endif %}
+      <span class="post-tile__more" aria-hidden="true">Read article <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+    </div>
+  </article>
+</li>

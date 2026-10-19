@@ -1,0 +1,99 @@
+columnSuffix: null
+handle: homepageSections
+instructions: null
+name: 'Homepage Sections'
+searchable: false
+settings:
+  createButtonLabel: 'Add section'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - a0f03dd6-5837-4abf-80ef-8e941d2b8acb # Hero Slider
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - ff07a059-8f67-404c-b8aa-d4fbdef1dd95 # Benefit Cards
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - aac0dbaa-d211-4433-93eb-4c8ea2bd7d8d # On-Demand Feature
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - 89da0225-2bd5-4858-8ce4-5c5f420fe0e1 # Locations Map
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - 65d20f8d-4a99-4354-8459-6753ee53a68d # Background Video Section
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - 43a7134f-2531-4cb4-b69f-5517aa9c56ef # CTA Band
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - 7d168617-1541-4be0-b60b-8f51c99b81af # Text + Media
+    -
+      __assoc__:
+        -
+          - uid
+          - 7775817e-d249-4e0d-9ba6-3546bb8709c9 # Latest Blog Posts
+    -
+      __assoc__:
+        -
+          - uid
+          - 1b40bd1b-a8c7-4208-882e-c96459dffc80 # Exhibitions
+    -
+      __assoc__:
+        -
+          - uid
+          - 5e99a3d3-f5ae-48c4-9805-ba1493d629a4 # Equipment Categories
+    -
+      __assoc__:
+        -
+          - uid
+          - 92fcfdeb-cd9a-4e2f-963e-72362dc7587a # Industries Carousel
+    -
+      __assoc__:
+        -
+          - uid
+          - 720c5ac7-9fed-453a-80b3-ac85342a6e52 # Stats Strip
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

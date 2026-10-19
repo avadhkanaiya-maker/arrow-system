@@ -1,0 +1,275 @@
+columnSuffix: null
+handle: menuIcon
+instructions: 'Line icon shown next to this item in menus.'
+name: 'Menu Icon'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - (none)
+        -
+          - value
+          - ''
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Wine glass'
+        -
+          - value
+          - wine
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Pill
+        -
+          - value
+          - pill
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Flask
+        -
+          - value
+          - flask
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Package
+        -
+          - value
+          - package
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Factory
+        -
+          - value
+          - factory
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Plane
+        -
+          - value
+          - plane
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Droplet
+        -
+          - value
+          - droplet
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Shield
+        -
+          - value
+          - shield
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Layers
+        -
+          - value
+          - layers
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Tag
+        -
+          - value
+          - tag
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Printer
+        -
+          - value
+          - printer
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Scissors
+        -
+          - value
+          - scissors
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Globe
+        -
+          - value
+          - globe
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Chip
+        -
+          - value
+          - cpu
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Gauge
+        -
+          - value
+          - gauge
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Scan
+        -
+          - value
+          - scan
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Leaf
+        -
+          - value
+          - leaf
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Clock
+        -
+          - value
+          - clock
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Refresh
+        -
+          - value
+          - refresh
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Wrench
+        -
+          - value
+          - wrench
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Headset
+        -
+          - value
+          - headset
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - File
+        -
+          - value
+          - file
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Image
+        -
+          - value
+          - image
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

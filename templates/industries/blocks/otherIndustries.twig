@@ -1,0 +1,36 @@
+{#
+  5. Other industries (design: ".ind-more"): the picked industries, else the next 3 listed industries after this one
+  (wrapping round), never this page. Vars: block, entry, listingPage
+#}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% set picked = block.relatedIndustries.with(['featuredImage']).all() %}
+{% if picked|length %}
+  {% set industries = picked %}
+{% else %}
+  {% set listed = craft.entries.section('industries').showOnListing(true).id(['not', entry.id]).with(['featuredImage']).all() %}
+  {% set after = listed|filter(i => i.lft > entry.lft) %}
+  {% set industries = ([]|merge(after)|merge(listed|filter(i => i.lft < entry.lft)))|slice(0, 3) %}
+{% endif %}
+{% if industries|length %}
+  <section class="section section--surface ind-more" aria-labelledby="more-title">
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          <h2 class="section-title" id="more-title">{{ text.highlight(block.sectionHeading ?: 'Other [Industries]') }}</h2>
+        </div>
+        {% if block.ctaLink and block.ctaLink.url %}
+        <a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        {% elseif listingPage %}
+        <a class="text-link" href="{{ listingPage.url }}">View all industries <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        {% endif %}
+      </header>
+      <ul class="ind-grid">
+        {% for industry in industries %}
+        {% include '_components/industry-card' with { industry: industry } only %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

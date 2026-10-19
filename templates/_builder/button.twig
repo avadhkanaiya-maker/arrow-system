@@ -1,0 +1,13 @@
+{# Button block: red / outline button, or a text link with an arrow (craft.css .prose-button) #}
+{% import '_macros/links' as links %}
+{% set link = block.ctaLink %}
+{% if link and link.url %}
+{% set style = block.buttonStyle.value ?: 'primary' %}
+<p class="prose-button">
+  {% if style == 'link' %}
+  <a class="text-link" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+  {% else %}
+  <a class="btn btn--{{ style }}" {{ links.attrs(link) }}>{{ link.label }}</a>
+  {% endif %}
+</p>
+{% endif %}

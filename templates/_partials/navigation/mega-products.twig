@@ -1,0 +1,73 @@
+{#
+  Main Menu item with Menu Style "Products mega menu":
+    level 2 Group / Column items → groups (Arrow Systems equipment / Partner Brands); other level 2 items → extra links in the box
+    level 3 → categories (their own link + "View All Text" give the "View all" link)
+    level 4 → products
+  The featured box comes from the Main Menu's own fields: Menu content → Products box
+  (Featured Image, Featured Title, Featured Text, Featured Link).
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/nav' as nav %}
+{% set children = item.children.all() %}
+<li class="nav-item nav-item--mega{{ isLast ? ' nav-item--end' }}" data-nav-item>
+  <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="{{ panelId }}" data-nav-trigger>
+    {{ item.title }} <svg class="icon nav-trigger__chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+  </button>
+  <div class="nav-panel nav-panel--mega" id="{{ panelId }}">
+    <div class="mega container">
+      <div class="mega__cats" data-cat-group>
+        {% for group in children|filter(n => n.isGroupColumn()) %}
+          <p class="mega__label{{ group.isPartnerGroup ? ' mega__label--partner' }}">{{ group.title }}</p>
+          <ul class="mega__cat-list">
+            {% for cat in group.children.all() %}
+              {% set catId = 'cat-' ~ (cat.title|kebab) %}
+              <li class="mega__cat" data-cat>
+                <button class="mega__cat-btn" type="button" aria-expanded="false" aria-controls="{{ catId }}" data-cat-trigger>
+                  {{ cat.title }} <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+                </button>
+                <div class="mega__cat-panel" id="{{ catId }}">
+                  {% if cat.panelTitle %}<p class="mega__cat-title">{{ cat.panelTitle }}</p>{% endif %}
+                  <ul class="mega__links">
+                    {% for node in cat.children.all() %}
+                      {% set description = nav.description(node)|trim %}
+                      <li><a {{ nav.attrs(node) }}>{{ node.title }}{% if description %}<span>{{ description }}</span>{% endif %}</a></li>
+                    {% endfor %}
+                  </ul>
+                  {% if cat.getUrl() and cat.viewAllLabel %}
+                    <a class="mega__all" {{ nav.attrs(cat) }}>{{ cat.viewAllLabel }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
+
+      {% if menu and menu.featuredTitle %}
+        {% set image = menu.featuredImage.one() %}
+        {% set link = menu.featuredLink %}
+        <aside class="mega__feature" aria-label="Featured product">
+          {% if image %}
+            <div class="mega__feature-media">
+              <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt ?? menu.featuredTitle }}">
+            </div>
+          {% endif %}
+          <p class="mega__feature-kicker">Featured</p>
+          <p class="mega__feature-title">{{ menu.featuredTitle }}</p>
+          {% if menu.featuredText %}<p class="mega__feature-text">{{ menu.featuredText }}</p>{% endif %}
+          {% if link and link.url %}
+            <a class="text-link" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          {% endif %}
+          {% set extras = children|filter(n => not n.isGroupColumn()) %}
+          {% if extras|length %}
+            <ul class="mega__extra">
+              {% for node in extras %}
+                <li><a {{ nav.attrs(node) }}>{{ node.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </aside>
+      {% endif %}
+    </div>
+  </div>
+</li>

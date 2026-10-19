@@ -1,0 +1,51 @@
+{#
+  D. On-demand production benefits + contact (design: index.html, "ON-DEMAND PRODUCTION BENEFITS + CONTACT").
+  Heading block (Small Heading, Heading with [red] words, Intro), then the facts + note + button and the video.
+  Video: click-to-play. site.js loads the YouTube player (youtube-nocookie) only after "Play video" is clicked.
+  DOM order = mobile reading order (video, facts, note, button); desktop puts facts left / video right (site.css).
+  Anchor ID → the section's id, so menu links like /#on-demand jump here. Vars: block (On-Demand Feature entry)
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+{% set videoId = text.youtubeId(block.videoUrl)|trim %}
+{% set poster = block.videoPoster.one() %}
+{% set facts = (block.facts ?? [])|filter(f => f.text|trim) %}
+<section class="section section--surface" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+  <div class="container">
+    <header class="section-head section-head--center">
+      {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+      <h2 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+      {% if block.sectionLead %}<p class="section-head__lead">{{ block.sectionLead }}</p>{% endif %}
+    </header>
+
+    <div class="ondemand">
+      <div class="ondemand__media">
+        {% if videoId %}
+          <div class="video" data-video="{{ videoId }}">
+            {% if poster %}<img src="{{ poster.url }}" width="{{ poster.width }}" height="{{ poster.height }}" loading="lazy" alt="">{% endif %}
+            <button class="video__play" type="button" data-video-play>
+              <span class="video__icon" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+              <span class="video__label">Play video{% if block.videoCaption %}<span class="visually-hidden">: {{ block.videoCaption|replace({' | ': ', '}) }}</span>{% endif %}</span>
+            </button>
+          </div>
+        {% endif %}
+        {% if block.videoCaption %}<p class="video__caption">{{ block.videoCaption }}</p>{% endif %}
+      </div>
+      <div class="ondemand__facts">
+        {% if facts|length %}
+          <ul class="fact-list">
+            {% for fact in facts %}
+              <li class="fact"><span class="fact__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ fact.icon ?: 'arrow-right' }}"/></svg></span><span class="fact__text">{{ fact.text }}</span></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if block.factNote %}<p class="fact-note">{{ block.factNote }}</p>{% endif %}
+        {% if block.ctaLink and block.ctaLink.url %}
+          <a class="btn btn--primary btn--lg" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

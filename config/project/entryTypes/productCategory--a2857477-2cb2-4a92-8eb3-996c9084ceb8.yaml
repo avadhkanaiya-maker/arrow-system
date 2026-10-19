@@ -1,0 +1,122 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A product category (from WooCommerce). Nest it under another one for a sub-category.'
+fieldLayouts:
+  c4a64cbe-655f-4a8a-858b-4f1d948f344a:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Category Name'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 403a57b0-781d-4173-b7dc-15085ee1ef5b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'Optional: a shorter name for cards, e.g. “Digital Label Printers”. Empty = the category name.'
+            label: 'Card Title'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2c4a6249-d004-4e65-a0f8-8c85e0e61cb3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1c2748fc-6dc8-4720-80e3-fad0a83163de # Featured Image
+            handle: null
+            instructions: 'The photo on the category card (homepage). 5:4 works best, e.g. 600 × 480.'
+            label: 'Card Photo'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 04b798fb-b289-421d-956d-0d2552aace84
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: 'Optional: a short description of the category.'
+            label: Description
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5639e8eb-f285-4d29-9219-3327f713eb8c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'Where the card links to until the category pages are built in Craft, e.g. the live /all-products/… page.'
+            label: 'Card Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9693f297-1529-46b6-bc95-0ed394c327aa
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: fa0835de-d709-45a0-a856-d5954d37cb90
+        userCondition: null
+    thumbFieldKey: null
+handle: productCategory
+hasTitleField: true
+icon: folder-tree
+name: 'Product Category'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

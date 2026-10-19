@@ -1,0 +1,66 @@
+columnSuffix: null
+handle: columnsLayout
+instructions: null
+name: 'Column Widths'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Equal (50 / 50)'
+        -
+          - value
+          - 1-1
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Narrow + wide (40 / 60)'
+        -
+          - value
+          - 2-3
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Wide + narrow (60 / 40)'
+        -
+          - value
+          - 3-2
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'One third + two thirds'
+        -
+          - value
+          - 1-2
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Two thirds + one third'
+        -
+          - value
+          - 2-1
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: datePrecision
+instructions: '“Year only” for past shows whose exact dates aren’t published (the site then shows just the year).'
+name: 'Show Dates As'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Exact dates (e.g. Oct 18–21, 2026)'
+        -
+          - value
+          - exact
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Year only (e.g. 2025)'
+        -
+          - value
+          - year
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

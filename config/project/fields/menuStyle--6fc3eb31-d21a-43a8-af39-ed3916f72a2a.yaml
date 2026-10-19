@@ -1,0 +1,44 @@
+columnSuffix: null
+handle: menuStyle
+instructions: 'How this top-level item opens. Simple dropdown: a list of its links. Mega menus: groups of links with a side box.'
+name: 'Menu Style'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Simple dropdown'
+        -
+          - value
+          - dropdown
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Products mega menu'
+        -
+          - value
+          - productsMega
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Industries mega menu'
+        -
+          - value
+          - industriesMega
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

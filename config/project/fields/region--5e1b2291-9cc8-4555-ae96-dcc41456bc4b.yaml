@@ -1,0 +1,77 @@
+columnSuffix: null
+handle: region
+instructions: 'Which group the location is listed under.'
+name: Region
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'North America'
+        -
+          - value
+          - north-america
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Central America & Caribbean'
+        -
+          - value
+          - central-america
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'South America'
+        -
+          - value
+          - south-america
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Europe
+        -
+          - value
+          - europe
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Middle East & Africa'
+        -
+          - value
+          - mea
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Asia Pacific'
+        -
+          - value
+          - asia-pacific
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

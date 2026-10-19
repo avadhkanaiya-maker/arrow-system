@@ -1,0 +1,43 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Questions that open and close: add an FAQ Item for each one'
+fieldLayouts:
+  49179cad-1189-42ee-98b1-5c86f9507ca7:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 440240ff-b6a2-406b-a724-12b1848e5d7c # Questions
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a19b26f2-8465-48e3-80b1-1deb1f8e33f3
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 63112b28-21bd-4a51-aa95-654cce98ea7f
+        userCondition: null
+    thumbFieldKey: null
+handle: faq
+hasTitleField: false
+icon: circle-question
+name: FAQ
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

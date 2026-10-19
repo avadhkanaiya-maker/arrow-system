@@ -1,0 +1,151 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  d273abe4-90de-4d72-811b-59e42fc20157:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 61d6c4e3-1470-46c3-b615-83f5ef202030
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 38e928c1-2e4c-4c23-97fc-660334a76734
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 16519104-d110-42b1-905c-abb07a5e505c # Body Text
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ebfb5e9b-11a0-4a5e-b7e7-6879193eb6c6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'Shown as a red text link with an arrow. Paste the link and type the link text in Label.'
+            label: Link
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3e6d7a61-bad3-4b52-b445-b0ee01cd0f33
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d3c5b1f2-d7a7-4dd3-9b4a-808500b3d871
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 6271bc90-c1a2-4158-8421-d491720e4950
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7bbe8361-b6da-451a-ae3f-5eba0250025f # Layout
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9a8cccc3-4b6e-418f-b10a-1d71853c7c07
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3778c280-3469-48ad-adca-51cf88eaed93
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: 9e7bfdfc-842c-436a-9c35-11fa0221b97a
+        userCondition: null
+    thumbFieldKey: null
+handle: textMedia
+hasTitleField: false
+icon: null
+name: 'Text + Media'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: "{{ object.sectionHeading|replace({'[': '', ']': ''}) }}"
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

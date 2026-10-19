@@ -1,0 +1,28 @@
+{#
+  B. Benefit cards (design: index.html, "BENEFIT CARDS"): illustration + linked title + small "more" line.
+  Each card: Title, Illustration (benefitIcon), Link (benefitLink; its Label is the small line under the title).
+  The whole card is clickable (design's stretched-link). Vars: block (Benefit Cards entry)
+#}
+{% import '_macros/links' as links %}
+{% set items = block.benefits.all() %}
+{% if items|length %}
+<section class="benefits" aria-label="{{ block.ariaLabel ?: 'Why Arrow Systems' }}">
+  <div class="container">
+    <ul class="benefits__list">
+      {% for item in items %}
+        {% set icon = item.benefitIcon.one() %}
+        {% set link = item.benefitLink %}
+        <li class="benefit">
+          {% if icon %}<img class="benefit__icon" src="{{ icon.url }}" width="128" height="128" alt="">{% endif %}
+          <div class="benefit__body">
+            <h2 class="benefit__title"><a class="stretched-link" {{ links.attrs(link, item.title ~ ' link') }}>{{ item.title }}</a></h2>
+            {% if link and link.getLabel(true) %}
+              <span class="benefit__more" aria-hidden="true">{{ link.getLabel(true) }} <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}

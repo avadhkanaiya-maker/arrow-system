@@ -1,0 +1,160 @@
+columnSuffix: null
+handle: facts
+instructions: 'Short facts with an icon, shown next to the video.'
+name: Facts
+searchable: false
+settings:
+  addRowLabel: 'Add fact'
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - Icon
+            -
+              - handle
+              - icon
+            -
+              - type
+              - select
+            -
+              - width
+              - 30%
+            -
+              - options
+              -
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Speed (gauge)'
+                    -
+                      - value
+                      - gauge
+                    -
+                      - default
+                      - true
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Resolution (scan)'
+                    -
+                      - value
+                      - scan
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Ink (droplet)'
+                    -
+                      - value
+                      - droplet
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Eco (leaf)'
+                    -
+                      - value
+                      - leaf
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Printer
+                    -
+                      - value
+                      - printer
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Technology (chip)'
+                    -
+                      - value
+                      - cpu
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Quality (shield)'
+                    -
+                      - value
+                      - shield
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Time (clock)'
+                    -
+                      - value
+                      - clock
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Service (wrench)'
+                    -
+                      - value
+                      - wrench
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Materials (layers)'
+                    -
+                      - value
+                      - layers
+                    -
+                      - default
+                      - false
+      -
+        - col2
+        -
+          __assoc__:
+            -
+              - heading
+              - Text
+            -
+              - handle
+              - text
+            -
+              - type
+              - singleline
+            -
+              - width
+              - ''
+  maxRows: null
+  minRows: null
+  staticRows: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

@@ -1,0 +1,19 @@
+{#
+  Product card (design: digital-label-printers/index.html listing cards and product-detail.html "More Printers").
+    {% include '_components/product-card' with { product: entry } only %}
+  product   a Products entry (eager-load featuredImage, mediaImage)
+  Name: the Card Title, else the product name. Photo: the Card Photo (4:3), else the Main Image. Tagline and key specs
+  are left out when empty.
+#}
+{% set image = product.featuredImage.one() ?? product.mediaImage.one() %}
+        <li class="pcard">
+          <article class="pcard__inner">
+            <div class="pcard__media">{% if image %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async" alt="{{ image.alt ?: (product.headingText ?: product.title) }}">{% endif %}</div>
+            <div class="pcard__body">
+              <h3 class="pcard__title"><a class="stretched-link" href="{{ product.url }}">{{ product.headingText ?: product.title }}</a></h3>
+              {% if product.cardTagline %}<p class="pcard__tagline">{{ product.cardTagline }}</p>{% endif %}
+              {% if product.keySpecs|length %}<dl class="pcard__specs">{% for row in product.keySpecs %}<div><dt>{{ row.label }}</dt><dd>{{ row.value }}</dd></div>{% endfor %}</dl>{% endif %}
+              <span class="pcard__more" aria-hidden="true">Learn More <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+            </div>
+          </article>
+        </li>

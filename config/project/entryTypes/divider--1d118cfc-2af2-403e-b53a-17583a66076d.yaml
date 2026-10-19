@@ -1,0 +1,25 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A horizontal line'
+fieldLayouts:
+  7f4b1bf7-5301-49aa-803e-11e0999f62c1:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        name: Content
+        uid: 830828ae-4e2b-43d8-be8e-501bfa2252de
+        userCondition: null
+    thumbFieldKey: null
+handle: divider
+hasTitleField: false
+icon: minus
+name: Divider
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

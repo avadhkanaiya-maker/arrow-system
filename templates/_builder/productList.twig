@@ -1,0 +1,11 @@
+{# Product List block: ul.product-list, one li.product-item per Product in its nested field (productItems) #}
+{% import '_macros/links' as links %}
+<ul class="product-list">
+  {% for item in block.productItems.all() %}
+  <li class="product-item">
+    {% if item.productTag %}<p class="product-item__tag">{{ item.productTag }}</p>{% endif %}
+    <h4 class="product-item__name">{% if item.ctaLink and item.ctaLink.url %}<a {{ links.attrs(item.ctaLink) }}>{{ item.productName }}</a>{% else %}{{ item.productName }}{% endif %}</h4>
+    {% if item.sectionBody %}<p>{{ item.sectionBody }}</p>{% endif %}
+  </li>
+  {% endfor %}
+</ul>

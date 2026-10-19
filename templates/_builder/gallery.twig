@@ -1,0 +1,9 @@
+{# Gallery block: a grid of images (craft.css .prose-gallery) #}
+{% set images = block.galleryImages.all() %}
+{% if images|length %}
+<div class="prose-gallery prose-gallery--{{ block.galleryColumns.value ?: 3 }}">
+  {% for image in images %}
+  <figure><img src="{{ image.getUrl({width: 800}) }}"{% if image.width %} width="{{ image.getWidth({width: 800}) }}" height="{{ image.getHeight({width: 800}) }}"{% endif %} loading="lazy" decoding="async" alt="{{ image.alt }}"></figure>
+  {% endfor %}
+</div>
+{% endif %}

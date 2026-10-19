@@ -1,0 +1,10 @@
+{# Key Takeaways block: boxed check-list with an H2 (listed in "On this page") #}
+{% set id = anchors['b' ~ block.id] ?? (block.anchorId|trim ?: block.headingText|kebab) %}
+<section class="takeaways" aria-labelledby="{{ id }}">
+  <h2 id="{{ id }}">{{ block.headingText }}</h2>
+  <ul class="checklist">
+    {% for row in block.listItems ?? [] %}
+    <li>{{ row.text|md(inlineOnly=true, encode=true) }}</li>
+    {% endfor %}
+  </ul>
+</section>

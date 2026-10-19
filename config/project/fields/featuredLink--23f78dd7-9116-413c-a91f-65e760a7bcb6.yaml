@@ -1,0 +1,15 @@
+columnSuffix: null
+handle: featuredLink
+instructions: 'Where the box links to. Paste the link and type the link text in Label (e.g. Explore Product).'
+name: 'Featured Link'
+searchable: false
+settings:
+  fullGraphqlData: true
+  maxLength: 255
+  showLabelField: true
+  types:
+    - url
+    - entry
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Link

@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: cardItems
+instructions: 'One card each, in this order.'
+name: Cards
+searchable: false
+settings:
+  createButtonLabel: 'Add card'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - b1814641-3e80-4fe2-ba43-2c6913b5b1df # Card
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

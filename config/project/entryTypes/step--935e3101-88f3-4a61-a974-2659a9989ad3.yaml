@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'One numbered step'
+fieldLayouts:
+  8e33ff10-7598-43c5-99c6-0dc4302d8402:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: null
+            label: Title
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6c717081-e338-4110-a15c-263471a8539b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 16519104-d110-42b1-905c-abb07a5e505c # Body Text
+            handle: null
+            instructions: 'One or two sentences.'
+            label: Text
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c3fa2884-3f19-4290-b36e-358b91a23162
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e1e20dba-542c-47e1-bba5-1b38d3ffd8bb
+        userCondition: null
+    thumbFieldKey: null
+handle: step
+hasTitleField: false
+icon: hashtag
+name: Step
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

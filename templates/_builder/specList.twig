@@ -1,0 +1,6 @@
+{# Spec List block: dl.spec-list (term + description) #}
+<dl class="spec-list">
+  {% for row in block.specItems ?? [] %}
+  <div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true) }}</dd></div>
+  {% endfor %}
+</dl>

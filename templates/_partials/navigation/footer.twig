@@ -1,0 +1,74 @@
+{#
+  Global footer:
+    brand, tagline, address, phones, email, social links → Globals → Site Settings
+    link columns  → Footer Menu (level 1: column headings, level 2: the links)
+    bottom bar    → © + Legal Menu
+  Markup is the approved design's (Arrowsystem_local/index.html).
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/nav' as nav %}
+{% set logo = siteSettings.logo.one() %}
+{% set brandName = siteSettings.logoAlt ?: siteName %}
+{% set socialLabels = { facebook: 'Facebook', linkedin: 'LinkedIn', youtube: 'YouTube', instagram: 'Instagram' } %}
+
+<footer class="site-footer">
+  <div class="container site-footer__main">
+    <div class="site-footer__brand">
+      <a class="site-footer__logo" href="{{ siteUrl }}">
+        {% if logo %}
+          <img src="{{ logo.url }}" width="{{ logo.width }}" height="{{ logo.height }}" loading="lazy" alt="{{ brandName }} home">
+        {% else %}
+          {{ brandName }}
+        {% endif %}
+      </a>
+      {% if siteSettings.siteTagline %}<p class="site-footer__tagline">{{ siteSettings.siteTagline }}</p>{% endif %}
+      <address class="site-footer__contact">
+        {% if siteSettings.address %}
+          <p><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg><span>{{ siteSettings.address }}</span></p>
+        {% endif %}
+        {% if siteSettings.tollFreePhone or siteSettings.directPhone %}
+          <p><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span>
+            {%- if siteSettings.tollFreePhone %}Toll-free <a href="tel:{{ links.tel(siteSettings.tollFreePhone) }}">{{ siteSettings.tollFreePhone }}</a>{% endif %}
+            {%- if siteSettings.tollFreePhone and siteSettings.directPhone %}<br>{% endif %}
+            {%- if siteSettings.directPhone %}Direct <a href="tel:{{ links.tel(siteSettings.directPhone) }}">{{ siteSettings.directPhone }}</a>{% endif -%}
+          </span></p>
+        {% endif %}
+        {% if siteSettings.salesEmail %}
+          <p><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:{{ siteSettings.salesEmail }}">{{ siteSettings.salesEmail }}</a></p>
+        {% endif %}
+      </address>
+      {% set social = siteSettings.socialLinks ?? [] %}
+      {% if social|length %}
+        <ul class="social" aria-label="{{ brandName|replace({', Inc.': ''}) }} on social media">
+          {% for s in social %}
+            <li><a href="{{ s.url }}"><svg class="icon" aria-hidden="true"><use href="#i-{{ s.network }}"/></svg><span class="visually-hidden">{{ socialLabels[s.network] ?? s.network }}</span></a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      {% for column in craft.navigation.nodes('footerMenu').level(1).all() %}
+        <div class="footer-col">
+          <h2 class="footer-col__title">{{ column.title }}</h2>
+          <ul>
+            {% for node in column.children.all() %}
+              <li><a {{ nav.attrs(node) }}>{{ node.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </nav>
+  </div>
+
+  <div class="site-footer__legal">
+    <div class="container site-footer__legal-inner">
+      <p>&copy; {{ brandName }}</p>
+      <ul class="legal-links">
+        {% for node in craft.navigation.nodes('legalMenu').level(1).all() %}
+          <li><a {{ nav.attrs(node) }}>{{ node.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</footer>

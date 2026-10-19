@@ -1,0 +1,44 @@
+columnSuffix: null
+handle: buttonStyle
+instructions: null
+name: 'Button Style'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Red button'
+        -
+          - value
+          - primary
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Outline button'
+        -
+          - value
+          - outline
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Text link with arrow'
+        -
+          - value
+          - link
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

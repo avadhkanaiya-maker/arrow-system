@@ -1,0 +1,22 @@
+columnSuffix: null
+handle: formieForm
+instructions: 'The form to show (create and edit forms in Formie → Forms; its submissions, emails and thank-you message are set there).'
+name: Form
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
+  selectionLabel: 'Choose a form'
+  showSearchInput: true
+  showSiteMenu: false
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: verbb\formie\fields\Forms

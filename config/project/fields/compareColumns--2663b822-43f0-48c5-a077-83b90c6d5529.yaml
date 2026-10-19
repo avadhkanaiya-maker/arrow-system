@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: compareColumns
+instructions: null
+name: Columns
+searchable: true
+settings:
+  createButtonLabel: 'Add column'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - bb6610c8-94e6-4226-9654-5e1663cfabbc # Comparison Column
+  includeTableView: false
+  maxEntries: 2
+  minEntries: 2
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

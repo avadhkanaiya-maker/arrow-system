@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: ctaLead
+instructions: 'Short line above the button, e.g. “For More Information, Contact Us Now”.'
+name: 'Button Intro'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,15 @@
+{#
+  "Not sure which equipment fits?" box: blog sidebar and the article rail.
+  Texts and buttons: Entries → Blog Page → Sidebar.  idPrefix: 'side' (listing) or 'rail' (article)
+  extraClass: e.g. 'post-rail__cta'
+#}
+{% import '_macros/links' as links %}
+{% if blogPage and blogPage.helpTitle %}
+<section class="side-cta{{ (extraClass ?? null) ? ' ' ~ extraClass }}" aria-labelledby="{{ idPrefix }}-cta-title">
+  <span class="dot-grid dot-grid--side" aria-hidden="true"></span>
+  <h2 class="side-cta__title" id="{{ idPrefix }}-cta-title">{{ blogPage.helpTitle }}</h2>
+  {% if blogPage.helpText %}<p>{{ blogPage.helpText }}</p>{% endif %}
+  {% if blogPage.helpLink %}<a class="btn btn--light btn--block" {{ links.attrs(blogPage.helpLink) }}>{{ blogPage.helpLink.label }}</a>{% endif %}
+  {% if blogPage.quoteLink %}<a class="btn btn--outline-light btn--block" {{ links.attrs(blogPage.quoteLink) }}>{{ blogPage.quoteLink.label }}</a>{% endif %}
+</section>
+{% endif %}

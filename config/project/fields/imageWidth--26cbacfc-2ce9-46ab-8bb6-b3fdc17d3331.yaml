@@ -1,0 +1,55 @@
+columnSuffix: null
+handle: imageWidth
+instructions: null
+name: Width
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Full article width'
+        -
+          - value
+          - full
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Large (¾)'
+        -
+          - value
+          - large
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Medium (½)'
+        -
+          - value
+          - medium
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Small (⅓)'
+        -
+          - value
+          - small
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

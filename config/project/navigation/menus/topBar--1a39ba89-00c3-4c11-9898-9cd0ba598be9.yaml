@@ -1,0 +1,85 @@
+defaultEnabledForPropagatedSites: true
+defaultPlacement: end
+fieldLayouts:
+  5670a17f-a6ba-4882-b995-b53eff57d442:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: 'Text visitors see. For a page or product, it follows that page’s title unless you change it here.'
+            label: Label
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            uid: 3445fc13-b01f-45d3-ac3c-abf0c45e72ee
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            elementCondition: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: verbb\navigation\fieldlayoutelements\NodeTypeElements
+            uid: 15270b4a-bdac-468c-bc9c-d735aa727df1
+            userCondition: null
+            warning: null
+          -
+            attribute: newWindow
+            dateAdded: null
+            elementCondition: null
+            id: null
+            instructions: null
+            label: null
+            mandatory: false
+            orientation: null
+            requirable: true
+            required: false
+            tip: null
+            translatable: false
+            type: verbb\navigation\fieldlayoutelements\NewWindowField
+            uid: 80942375-c337-4ee0-99b2-5798e657d30c
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Menu item'
+        uid: b07914b6-97e4-4dd2-a885-e5281dcabda5
+        userCondition: null
+    thumbFieldKey: null
+handle: topBar
+instructions: 'Slim row above the header (desktop), also listed at the bottom of the mobile menu.'
+maxNodes: null
+name: 'Top Bar'
+propagationMethod: all
+showSiteMenu: true
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabled: true
+sortOrder: 2
+structure:
+  maxLevels: 1
+  uid: 1eae278b-f969-44ff-aa01-1f3a8cc8eb0e
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

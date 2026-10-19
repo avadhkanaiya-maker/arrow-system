@@ -1,0 +1,66 @@
+{#
+  3. Content blocks (design: ".ind-blocks"): consecutive Content Blocks share this section; the design CSS alternates the
+  media side (.content-block:nth-child(even)). Each: image or a YouTube video (click to play), small heading, heading,
+  text, optional link (the design's markup). Without image / video: heading left, text right (craft.css
+  .content-block--text); without a heading too, the text spans the width (--plain). Vars: blocks, entry
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+  <section class="section ind-blocks" aria-label="{{ (entry.title ~ ' solutions')|lower|capitalize }}">
+    <div class="container">
+      {% for block in blocks %}
+      {% set image = block.mediaImage.one() %}
+      {% set videoId = text.youtubeId(block.videoUrl ?? '')|trim %}
+      {% set video = videoId|length == 11 %}
+      {% set hasText = (block.richText ?? '')|striptags|trim %}
+      {% set link = block.ctaLink and block.ctaLink.url ? block.ctaLink : null %}
+      {% set anchor = block.anchorId|trim ?: 'block-' ~ block.id %}
+      {% if image or video %}
+      <article class="content-block" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
+        {% if video %}
+        <div class="content-block__media content-block__media--video">
+          <div class="video" data-video="{{ videoId }}">
+            <img src="https://i.ytimg.com/vi/{{ videoId }}/hqdefault.jpg" width="480" height="360" loading="lazy" alt="">
+            <button class="video__play" type="button" data-video-play>
+              <span class="video__icon" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+              <span class="video__label">Play video{% if block.headingText %}<span class="visually-hidden">: {{ block.headingText }}</span>{% endif %}</span>
+            </button>
+          </div>
+        </div>
+        {% else %}
+        <figure class="content-block__media">
+          <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">
+        </figure>
+        {% endif %}
+        <div class="content-block__body">
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          {% if block.headingText %}<h2 class="content-block__title" id="{{ anchor }}-title">{{ block.headingText }}</h2>{% endif %}
+          {% if hasText %}
+          <div class="content-block__text">
+            {{ block.richText }}
+          </div>
+          {% endif %}
+          {% if link %}<a class="text-link" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+        </div>
+      </article>
+      {% else %}
+      <article class="content-block content-block--text{{ block.headingText or block.eyebrow ? '' : ' content-block--plain' }}" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
+        {% if block.headingText or block.eyebrow %}
+        <div class="content-block__head">
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          {% if block.headingText %}<h2 class="content-block__title" id="{{ anchor }}-title">{{ block.headingText }}</h2>{% endif %}
+        </div>
+        {% endif %}
+        <div class="content-block__body">
+          {% if hasText %}
+          <div class="content-block__text">
+            {{ block.richText }}
+          </div>
+          {% endif %}
+          {% if link %}<a class="text-link" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+        </div>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>

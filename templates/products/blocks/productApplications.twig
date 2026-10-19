@@ -1,0 +1,50 @@
+{# What You Can Print: industry cards in a scrolling row with arrows (design section 4, js/products/product-detail.js).
+   Industries: the ones picked in the block, else automatic = the industries whose Recommended Products include this
+   product. Each card uses the industry's listing image, name and tagline. Left out when there are none.
+   Vars: block, product (the product entry) #}
+{% import '_macros/text' as text %}
+{% set industries = block.applications.with(['featuredImage']).all() %}
+{% if not industries|length %}
+  {% set industries = craft.entries.section('industries').relatedTo({targetElement: product, field: 'industryBuilder.selectedProducts'}).with(['featuredImage']).all() %}
+{% endif %}
+{% set listingPage = craft.entries.section('industriesPage').one() %}
+{% set more = block.ctaLink and block.ctaLink.url ? block.ctaLink : null %}
+{% if industries|length %}
+  <section class="section section--surface pd-apps" aria-labelledby="apps-title-{{ block.id }}">
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          <h2 class="section-title" id="apps-title-{{ block.id }}">{{ text.highlight(block.sectionHeading ?: 'What You [Can Print]') }}</h2>
+          {% if block.sectionLead %}<p class="pd-apps__lead">{{ block.sectionLead|replace({'{name}': product.title}) }}</p>{% endif %}
+        </div>
+        <div class="pd-apps__aside">
+          <div class="industries__nav" data-apps-nav hidden>
+            <button class="industries__arrow" type="button" data-apps-prev aria-label="Previous applications"><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+            <button class="industries__arrow industries__arrow--next" type="button" data-apps-next aria-label="Next applications"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+          </div>
+          {% if more %}
+          <a class="text-link" href="{{ more.url }}"{% if more.target %} target="{{ more.target }}" rel="noopener"{% endif %}>{{ more.label ?: 'View all industries' }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          {% elseif listingPage %}
+          <a class="text-link" href="{{ listingPage.url }}">View all industries <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          {% endif %}
+        </div>
+      </header>
+      <ul class="pd-apps__track" data-apps-track>
+        {% for industry in industries %}
+        {% set image = industry.featuredImage.one() %}
+        <li class="pd-app">
+          <article class="pd-app__inner">
+            {% if image %}<div class="pd-app__media"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async" alt="{{ image.alt }}"></div>{% endif %}
+            <div class="pd-app__body">
+              <h3 class="pd-app__title"><a class="stretched-link" href="{{ industry.url }}">{{ industry.title }}</a></h3>
+              {% if industry.cardTagline %}<p class="pd-app__text">{{ industry.cardTagline }}</p>{% endif %}
+              <span class="pd-app__more" aria-hidden="true">Learn more <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+            </div>
+          </article>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

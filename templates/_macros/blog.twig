@@ -1,0 +1,31 @@
+{# Blog article helpers (templates/blog/) #}
+
+{#
+  A CKEditor table (<figure class="table"><table>…) in the design's markup:
+  <div class="table-wrap" tabindex="0"><table class="data-table"><caption>…</caption>…, with scope="col" on header-row
+  cells and scope="row" on header cells in the body. Other HTML passes through unchanged.
+    html     the rich text
+    caption  optional caption (Data Table block)
+    id       caption id, used by aria-labelledby
+#}
+{%- macro tables(html, caption = null, id = null) -%}
+  {%- set html = (html ?? '')|string -%}
+  {%- if '<table' in html -%}
+    {%- set open = caption
+      ? '<div class="table-wrap" role="region" aria-labelledby="' ~ id ~ '" tabindex="0"><table class="data-table"><caption id="' ~ id ~ '">' ~ caption|e ~ '</caption>'
+      : '<div class="table-wrap" tabindex="0"><table class="data-table">' -%}
+    {%- set html = html
+      |replace('/<figure class="table"[^>]*>\\s*<table[^>]*>/', open)
+      |replace('/<\\/table>\\s*<\\/figure>/', '</table></div>')
+      |replace('/<table>/', open)
+      |replace('/<\\/table>(?!<\\/div>)/', '</table></div>') -%}   {#- a table without CKEditor's <figure> (pasted / source HTML) needs its </div> too -#}
+    {#- header row cells → scope="col"; header cells in the body (row labels) → scope="row" -#}
+    {%- set parts = html|split('</thead>') -%}
+    {%- if parts|length > 1 -%}
+      {%- set html = parts[0]|replace({'<th>': '<th scope="col">'}) ~ '</thead>' ~ parts[1:]|join('</thead>')|replace({'<th>': '<th scope="row">'}) -%}
+    {%- else -%}
+      {%- set html = html|replace({'<th>': '<th scope="row">'}) -%}
+    {%- endif -%}
+  {%- endif -%}
+  {{- html|raw -}}
+{%- endmacro -%}

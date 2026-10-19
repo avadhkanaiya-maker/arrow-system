@@ -1,0 +1,35 @@
+{#
+  /tag/{slug}/ (+ /page/N/): a Blog Tag's posts. Hidden from search engines (noindex), as on the live site.
+#}
+{% extends '_layouts/base' %}
+
+{% paginate craft.entries.section('blog').relatedTo({targetElement: entry, field: 'blogTags'}).with(['featuredImage', 'blogCategories']).limit(10) as pageInfo, posts %}
+{# Craft shows the last page for a page number past the end; the live site answers 404 #}
+{% if craft.app.request.pageNum > max(1, pageInfo.totalPages) %}{% exit 404 %}{% endif %}
+
+{% set blogPage = craft.entries.section('blogPage').one() %}
+{% set pageTitle = entry.title ~ ' - ' ~ siteName %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    canonical: pageInfo.getPageUrl(pageInfo.currentPage),
+    noindex: true,
+    ogType: 'article',
+  } %}
+{% endblock %}
+
+{% block head %}
+  {% include 'blog/_partials/listing-head' %}
+{% endblock %}
+
+{% block content %}
+  {% include 'blog/_partials/listing' with {
+    blogPage: blogPage,
+    eyebrow: 'Tag',
+    heading: entry.title,
+    crumbs: [{title: blogPage.title, url: blogPage.url}, {title: entry.title, url: entry.url}],
+  } %}
+{% endblock %}

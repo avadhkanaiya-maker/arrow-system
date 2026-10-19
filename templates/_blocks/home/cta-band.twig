@@ -1,0 +1,24 @@
+{#
+  J. Sustainable printing CTA (design: index.html, "SUSTAINABLE PRINTING CTA"): maroon band, centred white content.
+  The leaf illustration is a fixed design element: the design's inline SVG (sustainable-premium.svg redrawn in white
+  for the maroon band), so it lives here, not in a field.
+  Fields: Heading ([red] words still work), Intro, Button (white "btn--light") · Anchor ID → the section's id
+  (the Benefit card "Sustainable" links to #sustainable). Vars: block (CTA Band entry)
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+{% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
+{% set titleId = anchor ~ '-title' %}
+<section class="sustain" id="{{ anchor }}" aria-labelledby="{{ titleId }}">
+  <div class="container sustain__inner">
+    <svg class="sustain__icon" viewBox="0 0 128 128" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <g opacity=".7"><path d="M31 48a39 39 0 0 1 61-16M98 49a39 39 0 0 1-15 50M58 103a39 39 0 0 1-31-28"/><path d="m82 19 12 14-17 2M100 87 83 100l-1-19M16 75l10-3 6 16"/></g>
+      <path d="M45 78C29 52 52 36 86 35c-1 29-6 47-28 48-6 0-10-2-13-5z" fill="currentColor" fill-opacity=".14"/>
+      <path d="M37 94c8-20 22-34 43-51M55 62l0-13M64 54l12 1M47 74l18 0"/>
+      <circle cx="91" cy="106" r="5" fill="currentColor" stroke="none"/>
+    </svg>
+    <h2 id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
+    {% if block.sectionLead %}<p>{{ block.sectionLead }}</p>{% endif %}
+    {% if block.ctaLink and block.ctaLink.url %}<a class="btn btn--light btn--lg" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }}</a>{% endif %}
+  </div>
+</section>

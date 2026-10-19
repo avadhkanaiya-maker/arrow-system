@@ -1,0 +1,25 @@
+{#
+  Columns (Pages / industries builder): two columns side by side (stacked on phones), widths from Column Widths, each with
+  its own blocks (any common block, rendered by _builder/, in a text column) and style: plain, white card, maroon panel.
+  Section Settings: Vertical Alignment (top / centre / equal height), Space Above / Below, Background. Only one column
+  filled = one full-width column. Vars: block
+#}
+{% import '_macros/layout' as layout %}
+{% set columns = [
+  {blocks: block.leftColumn.all(), style: block.leftStyle.value ?: 'plain'},
+  {blocks: block.rightColumn.all(), style: block.rightStyle.value ?: 'plain'},
+]|filter(c => c.blocks|length) %}
+{% if columns|length %}
+  <section class="section cols-section{{ layout.sectionClass(block) }}">
+    <div class="container cols cols--{{ columns|length == 2 ? (block.columnsLayout.value ?: '1-1') : 'one' }} cols--align-{{ block.columnsAlign.value ?? null ?: 'top' }}">
+      {% for column in columns %}
+      <div class="cols__col cols__col--{{ column.style }}">
+        {% if column.style == 'panel' %}<span class="dot-grid dot-grid--panel" aria-hidden="true"></span>{% endif %}
+        <div class="prose">
+          {% for b in column.blocks %}{% include '_builder/' ~ b.type.handle ignore missing with { block: b, anchors: {} } only %}{% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

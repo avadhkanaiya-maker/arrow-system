@@ -1,0 +1,140 @@
+{#
+  Blog listing body (design: Arrowsystem_local/blogs/index.html), shared by /blog/, /category/…/ and /tag/…/.
+  Included by blog/_index, blog/_category and blog/_tag with:
+    posts        the paginated posts of this page ({% paginate %} result)
+    pageInfo     the paginate info (pagination links, "Showing 1–10 of N")
+    heading      H1 text; [brackets] = red part
+    eyebrow      small label above the H1
+    lead         paragraph under the H1 (optional)
+    crumbs       breadcrumb items after "Home": [{title, url}], the last one is the current page
+    category     the current Blog Category, or null (marks it in the category filter)
+    search       the search words on /blog/?q=…, or empty (the search box always searches all posts on /blog/)
+  Texts of the sidebar box come from Entries → Blog Page → Sidebar.
+#}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% set blogPage = blogPage ?? craft.entries.section('blogPage').one() %}
+{% set category = category ?? null %}
+{% set search = search ?? '' %}
+{% set allCount = craft.entries.section('blog').count() %}
+{% set latest = craft.entries.section('blog').with(['featuredImage']).limit(3).all() %}
+
+  <section class="page-hero blog-hero" aria-labelledby="page-title">
+    <!-- Decorative illustration: two stacked article cards (echoes the post cards below) -->
+    <svg class="hero-articles" viewBox="0 0 250 132" aria-hidden="true" focusable="false">
+      <g transform="rotate(7 190 66)">
+        <rect x="128" y="10" width="110" height="104" rx="8" fill="#fff" stroke="#EAD5D6"/>
+        <rect x="136" y="18" width="94" height="40" rx="4" fill="#9C2226" fill-opacity=".14"/>
+        <rect x="136" y="66" width="26" height="8" rx="2" fill="#F8EEEE"/>
+        <rect x="136" y="80" width="86" height="5" rx="2.5" fill="#E2E2E2"/>
+        <rect x="136" y="90" width="64" height="5" rx="2.5" fill="#E2E2E2"/>
+      </g>
+      <rect x="40" y="14" width="124" height="112" rx="8" fill="#fff" stroke="#CACACA"/>
+      <rect x="48" y="22" width="108" height="44" rx="4" fill="#9C2226"/>
+      <path d="M48 58l24-18 16 12 14-9 26 17v6a4 4 0 0 1-4 4H52a4 4 0 0 1-4-4z" fill="#fff" fill-opacity=".22"/>
+      <circle cx="138" cy="35" r="5" fill="#fff" fill-opacity=".35"/>
+      <rect x="48" y="73" width="26" height="9" rx="2" fill="#F8EEEE"/>
+      <text x="61" y="79.6" text-anchor="middle" font-family="Inter, sans-serif" font-size="5.5" font-weight="700" letter-spacing=".4" fill="#9C2226">BLOG</text>
+      <rect x="48" y="88" width="100" height="5.5" rx="2.75" fill="#2B2B2B" fill-opacity=".75"/>
+      <rect x="48" y="98" width="76" height="5.5" rx="2.75" fill="#2B2B2B" fill-opacity=".75"/>
+      <rect x="48" y="111" width="34" height="4" rx="2" fill="#9C2226"/>
+      <path d="M86 113h6m-2.5-2.5L92 113l-2.5 2.5" fill="none" stroke="#9C2226" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="26" y="6" width="28" height="12" rx="2.5" fill="#111"/>
+      <text x="40" y="14.2" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" font-weight="700" letter-spacing=".5" fill="#fff">NEW</text>
+    </svg>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          {% for crumb in crumbs %}
+            <li><a href="{{ crumb.url }}"{{ loop.last ? ' aria-current="page"' }}>{{ crumb.title }}</a></li>
+          {% endfor %}
+        </ol>
+      </nav>
+
+      <div class="blog-hero__row">
+        <div class="blog-hero__intro">
+          {% if eyebrow ?? null %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+          <h1 class="page-hero__title" id="page-title">{{ text.highlight(heading) }}</h1>
+          {% if lead ?? null %}<p class="page-hero__lead">{{ lead }}</p>{% endif %}
+        </div>
+
+        <div class="blog-hero__aside">
+          <form class="blog-search" role="search" action="{{ blogPage.url }}" method="get">
+            <label class="visually-hidden" for="blog-search-input">Search articles</label>
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="blog-search-input" type="search" name="q" value="{{ search }}" placeholder="Search articles" autocomplete="off">
+            <button class="btn btn--primary" type="submit">Search</button>
+          </form>
+          {% set newest = latest|first %}
+          <p class="blog-hero__meta"><span><strong>{{ allCount }}</strong> articles</span>{% if newest %}<span>Latest <time datetime="{{ newest.postDate|date('Y-m-d') }}">{{ newest.postDate|date('M j, Y') }}</time></span>{% endif %}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface blog-body" aria-labelledby="latest-title">
+    <h2 class="visually-hidden" id="latest-title">Latest articles</h2>
+    <div class="container">
+
+      <div class="blog-toolbar">
+        {% include 'blog/_partials/category-filter' with { current: category, allCount: allCount } only %}
+        <p class="blog-toolbar__count" role="status">
+          {%- if search -%}
+            {%- if pageInfo.total -%}<strong>{{ pageInfo.total }}</strong> article{{ pageInfo.total != 1 ? 's' }} for “{{ search }}”{% if pageInfo.totalPages > 1 %} ({{ pageInfo.first }}–{{ pageInfo.last }}){% endif %}{% else %}No articles found for “{{ search }}”{% endif %} · <a href="{{ blogPage.url }}">Clear search</a>
+          {%- elseif pageInfo.total -%}
+            Showing <strong>{{ pageInfo.first }}–{{ pageInfo.last }}</strong> of {{ pageInfo.total }} article{{ pageInfo.total != 1 ? 's' }}
+          {%- else -%}
+            No articles yet
+          {%- endif -%}
+        </p>
+      </div>
+
+      <div class="blog-layout">
+        <div class="blog-main">
+          <ul class="post-tiles">
+          {% for post in posts %}
+            {% include '_components/post-card' with { post: post, feature: loop.first and pageInfo.currentPage == 1 and not search } only %}
+          {% endfor %}
+          </ul>
+          {% if search and not pageInfo.total %}
+            <p class="blog-noresults">Try other words, check the spelling, or <a href="{{ blogPage.url }}">browse all articles</a>.</p>
+          {% endif %}
+
+          {% if pageInfo.totalPages > 1 %}
+            {% include 'blog/_partials/pagination' with { pageInfo: pageInfo } only %}
+          {% endif %}
+        </div>
+
+        <aside class="blog-sidebar" aria-label="Blog sidebar">
+          {# TODO(product categories migration): links to the live product category pages until those exist in Craft #}
+          <section class="side-card" aria-labelledby="side-cats-title">
+            <h2 class="side-card__title" id="side-cats-title">Product Categories</h2>
+            <ul class="side-cats">
+              <li><a class="side-cats__link" href="https://arrsys.com/all-products/digital-label-printers/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-printer"/></svg></span>Digital Label Printers<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+              <li><a class="side-cats__link" href="https://arrsys.com/all-products/fume-extraction/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-refresh"/></svg></span>Fume Extraction<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+              <li><a class="side-cats__link" href="https://arrsys.com/all-products/label-finishers/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-scissors"/></svg></span>Label Finishers<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+              <li><a class="side-cats__link" href="https://arrsys.com/all-products/plotters/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>Gerber Plotters<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+            </ul>
+          </section>
+
+          <section class="side-card" aria-labelledby="side-recent-title">
+            <h2 class="side-card__title" id="side-recent-title">Recent Blog Posts</h2>
+            <ul class="side-recent">
+              {% for post in latest %}
+                {% set thumb = post.featuredImage.one() %}
+                <li class="side-recent__item">
+                  <a class="side-recent__link" href="{{ post.url }}">
+                    <span class="side-recent__thumb">{% if thumb %}<img src="{{ thumb.getUrl({width: 640, height: 360, mode: 'crop'}) }}" width="640" height="360" loading="lazy" alt="">{% endif %}</span>
+                    <span class="side-recent__text"><span class="side-recent__title">{{ text.plain(post.title) }}</span><time datetime="{{ post.postDate|date('Y-m-d') }}">{{ post.postDate|date('M j, Y') }}</time></span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+
+          {% include 'blog/_partials/side-cta' with { blogPage: blogPage, idPrefix: 'side' } only %}
+        </aside>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,94 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A photo grid that opens in a lightbox.'
+fieldLayouts:
+  aa4b275c-4900-4b79-9c41-c341f038fdbb:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e73e9c89-8fcf-43e3-889e-cdcf2cb1ef78
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: '[brackets] = red.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 94ab3ad8-e5cd-4569-a0ef-59d4457186a6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c9716b5-7de2-45b7-b2e5-7ee937bb273b # Images
+            handle: null
+            instructions: null
+            label: Photos
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1a20fbc5-adc7-45c5-8868-7c21926e6695
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cb4c0dfa-a16c-470e-b120-4f1522bbbdf2
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 5865838e-d775-4756-930d-a16c0cd48a56
+        userCondition: null
+    thumbFieldKey: null
+handle: photoGallery
+hasTitleField: false
+icon: images
+name: 'Photo Gallery'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

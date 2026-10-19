@@ -1,0 +1,219 @@
+fieldLayouts:
+  119f405f-33cd-421d-ae9b-36a5fd1e1b3c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 910f8d08-fa12-41d3-8fc9-df2b1636f21f # Logo
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dc740c2c-71a5-4f97-a496-53f6f82c5fe5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: ebc55264-1f5f-49e0-86ae-6ab767c1e4fd # Logo Alt Text
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 76f7ca8e-7a0b-4c76-ba83-74bf8b0d450c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 26f00ef3-5144-45ce-8180-2e1bd5dab42a # Favicon
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 68b2cab9-34ee-4c21-b632-9cf3b90a996d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 4324bf77-8b8a-40d1-8758-fd26b223c037 # Tagline
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8642400f-0378-41f4-8733-84734fa3658d
+            userCondition: null
+            warning: null
+            width: 100
+        name: Brand
+        uid: 8fa591ff-911f-4406-94ae-8931dc49a758
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: ef62ce36-1c75-41b7-9cf2-70f67569f670 # Address
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e6f26c0b-acff-45d0-b721-df960ba1050f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5478b72c-864d-42de-89ce-e5d3eb52759b # Toll-free Phone
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c75e4d20-5baa-4146-9f3f-256b7c154e67
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 704585f6-ce27-4737-aff7-090d130125a7 # Direct Phone
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1ff22f6d-9ef3-4760-9950-dc4142139ca1
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: aed81651-8b94-4d06-8cbe-f894ceef91f3 # Sales Email
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 831ca377-d2b8-4205-9772-07b6532bbc9f
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contact
+        uid: 5684a633-cf1c-4b1b-96aa-30f9dac7f4c6
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1cf537dd-80ca-4d3d-a774-ccd2e5e23b09 # Request a Quote Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3bfc8b37-e0f6-4649-8834-0c4a0c1ad6dd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3de74144-5e32-4f98-a9cb-e138a84a3776 # Free Sample Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a536a797-b6a2-42b3-997a-1fadc36e8883
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Calls to action'
+        uid: a49667ef-31a4-4271-85a1-ccbd4f4bea79
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7c8145c6-3331-456d-88f9-301975abb3a7 # Social Links
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ae7d1331-37b1-4fc0-a8f5-b3ab30ba4876
+            userCondition: null
+            warning: null
+            width: 100
+        name: Social
+        uid: 1b105574-21f6-4b11-ab20-d90c928ea706
+        userCondition: null
+    thumbFieldKey: null
+handle: siteSettings
+name: 'Site Settings'
+sortOrder: 1

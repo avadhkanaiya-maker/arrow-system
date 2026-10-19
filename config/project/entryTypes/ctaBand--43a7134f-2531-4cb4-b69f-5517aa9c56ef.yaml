@@ -1,0 +1,100 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  e7c21f67-af6c-4d60-8f26-35a07f1e740e:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:29:35+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4a5aa483-f63d-4ccc-9b36-afad4074eddf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:29:35+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6645595d-9692-473d-81d5-5893ee7ce3d9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-13T06:29:35+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 929a2ec4-9dc5-4514-8923-798dd72f7d6b
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 9bda9176-56ec-46a6-aa50-46db79370f8f
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-13T06:29:35+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 62f94aad-e16a-4706-98dd-7ba43787d67b
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: 82c3d36a-6d9d-40a6-822e-e10924eff341
+        userCondition: null
+    thumbFieldKey: null
+handle: ctaBand
+hasTitleField: false
+icon: bullhorn
+name: 'CTA Band'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: 'J · Sustainable printing CTA'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

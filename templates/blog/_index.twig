@@ -1,0 +1,56 @@
+{#
+  /blog/ and /blog/page/N/ (Blog Page single; design: Arrowsystem_local/blogs/index.html).
+  10 posts per page, newest first; the newest post is the large first card on page 1.
+  Search: /blog/?q=… lists the matching posts (Craft's search index: title, lead, the Article Body text), best match
+  first, same grid and pagination; search pages are noindex.
+  Texts: Entries → Blog Page. Posts: Entries → Blog.
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/text' as text %}
+
+{% set search = (craft.app.request.getQueryParam('q') ?? '')|string|trim %}
+{% set query = craft.entries.section('blog').with(['featuredImage', 'blogCategories']).limit(10) %}
+{% if search %}{% set query = query.search(search).orderBy('score') %}{% endif %}
+{% paginate query as pageInfo, posts %}
+{# Craft shows the last page for a page number past the end; the live site answers 404 #}
+{% if craft.app.request.pageNum > max(1, pageInfo.totalPages) %}{% exit 404 %}{% endif %}
+
+{% set pageTitle = search ? 'Search: “' ~ search ~ '” - ' ~ entry.title ~ ' - ' ~ siteName : (entry.seoTitle ?: entry.title ~ ' - ' ~ siteName) %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% set canonical = pageInfo.getPageUrl(pageInfo.currentPage) %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: canonical,
+    noindex: entry.seoNoIndex or search,
+    ogType: 'website',
+    image: entry.socialImage.one(),
+    prev: pageInfo.prevUrl,
+    next: pageInfo.nextUrl,
+    schema: [
+      {'@type': 'CollectionPage', '@id': canonical ~ '#webpage', url: canonical, name: pageTitle, inLanguage: currentSite.language},
+      {'@type': 'BreadcrumbList', itemListElement: [
+        {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl},
+        {'@type': 'ListItem', position: 2, name: entry.title, item: entry.url},
+      ]},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  {% include 'blog/_partials/listing-head' %}
+{% endblock %}
+
+{% block content %}
+  {% include 'blog/_partials/listing' with {
+    blogPage: entry,
+    eyebrow: entry.eyebrow,
+    heading: entry.sectionHeading ?: entry.title,
+    lead: entry.sectionLead,
+    crumbs: [{title: entry.title, url: entry.url}],
+    search: search,
+  } %}
+{% endblock %}

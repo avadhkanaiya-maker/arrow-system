@@ -1,0 +1,13 @@
+{#
+  The red closing box of an article (design: aside.post-cta). From a Call to Action block, or the default one
+  (Entries → Blog Page → Default CTA).  heading, body (paragraphs split by an empty line), link (Link field), id
+#}
+{% import '_macros/links' as links %}
+<aside class="post-cta" aria-labelledby="{{ id }}">
+  <span class="dot-grid dot-grid--post-cta" aria-hidden="true"></span>
+  <h2 class="post-cta__title" id="{{ id }}">{{ heading }}</h2>
+  {% for para in (body ?? '')|split("\n\n")|map(p => p|trim)|filter(p => p) %}
+  <p>{{ para|nl2br }}</p>
+  {% endfor %}
+  {% if link and link.url %}<a class="btn btn--light btn--lg" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+</aside>

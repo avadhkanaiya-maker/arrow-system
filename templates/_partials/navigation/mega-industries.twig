@@ -1,0 +1,42 @@
+{#
+  Main Menu item with Menu Style "Industries mega menu":
+    level 2 Group / Column items → labelled groups; other level 2 items → "View all" link under the last group
+    level 3 → industry links (icon: chosen on the item, else the linked entry's Menu Icon)
+  The help box comes from the Main Menu's own fields: Menu content → Industries box.
+#}
+{% import '_macros/links' as links %}
+{% import '_macros/nav' as nav %}
+{% set children = item.children.all() %}
+{% set viewAll = (children|filter(n => not n.isGroupColumn()))|first %}
+<li class="nav-item nav-item--mega{{ isLast ? ' nav-item--end' }}" data-nav-item>
+  <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="{{ panelId }}" data-nav-trigger>
+    {{ item.title }} <svg class="icon nav-trigger__chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+  </button>
+  <div class="nav-panel nav-panel--mega" id="{{ panelId }}">
+    <div class="mega mega--industries container">
+      {% set groups = children|filter(n => n.isGroupColumn()) %}
+      {% for group in groups %}
+        {% set labelId = 'ind-' ~ (group.title|kebab) %}
+        <div class="mega__group">
+          <p class="mega__label" id="{{ labelId }}">{{ group.title }}</p>
+          <ul class="mega__links mega__links--icons" aria-labelledby="{{ labelId }}">
+            {% for node in group.children.all() %}
+              {% set icon = nav.icon(node)|trim %}
+              <li><a {{ nav.attrs(node) }}>{% if icon %}<svg class="icon" aria-hidden="true"><use href="#i-{{ icon }}"/></svg>{% endif %}{{ node.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% if loop.last and viewAll %}
+            <a class="mega__all" {{ nav.attrs(viewAll) }}>{{ viewAll.title }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% if menu and menu.helpTitle %}
+        <aside class="mega__help" aria-label="Help choosing equipment">
+          <p class="mega__feature-title">{{ menu.helpTitle }}</p>
+          {% if menu.helpText %}<p class="mega__feature-text">{{ menu.helpText }}</p>{% endif %}
+          {% if menu.helpLink %}<a class="btn btn--outline btn--sm" {{ links.attrs(menu.helpLink) }}>{{ menu.helpLink.label }}</a>{% endif %}
+        </aside>
+      {% endif %}
+    </div>
+  </div>
+</li>

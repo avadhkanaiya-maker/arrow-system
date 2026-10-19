@@ -1,0 +1,15 @@
+{# ul.downloads, one row per Download (Label, File, Note). Vars: items #}
+            <ul class="downloads">
+              {% for item in items %}
+              {% set file = item.downloadFile.one() %}
+              {% if file %}
+              <li>
+                <a class="download" href="{{ file.url }}"{% if item.caption|lower in ['español', 'spanish'] %} hreflang="es"{% endif %}>
+                  <span class="download__icon" aria-hidden="true"><svg class="icon"><use href="#i-file"/></svg><span>{{ file.extension|upper }}</span></span>
+                  <span class="download__text"><strong>{{ item.headingText }}</strong>{% if item.caption %}<span>{{ item.caption }}</span>{% endif %}</span>
+                  <svg class="icon download__arrow" aria-hidden="true"><use href="#i-download"/></svg>
+                </a>
+              </li>
+              {% endif %}
+              {% endfor %}
+            </ul>

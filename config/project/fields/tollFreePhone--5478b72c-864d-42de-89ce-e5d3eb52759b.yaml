@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: tollFreePhone
+instructions: 'As displayed, e.g. 1-888-697-2749. The tap-to-call link is generated from it.'
+name: 'Toll-free Phone'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

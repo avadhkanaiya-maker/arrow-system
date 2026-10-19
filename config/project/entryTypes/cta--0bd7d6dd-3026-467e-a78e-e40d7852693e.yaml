@@ -1,0 +1,77 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'The red closing box with a button'
+fieldLayouts:
+  e102911b-02e4-4c82-9fa9-1f78a2491d23:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0b27468b-ea05-46f4-92f9-4e618131d1f7 # CTA Heading
+            handle: null
+            instructions: null
+            label: Heading
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b104e7f1-9a07-4562-a21c-bdf08403d620
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8cbe334a-5712-4c17-b3be-40923a1c8aa0 # CTA Text
+            handle: null
+            instructions: null
+            label: Text
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 247bc46f-ce5b-42d4-8097-e64eb71be7e0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: null
+            label: Button
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6450daa2-edeb-4b61-81e2-930e3a3a8793
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 93e54804-8d2c-49ae-bf48-acd30ec838d4
+        userCondition: null
+    thumbFieldKey: null
+handle: cta
+hasTitleField: false
+icon: rocket
+name: 'Call to Action'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{ctaHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

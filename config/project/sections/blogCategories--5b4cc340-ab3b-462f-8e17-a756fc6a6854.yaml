@@ -1,0 +1,24 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: aa9d048f-d09d-4ce3-85cc-ef9decb870e1 # Blog Category
+handle: blogCategories
+maxAuthors: 1
+minAuthors: 1
+name: 'Blog Categories'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: blog/_category
+    uriFormat: "{{ object.parent ? object.parent.uri ~ '/' : 'category/' }}{{ object.slug }}"
+structure:
+  maxLevels: 3
+  uid: 86c78db3-55b0-46f9-b163-5e8cecc4e809
+type: structure

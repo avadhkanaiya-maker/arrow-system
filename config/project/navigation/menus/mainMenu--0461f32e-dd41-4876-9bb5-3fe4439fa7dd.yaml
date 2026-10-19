@@ -1,0 +1,389 @@
+defaultEnabledForPropagatedSites: true
+defaultPlacement: end
+fieldLayouts:
+  d460ba46-ec51-4ca1-81d2-7cca8020685b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: 'Text visitors see. For a page or product, it follows that page’s title unless you change it here.'
+            label: Label
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            uid: 6e408d0c-0f0b-4e69-8599-dda8b059164d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            elementCondition: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: verbb\navigation\fieldlayoutelements\NodeTypeElements
+            uid: bc2f983c-7c3d-48c0-8542-6c755579dde8
+            userCondition: null
+            warning: null
+          -
+            attribute: newWindow
+            dateAdded: null
+            elementCondition: null
+            id: null
+            instructions: null
+            label: null
+            mandatory: false
+            orientation: null
+            requirable: true
+            required: false
+            tip: null
+            translatable: false
+            type: verbb\navigation\fieldlayoutelements\NewWindowField
+            uid: d98aaba2-b7ef-421b-bb7c-803490599cce
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: eee3fe08-6e6f-4b1a-94b2-6bb36c7af7d3
+                  value: '1'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 6fc3eb31-d21a-43a8-af39-ed3916f72a2a # Menu Style
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0680a9b6-6f24-4f14-bc18-337c106df1b4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: 4e298810-bbec-4ee6-a323-5c54eb489b5d
+                  value: '2'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: b2ac1849-b531-44c4-bc8d-c2a286528fec # Partner group
+            handle: null
+            instructions: 'Products menu groups: style this heading as the separate “Partner Brands” group.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 25310888-bbcb-4ca2-9a37-98cbfafa3110
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: e45585a3-0776-47a7-b00e-9f59f5a68a7e
+                  value: '3'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: ae05869d-2cd8-4e20-8b22-83b99c725ce1 # Panel Title
+            handle: null
+            instructions: 'Products menu categories: heading inside the open panel, e.g. “ArrowJet digital label printers”. Optional.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3541b271-07cb-4ac9-999b-78c81b63ba72
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: 1112c83f-136a-4fa5-971e-a50376985b36
+                  value: '3'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 4aa2e10e-5601-4b48-888b-b506fd4696a0 # View All Text
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 95dae721-9ebf-461d-92fe-bdd4e80c6937
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: cbc71e91-fcd2-42f8-b8f8-404cb40a0b5e
+                  value: '3'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 331d7548-f88e-47fa-b1b7-5bc3af0e3d50 # Menu Icon
+            handle: null
+            instructions: 'Industries menu: line icon before the name. Leave empty to use the industry’s own icon.'
+            label: Icon
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2214a206-4983-48df-acfb-98cfdee3420d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: 3e313db1-47ea-4cb4-868a-6b89e4f041f6
+                  value: '4'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 83b9bca3-2c30-4135-874b-14101aad0437 # Description
+            handle: null
+            instructions: 'Grey line under the name. Leave empty to use the product’s Menu Description.'
+            label: 'Second Line'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c39f0b4c-a952-42e8-bdf7-a84250968519
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Menu item'
+        uid: 4052bcd5-3b38-4b2b-b414-53c56077cbea
+        userCondition: null
+    thumbFieldKey: null
+handle: mainMenu
+instructions: 'Top menu in the header (desktop and mobile). Level 1: menu items. Under a mega menu, level 2: group headings, level 3: categories or industries, level 4: products.'
+maxNodes: null
+menuFieldLayouts:
+  42f558eb-7370-42de-9b59-bc54c4ce0544:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1c2748fc-6dc8-4720-80e3-fad0a83163de # Featured Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 68dcd1e3-4663-4a23-a1c5-a04fbcf94b11
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 6b4c568b-508c-4466-bb1c-037b61e4e6b4 # Featured Title
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: adb6d356-6550-4b94-841e-9df5acf2a746
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5f9d7dc7-7c28-491b-b2b3-e4c6605eaf88 # Featured Text
+            handle: null
+            instructions: 'Leave empty to use the product’s Card Tagline.'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 29689b7c-464d-4f07-bc9f-6beede3147ad
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 23f78dd7-9116-413c-a91f-65e760a7bcb6 # Featured Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d7df558a-0ac5-4920-af4c-49e3f8523c64
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Products box'
+        uid: 15573ab7-accc-4dbb-9224-b905421ad247
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f05d48db-4c92-4585-a705-0f84d3a43e81 # Help Box Title
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f005a118-f31c-42c8-a2b2-7b65e5539b7b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fd7d5248-e909-48c5-9758-673cc8499ef8 # Help Box Text
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7a1f8348-8e49-44e6-8a21-07b0265b48db
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 39ac01db-5a9c-4da2-8949-c547207a56d6 # Help Box Button
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f499fbdf-ab69-49ff-95b4-701413bb18a9
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Industries box'
+        uid: 33241bc8-bb8b-4a65-af45-6034b4a6a935
+        userCondition: null
+    thumbFieldKey: null
+name: 'Main Menu'
+propagationMethod: all
+showSiteMenu: true
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabled: true
+sortOrder: 1
+structure:
+  maxLevels: 4
+  uid: 225d973e-092b-4ca5-92cb-76ba06f49550
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

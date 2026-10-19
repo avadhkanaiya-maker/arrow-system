@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: emailPlaceholder
+instructions: 'Grey text inside the email box, e.g. “Your email”.'
+name: 'Email Placeholder'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

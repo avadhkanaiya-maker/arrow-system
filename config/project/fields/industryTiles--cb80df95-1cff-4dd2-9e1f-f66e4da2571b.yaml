@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: industryTiles
+instructions: 'The carousel tiles, in order (the design has 6).'
+name: Tiles
+searchable: false
+settings:
+  createButtonLabel: 'Add tile'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 01ec555c-b8a4-4638-9aa5-fc3066925e9e # Industry Tile
+  includeTableView: false
+  maxEntries: null
+  minEntries: 1
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

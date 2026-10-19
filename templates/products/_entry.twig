@@ -1,0 +1,269 @@
+{#
+  A product page: /product/{slug}/ (as live). Design: Arrowsystem/digital-label-printers/product-detail.html (client prototype, 2026-10-14)
+    1. Header: breadcrumb (Home › Products › main category › product); gallery (Main Image + Gallery photos, their Caption
+       as the label, then the first Video block set to Show In "Header" as the last thumbnail) | small heading, name,
+       Subtitle (red), Intro (the description), Header Specs (4 tiles), Request a Quote / Request a Sample (Site Settings
+       links), quick links (Download … opens the first Downloads tab / block, phone).
+    2. The Page Builder (productBuilder) blocks, top to bottom, each its own full-width section: Stats Strip (Globals →
+       Stats Strip), Tabs (Highlights / Specifications / Downloads / text), What You Can Print (industry cards),
+       Specifications, Downloads and Video blocks (products/blocks/<type>.twig), and the common blocks shared with the
+       blog and industries (_builder/: consecutive ones share one white panel, styled by blog-detail.css).
+       Without JS every tab panel and gallery slide shows in order (js/products/product-detail.js).
+    3. Related: the Related Products picked on the entry, else other products in the main category (max 3)
+    4. Help band (maroon): phone + quote link from Site Settings
+  The main category is the first one in Categories (its name in sentence case in the small headings, as the design). Styles: css/products/{digital-label-printers,product-detail}.css.
+  SEO: Product + BreadcrumbList (+ VideoObject) schema; og:type product; Robots (advanced) overrides robots (as live).
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+
+{% set category = entry.productCategories.one() %}
+{% set categoryName = category ? (category.headingText ?: category.title) : null %}
+{% set categoryUrl = category ? (category.url ?: (category.ctaLink and category.ctaLink.url ? category.ctaLink.url : null)) : null %}
+{% set image = entry.mediaImage.one() ?? entry.featuredImage.one() %}
+{% set blocks = entry.productBuilder.all() %}
+{# Video blocks shown in the header (Show In: Header, the default) vs the blocks below it #}
+{% set headerVideos = blocks|filter(b => b.type.handle == 'productVideo' and (b.placement.value ?: 'header') == 'header') %}
+{% set pageBlocks = blocks|filter(b => not (b.type.handle == 'productVideo' and (b.placement.value ?: 'header') == 'header')) %}
+{# Consecutive common blocks (the page-builder blocks shared with the blog, _builder/) share one white panel #}
+{% set own = ['tabsBlock', 'specsBlock', 'downloadsBlock', 'productVideo', 'statsStrip', 'productApplications'] %}
+{% set runs = [] %}
+{% for block in pageBlocks %}
+  {% set last = runs|last %}
+  {% if block.type.handle not in own and last and last.common %}
+    {% set runs = runs|slice(0, runs|length - 1)|merge([last|merge({blocks: last.blocks|merge([block])})]) %}
+  {% else %}
+    {% set runs = runs|merge([{common: block.type.handle not in own, blocks: [block]}]) %}
+  {% endif %}
+{% endfor %}
+{% set phone = siteSettings.tollFreePhone ?? null %}
+{% set quote = siteSettings.quoteLink ?? null %}
+{% set sample = siteSettings.sampleLink ?? null %}
+{% set photos = (image ? [image] : [])|merge(entry.gallery.all()) %}
+{% set headerVideo = headerVideos|first %}
+{% set headerVideoId = headerVideo ? text.youtubeId(headerVideo.videoUrl)|trim : '' %}
+{% set related = entry.relatedProducts.with(['featuredImage', 'mediaImage']).all() %}
+{% if not related|length and category %}
+  {% set related = craft.entries.section('products').relatedTo({targetElement: category, field: 'productCategories'}).id(['not', entry.id]).with(['featuredImage', 'mediaImage']).limit(3).all() %}
+{% endif %}
+{% set isPrinter = category and 'printer' in category.slug %}
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+
+{# Tab ids from the tab titles, unique on the page (as the design: tab-overview / overview); a repeated title gets a number.
+   Also: the "Download …" quick link (the first Downloads tab, else the first Downloads block) and the video for SEO. #}
+{% set tabSets = {} %}
+{% set tabIds = {} %}
+{% set brochure = null %}
+{% set seoVideo = null %}
+{% for block in blocks %}
+  {% if block.type.handle == 'tabsBlock' %}
+    {% set tabs = block.productTabs.all() %}
+    {% set tabSets = tabSets|merge({('b' ~ block.id): tabs}) %}
+    {% for tab in tabs %}
+      {% set id = tab.headingText|kebab ?: 'tab' %}
+      {% set id = id in tabIds ? id ~ '-' ~ tab.id : id %}
+      {% set tabIds = tabIds|merge({('t' ~ tab.id): id}) %}
+      {% if not brochure and tab.type.handle == 'downloadsTab' %}{% set brochure = {label: tab.headingText, attrs: 'href="#details" data-open-tab="tab-' ~ id ~ '"'} %}{% endif %}
+    {% endfor %}
+  {% elseif block.type.handle == 'downloadsBlock' and not brochure %}
+    {% set brochure = {label: block.headingText ?: 'Brochure', attrs: 'href="#block-' ~ block.id ~ '"'} %}
+  {% elseif block.type.handle == 'productVideo' and not seoVideo %}
+    {% set seoVideo = block %}
+  {% endif %}
+{% endfor %}
+{% set videoId = seoVideo ? text.youtubeId(seoVideo.videoUrl)|trim : '' %}
+{% set poster = seoVideo ? seoVideo.videoPoster.one() : null %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% set social = entry.socialImage.one() ?? image %}
+  {% set crumbs = [{'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl}, {'@type': 'ListItem', position: 2, name: 'Products', item: 'https://arrsys.com/all-products/'}] %}
+  {% if category %}{% set crumbs = crumbs|merge([{'@type': 'ListItem', position: 3, name: categoryName}|merge(categoryUrl ? {item: categoryUrl} : {})]) %}{% endif %}
+  {% set crumbs = crumbs|merge([{'@type': 'ListItem', position: crumbs|length + 1, name: entry.title, item: entry.url}]) %}
+  {% set product = {'@type': 'Product', '@id': entry.url ~ '#product', name: entry.title, url: entry.url,
+    description: entry.seoDescription ?: entry.cardTagline ?: entry.subheading} %}
+  {% if image %}{% set product = product|merge({image: image.url}) %}{% endif %}
+  {% if entry.sku %}{% set product = product|merge({sku: entry.sku}) %}{% endif %}
+  {% if entry.brand.value %}{% set product = product|merge({brand: {'@type': 'Brand', name: entry.brand.label}}) %}{% endif %}
+  {% if category %}{% set product = product|merge({category: category.title}) %}{% endif %}
+  {% set schema = [product, {'@type': 'BreadcrumbList', '@id': entry.url ~ '#breadcrumb', itemListElement: crumbs}] %}
+  {% if videoId %}
+    {% set schema = schema|merge([{'@type': 'VideoObject', name: seoVideo.videoCaption ?: entry.title, description: entry.seoDescription ?: entry.subheading ?: entry.title,
+      thumbnailUrl: poster ? poster.url : 'https://i.ytimg.com/vi/' ~ videoId ~ '/hqdefault.jpg', uploadDate: entry.postDate|atom,
+      embedUrl: 'https://www.youtube.com/embed/' ~ videoId}]) %}
+  {% endif %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.seoCanonical ? url(entry.seoCanonical) : entry.url,
+    noindex: entry.seoNoIndex,
+    robots: entry.seoRobots,
+    ogType: 'product',
+    image: social,
+    extraMeta: videoId ? [{property: 'og:video', content: 'https://www.youtube.com/embed/' ~ videoId}] : [],
+    schema: schema,
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/products/digital-label-printers.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/css/products/product-detail.css') }}">
+  {% if runs|filter(r => r.common)|length %}<link rel="stylesheet" href="{{ url('assets/css/blog-detail.css') }}">{% endif %}
+  <script src="{{ url('assets/js/products/product-detail.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <!-- ============ 1. PRODUCT HEADER: gallery | name, description, key specs, actions ============ -->
+  <section class="page-hero pd-hero" aria-labelledby="page-title">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          <li><a href="https://arrsys.com/all-products/">Products</a></li>
+          {% if category %}<li>{% if categoryUrl %}<a href="{{ categoryUrl }}">{{ categoryName }}</a>{% else %}{{ categoryName }}{% endif %}</li>{% endif %}
+          <li><a href="{{ entry.url }}" aria-current="page">{{ entry.title }}</a></li>
+        </ol>
+      </nav>
+
+      <div class="pd-hero__grid">
+        {% if photos|length or headerVideoId|length == 11 %}
+        {# Gallery: one slide per photo, then the header video. Without JS every slide shows in order and the thumbnails stay hidden. #}
+        <div class="pd-gallery" data-gallery>
+          {% for photo in photos %}
+          <figure class="pd-media" id="pd-slide-{{ loop.index }}">
+            <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
+            <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" {{ loop.first ? 'fetchpriority="high"' : 'loading="lazy"' }} alt="{{ photo.alt ?: entry.title ~ (photo.caption ? ', ' ~ photo.caption|lower) }}">
+            {% if photo.caption %}<figcaption class="pd-media__label">{{ photo.caption }}</figcaption>{% endif %}
+          </figure>
+          {% endfor %}
+          {% if headerVideoId|length == 11 %}
+          {% set poster = headerVideo.videoPoster.one() %}
+          {% set posterUrl = poster ? poster.url : 'https://i.ytimg.com/vi/' ~ headerVideoId ~ '/hqdefault.jpg' %}
+          <div class="pd-media pd-media--video" id="pd-slide-{{ photos|length + 1 }}">
+            <div class="video" data-video="{{ headerVideoId }}">
+              <img src="{{ posterUrl }}" width="{{ poster.width ?? 480 }}" height="{{ poster.height ?? 360 }}" loading="lazy" alt="">
+              <button class="video__play" type="button" data-video-play>
+                <span class="video__icon" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+                <span class="video__label">Play video<span class="visually-hidden">: {{ (headerVideo.videoCaption ?: entry.title)|replace({' | ': ', '}) }}</span></span>
+              </button>
+            </div>
+          </div>
+          {% endif %}
+          <div class="pd-thumbs" role="group" aria-label="Product images" data-gallery-thumbs hidden>
+            {% for photo in photos %}
+            <button class="pd-thumb" type="button" aria-controls="pd-slide-{{ loop.index }}" aria-pressed="{{ loop.first ? 'true' : 'false' }}" aria-label="{{ photo.caption ?: 'Photo ' ~ loop.index }}" data-gallery-thumb>
+              <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}"{% if not loop.first %} loading="lazy"{% endif %} alt="">
+            </button>
+            {% endfor %}
+            {% if headerVideoId|length == 11 %}
+            <button class="pd-thumb pd-thumb--video" type="button" aria-controls="pd-slide-{{ photos|length + 1 }}" aria-pressed="{{ photos|length ? 'false' : 'true' }}" aria-label="Product video" data-gallery-thumb>
+              <img src="{{ posterUrl }}" width="{{ poster.width ?? 480 }}" height="{{ poster.height ?? 360 }}" loading="lazy" alt="">
+              <span class="pd-thumb__play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="pd-hero__body">
+          {% if entry.eyebrow or category %}<p class="eyebrow">{{ entry.eyebrow ?: category.title|lower|capitalize }}</p>{% endif %}
+          <h1 class="pd-hero__title" id="page-title">{{ entry.title }}</h1>
+          {% if entry.subheading %}<p class="pd-hero__subtitle">{{ entry.subheading }}</p>{% endif %}
+          {% if (entry.richText ?? '')|striptags|trim %}
+          <div class="pd-hero__intro rich-text">
+            {{ entry.richText }}
+          </div>
+          {% endif %}
+          {% set keySpecs = (entry.headerSpecs ?? [])|filter(row => row.value|trim) %}
+          {% if keySpecs|length %}
+          <dl class="pd-keyspecs">
+            {% for row in keySpecs %}
+            <div><dt>{{ row.label }}{% if row.note %} <span>{{ row.note }}</span>{% endif %}</dt><dd>{% if row.icon %}<svg class="icon" aria-hidden="true"><use href="#i-{{ row.icon }}"/></svg>{% endif %}<strong>{{ row.value }}</strong></dd></div>
+            {% endfor %}
+          </dl>
+          {% endif %}
+          <div class="btn-row pd-hero__actions">
+            <a class="btn btn--primary btn--lg" {{ links.attrs(quote, 'Quote page not set (Site Settings)') }}>Request a Quote</a>
+            <a class="btn btn--outline btn--lg" {{ links.attrs(sample, 'Sample page not set (Site Settings)') }}>Request a Sample</a>
+          </div>
+          {% if brochure or phone %}
+          <ul class="pd-quicklinks">
+            {% if brochure %}<li><a {{ brochure.attrs|raw }}><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download {{ brochure.label }}</a></li>{% endif %}
+            {% if phone %}<li><a href="tel:{{ links.tel(phone) }}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Talk to a Specialist</a></li>{% endif %}
+          </ul>
+          {% endif %}
+          {% for block in headerVideos|slice(1) %}
+          {% include 'products/blocks/productVideo' with { block: block } only %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. THE PAGE BUILDER: each block (or run of common blocks) is a full-width section ============ -->
+  {% set detailsId = 'details' %}
+  {% for run in runs %}
+  {% set block = run.blocks[0] %}
+  {% if run.common %}
+  <section class="section pd-details">
+    <div class="container">
+      <div class="pd-block"><div class="prose">
+        {% for block in run.blocks %}{% include '_builder/' ~ block.type.handle ignore missing with { block: block, anchors: {} } only %}{% endfor %}
+      </div></div>
+    </div>
+  </section>
+  {% elseif block.type.handle == 'statsStrip' %}
+  {% include '_partials/stats-strip' %}
+  {% elseif block.type.handle == 'productApplications' %}
+  {% include 'products/blocks/productApplications' with { block: block, product: entry } only %}
+  {% else %}
+  <section class="section pd-details"{% if block.type.handle == 'tabsBlock' and detailsId %} id="{{ detailsId }}" aria-labelledby="details-title"{% endif %}>
+    <div class="container">
+      {% if block.type.handle == 'tabsBlock' %}
+      {% if detailsId %}<h2 class="visually-hidden" id="details-title">Product details</h2>{% set detailsId = null %}{% endif %}
+      {% include 'products/blocks/tabsBlock' with { block: block, tabs: tabSets['b' ~ block.id], tabIds: tabIds } only %}
+      {% else %}
+      {% include 'products/blocks/' ~ block.type.handle ignore missing with { block: block } only %}
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+  {% endfor %}
+
+  {% if related|length %}
+  <!-- ============ 3. RELATED PRODUCTS ============ -->
+  <section class="section pd-related" aria-labelledby="related-title">
+    <div class="container">
+      <header class="section-head section-head--split">
+        <div>
+          {% if category %}<p class="eyebrow">{{ category.title|lower|capitalize }}</p>{% endif %}
+          <h2 class="section-title" id="related-title">More <span class="hl">{{ isPrinter ? 'Printers' : 'Products' }}</span></h2>
+        </div>
+        {% if categoryUrl %}<a class="text-link" href="{{ categoryUrl }}">View all {{ isPrinter ? 'printers' : categoryName|lower }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+      </header>
+      <ul class="pgrid pd-related__grid">
+        {% for product in related %}
+        {% include '_components/product-card' with { product: product } only %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- ============ 4. HELP BAND (maroon) ============ -->
+  <section class="sustain cat-cta" aria-labelledby="cat-cta-title">
+    <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
+    <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
+    <div class="container sustain__inner">
+      <svg class="reg-mark reg-mark--cta" aria-hidden="true" focusable="false"><use href="#i-reg"/></svg>
+      <h2 id="cat-cta-title">Not sure which {{ isPrinter ? 'printer' : 'product' }} fits?</h2>
+      <p>Tell us your application, materials and run lengths.</p>
+      <div class="btn-row cat-cta__actions">
+        {% if phone %}<a class="btn btn--light btn--lg" href="tel:{{ links.tel(phone) }}">Talk to a Specialist</a>{% endif %}
+        <a class="btn btn--outline-light btn--lg" {{ links.attrs(quote, 'Quote page not set (Site Settings)') }}>Request a Quote</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

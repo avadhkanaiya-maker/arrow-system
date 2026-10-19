@@ -1,0 +1,19 @@
+# Industries import report
+
+Run: 2026-10-14 09:36
+
+| Page | Name | Blocks | Notes |
+|---|---|---|---|
+| `aircraft-interior-placards` | Aircraft Interior | industryHeader × 1, productShowcase × 1, contentBlock × 3, photoGallery × 1, contactBlock × 1, otherIndustries × 1 | product teaser “Matan SprinG3” → Recommended Products: matan-spring3, arrow-ezcut-330r; header image: the industry's Card Photo (live has a background banner) |
+| `digital-printing-for-beverage-labels` | Beverages Labels | industryHeader × 1, productShowcase × 1, contentBlock × 4, photoGallery × 1, contactBlock × 1, otherIndustries × 1 | product teaser “ArrowJet Aqua Hybrid Pro M” → Recommended Products: arrowjet-aqua-330r-hybrid-pro-m; header image: the industry's Card Photo (live has a background banner) |
+| `decorative-solutions-for-building-materials` | Building Materials | industryHeader × 1, contentBlock × 3, contactBlock × 1, otherIndustries × 1 | header image: the industry's Card Photo (live has a background banner) |
+| `chemical-label-printing` | Chemical Label Printing | industryHeader × 1, productShowcase × 1, contentBlock × 3, contactBlock × 1, otherIndustries × 1 | product teaser “Matan SprinG3” → Recommended Products: matan-spring3; header image: the industry's Card Photo (live has a background banner) |
+| `flexible-packaging-and-custom-mylar-bags` | Flexible Packaging | industryHeader × 1, productShowcase × 1, contentBlock × 2, contactBlock × 1, otherIndustries × 1 | pilot: the design page |
+| `government-and-military` | Government & Military | industryHeader × 1, productShowcase × 1, contentBlock × 2, photoGallery × 1, contactBlock × 1, otherIndustries × 1 | product teaser “Matan SprinG3” → Recommended Products: matan-spring3; header image: the industry's Card Photo (live has a background banner) |
+| `label-production-and-in-house-labeling` | Label Packaging Printing | industryHeader × 1, productShowcase × 1, contentBlock × 1, contactBlock × 1, otherIndustries × 1 | product teaser “” → Recommended Products: arrowcut-nova-330r-roll-to-roll-laser-cutter; header image: the industry's Card Photo (live has a background banner) |
+| `manufacturing-and-industrial-labels` | Manufacturing & Industrial | industryHeader × 1, productShowcase × 1, contentBlock × 2, photoGallery × 1, contactBlock × 1, otherIndustries × 1 | product teaser “Matan SprinG3” → Recommended Products: matan-spring3; header image: the industry's Card Photo (live has a background banner) |
+| `pharmaceutical-labeling` | Pharmaceutical Labelling | industryHeader × 1, productShowcase × 1, contentBlock × 1, photoGallery × 1, video × 1, contactBlock × 1, otherIndustries × 1 | product teaser “The ArrowJet Aqua 330R is the answer to all of your flexible packaging needs” → Recommended Products: arrowjet-aqua-330r-lite-2; header image: the industry's Card Photo (live has a background banner) |
+| `signs-and-graphics` | Signs and Graphics | industryHeader × 1, productShowcase × 1, contentBlock × 2, photoGallery × 1, contactBlock × 1, otherIndustries × 1 | product teaser “Matan SprinG3” → Recommended Products: matan-spring3; header image: the industry's Card Photo (live has a background banner) |
+| `corrugation-printing` | Corrugation Printing | industryHeader × 1, productShowcase × 1, contentBlock × 3, contactBlock × 1, otherIndustries × 1 | row “Key Features of the ArrowJet OverJet Pro” (1544 characters) kept as content; its product → Recommended Products; header image: the industry's Card Photo (live has a background banner) |
+| `wallpaper-printer` | Wallpaper Printer | industryHeader × 1, productShowcase × 1, contentBlock × 5, contactBlock × 1, otherIndustries × 1 | Recommended Products: arrowjet-aqua-800m (the page is about it); header image: the industry's Card Photo (live has a background banner) |
+

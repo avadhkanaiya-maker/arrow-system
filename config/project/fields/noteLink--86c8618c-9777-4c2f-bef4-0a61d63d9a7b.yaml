@@ -1,0 +1,27 @@
+columnSuffix: null
+handle: noteLink
+instructions: 'Shown after the note as “See our {label}.”, e.g. Privacy Policy. Paste the link and type the text in Label.'
+name: 'Note Link'
+searchable: false
+settings:
+  fullGraphqlData: true
+  maxLength: 255
+  showLabelField: true
+  typeSettings:
+    __assoc__:
+      -
+        - url
+        -
+          __assoc__:
+            -
+              - allowRootRelativeUrls
+              - true
+            -
+              - allowAnchors
+              - true
+  types:
+    - url
+    - entry
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Link

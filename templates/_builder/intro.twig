@@ -1,0 +1,2 @@
+{# Intro block: the large opening paragraph (p.post-intro) #}
+{{ (block.shortRichText ?? '')|string|replace({'<p>': '<p class="post-intro">'})|raw }}

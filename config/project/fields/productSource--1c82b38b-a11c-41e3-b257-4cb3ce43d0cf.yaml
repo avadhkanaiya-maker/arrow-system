@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: productSource
+instructions: 'Picked = exactly the products you choose. Categories = products from the chosen product categories, filled in automatically as products are added.'
+name: Show
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Picked products'
+        -
+          - value
+          - picked
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Products from the categories below'
+        -
+          - value
+          - category
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -1,0 +1,185 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Two columns side by side, each with its own blocks (text, image, embed, form …) and style.'
+fieldLayouts:
+  98982a17-9bef-4d90-90ce-4d0370fdb12a:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 43611044-6e59-4fd9-9510-8ead8bfc17f4 # Column Widths
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1936eafe-01ec-49b6-9577-e94314157521
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3f27e164-a203-43c7-b2e1-5f9c18aac05f # Column Style
+            handle: leftStyle
+            instructions: null
+            label: 'Left Column Style'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ffa993c6-b792-4928-af55-13f3103e9396
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 4307aaf7-f83f-4d28-98ef-a4305e405976 # Left Column
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a88fcb7a-0695-44a9-91fc-5eb6bcfde801
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3f27e164-a203-43c7-b2e1-5f9c18aac05f # Column Style
+            handle: rightStyle
+            instructions: null
+            label: 'Right Column Style'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7da3ce51-9a92-4f60-9406-2b87602c9788
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3cb6f238-7c92-4d4f-ac52-81f5bf882f80 # Right Column
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c7cd350f-353f-4195-b63f-fd0ed54c6a53
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 6a98ab21-a4b4-455c-9fca-386ab86072cc
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: ed288829-5da8-4673-9365-42f158a1dbfd # Vertical Alignment
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e9e93ad6-6fa6-454b-a495-80caad87dfef
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 57d1d2c9-ac0f-40ee-8914-36aa14392881 # Space Above
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8eddfd98-8005-4381-9e2f-696a7fcc3d20
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f5aa0ceb-3e8f-47f1-91df-0644c97e3b82 # Space Below
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 27d564c7-f0ee-41ad-a682-3c77dc8491d6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 78f46f52-ad0b-4ac0-8879-936a8e4bb65d # Background
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 67a4ae54-1cc1-41de-bcc4-dab2ce8ac65f
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Section Settings'
+        uid: efa8af4e-5283-4df2-a081-0ef3448cbc62
+        userCondition: null
+    thumbFieldKey: null
+handle: columnsBlock
+hasTitleField: false
+icon: table-columns
+name: Columns
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{columnsLayout}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

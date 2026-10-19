@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: relationship
+instructions: 'Headquarters gets the red pin on the map.'
+name: Relationship
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Partner location'
+        -
+          - value
+          - partner
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - Headquarters
+        -
+          - value
+          - headquarters
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Arrow Systems — Exhibition detail page
+   Loaded after ../css/home.css (design system) and css/exhibitions.css (page hero, breadcrumb, collage,
+   decorative elements, facts). Only this page's own components are here.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Page header
+   ========================================================================== */
+.detail-hero .page-hero__title { font-size: clamp(2.375rem, 1.5rem + 3vw, 3.75rem); }
+.detail-hero__subtitle { margin-top: 20px; font-size: clamp(1.125rem, 1rem + .5vw, 1.375rem); font-weight: 700; line-height: 1.3; color: var(--c-ink); }
+.detail-hero__lead { max-width: 58ch; margin: 12px 0 0; }
+
+.detail-facts {
+  display: flex; flex-wrap: wrap; gap: 16px 32px;
+  margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--c-line);
+}
+.detail-fact { display: flex; align-items: center; gap: 12px; font-size: 1rem; font-weight: 600; line-height: 1.35; color: var(--c-ink); }
+.detail-fact a { color: var(--c-maroon); text-decoration: none; }
+.detail-fact a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.detail-hero .collage__main img { aspect-ratio: 4 / 3; }
+
+/* ==========================================================================
+   2. Gallery: mixed tile sizes (big 2×2, wide 2×1, small 1×1) that pack into full rows
+   ========================================================================== */
+.gallery-section { position: relative; overflow: clip; }
+.gallery-count { font-size: .9375rem; color: var(--c-muted); }
+.gallery-count strong { margin-right: 4px; font-family: var(--font-display); font-size: 1.75rem; font-weight: 800; letter-spacing: -.02em; color: var(--c-ink); }
+
+.gallery-wrap { position: relative; isolation: isolate; }
+.dot-grid--gallery { --cols: 8; --rows: 6; left: -22px; bottom: -22px; }
+
+.gallery {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 124px; grid-auto-flow: dense; gap: 10px;
+}
+.gallery__item--big { grid-column: span 2; grid-row: span 2; }
+.gallery__item--wide { grid-column: span 2; }
+
+.gallery__link {
+  position: relative; display: block; height: 100%; overflow: hidden;
+  border-radius: var(--radius-lg); background: var(--c-line);
+}
+.gallery__link img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.gallery__link::after { /* soft shade so the zoom icon reads on light photos */
+  content: ""; position: absolute; inset: 0; background: linear-gradient(200deg, rgba(0, 0, 0, .35) 0%, rgba(0, 0, 0, 0) 40%);
+  opacity: 0; transition: opacity .2s ease;
+}
+.gallery__zoom {
+  position: absolute; top: 10px; right: 10px; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px;
+  border-radius: 50%; background: var(--c-white); color: var(--c-maroon); box-shadow: var(--shadow-sm);
+  opacity: 0; transform: scale(.85); transition: opacity .2s ease, transform .2s ease;
+}
+.gallery__zoom .icon { width: 16px; height: 16px; }
+.gallery__link:hover img { transform: scale(1.04); }
+.gallery__link:hover::after, .gallery__link:focus-visible::after { opacity: 1; }
+.gallery__link:hover .gallery__zoom, .gallery__link:focus-visible .gallery__zoom { opacity: 1; transform: none; }
+.gallery__link:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 3px; }
+
+@media (min-width: 36em) { .gallery { grid-auto-rows: 150px; gap: 12px; } }
+@media (min-width: 48em) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 160px; } }
+@media (min-width: 64em) { .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 180px; gap: 14px; } }
+@media (min-width: 75em) { .gallery { grid-auto-rows: 200px; } }
+
+/* ==========================================================================
+   3. More exhibitions (pager cards)
+   ========================================================================== */
+.pager { display: grid; gap: 16px; }
+.pager__card {
+  position: relative; display: flex; align-items: center; gap: 18px; padding: 16px 20px 16px 16px;
+  background: var(--c-white); border: 1px solid var(--c-line); border-radius: 12px; text-decoration: none; color: var(--c-ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 12px 26px -22px rgba(0, 0, 0, .35);
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.pager__card::before { /* maroon bar that sweeps in on hover, as on the listing cards */
+  content: ""; position: absolute; top: -1px; left: 16px; right: 16px; height: 3px; border-radius: 0 0 3px 3px;
+  background: var(--c-maroon); transform: scaleX(0); transform-origin: left; transition: transform .35s ease;
+}
+.pager__card:hover { border-color: var(--c-line-strong); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.pager__card:hover::before { transform: scaleX(1); }
+.pager__thumb { flex-shrink: 0; width: 112px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 8px; background: var(--c-surface); }
+.pager__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pager__icon {
+  flex-shrink: 0; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 8px;
+  background: var(--c-maroon-tint); color: var(--c-maroon);
+}
+.pager__icon .icon { width: 30px; height: 30px; stroke-width: 1.5; }
+.pager__text { display: grid; gap: 2px; min-width: 0; }
+.pager__kicker { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); }
+.pager__title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; color: var(--c-ink); }
+.pager__meta { font-size: .875rem; color: var(--c-muted); }
+.pager__arrow { margin-left: auto; width: 20px; height: 20px; color: var(--c-maroon); transition: transform .15s ease; }
+.pager__card:hover .pager__arrow { transform: translateX(3px); }
+.pager__card:hover .pager__title { color: var(--c-maroon); }
+@media (min-width: 48em) { .pager { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+@media (max-width: 29.99em) {
+  .pager__thumb { width: 88px; }
+  .pager__icon { width: 66px; height: 66px; }
+}
+
+/* ==========================================================================
+   4. Next show band (homepage .sustain maroon band)
+   ========================================================================== */
+.next-band { isolation: isolate; }
+.next-band .dot-grid { background-image: radial-gradient(circle at center, rgba(255, 255, 255, .4) 0 var(--dot), transparent calc(var(--dot) + .75px)); }
+.next-band .dot-grid--cta-a { --cols: 7; --rows: 5; left: 3%; top: 24px; }
+.next-band .dot-grid--cta-b { --cols: 7; --rows: 5; right: 3%; bottom: 24px; }
+.next-band__inner { display: grid; justify-items: center; gap: 22px; }
+.next-band__date {
+  display: grid; justify-items: center; padding: 14px 24px; line-height: 1;
+  border: 1.5px dashed rgba(255, 255, 255, .55); border-radius: 12px;
+}
+.next-band__month { font-size: .8125rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; opacity: .85; }
+.next-band__days { margin: 8px 0 6px; font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; letter-spacing: -.03em; }
+.next-band__yr { font-size: .875rem; font-weight: 600; letter-spacing: .12em; opacity: .85; }
+.next-band .next-band__kicker { margin: 0 0 6px; font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255, 255, 255, .85); }
+.next-band h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem); }
+.next-band .next-band__meta { margin: 8px 0 0; color: rgba(255, 255, 255, .9); }
+.next-band__actions { justify-content: center; }
+@media (max-width: 47.99em) { .next-band .dot-grid { display: none; } }
+@media (min-width: 64em) {
+  .next-band__inner { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; justify-items: start; gap: 36px; text-align: left; }
+  .next-band__actions { justify-content: flex-end; }
+}
+
+/* ==========================================================================
+   5. Lightbox
+   ========================================================================== */
+html.lightbox-open { overflow: hidden; }
+.lightbox {
+  width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; margin: 0; padding: 0; border: 0;
+  background: #0E0E0E; color: var(--c-white); --c-focus: #ffffff;
+}
+.lightbox::backdrop { background: transparent; }
+.lightbox__frame { position: relative; display: grid; place-items: center; height: 100%; padding: 64px 16px 88px; }
+.lightbox__figure { display: grid; gap: 14px; width: min(1100px, 100%); }
+.lightbox__img {
+  width: auto; max-width: 100%; max-height: calc(100vh - 200px); margin-inline: auto;
+  border-radius: 6px; object-fit: contain; transition: opacity .2s ease;
+}
+.lightbox__img.is-loading { opacity: .25; }
+.lightbox__caption { display: flex; justify-content: space-between; gap: 16px; font-size: .875rem; color: rgba(255, 255, 255, .8); }
+.lightbox__count { flex-shrink: 0; font-weight: 700; letter-spacing: .08em; color: var(--c-white); }
+.lightbox__btn {
+  position: absolute; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .25); color: var(--c-white);
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.lightbox__btn:hover { background: var(--c-maroon); border-color: var(--c-maroon); }
+.lightbox__btn .icon { width: 22px; height: 22px; }
+.lightbox__btn--close { top: 14px; right: 14px; }
+.lightbox__btn--prev { left: calc(50% - 60px); bottom: 20px; }
+.lightbox__btn--next { right: calc(50% - 60px); bottom: 20px; }
+@media (min-width: 64em) {
+  .lightbox__frame { padding: 56px 96px; }
+  .lightbox__img { max-height: calc(100vh - 150px); }
+  .lightbox__btn--prev { left: 24px; bottom: auto; top: 50%; margin-top: -24px; }
+  .lightbox__btn--next { right: 24px; bottom: auto; top: 50%; margin-top: -24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__link:hover img, .pager__card:hover { transform: none; }
+}

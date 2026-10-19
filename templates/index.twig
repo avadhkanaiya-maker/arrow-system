@@ -1,0 +1,20 @@
+{#
+  Homepage (Homepage single, URI __home__). Renders entry.homepageSections in order: each section type has its own
+  template in _blocks/home/, named after the entry type handle (heroSlider → hero-slider.twig).
+#}
+{% extends '_layouts/base' %}
+
+{% set sections = entry.homepageSections.all() %}
+{% set firstSlider = sections|filter(s => s.type.handle == 'heroSlider')|first %}
+{% set firstBanner = firstSlider ? (firstSlider.slides.one().bannerImage.one() ?? null) : null %}
+
+{% block head %}
+  {# Start downloading the first banner early: it's the largest thing above the fold. #}
+  {% if firstBanner %}<link rel="preload" as="image" href="{{ firstBanner.url }}" fetchpriority="high">{% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for section in sections %}
+    {% include '_blocks/home/' ~ (section.type.handle|kebab) ignore missing with { block: section } only %}
+  {% endfor %}
+{% endblock %}
