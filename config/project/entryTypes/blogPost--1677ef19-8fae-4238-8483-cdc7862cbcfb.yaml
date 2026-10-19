@@ -60,7 +60,7 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 1c2748fc-6dc8-4720-80e3-fad0a83163de # Featured Image
             handle: null
-            instructions: 'The large picture next to the title (16:9, at least 1280 × 720). Also the card image.'
+            instructions: 'The large picture under the title, shown whole at its own shape (any proportions; at least 1280 px wide looks sharp). Also the card image on listings.'
             label: 'Cover Image'
             oldFieldUid: null
             required: false

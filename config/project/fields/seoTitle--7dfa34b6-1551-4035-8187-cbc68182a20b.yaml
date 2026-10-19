@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: seoTitle
-instructions: 'The title shown in Google and the browser tab. Leave empty to use the entry title + “| Arrow Systems, Inc.”.'
+instructions: 'The title shown in Google and the browser tab. Leave empty to use the entry title + “ - Arrow Systems, Inc.” (as the live site).'
 name: 'SEO Title'
 searchable: false
 settings:
