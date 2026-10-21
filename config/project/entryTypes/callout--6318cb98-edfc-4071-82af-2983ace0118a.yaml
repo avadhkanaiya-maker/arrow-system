@@ -45,6 +45,29 @@ fieldLayouts:
         name: Content
         uid: 677eaa46-50d6-492e-8aca-13f4d843c0db
         userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8f6b76a1-5161-448d-89fa-5ad65f8284e7
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Section Settings'
+        uid: 34377c64-9168-49b1-b195-13cc29fc4faf
+        userCondition: null
     thumbFieldKey: null
 handle: callout
 hasTitleField: false

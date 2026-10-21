@@ -1,7 +1,7 @@
 {#
   Card Grid (Pages / industries builder): heading ([red] words), intro, cards (title, subtitle, image, text, link),
   2 / 3 / 4 per row on large screens. A card with a link is clickable as a whole. Section Settings: Space Above / Below,
-  Background. Vars: block
+  Background, Card Shadow. Vars: block
 #}
 {% import '_macros/text' as text %}
 {% import '_macros/layout' as layout %}
@@ -16,7 +16,8 @@
         {% if block.sectionLead %}<p class="section-lead">{{ block.sectionLead }}</p>{% endif %}
       </header>
       {% endif %}
-      <ul class="card-grid__list card-grid__list--{{ block.cardColumns.value ?: '3' }}">
+      {% set shadow = block.cardShadow.value ?? null %}
+      <ul class="card-grid__list card-grid__list--{{ block.cardColumns.value ?: '3' }}{{ shadow and shadow != 'none' ? ' card-grid__list--shadow-' ~ shadow }}">
         {% for item in items %}
         {% set image = item.mediaImage.one() %}
         {% set link = item.ctaLink and item.ctaLink.url ? item.ctaLink : null %}

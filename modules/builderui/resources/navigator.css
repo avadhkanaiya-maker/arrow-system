@@ -1,7 +1,9 @@
-/* Page-builder navigator (navigator.js): the "Outline" panel, first in the entry's right sidebar (Craft keeps it sticky).
-   navigator.js makes it reach the window bottom; only its list scrolls */
+/* Page-builder navigator (navigator.js): the "Outline" panel, last in the entry's right-hand column, under the entry's
+   settings. The column is a normal column (Craft makes it sticky; here it runs the page's full height), so the settings
+   scroll away with the page and the outline sticks under Craft's top bar, as tall as the window (only its list scrolls) */
+#details-container.bui-nav-sidebar { position: static; align-self: stretch; }
 .bui-nav {
-    margin-bottom: 18px; padding: 12px 12px 8px;
+    position: sticky; margin-top: 18px; padding: 12px 12px 8px;
     background: var(--white, #fff); border-radius: var(--large-border-radius, 8px);
     box-shadow: 0 0 0 1px var(--hairline-color, #e3e5e8), 0 2px 12px rgba(31, 41, 51, .08);
     display: flex; flex-direction: column;

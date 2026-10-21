@@ -1,6 +1,6 @@
 allowLineBreaksInTitles: false
 color: null
-description: 'One product in a product list'
+description: 'A product: choose its entry (photo, name and text come from it) or paste a link.'
 fieldLayouts:
   323f6327-99fb-44ee-9381-1be3dc65aaa6:
     cardThumbAlignment: end
@@ -8,6 +8,23 @@ fieldLayouts:
       -
         elementCondition: null
         elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'Choose a product entry: its photo, name and short description appear automatically (fill the fields below only to change them). Or paste a URL, then fill in the Name.'
+            label: 'Product or Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e91e6f7e-e03e-494a-a3ba-c0547a40f216
+            userCondition: null
+            warning: null
+            width: 100
           -
             dateAdded: null
             editCondition: null
@@ -32,10 +49,10 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: a4104688-9fd2-429a-876b-fd752fc5426c # Product Name
             handle: null
-            instructions: 'e.g. “ArrowJet Eco 330R”.'
+            instructions: 'Optional when a product entry is chosen (empty = the product’s name). Needed for a URL.'
             label: Name
             oldFieldUid: null
-            required: true
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 74ce21ad-2706-4db2-a63e-227e77f4edf8
@@ -47,15 +64,15 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
-            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
             handle: null
-            instructions: 'The product page.'
-            label: Link
+            instructions: 'Optional. Empty = the product’s card photo (when a product entry is chosen above).'
+            label: Image
             oldFieldUid: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: e91e6f7e-e03e-494a-a3ba-c0547a40f216
+            uid: 84bc2973-222e-43f0-b63d-ae3a6ac746c8
             userCondition: null
             warning: null
             width: 100
@@ -66,7 +83,7 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 16519104-d110-42b1-905c-abb07a5e505c # Body Text
             handle: null
-            instructions: 'A short paragraph about the product.'
+            instructions: 'Optional. Empty = the product’s Card Tagline.'
             label: Description
             oldFieldUid: null
             required: false

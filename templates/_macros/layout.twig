@@ -1,9 +1,21 @@
 {# Layout helpers for the page-builder section blocks #}
 
-{# The admin's Section Settings (Space Above / Below, Background) as classes on a block's <section> (craft.css).
+{# The admin's Section Settings (Space Above / Below, Background, CSS Class) as classes on a block's <section> (craft.css).
    Blocks without those fields get none. #}
 {%- macro sectionClass(block) -%}
   {%- set top = block.spacingTop.value ?? '' -%}
   {%- set bottom = block.spacingBottom.value ?? '' -%}
-  {{- (top and top != 'normal' ? ' section--pt-' ~ top) ~ (bottom and bottom != 'normal' ? ' section--pb-' ~ bottom) ~ ((block.sectionBackground.value ?? '') == 'surface' ? ' section--surface') -}}
+  {{- (top and top != 'normal' ? ' section--pt-' ~ top) ~ (bottom and bottom != 'normal' ? ' section--pb-' ~ bottom) ~ ((block.sectionBackground.value ?? '') == 'surface' ? ' section--surface') ~ _self.customClass(block) -}}
+{%- endmacro -%}
+
+{# The admin's CSS Class (Section Settings) as " name1 name2": only valid class names, the rest is dropped #}
+{%- macro customClass(block) -%}
+  {%- set names = (block.cssClass ?? '')|split(' ')|filter(c => c matches '/^-?[A-Za-z_][A-Za-z0-9_-]*$/') -%}
+  {{- names ? ' ' ~ names|join(' ') -}}
+{%- endmacro -%}
+
+{# A common block (_builder/) inside a text column, wrapped in a <div> with its CSS Class when it has one #}
+{%- macro builderBlock(block, anchors) -%}
+  {%- set names = _self.customClass(block)|trim -%}
+  {% if names %}<div class="{{ names }}">{% endif %}{% include '_builder/' ~ block.type.handle ignore missing with { block: block, anchors: anchors ?? {} } only %}{% if names %}</div>{% endif %}
 {%- endmacro -%}

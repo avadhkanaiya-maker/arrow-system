@@ -6,6 +6,10 @@
   Buttons are fully editable: link + text come from the slide's Primary / Secondary Button fields (text = the Label;
   if the Label is empty, Craft uses the linked entry's title or the URL). Secondary button: the slide's own, or
   Globals → Site Settings → Free Sample Link.
+  Video slides (Slide Type = Video): the design's hero video (site.js): an uploaded Video File (data-hero-video-src, plays
+  instantly) or else the YouTube Link (data-hero-video); muted, autoplaying, no controls, replayed from the start; the
+  Banner Image is the poster (until it plays, and for reduced motion). Display Time = data-interval (empty: the carousel's
+  7 s; video slides 20 s, as the design).
   Class names and data-carousel attributes match the design, so site.js runs the carousel unchanged.
   Vars: block (Hero Slider entry)
 #}
@@ -18,11 +22,18 @@
       {% set name = slide.productName ?: (image.alt ?? null) ?: (image.title ?? 'Slide ' ~ loop.index) %}
       {% set primary = slide.primaryCta %}
       {% set secondary = slide.secondaryCta ?: siteSettings.sampleLink %}
-      <div class="hero-slide{{ loop.first ? ' is-active' }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}: {{ name }}" data-slide>
+      {% set videoFile = (slide.slideType.value ?? '') == 'video' ? slide.videoFile.one() : null %}
+      {% set youtube = (slide.slideType.value ?? '') == 'video' and not videoFile ? (slide.videoUrl ?? '')|trim : '' %}
+      {% set isVideo = videoFile or youtube %}
+      {% set seconds = slide.slideDuration ?: (isVideo ? 20 : null) %}
+      <div class="hero-slide{{ isVideo ? ' hero-slide--video' }}{{ loop.first ? ' is-active' }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}: {{ name }}{{ isVideo ? ' (video)' }}" data-slide{% if seconds %} data-interval="{{ seconds * 1000 }}"{% endif %}>
         <div class="hero-slide__stage">
           {% if image %}
             <img class="hero-slide__art" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"
               {{- loop.first ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low" decoding="async"' }} alt="{{ image.alt }}">
+          {% endif %}
+          {% if isVideo %}
+            <div class="hero-slide__video" {% if videoFile %}data-hero-video-src="{{ videoFile.url }}"{% else %}data-hero-video="{{ youtube }}"{% endif %} data-hero-video-title="{{ name }}" aria-hidden="true"></div>
           {% endif %}
           {# The whole banner is a pointer shortcut to the primary link (duplicate of the button, hidden from keyboard/AT). #}
           {% if primary %}<a class="hero-slide__hit" href="{{ primary.url }}" tabindex="-1" aria-hidden="true"></a>{% endif %}

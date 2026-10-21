@@ -7,6 +7,23 @@
 (function () {
     var FIELD_IDS = ['fields-articleBody-field', 'fields-productBuilder-field', 'fields-industryBuilder-field', 'fields-pageBuilder-field'];   // one per entry page
 
+    // Craft's tables (Craft.EditableTable: Items, Applications, Spec List …) finish setting up only once visible, else on
+    // the next window resize. Blocks start collapsed here, so a table inside one stayed half set up ("Add item" did
+    // nothing). Opening any block (also nested ones, e.g. in Columns) now sends that resize.
+    var resizeTimer;
+    new MutationObserver(function (records) {
+        var opened = records.some(function (r) {
+            return r.target.classList && r.target.classList.contains('matrixblock') &&
+                /(^|\s)collapsed(\s|$)/.test(r.oldValue || '') && !r.target.classList.contains('collapsed');
+        });
+        if (!opened || !window.Garnish) return;
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            Garnish.$win.trigger('resize');
+            setTimeout(function () { Garnish.$win.trigger('resize'); }, 400);   // again once the opening animation ends
+        }, 60);
+    }).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+
     function topBlocks(field) {
         var blocks = field.querySelector('.blocks');   // the first .blocks is the field's own (nested Matrix fields are inside blocks)
         return blocks ? Array.prototype.filter.call(blocks.children, function (el) { return el.classList.contains('matrixblock'); }) : [];
@@ -49,7 +66,9 @@
             '<div class="bui-nav__tools"><button type="button" class="btn small" data-bui="collapse">Collapse all</button>' +
             '<button type="button" class="btn small" data-bui="expand">Expand all</button></div>' +
             '<ol class="bui-nav__list"></ol>';
-        sidebar.insertBefore(panel, sidebar.firstChild);   // first in the sidebar: fully on screen without scrolling
+        // last in the right-hand column, under the entry's settings (slug, author, dates, status …)
+        var box = document.getElementById('details-container');
+        (box || sidebar).appendChild(panel);
         var list = panel.querySelector('.bui-nav__list');
         var search = panel.querySelector('.bui-nav__search');
 
@@ -123,13 +142,17 @@
         field.addEventListener('input', later);
         field.addEventListener('change', later);
 
-        // the outline (first in Craft's sticky sidebar) reaches the window bottom; only its list scrolls, the sidebar has no
-        // scrollbar of its own (the details below the outline come into view by scrolling the page)
-        var box = document.getElementById('details-container');
+        // the column (#details-container) is no longer sticky itself: the settings scroll away with the page and the outline
+        // sticks under Craft's top bar, as tall as the window (only its list scrolls)
+        if (box) box.classList.add('bui-nav-sidebar');
         function fit() {
-            if (!box) return;
-            var stickyTop = parseFloat(getComputedStyle(box).top) || 0;
-            panel.style.height = Math.max(320, window.innerHeight - Math.max(stickyTop, panel.getBoundingClientRect().top) - 16) + 'px';
+            var header = document.getElementById('header');   // Craft's sticky top bar
+            var top = (header ? header.offsetHeight : 0) + 14;
+            // down to the window's bottom, or to the column's end near the end of the page (else the column's end pushes
+            // the stuck outline up and hides its top)
+            var bottom = Math.min(window.innerHeight - 16, box ? box.getBoundingClientRect().bottom - 16 : Infinity);
+            panel.style.top = top + 'px';
+            panel.style.height = Math.max(320, bottom - top) + 'px';
         }
         window.addEventListener('resize', fit);
         window.addEventListener('scroll', fit, { passive: true });

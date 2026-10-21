@@ -2,6 +2,7 @@
 namespace modules\forms;
 
 use Craft;
+use craft\services\Plugins;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberUtil;
 use verbb\formie\elements\Submission;
@@ -14,6 +15,7 @@ use yii\base\Model;
  * Server-side rules for the Formie forms (front end and CP):
  * - Phone fields with the country picker: the number must be a valid number for the chosen country. Formie checks this
  *   only in the browser (intl-tel-input), so without this a bot or a browser without JS could send "123".
+ * - Submission status colours as Craft's Color enum (StatusesWithColors): the Cards view of Submissions crashed.
  */
 class Module extends \yii\base\Module
 {
@@ -25,6 +27,11 @@ class Module extends \yii\base\Module
         if (!class_exists(Submission::class)) {
             return;
         }
+
+        // Formie's statuses service → our subclass, once the plugins are loaded
+        Event::on(Plugins::class, Plugins::EVENT_AFTER_LOAD_PLUGINS, function() {
+            \verbb\formie\Formie::$plugin?->set('statuses', StatusesWithColors::class);
+        });
 
         Event::on(Submission::class, Model::EVENT_AFTER_VALIDATE, function(Event $event) {
             /** @var Submission $submission */

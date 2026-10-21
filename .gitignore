@@ -14,3 +14,4 @@
 # copies of live pages saved by the import scripts (fetched again when needed); the scripts' data/ folders are kept
 /storage/imports/*/cache/
 .env.*.local
+*.zip

@@ -133,6 +133,40 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: de5be2f1-a831-462e-8d19-77c2e43c125a # Card Shadow
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cad07e9e-0e9c-4a00-bbb2-66a208487868
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a0c698a1-e077-44f5-8a0d-a315d2f740e2
+            userCondition: null
+            warning: null
+            width: 100
         name: 'Section Settings'
         uid: f8842535-6db2-415b-97dc-652c380b8f70
         userCondition: null

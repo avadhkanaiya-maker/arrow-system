@@ -249,6 +249,8 @@
       current = (index + slides.length) % slides.length;
       slides.forEach(function (slide, i) {
         var active = i === current;
+        // Video slides keep playing (muted) while hidden: resuming a YouTube video makes it show its pause button again.
+        if (active && !slide.classList.contains('is-active')) videoCommand(slide, 'playVideo');
         slide.classList.toggle('is-active', active);
         slide.toggleAttribute('inert', !active);
         slide.setAttribute('aria-hidden', String(!active));
@@ -257,10 +259,88 @@
         if (i === current) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
       });
     };
-    var stop = function () { clearInterval(timer); timer = null; };
-    var start = function () {
+    // Video slides (CMS: a YouTube link OR an uploaded video file per slide). Muted, autoplaying, shown as soon as it plays.
+    //  - data-hero-video-src="file.mp4": native <video>, plays instantly with no third-party player.
+    //  - data-hero-video="YouTube URL or ID": privacy-enhanced YouTube embed with no controls. Not loop/playlist mode (that
+    //    adds previous/next buttons and an end screen): it is replayed by seeking to 0 just before the end, the same way as
+    //    the One Stop Solution background video below. YouTube may still flash its own play icon for a moment as it starts.
+    // Videos keep playing while their slide is hidden (no pause/resume, so YouTube does not show its pause button again on
+    // return; an uploaded file simply loops). Reduced motion: no video, the poster stays.
+    var YT_ORIGIN = 'https://www.youtube-nocookie.com';
+    var youtubeId = function (value) { // accepts a bare ID or any common YouTube URL form
+      var m = String(value || '').match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/);
+      return m ? m[1] : (/^[\w-]{11}$/.test(value) ? value : '');
+    };
+    var heroVideos = reduceMotion ? [] : Array.prototype.slice.call(carousel.querySelectorAll('[data-hero-video], [data-hero-video-src]'));
+    var ytCommand = function (box, func, args) {
+      var frame = box.querySelector('iframe');
+      if (frame && frame.contentWindow) frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: args || [] }), YT_ORIGIN);
+    };
+    var videoCommand = function (slide, func) { // func: 'playVideo' | 'pauseVideo'
+      var box = slide.querySelector('[data-hero-video], [data-hero-video-src]');
+      if (!box) return;
+      var file = box.querySelector('video');
+      if (file) { if (func === 'playVideo') { var p = file.play(); if (p && p.catch) p.catch(function () {}); } else file.pause(); }
+      else ytCommand(box, func);
+    };
+    var replayVideo = function (box) {
+      if (box.restarting) return;
+      box.restarting = true;
+      ytCommand(box, 'seekTo', [0, true]);
+      ytCommand(box, 'playVideo');
+      setTimeout(function () { box.restarting = false; }, 1500);
+    };
+    heroVideos.forEach(function (box) {
+      var title = box.getAttribute('data-hero-video-title') || 'Video';
+      var src = box.getAttribute('data-hero-video-src');
+      if (src) {
+        var video = document.createElement('video');
+        video.src = src; video.muted = true; video.loop = true; video.autoplay = true; video.playsInline = true;
+        video.setAttribute('muted', ''); video.setAttribute('playsinline', ''); video.setAttribute('aria-hidden', 'true');
+        video.preload = 'auto'; video.title = title;
+        video.addEventListener('playing', function () { box.classList.add('is-ready'); });
+        box.appendChild(video);
+        return;
+      }
+      var id = youtubeId(box.getAttribute('data-hero-video'));
+      if (!id) return;
+      var params = 'autoplay=1&mute=1&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1';
+      if (/^https?:$/.test(window.location.protocol)) params += '&origin=' + encodeURIComponent(window.location.origin);
+      var frame = document.createElement('iframe');
+      frame.src = YT_ORIGIN + '/embed/' + id + '?' + params;
+      frame.title = title;
+      frame.tabIndex = -1;
+      frame.allow = 'autoplay; encrypted-media';
+      frame.addEventListener('load', function () { // ask the player to report its state
+        frame.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: id }), YT_ORIGIN);
+      });
+      box.appendChild(frame);
+    });
+    if (heroVideos.length) {
+      window.addEventListener('message', function (e) {
+        if (e.origin !== YT_ORIGIN) return;
+        var data;
+        try { data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch (err) { return; }
+        if (!data || !data.event) return;
+        heroVideos.forEach(function (box) {
+          var frame = box.querySelector('iframe');
+          if (!frame || frame.contentWindow !== e.source) return;
+          var info = data.event === 'infoDelivery' && data.info ? data.info : null;
+          if (info && typeof info.duration === 'number' && info.duration > 0) box.duration = info.duration;
+          // Replay just before the end so YouTube's end screen never appears.
+          if (info && typeof info.currentTime === 'number' && box.duration && info.currentTime >= box.duration - 0.6) replayVideo(box);
+          var state = data.event === 'onStateChange' ? data.info : (info && info.playerState);
+          if (state === 1) box.classList.add('is-ready');      // playing: show it straight away (it then stays shown)
+          else if (state === 0) replayVideo(box);              // ended (fallback): start again
+        });
+      });
+    }
+    var stop = function () { clearTimeout(timer); timer = null; };
+    var start = function () { // a slide can ask for more time with data-interval (ms), e.g. a video slide
       stop();
-      if (!userPaused && !hoverPaused) timer = setInterval(function () { showSlide(current + 1); }, INTERVAL);
+      if (!userPaused && !hoverPaused) {
+        timer = setTimeout(function () { showSlide(current + 1); start(); }, Number(slides[current].getAttribute('data-interval')) || INTERVAL);
+      }
     };
     var setUserPaused = function (paused) {
       userPaused = paused;
@@ -289,6 +369,15 @@
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
 
     carousel.querySelector('[data-carousel-controls]').hidden = false;
+    // Reserve the controls' real width beside the caption (the number of slides, and so of dots, comes from the CMS).
+    var controls = carousel.querySelector('[data-carousel-controls]');
+    var sizeControls = function () {
+      var w = 0;
+      Array.prototype.forEach.call(controls.children, function (el) { w += el.getBoundingClientRect().width; });
+      if (w) carousel.style.setProperty('--hero-controls-w', Math.ceil(w + 6 * (controls.children.length - 1) + 30) + 'px');
+    };
+    sizeControls();
+    window.addEventListener('resize', sizeControls);
     showSlide(0);
     setUserPaused(userPaused);
   }

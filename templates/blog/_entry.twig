@@ -9,6 +9,7 @@
   Reading time = words in the blocks ÷ 225 (the design: 3,127 words → 14 min).
 #}
 {% extends '_layouts/base' %}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
 
@@ -206,7 +207,7 @@
 
       <article class="prose" data-article>
         {% for block in blocks %}
-          {% include '_builder/' ~ block.type.handle ignore missing with { block: block, anchors: anchors } only %}
+          {{ layout.builderBlock(block, anchors) }}
         {% endfor %}
 
         {% if not hasCta and blogPage and blogPage.ctaHeading %}

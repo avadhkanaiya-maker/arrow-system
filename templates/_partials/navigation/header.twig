@@ -3,12 +3,12 @@
     Top Bar    → utility bar (and the extra links at the bottom of the mobile menu)
     Main Menu  → main menu; each level-1 item's "Menu Style" picks its panel template:
                  Simple dropdown → dropdown.twig · Products mega menu → mega-products.twig · Industries → mega-industries.twig
-  Logo, phone and Request a Quote come from Globals → Site Settings.
-  Markup is the approved design's (Arrowsystem_local/index.html), so site.css and site.js work unchanged.
+  Logo (Logo on Dark Background, else Logo), phone and Request a Quote come from Globals → Site Settings.
+  Markup is the approved design's (Arrowsystem/index.html), so site.css, dark-chrome.css and site.js work unchanged.
 #}
 {% import '_macros/links' as links %}
 {% import '_macros/nav' as nav %}
-{% set logo = siteSettings.logo.one() %}
+{% set logo = siteSettings.logoLight.one() ?? siteSettings.logo.one() %}{# the dark header / footer: the light-lettering logo #}
 {% set brandName = siteSettings.logoAlt ?: siteName %}
 {% set phone = siteSettings.tollFreePhone %}
 {% set quote = siteSettings.quoteLink %}

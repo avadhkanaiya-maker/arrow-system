@@ -1,9 +1,10 @@
 {# Stats Strip: the company figures from Globals → Stats Strip (one place, the same on every page). Rendered by the
    "Stats Strip" block of every page builder (products, industries, blog, homepage). Left out when it has no figures.
    Design: Arrowsystem/digital-label-printers/product-detail.html section 2; styles in craft.css (.pd-stats). #}
+{% import '_macros/layout' as layout %}
 {% set stats = (statsStrip.statItems ?? [])|filter(row => row.value|trim) %}
 {% if stats|length %}
-  <section class="pd-stats" aria-label="Arrow Systems in numbers">
+  <section class="pd-stats{{ block is defined ? layout.customClass(block) }}" aria-label="Arrow Systems in numbers">
     <div class="container">
       <ul class="pd-stats__list">
         {% for row in stats %}

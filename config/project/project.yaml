@@ -1,4 +1,4 @@
-dateModified: 1792411626
+dateModified: 1792578665
 email:
   fromEmail: arrowsysadmin@yopmail.com
   fromName: 'Arrow Systems (Local Staging)'
@@ -24,8 +24,10 @@ meta:
     0a3d4baf-556a-4687-915b-ed414863dba9: Button # Button
     0b27468b-ea05-46f4-92f9-4e618131d1f7: 'CTA Heading' # CTA Heading
     0bd7d6dd-3026-467e-a78e-e40d7852693e: 'Call to Action' # Call to Action
+    0d841017-f440-44d6-a3e5-c067dccf690b: 'Featured Product' # Featured Product
     0db4a0ba-b658-4cd9-b4f6-53f9267ff275: 'Show on Listing' # Show on Listing
     0de3d35a-404a-48e9-8d0d-25d2eaabb7af: 'Tag Line' # Tag Line
+    0f1b9be9-36a4-4653-b018-d2852e2a07b8: 'Video File' # Video File
     1a052a88-6591-4eaf-91e0-31d2a757eabe: Quote # Quote
     1a39ba89-00c3-4c11-9898-9cd0ba598be9: 'Top Bar' # Top Bar
     1b40bd1b-a8c7-4208-882e-c96459dffc80: Exhibitions # Exhibitions
@@ -43,6 +45,7 @@ meta:
     2b5d3982-5c7e-4532-9118-e1c462664708: 'Product Video' # Product Video
     2c86f3fb-3899-4738-a756-3b1b4456fc52: 'Homepage Sections' # Homepage Sections
     2dc1a6a0-3996-4d72-8513-321b88d4c946: Level # Level
+    2e03667f-e9e9-4db3-b9d0-05129129706c: 'Display Time' # Display Time
     2e4c99f9-7844-4051-942e-0fb350ac475d: Industries # Industries
     2f088e9c-9d5e-453e-9468-003c0b662257: 'Industries Page' # Industries Page
     3a146d79-623e-4443-9485-ce8d03c902b5: Longitude # Longitude
@@ -65,14 +68,13 @@ meta:
     5cd88f47-8b53-4c42-a0a1-7328db8c729c: 'Blog Tag' # Blog Tag
     5e1b2291-9cc8-4555-ae96-dcc41456bc4b: Region # Region
     5e99a3d3-f5ae-48c4-9805-ba1493d629a4: 'Equipment Categories' # Equipment Categories
-    5f9d7dc7-7c28-491b-b2b3-e4c6605eaf88: 'Featured Text' # Featured Text
-    6b4c568b-508c-4466-bb1c-037b61e4e6b4: 'Featured Title' # Featured Title
     6d421415-7f3a-4c3a-ac8a-0668e1ddb6cc: File # File
     6e2aa812-e2f6-41fc-9911-4d24a44e513b: 'How Many' # How Many
     6ef05b4c-6cc1-4741-9291-e1b5780dd494: Checklist # Checklist
     6fc3eb31-d21a-43a8-af39-ed3916f72a2a: 'Menu Style' # Menu Style
     7bbe8361-b6da-451a-ae3f-5eba0250025f: Layout # Layout
     7c8145c6-3331-456d-88f9-301975abb3a7: 'Social Links' # Social Links
+    7c336179-94cc-406c-b260-f9c67ff4c7b5: 'Header Style' # Header Style
     7d168617-1541-4be0-b60b-8f51c99b81af: 'Text + Media' # Text + Media
     7dbe18e9-a4e7-4adf-a418-e02992f14f9a: 'Text Tab' # Text Tab
     7dfa34b6-1551-4035-8187-cbc68182a20b: 'SEO Title' # SEO Title
@@ -86,6 +88,7 @@ meta:
     9c1a9914-b101-45b3-b078-86bd22e99bc2: 'Button Intro' # Button Intro
     9c9e47de-8c60-428c-a49c-8c4a209c15b5: 'Tech Spotlight' # Tech Spotlight
     9c9716b5-7de2-45b7-b2e5-7ee937bb273b: Images # Images
+    9c207017-356e-4550-8877-9c6497648b06: 'CSS Class' # CSS Class
     9ea88aa5-524c-4ab0-bbc6-19cc33fa453d: 'Blog Page' # Blog Page
     10aebab9-e4c3-4e9b-b45b-3e84ff8c2d73: 'Product List' # Product List
     16dde185-f39f-406d-b493-119ccf64bd1e: 'Card Grid' # Card Grid
@@ -93,7 +96,7 @@ meta:
     18cbe12d-c7e5-4229-a612-bfd42a85c447: Newsletter # Newsletter
     18e0e446-9775-483b-a2ed-9939ddd402e6: Steps # Steps
     21a8f5d0-0739-4515-8707-7cc048950503: Specifications # Specifications
-    23f78dd7-9116-413c-a91f-65e760a7bcb6: 'Featured Link' # Featured Link
+    24e67e77-5100-454c-b0a6-9a6c77eed937: 'Logo on Dark Background' # Logo on Dark Background
     24fb03b8-54b4-45a6-820e-a8677c18d4ec: 'More Insights' # More Insights
     26cbacfc-2ce9-46ab-8bb6-b3fdc17d3331: Width # Width
     26f00ef3-5144-45ce-8180-2e1bd5dab42a: Favicon # Favicon
@@ -149,6 +152,7 @@ meta:
     4055abcd-d97e-47b5-9f50-d3307f4f3f56: Latitude # Latitude
     4307aaf7-f83f-4d28-98ef-a4305e405976: 'Left Column' # Left Column
     4324bf77-8b8a-40d1-8758-fd26b223c037: Tagline # Tagline
+    4627ccc0-128f-494c-b994-8376af4f5013: 'Form Width' # Form Width
     5478b72c-864d-42de-89ce-e5d3eb52759b: 'Toll-free Phone' # Toll-free Phone
     6318cb98-edfc-4071-82af-2983ace0118a: Callout # Callout
     06540dd4-4fea-4ea5-b353-aa2b7c21f024: Products # Products
@@ -157,6 +161,7 @@ meta:
     71736ea4-0de2-4c02-9ebe-5cbf489571fd: Button # Button
     93083a6e-cf78-4691-a4b0-c263f8361437: SKU # SKU
     93414c4d-92c9-47bc-8af1-64b0c34be564: Columns # Columns
+    146011db-49a0-4cff-9486-d08c98758832: 'Banner Height' # Banner Height
     360233b1-dacd-47b0-829b-05ebe99d64e9: Intro # Intro
     440240ff-b6a2-406b-a724-12b1848e5d7c: Questions # Questions
     461968e6-aa9e-4856-8271-890d431235ae: 'Related Products' # Related Products
@@ -174,6 +179,7 @@ meta:
     50687014-91de-4012-983d-c6d2b75b6414: 'Short Text' # Short Text
     62511633-848a-4c46-a3dc-93dff754212a: 'Downloads Tab' # Downloads Tab
     63722637-4d0b-4fb0-8cd3-ad27ae01e535: Benefit # Benefit
+    66219741-bdf0-423c-acfc-389762d2d0f6: 'Custom CSS' # Custom CSS
     97004007-b7e5-48df-aa4e-88991f7e2f9e: 'Answer Lead' # Answer Lead
     a0ece179-707a-4d3d-9d10-e57516deb61c: 'Article Body' # Article Body
     a0f03dd6-5837-4abf-80ef-8e941d2b8acb: 'Hero Slider' # Hero Slider
@@ -212,6 +218,7 @@ meta:
     c0dba6b7-0116-4bd7-80b4-dae679f9ac30: 'Upcoming Exhibitions Page' # Upcoming Exhibitions Page
     c062ee6d-7608-48d2-8faa-f9aa15094ebd: 'Blog Page' # Blog Page
     c6b3cd74-346e-44ed-87fd-e656cbc77636: City # City
+    c7a13559-c602-4876-a22f-6450d52e0fd7: 'Slide Type' # Slide Type
     c28cb0bb-637c-4069-8162-871afa0f7937: 'Anchor ID' # Anchor ID
     c42b6543-8b75-403b-b77e-8d8d6ecb64a3: Photos # Photos
     c61fceff-5553-4508-af12-baa63e9417ee: Source # Source
@@ -235,6 +242,7 @@ meta:
     d2510ae3-b398-4a9b-8fca-a97ecc89b447: 'Arrow Systems (Local Staging)' # Arrow Systems (Local Staging)
     d5350b12-01ff-4eb3-bb4f-f555b9c18e51: 'Rich Text' # Rich Text
     da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6: 'Small Heading' # Small Heading
+    de5be2f1-a831-462e-8d19-77c2e43c125a: 'Card Shadow' # Card Shadow
     df624304-92d7-4cbd-9bf2-278048320d79: Form # Form
     dfff6f49-bf7b-4ed6-b4de-5080c07efd72: 'Arrow Systems (Local Staging)' # Arrow Systems (Local Staging)
     e2d4a840-f234-432d-a296-8a79a4672bf3: 'Legal Menu' # Legal Menu
@@ -395,5 +403,6 @@ system:
   edition: pro
   live: true
   name: 'Arrow Systems (Local Staging)'
+  retryDuration: null
   schemaVersion: 5.11.0.2
-  timeZone: America/New_York
+  timeZone: Asia/Kolkata

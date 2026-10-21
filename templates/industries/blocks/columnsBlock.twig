@@ -16,7 +16,7 @@
       <div class="cols__col cols__col--{{ column.style }}">
         {% if column.style == 'panel' %}<span class="dot-grid dot-grid--panel" aria-hidden="true"></span>{% endif %}
         <div class="prose">
-          {% for b in column.blocks %}{% include '_builder/' ~ b.type.handle ignore missing with { block: b, anchors: {} } only %}{% endfor %}
+          {% for b in column.blocks %}{{ layout.builderBlock(b) }}{% endfor %}
         </div>
       </div>
       {% endfor %}

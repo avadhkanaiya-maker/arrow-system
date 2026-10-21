@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: cssClass
+instructions: 'Your own class names for this block, separated by spaces (letters, numbers, - and _), e.g. “promo-box”. Style them in Custom CSS (the page’s Custom CSS tab, or Globals → Site Settings → Custom CSS for every page).'
+name: 'CSS Class'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Arrow Systems — Black header and footer (client request 2026-10-19, third pass, refined)
+   Loaded after css/home.css by every page except the *-backup pages, which keep the previous light header and footer.
+   The previous dark design (graphite, close to the live site) is kept in css/dark-chrome-backup.css: copy it over this
+   file to bring it back.
+   Designed not to look like the live site's charcoal bar with a red rule. Soft charcoal (#1A1B1F), not pure black:
+     - Header: soft charcoal bar. The menu sits in a rounded capsule; the open item becomes a red pill. Round icon
+       buttons and a pill-shaped "Request a Quote" with an arrow. On desktop the bar turns slightly see-through with
+       a blur while the page scrolls. Menus, dropdowns, the search panel and the phone drawer stay white.
+     - Footer: soft charcoal, the site's blueprint grid fading in from the top-right corner and a faint sheet of die-cut
+       labels (rounded label shapes in rows) fading in from the bottom-right corner,
+       the logo and contact details in their own panel, small uppercase column titles marked with a red square, and
+       generous space between the parts. (Client feedback 2026-10-19: no colour strip; grid and a printer-with-ink-bottles drawing instead of dots, arrows, the registration mark or the label roll.)
+   The logo uses assets/brand/ASI-Logo-4-light.webp (white lettering, same red arrow).
+   ========================================================================== */
+:root {
+  --ink-black: #1A1B1F;            /* header, utility bar, footer: soft charcoal, not pure black (client request) */
+  --ink-black-2: #23252A;          /* header gradient top */
+  --ink-text: #F4F4F5;
+  --ink-muted: #B3B5BA;            /* 7.7:1 on --ink-black */
+  --ink-red: #F05A61;              /* lighter brand red for icons on black */
+  --ink-line: rgba(255, 255, 255, .1);
+  --ink-hover: rgba(255, 255, 255, .08);
+  --ink-red-soft: #D63A42;         /* lighter brand red for the quote button and open menu item: white text still 4.6:1 */
+}
+
+/* ---------- Utility bar ---------- */
+.utility-bar { background: var(--ink-black); color: var(--ink-muted); border-bottom-color: var(--ink-line); --c-focus: #FFFFFF; }
+.utility-nav li + li { border-left-color: var(--ink-line); }
+.utility-nav a { transition: color .15s ease; }
+.utility-nav a:hover { color: var(--ink-text); }
+
+/* ---------- Header bar ---------- */
+.site-header {
+  --c-focus: #FFFFFF;
+  background: linear-gradient(180deg, var(--ink-black-2) 0%, var(--ink-black) 100%); color: var(--ink-text);
+  border-bottom: 1px solid var(--ink-line);
+}
+.site-header.is-compact { box-shadow: 0 12px 28px -14px rgba(0, 0, 0, .9); }
+.site-header .icon-btn { border-radius: 50%; }
+.site-header .icon-btn:hover, .header-phone:hover { background: var(--ink-hover); }
+.header-phone .icon { color: var(--ink-red); }
+.site-header .header-cta {
+  gap: 8px; border-radius: 999px; background: var(--ink-red-soft); border-color: var(--ink-red-soft);
+  transition: background-color .2s ease, box-shadow .2s ease;
+}
+@media (min-width: 90em) { .site-header .header-cta::after { content: "\2192"; font-weight: 700; transition: transform .2s ease; } } /* arrow, where the row has room */
+.site-header .header-cta:hover { background: var(--c-red); border-color: var(--c-red); box-shadow: 0 0 0 4px rgba(214, 58, 66, .25); }
+.site-header .header-cta:hover::after { transform: translateX(3px); }
+/* White panels inside the header keep their dark text and maroon focus ring */
+.site-search, .site-nav { color: var(--c-ink); }
+.site-search .icon-btn:hover { background: var(--c-surface); }
+
+@media (min-width: 75em) {
+  .site-nav { --c-focus: #FFFFFF; color: var(--ink-text); }
+  /* Menu capsule */
+  .nav-list {
+    align-self: center; align-items: center; gap: 0; padding: 3px;
+    border: 1px solid var(--ink-line); border-radius: 999px; background: rgba(255, 255, 255, .035);
+  }
+  :root { --header-h: 92px; }   /* more air above and below; the scrolled (compact) height is unchanged */
+  /* Header row a little wider than the page content, so it has room; the footer uses the same width so both start and end at the same edges */
+  .site-header__inner, .utility-bar__inner, .site-footer__main, .site-footer__legal-inner { width: min(100% - var(--gutter) * 2, 1400px); }
+  .site-header__inner { gap: 14px; }
+  .site-header__actions { gap: 8px; }
+  .nav-trigger { border-radius: 999px; padding: 9px 10px; color: var(--ink-text); transition: background-color .15s ease, color .15s ease; }
+  .nav-trigger::after { display: none; } /* the red pill replaces the underline */
+  .nav-trigger:hover { background: rgba(214, 58, 66, .22); color: #FFFFFF; } /* soft red tint */
+  .nav-trigger[aria-expanded="true"] { background: var(--ink-red-soft); color: #FFFFFF; }
+  .header-phone { border-left-color: var(--ink-line); }
+  .header-phone:hover { background: none; }
+  .nav-panel { color: var(--c-ink); }
+  .nav-panel--dropdown { margin-top: 10px; border-top: 1px solid var(--c-line); border-radius: var(--radius); }
+  /* See-through bar while scrolled. Desktop only: a backdrop filter would trap the phone drawer (position: fixed) inside the bar. */
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-header.is-compact { background: rgba(26, 27, 31, .86); -webkit-backdrop-filter: blur(12px) saturate(140%); backdrop-filter: blur(12px) saturate(140%); }
+  }
+}
+
+/* More room between the header's parts on wide screens (the menu capsule stays centred in the free space) */
+@media (min-width: 90em) {
+  .site-header__inner { gap: 24px; }
+  .site-header__actions { gap: 12px; }
+  .nav-list { gap: 2px; padding: 4px; }
+  .nav-trigger { padding: 9px 13px; }
+}
+@media (min-width: 100em) {
+  .site-header__inner { gap: 28px; }
+  .nav-trigger { padding: 9px 15px; }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  --c-focus: #FFFFFF;
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--ink-black);
+  color: var(--ink-muted); border-top: 0;
+}
+.site-footer::before { /* sheet of die-cut labels (rounded label shapes in rows), fading in from the bottom-right corner */
+  content: ""; position: absolute; z-index: -1; right: 0; bottom: 0; width: min(55%, 720px); height: 75%; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='44' viewBox='0 0 64 44' fill='none' stroke='%23FFFFFF' stroke-opacity='.09' stroke-width='1'%3E%3Crect x='4.5' y='4.5' width='55' height='35' rx='7'/%3E%3C/svg%3E") right bottom / 64px 44px;
+  -webkit-mask-image: radial-gradient(100% 100% at 100% 100%, #000 0%, rgba(0, 0, 0, .4) 45%, transparent 75%);
+  mask-image: radial-gradient(100% 100% at 100% 100%, #000 0%, rgba(0, 0, 0, .4) 45%, transparent 75%);
+}
+@media (max-width: 63.99em) { .site-footer::before { display: none; } } /* tall stacked footer on small screens: pattern would sit behind the links */
+.site-footer::after { /* blueprint grid (as behind the page headers), fading in from the top-right corner */
+  content: ""; position: absolute; z-index: -1; top: 0; right: 0; width: min(70%, 900px); height: 100%; pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, .07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 56px 56px; background-position: right top;
+  -webkit-mask-image: radial-gradient(110% 100% at 100% 0%, #000 0%, rgba(0, 0, 0, .35) 40%, transparent 72%);
+  mask-image: radial-gradient(110% 100% at 100% 0%, #000 0%, rgba(0, 0, 0, .35) 40%, transparent 72%);
+}
+.site-footer a { color: var(--ink-text); }
+/* More space between the footer's parts */
+.site-footer__main { padding-block: clamp(56px, 6vw, 88px) clamp(48px, 5vw, 72px); gap: 48px; }
+.site-footer__nav { gap: 40px 32px; }
+.footer-col__title { margin-bottom: 18px; }
+.footer-col li + li { margin-top: 11px; }
+@media (min-width: 64em) { .site-footer__main { gap: clamp(56px, 6vw, 96px); } }
+.site-footer__legal-inner { padding-block: 24px; }
+
+/* Brand panel */
+.site-footer__brand {
+  align-self: start; padding: clamp(20px, 2.4vw, 28px);
+  border: 1px solid var(--ink-line); border-radius: 18px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, .02) 100%);
+}
+.site-footer__contact .icon { color: var(--ink-red); }
+.social a { border-color: var(--ink-line); border-radius: 12px; background: rgba(255, 255, 255, .04); color: var(--ink-text); transition: background-color .2s ease, border-color .2s ease; }
+.social a:hover { border-color: var(--c-red); background: var(--c-red); color: #FFFFFF; }
+
+/* Link columns: small uppercase titles marked with a red square */
+.footer-col__title { display: flex; align-items: center; gap: 8px; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: #FFFFFF; }
+.footer-col__title::after { order: -1; width: 7px; height: 7px; margin: 0; border-radius: 1px; background: var(--c-red); }
+.footer-col a, .legal-links a { color: var(--ink-muted); }
+.footer-col a { transition: color .15s ease; }
+.footer-col a:hover, .legal-links a:hover { color: #FFFFFF; }
+
+.site-footer__legal { border-top-color: var(--ink-line); }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header .header-cta:hover::after { transform: none; }
+}

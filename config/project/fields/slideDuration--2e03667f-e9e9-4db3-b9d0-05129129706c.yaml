@@ -1,0 +1,19 @@
+columnSuffix: null
+handle: slideDuration
+instructions: 'How long the slide shows before the next one. Empty = 7 seconds (images) or 20 seconds (videos).'
+name: 'Display Time'
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: 120
+  min: 3
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  step: null
+  suffix: seconds
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

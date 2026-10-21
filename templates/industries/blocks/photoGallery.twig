@@ -5,11 +5,12 @@
   industries/_entry). startIndex = photos before this gallery on the page (the lightbox numbers all photos together).
   Vars: block, startIndex
 #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% set photos = block.galleryImages.all() %}
 {% set anchor = block.anchorId|trim ?: 'gallery-' ~ block.id %}
 {% if photos|length %}
-  <section class="section section--surface gallery-section" id="{{ anchor }}"{% if block.sectionHeading %} aria-labelledby="{{ anchor }}-title"{% else %} aria-label="Photo gallery"{% endif %}>
+  <section class="section section--surface gallery-section{{ layout.customClass(block) }}" id="{{ anchor }}"{% if block.sectionHeading %} aria-labelledby="{{ anchor }}-title"{% else %} aria-label="Photo gallery"{% endif %}>
     <div class="container">
       {% if block.sectionHeading or block.eyebrow %}
       <header class="section-head section-head--split">

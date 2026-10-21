@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: slideType
+instructions: 'Image = a ready-made banner. Video = an uploaded video file or a YouTube link, with the banner image as its poster.'
+name: 'Slide Type'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Image
+        -
+          - value
+          - image
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - Video
+        -
+          - value
+          - video
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

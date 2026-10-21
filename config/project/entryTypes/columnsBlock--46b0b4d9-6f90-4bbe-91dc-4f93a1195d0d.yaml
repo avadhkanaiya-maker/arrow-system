@@ -167,6 +167,23 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6e1da127-f13d-4746-88f5-4645175ad777
+            userCondition: null
+            warning: null
+            width: 100
         name: 'Section Settings'
         uid: efa8af4e-5283-4df2-a081-0ef3448cbc62
         userCondition: null

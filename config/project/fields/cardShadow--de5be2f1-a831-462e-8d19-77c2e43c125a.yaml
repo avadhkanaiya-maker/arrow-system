@@ -1,0 +1,44 @@
+columnSuffix: null
+handle: cardShadow
+instructions: 'A shadow under every card in this grid. None = flat cards with a border.'
+name: 'Card Shadow'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - None
+        -
+          - value
+          - none
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - Soft
+        -
+          - value
+          - soft
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Strong
+        -
+          - value
+          - strong
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

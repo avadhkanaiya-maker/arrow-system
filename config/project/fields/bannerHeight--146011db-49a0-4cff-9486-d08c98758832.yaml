@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: bannerHeight
+instructions: 'Whole image = the full picture. Short strip = a band about 320 px tall, cropped from the middle (good for textures and wide scenes).'
+name: 'Banner Height'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Whole image'
+        -
+          - value
+          - whole
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Short strip (cropped)'
+        -
+          - value
+          - strip
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

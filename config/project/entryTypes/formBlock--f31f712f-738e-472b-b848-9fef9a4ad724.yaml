@@ -133,6 +133,40 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 4627ccc0-128f-494c-b994-8376af4f5013 # Form Width
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d1d166ab-cf3a-4bfb-b000-cafcd9300cd3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bbf048f7-bd53-4c3c-8718-98ea06097876
+            userCondition: null
+            warning: null
+            width: 100
         name: 'Section Settings'
         uid: ac717219-7803-4004-a445-63b097202576
         userCondition: null

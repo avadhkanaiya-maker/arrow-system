@@ -2,6 +2,7 @@
   5. Other industries (design: ".ind-more"): the picked industries, else the next 3 listed industries after this one
   (wrapping round), never this page. Vars: block, entry, listingPage
 #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
 {% set picked = block.relatedIndustries.with(['featuredImage']).all() %}
@@ -13,7 +14,7 @@
   {% set industries = ([]|merge(after)|merge(listed|filter(i => i.lft < entry.lft)))|slice(0, 3) %}
 {% endif %}
 {% if industries|length %}
-  <section class="section section--surface ind-more" aria-labelledby="more-title">
+  <section class="section section--surface ind-more{{ layout.customClass(block) }}" aria-labelledby="more-title">
     <div class="container">
       <header class="section-head section-head--split">
         <div>

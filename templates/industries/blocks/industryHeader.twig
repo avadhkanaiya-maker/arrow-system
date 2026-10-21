@@ -1,9 +1,15 @@
-{# 1. Industry header (design: ".ind-detail-hero"): breadcrumb, small heading, H1 ([red] words), intro (a blank line = a new paragraph),
-   applications, image (empty = the industry's Card Photo, else its Social Image), buttons. Vars: block, entry, listingPage #}
+{# 1. Page Header (industries and Pages; design: ".ind-detail-hero"): breadcrumb, small heading, H1 ([red] words), intro (a blank
+   line = a new paragraph), applications, image (empty = the page's Card Photo, else its Social Image), buttons.
+   Header Style: Image beside text (default) · Full-width banner (.page-banner, craft.css): the text first, then the image
+   on its own across the full content width, shown whole (not cropped, nothing on it), as the blog posts' cover; without
+   an image it falls back to the default. Banner Height "Short strip": a cropped band instead of the whole image.
+   Vars: block, entry, listingPage #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
 {% set image = block.mediaImage.one() ?? entry.featuredImage.one() ?? entry.socialImage.one() %}
-  <section class="page-hero ind-detail-hero" aria-labelledby="page-title">
+{% set banner = image and (block.headerStyle.value ?? '') == 'banner' %}
+  <section class="page-hero ind-detail-hero{{ banner ? ' page-banner' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
     <div class="container">
       {% include 'industries/blocks/_breadcrumb' with { entry: entry, listingPage: listingPage } only %}
       <div class="ind-detail-hero__grid">
@@ -26,7 +32,7 @@
           </div>
           {% endif %}
         </div>
-        {% if image %}
+        {% if image and not banner %}
         <figure class="ind-detail-hero__media">
           <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
           <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
@@ -35,5 +41,14 @@
         </figure>
         {% endif %}
       </div>
+      {% if banner %}
+      <figure class="page-banner__cover{{ (block.bannerHeight.value ?? '') == 'strip' ? ' page-banner__cover--strip' }}">
+        <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
+        <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
+        <span class="crop crop--bl" aria-hidden="true"></span><span class="crop crop--br" aria-hidden="true"></span>
+        {% set size = {width: min(1600, image.width)} %}{# up to 1600 px wide (shown at 1280 max), never enlarged or cropped #}
+        <img src="{{ image.getUrl(size) }}" width="{{ image.getWidth(size) }}" height="{{ image.getHeight(size) }}" fetchpriority="high" alt="{{ image.alt }}">
+      </figure>
+      {% endif %}
     </div>
   </section>

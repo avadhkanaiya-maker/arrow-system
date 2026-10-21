@@ -20,6 +20,7 @@
   (css/js exhibitions/detail.*). SEO: WebPage + BreadcrumbList; og:type article (as live).
 #}
 {% extends '_layouts/base' %}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 
 {% set isPage = entry.section.handle == 'pages' %}
@@ -93,7 +94,7 @@
     {% elseif group.type == 'common' %}
   <section class="section ind-prose">
     <div class="container"><div class="prose">
-      {% for block in group.blocks %}{% include '_builder/' ~ block.type.handle ignore missing with { block: block, anchors: {} } only %}{% endfor %}
+      {% for block in group.blocks %}{{ layout.builderBlock(block) }}{% endfor %}
     </div></div>
   </section>
     {% elseif group.type == 'photoGallery' %}

@@ -1,0 +1,37 @@
+columnSuffix: null
+handle: videoFile
+instructions: 'Upload an MP4 (H.264, ideally under 10 MB, 16:9). It starts instantly, without YouTube. Leave empty to use the YouTube link.'
+name: 'Video File'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowSubfolders: false
+  allowUploads: true
+  allowedKinds:
+    - video
+  branchLimit: null
+  defaultPlacement: end
+  defaultUploadLocationSource: 'volume:b3b70498-0206-4b1d-a0a5-d8dd21371549' # Images
+  defaultUploadLocationSubpath: hero
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
+  previewMode: full
+  restrictFiles: true
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: null
+  restrictedLocationSubpath: null
+  selectionLabel: null
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  sources:
+    - 'volume:b3b70498-0206-4b1d-a0a5-d8dd21371549' # Images
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Assets

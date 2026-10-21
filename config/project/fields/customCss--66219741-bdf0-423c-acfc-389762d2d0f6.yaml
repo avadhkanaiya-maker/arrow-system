@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: customCss
+instructions: 'CSS for your classes, e.g. `.promo-box { background: #f5f5f5; }` (no <style> tag). Applies after the site’s own CSS. Test on a draft first.'
+name: 'Custom CSS'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: true
+  initialRows: 12
+  multiline: true
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

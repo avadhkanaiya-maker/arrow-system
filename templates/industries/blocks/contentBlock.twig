@@ -4,6 +4,7 @@
   text, optional link (the design's markup). Without image / video: heading left, text right (craft.css
   .content-block--text); without a heading too, the text spans the width (--plain). Vars: blocks, entry
 #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/links' as links %}
 {% import '_macros/text' as text %}
   <section class="section ind-blocks" aria-label="{{ (entry.title ~ ' solutions')|lower|capitalize }}">
@@ -16,7 +17,7 @@
       {% set link = block.ctaLink and block.ctaLink.url ? block.ctaLink : null %}
       {% set anchor = block.anchorId|trim ?: 'block-' ~ block.id %}
       {% if image or video %}
-      <article class="content-block" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
+      <article class="content-block{{ layout.customClass(block) }}" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
         {% if video %}
         <div class="content-block__media content-block__media--video">
           <div class="video" data-video="{{ videoId }}">
@@ -44,7 +45,7 @@
         </div>
       </article>
       {% else %}
-      <article class="content-block content-block--text{{ block.headingText or block.eyebrow ? '' : ' content-block--plain' }}" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
+      <article class="content-block content-block--text{{ block.headingText or block.eyebrow ? '' : ' content-block--plain' }}{{ layout.customClass(block) }}" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
         {% if block.headingText or block.eyebrow %}
         <div class="content-block__head">
           {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}

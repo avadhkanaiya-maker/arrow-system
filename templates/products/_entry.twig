@@ -15,6 +15,7 @@
   SEO: Product + BreadcrumbList (+ VideoObject) schema; og:type product; Robots (advanced) overrides robots (as live).
 #}
 {% extends '_layouts/base' %}
+{% import '_macros/layout' as layout %}
 {% import '_macros/links' as links %}
 {% import '_macros/text' as text %}
 
@@ -210,7 +211,7 @@
   <section class="section pd-details">
     <div class="container">
       <div class="pd-block"><div class="prose">
-        {% for block in run.blocks %}{% include '_builder/' ~ block.type.handle ignore missing with { block: block, anchors: {} } only %}{% endfor %}
+        {% for block in run.blocks %}{{ layout.builderBlock(block) }}{% endfor %}
       </div></div>
     </div>
   </section>

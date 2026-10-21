@@ -1,0 +1,44 @@
+columnSuffix: null
+handle: formWidth
+instructions: 'How wide the form card is when the form is a section of its own. Inside Columns the column sets the width.'
+name: 'Form Width'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Wide
+        -
+          - value
+          - wide
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - Narrow
+        -
+          - value
+          - narrow
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Full width'
+        -
+          - value
+          - full
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

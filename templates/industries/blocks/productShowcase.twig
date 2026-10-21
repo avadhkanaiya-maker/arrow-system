@@ -4,6 +4,7 @@
   in those product categories (newest first), How Many of them. One product: a wide card (craft.css .pgrid--one).
   Left out when there are none. Vars: block
 #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
 {% if (block.productSource.value ?: 'picked') == 'category' %}
@@ -15,7 +16,7 @@
 {% endif %}
 {% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
 {% if products|length %}
-  <section class="section section--surface ind-equipment" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
+  <section class="section section--surface ind-equipment{{ layout.customClass(block) }}" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
     <div class="container">
       <header class="section-head section-head--split">
         <div>

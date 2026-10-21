@@ -1,13 +1,13 @@
 {#
   Global footer:
-    brand, tagline, address, phones, email, social links → Globals → Site Settings
+    brand (Logo on Dark Background, else Logo), tagline, address, phones, email, social links → Globals → Site Settings
     link columns  → Footer Menu (level 1: column headings, level 2: the links)
     bottom bar    → © + Legal Menu
-  Markup is the approved design's (Arrowsystem_local/index.html).
+  Markup is the approved design's (Arrowsystem/index.html; dark styles: dark-chrome.css).
 #}
 {% import '_macros/links' as links %}
 {% import '_macros/nav' as nav %}
-{% set logo = siteSettings.logo.one() %}
+{% set logo = siteSettings.logoLight.one() ?? siteSettings.logo.one() %}{# the dark header / footer: the light-lettering logo #}
 {% set brandName = siteSettings.logoAlt ?: siteName %}
 {% set socialLabels = { facebook: 'Facebook', linkedin: 'LinkedIn', youtube: 'YouTube', instagram: 'Instagram' } %}
 

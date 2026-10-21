@@ -1,0 +1,33 @@
+columnSuffix: null
+handle: headerStyle
+instructions: 'Full-width banner: the image on its own under the text, across the full width and shown whole (like a blog post cover). Use a wide photo, 1600 px wide or more.'
+name: 'Header Style'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Image beside text'
+        -
+          - value
+          - split
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Full-width banner'
+        -
+          - value
+          - banner
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

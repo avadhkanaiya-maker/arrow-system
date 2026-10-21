@@ -221,6 +221,29 @@ fieldLayouts:
         name: SEO
         uid: ba81935b-edb8-479a-b6aa-870f62c2559f
         userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 66219741-bdf0-423c-acfc-389762d2d0f6 # Custom CSS
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b1e090bb-ecf0-4438-9f23-acb654fedf8f
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Custom CSS'
+        uid: d7690a90-ab1c-44ca-9e5b-4da28573b840
+        userCondition: null
     thumbFieldKey: null
 handle: blogPost
 hasTitleField: true

@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: featuredProduct
+instructions: 'Products menu → a category item (e.g. Label Finishers) only: the product in the box on the right while this category is open (its card photo, name and tagline). Empty = no product box for this category (only the extra links). Ignored on other items.'
+name: 'Featured Product'
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  defaultPlacement: end
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
+  selectionLabel: 'Choose a product'
+  showSearchInput: true
+  showSiteMenu: false
+  showUnpermittedEntries: false
+  showUnpermittedSections: false
+  sources:
+    - 'section:7e1cfbd5-d179-4bf5-9dfa-258ac1f2e8b9' # Products
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

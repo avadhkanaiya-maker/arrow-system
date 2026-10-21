@@ -2,8 +2,10 @@
   Page shell from the homepage design (Arrowsystem_local/index.html): <head>, icon sprite, header, <main> (page content +
   newsletter band), footer.
   Header and footer menus come from the Navigation plugin (CP → Navigation → Menus): _partials/navigation/.
-  Styles and behaviour are the design's own files, unchanged: web/assets/css/site.css and web/assets/js/site.js.
-  web/assets/css/craft.css (loaded after site.css) holds fixes and additions for the Craft templates.
+  Styles and behaviour are the design's own files, unchanged: web/assets/css/site.css and web/assets/js/site.js
+  (= Arrowsystem/css/home.css and js/home.js, copied 2026-10-21 with the hero video).
+  web/assets/css/dark-chrome.css (the design's dark header and footer, Arrowsystem/css/dark-chrome.css, unchanged) is
+  loaded after site.css; web/assets/css/craft.css (last) holds fixes and additions for the Craft templates.
   Blocks for child templates:
     {% block title %}  <title> (default: entry title | site name)
     {% block seo %}    meta description, canonical, robots, Open Graph, JSON-LD (blog pages: include '_partials/seo')
@@ -26,9 +28,14 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap">
   <link rel="icon" href="{{ favicon ? favicon.url : 'data:,' }}">
   <link rel="stylesheet" href="{{ url('assets/css/site.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/css/dark-chrome.css') }}">
   <link rel="stylesheet" href="{{ url('assets/css/craft.css') }}">
   {% block head %}{% endblock %}
+  {# the admin's Custom CSS: site-wide (Site Settings) then this page's, after the site's CSS so it wins; "<" removed so it can't close the tag #}
+  {% set customCss = [siteSettings.customCss ?? '', entry.customCss ?? '']|filter(c => c|trim)|join("\n") %}
+  {% if customCss %}<style>{{ customCss|replace({'<': ''})|raw }}</style>{% endif %}
   <script src="{{ url('assets/js/site.js') }}" defer></script>
+  <script src="{{ url('assets/js/craft.js') }}" defer></script>
 </head>
 <body>
 {% include '_partials/icon-sprite' %}

@@ -9,19 +9,94 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c7a13559-c602-4876-a22f-6450d52e0fd7 # Slide Type
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ac8c223c-9ebe-4dd4-9388-f2c5a5f5ff56
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-10-12T10:09:26+00:00'
             editCondition: null
             elementCondition: null
             elementEditCondition: null
             fieldUid: cf2f7a05-3513-4370-85bf-521a72260189 # Banner Image
             handle: null
-            instructions: null
-            label: null
+            instructions: 'Image slide: the ready-made banner, 1920 × 600 px (16:5). Video slide: the poster shown until the video plays (16:9, e.g. 1280 × 720). Fill in its Alt Text.'
+            label: 'Banner Image / Video Poster'
             oldFieldUid: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 69e8beb7-e373-4af4-981f-b14219a28ebf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\OptionsFieldConditionRule
+                  fieldUid: c7a13559-c602-4876-a22f-6450d52e0fd7 # Slide Type
+                  layoutElementUid: ac8c223c-9ebe-4dd4-9388-f2c5a5f5ff56
+                  operator: in
+                  uid: 213bcd8f-2f7e-40ab-a482-4148491fd64d
+                  values:
+                    - video
+              elementType: craft\elements\Entry
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 0f1b9be9-36a4-4653-b018-d2852e2a07b8 # Video File
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 21e7dc18-ada8-42fb-b63d-6ceafa166011
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\OptionsFieldConditionRule
+                  fieldUid: c7a13559-c602-4876-a22f-6450d52e0fd7 # Slide Type
+                  layoutElementUid: ac8c223c-9ebe-4dd4-9388-f2c5a5f5ff56
+                  operator: in
+                  uid: 7b5707c5-2af0-4b0b-b7cf-80314a9e1338
+                  values:
+                    - video
+              elementType: craft\elements\Entry
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
+            handle: null
+            instructions: 'Or a YouTube link (watch, youtu.be, shorts …) or the video ID. Used when no Video File is uploaded.'
+            label: 'YouTube Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 59eb5dce-3191-4047-8ef5-06b92467b489
             userCondition: null
             warning: null
             width: 100
@@ -90,6 +165,23 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 07b3f269-283c-4222-8ac8-460da64575f6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2e03667f-e9e9-4db3-b9d0-05129129706c # Display Time
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fdc4a5ec-3e22-40f6-93c0-0021efeae32e
             userCondition: null
             warning: null
             width: 100

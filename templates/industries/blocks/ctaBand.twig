@@ -1,9 +1,10 @@
 {# CTA Band (shared with the homepage: Heading, Intro, Button, Anchor ID) as the industries' maroon help band (design: industries/index.html "HELP BAND"); first button = phone from Site Settings. Vars: block #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
 {% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
 {% set phone = siteSettings.tollFreePhone ?? null %}
-  <section class="sustain ind-cta" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
+  <section class="sustain ind-cta{{ layout.customClass(block) }}" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
     <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
     <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
     <div class="container sustain__inner">

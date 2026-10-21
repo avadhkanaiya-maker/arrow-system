@@ -456,6 +456,14 @@ h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
   mask-image: linear-gradient(90deg, transparent 0, #000 2.5%, #000 97.5%, transparent 100%);
 }
 .hero-slide__hit { position: absolute; inset: 0; z-index: 1; }
+/* Video slide (js/home.js): YouTube or an uploaded file, covers the stage, shown as soon as it plays. */
+.hero-slide__video { position: absolute; inset: 0; overflow: hidden; background: #0B0B0C; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.hero-slide__video.is-ready { opacity: 1; }
+.hero-slide__video iframe { position: absolute; top: 50%; left: 0; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; transform: translateY(-50%); }
+.hero-slide__video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } /* uploaded video file */
+/* Video slide: its poster (the video's thumbnail) fills the stage like the video does. */
+.hero-slide--video .hero-slide__stage { background: #0B0B0C; }
+.hero-slide--video .hero-slide__art { width: 100%; object-fit: cover; object-position: 50% 8%; } /* keep the product name in view */
 
 .hero-caption { display: grid; gap: 18px; padding-block: 72px 32px; } /* top space holds the controls row */
 .hero-slide__kicker {
@@ -505,7 +513,7 @@ h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
   /* One row: name left, CTAs and controls right. Desktop artwork carries the tagline, so the lead/tags are mobile-only. */
   .hero-caption {
     grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 32px;
-    padding-block: 22px 26px; padding-right: 368px;
+    padding-block: 22px 26px; padding-right: var(--hero-controls-w, 368px); /* js/home.js sets the controls' real width */
   }
   .hero-slide__lead, .hero-slide__tags { display: none; }
   .hero-caption__actions { margin-top: 4px; flex-wrap: nowrap; }
@@ -514,7 +522,7 @@ h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
 @media (min-width: 64em) and (max-width: 74.99em) {
   /* Narrow desktop: name on its own row beside the controls, CTAs below. */
   .hero-caption { padding-right: 0; grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .hero-caption__text { padding-right: 368px; }
+  .hero-caption__text { padding-right: var(--hero-controls-w, 368px); }
 }
 
 /* ==========================================================================

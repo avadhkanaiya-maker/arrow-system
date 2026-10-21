@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: logo
-instructions: 'Header and footer logo. Replace with the official master SVG when supplied.'
+instructions: 'The logo with dark lettering, for light backgrounds. (The dark header and footer use Logo on Dark Background.)'
 name: Logo
 searchable: false
 settings:

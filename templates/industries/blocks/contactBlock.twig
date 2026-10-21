@@ -4,10 +4,11 @@
   js/industries/industry-detail.js checks the fields and says so. Privacy link: Globals → Newsletter → note link.
   Vars: block
 #}
+{% import '_macros/layout' as layout %}
 {% import '_macros/links' as links %}
 {% set anchor = block.anchorId|trim ?: 'contact' %}
 {% set privacy = newsletter.noteLink ?? null %}
-  <section class="section ind-contact" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
+  <section class="section ind-contact{{ layout.customClass(block) }}" id="{{ anchor }}" aria-labelledby="{{ anchor }}-title">
     <div class="container ind-contact__grid">
       <div class="contact-panel">
         <span class="dot-grid dot-grid--panel" aria-hidden="true"></span>

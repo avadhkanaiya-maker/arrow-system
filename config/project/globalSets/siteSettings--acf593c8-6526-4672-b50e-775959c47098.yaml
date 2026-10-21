@@ -27,6 +27,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 24e67e77-5100-454c-b0a6-9a6c77eed937 # Logo on Dark Background
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4d4cb8ce-3971-44cc-ba53-4c27aae35bbd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: ebc55264-1f5f-49e0-86ae-6ab767c1e4fd # Logo Alt Text
             handle: null
             instructions: null
@@ -212,6 +229,29 @@ fieldLayouts:
             width: 100
         name: Social
         uid: 1b105574-21f6-4b11-ab20-d90c928ea706
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 66219741-bdf0-423c-acfc-389762d2d0f6 # Custom CSS
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 86028a1b-fdc4-4cca-b4ba-552997e4dd87
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Custom CSS'
+        uid: 53d071a7-3f18-4e20-b237-86800281459d
         userCondition: null
     thumbFieldKey: null
 handle: siteSettings

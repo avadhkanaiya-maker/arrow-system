@@ -1902,6 +1902,199 @@ columns stretched to the same height, article-size text in the panel / card).
   their `data/`, the docs. First commit ≈ 21 MB. Checked: no `.env` secret appears in any file that would be committed.
 - Next: `git init` + first commit (by the user), then `QA_SETUP.md` updated for clone + `composer install`.
 
+## Phase 34: Dark header and footer (the design's 2026-10-19 version)
+
+Source: the design on the server (`Arrowsystem/`, CHANGELOG 2026-10-19 "Dark header and footer" … "Lighter red on menu
+hover … label-sheet pattern in the footer"). The design changed the look with one stylesheet and a light logo; the
+header / footer HTML was already the same as the staging templates render.
+- `web/assets/css/dark-chrome.css`: the design's file, copied unchanged; loaded after site.css (base.twig).
+- **Globals → Site Settings → Brand:** + **Logo on Dark Background** (`logoLight`) = the design's
+  ASI-Logo-4-light.webp (Images root); the header and footer use it (else the Logo). Logo's instructions updated.
+- **Main Menu** (Navigation), as the design's menus now (`storage/imports/navigation/01_dark_header.php`, idempotent,
+  finds items by title): Gerber Plotters → end of Label Finishers ("Gerber cutting plotters"); "Partner Product Lines"
+  → **Specialty Printers** (Matan SprinG3, Gerber Edge FX, Corrugated & End-of-Line) as the last category of "Arrow
+  Systems equipment"; Gerber Foils, Gerber Premium Cast Vinyl Film, 3M Aviation Films → **Materials**; the empty
+  "Partner Brands" group deleted. Menu management unchanged (same menus, item types and fields).
+- Checked: header / footer structure = the design's (left: links to staging's own pages, the admin's cut-out featured
+  photo); screenshots design vs staging at 1440 and 390 px (header, footer: identical); Products mega (Specialty
+  Printers) and Materials open with the design's items; no JS errors.
+- Not copied (not header / footer): the design's homepage hero video changes in home.css / home.js.
+
+## Phase 35: Homepage hero, video slides (uploaded file or YouTube link)
+
+The design's hero video (Arrowsystem/, CHANGELOG 2026-10-19 hero video entries). `storage/imports/homepage/01_hero_video.php`
+(idempotent; keeps the existing slide fields' layout elements, so the slides keep their content):
+- **Hero Slide** fields: **Slide Type** (Image / Video), **Video File** (upload, video files, into Images → hero/) and
+  **YouTube Link** (the existing Video Link field; any YouTube URL or the ID), both shown only for Slide Type = Video
+  (field layout conditions); **Banner Image / Video Poster** (for a video: the poster, until it plays and for reduced
+  motion); **Display Time** (seconds; empty = 7 s, or 20 s for a video).
+- Front end: `_blocks/home/hero-slider.twig` outputs the design's video slide (`hero-slide--video`, `data-interval`,
+  `.hero-slide__video` with `data-hero-video-src` for a file, else `data-hero-video`); a file wins over a link.
+  `web/assets/css/site.css` and `js/site.js` replaced by the design's current home.css / home.js (they differ from the
+  previous copies only by the hero video handling): muted autoplay, no controls, replay from the start, keeps playing
+  while hidden (no YouTube pause button on return), controls' width measured.
+- Content: the design's video slide added first: "ArrowJet MTS-48 in Action" (YouTube HjWQU9GJ4bI, the design's poster,
+  Explore Product → the MTS-48 product, 20 s). The 5 image slides unchanged.
+- Fixed on the way: a field layout condition set from a script needs `elementType` in its config and the layout saved
+  first, else Craft silently drops it.
+- Checked in a browser: YouTube slide → player loads and plays; an uploaded MP4 (temporary test, removed) → native video
+  plays at once, wins over the link; Next / 6 dots work; no JS errors; desktop + phone screenshots. Upload limits:
+  Craft's maxUploadFileSize default 16 MB, PHP (XAMPP) 40 MB.
+
+## Phase 36: Products mega menu, a featured product per category
+
+`storage/imports/navigation/02_category_featured.php` (idempotent): Main Menu items get **Featured Product** (Entries →
+Products, one). On a Products **category** item (Digital Label Printers, Label Finishers …) it sets the box on the right
+while that category is open: the product's Card Photo (else Main Image), name (Card Title else title), Card Tagline,
+"Explore Product" → its page. Categories without a pick show the menu's own box (Navigation → Main Menu → Products box),
+as before; the "Compare Models / Used Equipment" links stay under every box. Featured Text's help text corrected (it
+promised a tagline fallback the menu box doesn't have).
+- Templates: `_partials/navigation/mega-feature.twig` (one box), `mega-products.twig` (the default box + one hidden box
+  per category with a pick). `web/assets/js/craft.js` (new, loaded after site.js; Craft-only behaviour, the design's
+  site.js unchanged): shows the open category's box, else the default (follows site.js's aria-expanded: click, keyboard,
+  default first category). Without JS / without picks: the default box only, as before. Phones: no box (design).
+- Checked in a browser with 2 temporary picks (removed after): opening each category switches the box; a category
+  without a pick shows the default; no JS errors. No picks set yet: the site looks as before.
+
+## Phase 37: Products box removed from the Main Menu content
+
+`storage/imports/navigation/03_remove_products_box.php` (idempotent): each category now picks its own Featured Product
+(Phase 36), so the hand-typed menu-level box is gone: the "Products box" tab left Navigation → Main Menu's own fields
+(the "Industries box" tab stays) and the fields Featured Title / Featured Text / Featured Link were deleted (used only
+there; Featured Image is the shared Card Photo field and stays). A category without a Featured Product shows only the
+extra links (Compare Models, Used Equipment) in a compact box (`mega__feature--links`, craft.css). Featured Product's
+help text updated.
+- Checked in a browser: a category with a pick shows its product + the links; without one, the links only; no JS
+  errors; screenshot. Note: a test run overwrote the admin's pick on Digital Label Printers (Digital Sleeking Film),
+  restored right after.
+
+## Phase 38: Product List block, dynamic products with photos
+
+`storage/imports/builder/02_product_list_dynamic.php` (idempotent; keeps the item's layout elements, so the 19 existing
+items keep their content). Each Product of a Product List (common block: blog, products, industries, pages, columns):
+- **Product or Link** (first): choose a product **entry** → its photo (Card Photo, else Main Image), name (Card Title,
+  else title) and text (Card Tagline) show automatically, as on the Recommended Products cards; or paste a URL.
+- The item's own **Image** (new, optional), **Name** (no longer required) and **Description** override them; Tag Line
+  as before. A URL item needs its Name; an item with no name at all is left out.
+- `_builder/productList.twig` (works for a link to any entry type); `craft.css`: the photo at the top of the card
+  (4:3, whole product on a light ground, like pcard__media); cards without a photo keep the text-only look. The blog's
+  product-card design (blog-detail.css) is otherwise unchanged.
+- Checked: every page using the block renders (the Roll-to-Roll post: 9 products, 9 photos; test pages: the URL item
+  text-only); screenshots desktop + phone; no sideways scroll at 390 px.
+
+## Phase 39: Page Header full-width banner; tables in collapsed blocks fixed
+
+- **Header Style** on the Page Header block (Pages + industries; `storage/imports/pages/06_header_style.php`, keeps the
+  layout elements): **Image beside text** (default, unchanged) or **Full-width banner**: the text first (breadcrumb, small
+  heading, H1, intro, tags, buttons), then the image on its own across the full content width, shown whole (not cropped,
+  no text on it) with the design's corner marks, as the blog posts' cover (review: the first version put the text on the
+  image). `industryHeader.twig` + `.page-banner` / `.page-banner__cover` in craft.css; image served up to 1600 px wide.
+  Without an image it falls back to the default. /contact-us/ switched to the banner (as live).
+- **"Add item" in tables did nothing** (Applications, Items, Spec List … inside a page-builder block): Craft's
+  EditableTable finishes setting up only when visible, else on the next window resize; our builders start blocks
+  collapsed (navigator.js), so a table in a collapsed block never finished. navigator.js now sends that resize whenever
+  a block opens (also nested ones). Checked in the CP: open the Page Builder tab, open the Page Header, Add item → rows
+  1 → 2 → 3 (not saved).
+- Checked: banner screenshots desktop + phone (aligned with the page edges, readable); industry pages unchanged (200).
+
+## Phase 40: Editor sidebar: entry settings above the Outline
+
+Review: the entry's settings (Slug, Parent, Author, Post / Expiry Date, Enabled, notes, ID …) back above the Outline
+(`modules/builderui/resources/navigator.js` + `navigator.css`, all builders: blog, products, industries, pages):
+- the Outline is the last item of the right-hand column; the column is no longer sticky itself (it runs the page's full
+  height), so the settings scroll away with the page and the **Outline sticks** under Craft's top bar, as tall as the
+  window (its list scrolls); near the end of the page it shrinks to the column's end, so it is always whole.
+- Checked in the CP (long blog post, Contact Us, a product): top of the page = settings, then the Outline; scrolled =
+  the Outline stuck at 71–797 px (window 813); end = whole (71–621 / 74–637); no JS errors.
+
+## Phase 41: Formie Submissions "Cards" view crash fixed
+
+Switching Formie → Submissions to the Cards view failed with "Attempt to read property "value" on string"
+(craft/helpers/Cp.php:1049): Formie 3.1.48 (the latest 3.x) gives Craft the submission status colours as plain strings
+("green"), Craft 5.11 expects its Color enum. `modules/forms/StatusesWithColors.php` (Formie's Statuses service with
+`getStatusesArray()` returning Color enums) replaces Formie's `statuses` service once the plugins are loaded
+(`modules/forms/Module.php`). Marked `shortcut:`: remove when upgrading to Formie 4 (statuses reworked; 4.0 is from
+2026-10-16, a major upgrade with migrations, not taken now). Checked: the card renders with its status label in PHP and
+in the CP (Cards view: 4 cards, 4 status labels, no HTTP errors); no new log errors.
+
+## Phase 42: Our Company page (/our-company/)
+
+`storage/imports/pages/07_our_company.php`. Live (https://arrsys.com/our-company/) has only a banner, the H1 and 3
+paragraphs; no design file exists. Redesigned with general blocks only, the live text word for word (typos too):
+Page Header (Full-width banner: "Our [Company]", paragraph 1, the live banner Our-Company.webp shown whole, buttons
+Request a Quote / Contact Us) · Stats Strip · Card Grid "Segments We Serve" (the 6 segments paragraph 1 names, each
+linked to its industry page with that page's card photo and summary; materials → live Label Materials, the design's
+material photo) · Content Block (paragraph 2, "Request a Free Quote") · CTA Band (paragraph 3, Contact Us). SEO as live
+(default title, the live meta description, which live cuts off mid-sentence). Main Menu and Footer "Our Company" now
+link to the page. Checked: 200, title / description / canonical / robots / og:image; desktop + phone screenshots.
+
+## Phase 43: Support page (/support/)
+
+`storage/imports/pages/08_support.php`, from live https://arrsys.com/support/ (no design file); live text word for
+word, general blocks only: Page Header (text only: the live background is a plain dark texture; buttons Call
+1-888-697-2749 and Send a Support Request → #support-form) · Columns [maroon panel: Contact Support (toll-free, direct,
+email, headquarters, the support partners line) | white card: Form block "Send a Support Request" with the Contact Us
+Formie form: live's text promises "the form below" but live has none] · CTA Band "Planning to Add [Capacity]?" (Request
+a Quote). SEO as live (title "Label Press & Finisher Support | Arrow Systems, Inc.", description). The Page Header
+buttons now also accept phone and email links (any page). Top bar "Support", Main Menu and Footer "Request Support"
+link to the page. Fixed in 07/08: the block-count self-check compared Craft's count (a string) strictly.
+Checked: 200, SEO tags, tel: button, form anchor; desktop + phone screenshots.
+
+## Phase 44: Page Header widths, Banner Height; the Support banner image
+
+- **Full-width banner:** the header text now spans the full content width too (intro without the 54-character cap).
+  **Image beside text:** an even 50 / 50 split on large screens (the design had 1fr / 1.05fr; industries too).
+  craft.css, two-class selectors (industry-detail.css loads after it).
+- **Banner Height** (new Page Header option, shown only for Full-width banner, `06_header_style.php`): Whole image
+  (default) or Short strip (cropped band, 160–320 px tall): `.page-banner__cover--strip`.
+- **/support/:** the Support banner **inner-banner-support-new.jpg** (1165 × 376: "24/7 Service, working with you around
+  the clock" + the ASI logo; live media library id 82) on the Page Header, Full-width banner, whole image
+  (`08_support.php`). First version wrongly took the page's CSS background (v1016-b-08-scaled.jpg, a plain dark
+  texture): the current live HTML / CSS / REST content don't reference the banner (found in the media library); the
+  texture asset was deleted.
+- Checked: screenshots of /support/, /our-company/ (banner, whole) and an industry page (50 / 50); the Banner Height
+  field shows for banner headers only.
+
+## Phase 45: Customer Service form and page (/customer-service/)
+
+- **Formie form "Customer Service"** (`customerService`, `storage/imports/forms/02_customer_service.php`): Formie's own
+  duplicate of Contact Us (same settings, honeypot, reCAPTCHA via .env, thank-you message, both notifications, but its
+  own fields), reshaped to the live form: Name*, Email*, Phone No.* (country picker, checked by modules/forms),
+  Message*, button Send. Admin Notification → admin_arrowsys@yopmail.com. The script stops if the copy shares fields
+  with Contact Us (a plain `duplicateElement()` does that; Contact Us stays 6 fields).
+- **/customer-service/** (`storage/imports/pages/09_customer_service.php`), live text word for word, general blocks:
+  Page Header, Image beside text ("We Provide 24 X 7 Customer [Service]", the live sentence, the live photo
+  people-working-call-center-1.jpg → Images / pages, button "Fill Up the Form" → `#customer-service-form`) + Form block
+  ("Fill Up Our Customer Service form", the Customer Service form). SEO as live (default title, the live description).
+- Main Menu and Footer "Customer Service" now link to the page.
+- Checked: 200, title / description / canonical, the 4 fields render; screenshots at 1440 and 390 px (no sideways
+  scroll); the script's second run changes nothing.
+- **Form Width** (review: "form is too small"; `storage/imports/pages/10_form_width.php`): a new option on the Form
+  block's Section Settings: Wide (default, 1100 px), Narrow (820 px, the old width), Full width (the content width).
+  It applies when the form is a section of its own; inside Columns the column sets the width. Only /customer-service/
+  had a section-level Form block, so no other page changed.
+
+## Phase 46: Card Shadow option (Card Grid)
+
+- **Card Shadow** (new option on the Card Grid block's Section Settings, `storage/imports/pages/11_card_shadow.php`):
+  None (default, the flat bordered cards as before), Soft (`--shadow-md`), Strong (`--shadow-lg`); linked cards still
+  lift on hover. `cardGrid.twig` adds `card-grid__list--shadow-soft|strong`; the styles are in craft.css.
+- Checked: existing grids render unchanged; Soft tried on /our-company/ (screenshot), then set back to None.
+
+## Phase 47: CSS Class and Custom CSS (admin-written styles)
+
+- **CSS Class** (`cssClass`, `storage/imports/pages/12_custom_css.php`): on the Section Settings tab of all 31 block
+  types of the Pages and Industries builders (the shared text blocks show it in the blog and product builders too, and
+  work there). Section blocks get the classes on their `<section>` (Page Header, Content Block on its card, Stats
+  Strip …); text blocks (Heading, Rich Text, Image …) get a `<div class="…">` around them. Only valid class names are
+  output (`_macros/layout.twig`: `customClass`, `builderBlock`; `sectionClass` adds it too).
+- **Custom CSS** (`customCss`, code textarea): a "Custom CSS" tab on pages, industries, products and blog posts (that
+  page only) and on Globals → Site Settings (every page). `_layouts/base.twig` writes both into one `<style>` after
+  the site's CSS (site-wide first, then the page's); `<` is removed so the text can't close the tag.
+- Checked: pages, an industry, a product, a blog post load (200); a test class + CSS on /customer-service/ (invalid
+  names dropped, a `</style><script>` attempt neutralised) and a class on a Rich Text block on /support/, both reverted.
+- Product-only blocks (Tabs, Specs, Downloads, Video, Applications) and homepage sections don't have CSS Class.
+
 ## Follow-ups
 
 | # | Item | Where |
