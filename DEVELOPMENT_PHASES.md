@@ -2095,6 +2095,476 @@ Checked: 200, SEO tags, tel: button, form anchor; desktop + phone screenshots.
   names dropped, a `</style><script>` attempt neutralised) and a class on a Rich Text block on /support/, both reverted.
 - Product-only blocks (Tabs, Specs, Downloads, Video, Applications) and homepage sections don't have CSS Class.
 
+## Phase 48: Request a Quote form and page (/request-quote/)
+
+- **Formie form "Request a Quote"** (`requestQuote`, `storage/imports/forms/03_request_quote.php`): Formie's duplicate
+  of Contact Us (own fields; settings, captchas and notifications as Contact Us), reshaped to the live form: Name* |
+  Email*, Phone No.* | Company, How Did You Hear About Us | Product Required*, Message*, button Send. Admin
+  Notification → admin_arrowsys@yopmail.com. Contact Us unchanged.
+- **/request-quote/** (`storage/imports/pages/13_request_quote.php`). Live has only the H1 and the form (no image, none
+  in the media library). Page Header "Request [Quote]" (no image) + Columns: maroon panel "Contact Us" (toll-free,
+  direct, email, headquarters from Site Settings, as /support/) | white card with the form (anchor `quote-form`).
+  SEO as live: title "Request Quote - Arrow Systems, Inc.", description "Request Quote".
+- **Links moved to the page:** Footer "Request a Quote"; Site Settings → Request a Quote Link (header and mobile
+  buttons); the Request a Quote buttons on /our-company/ (Page Header), /support/ (CTA Band), an industry Content Block
+  and the blog listing. Links typed inside rich text (7 product / blog texts, 1 industry text) still go to arrsys.com.
+- **Page Header, generic:** without any image the text now spans the full width (`page-banner` layout), instead of
+  half the width beside an empty column.
+- Checked: 200, title / description, the 7 fields render, header button → the page; screenshots at 1440 and 390 px;
+  the scripts' second runs change nothing.
+
+## Phase 49: Contact Us submissions from the live site
+
+- **642 live submissions** (Elementor export, 2022-08-22 to 2026-10-14) imported into the Formie form Contact Us
+  (`storage/imports/forms/04_live_submissions.php contactUs <csv>`): Name, Email, Number, Country, Message, How Did You
+  Hear About Us, the visitor's IP and the original date (the live site's time, UTC-4); title = that date, as Formie's
+  own titles; status New. Not kept: Elementor's submission ID, user agent, referrer.
+- The export writes text JSON-style (`\r\n`, `\"`, `\/`); the script decodes it, so messages keep line breaks, quotes
+  and non-Latin text. No emails sent (a directly saved submission triggers no notifications or integrations); saved
+  without validation (old numbers predate the per-country phone check).
+- Runs again safely (skips rows with the same email and date). The CSV holds personal data: it stays in Downloads,
+  not in the project. First run's duplicate check compared dates in different timezones and imported twice: restored
+  the backup taken just before, fixed, re-run.
+- The live data includes spam (SEO / Instagram offers, Cyrillic messages): imported as is, not marked as spam.
+- **Request a Quote: 157 live submissions** (2022-08-22 to 2026-09-29) imported the same way into the Formie form
+  Request a Quote (`04_live_submissions.php requestQuote ~/Downloads/request-a-quote-submission.csv`). The script is
+  now general: any form, each CSV column into the field with the same label (stops on a column without one).
+- **Customer Service: 14 live submissions** (2022-11-20 to 2026-10-18) imported into the Formie form Customer Service
+  (`04_live_submissions.php customerService ~/Downloads/customer-service-submissions.csv`).
+
+## Phase 50: Become a Dealer form and page (/become-a-dealer/)
+
+- **Formie form "Become a Dealer"** (`becomeADealer`, `storage/imports/forms/05_become_a_dealer.php`): Formie's
+  duplicate of Contact Us, reshaped to the live form: Name* | Email*, Contact No.* (country picker) | Country*,
+  Existing Business History (several lines, "Brief us in Few Words"), Existing Dealership details | Sales and Service
+  History, Reason For Becoming a Dealer*, button Send. Admin Notification → admin_arrowsys@yopmail.com.
+- **/become-a-dealer/** (`storage/imports/pages/14_become_a_dealer.php`), live text word for word: Page Header, Image
+  beside text ("Join Us To Dominate The Fast-Moving Label and Packaging [Industries]", the photo uploaded with the
+  live page: the handshake, media id 9924; button → `#dealer-form`) + Form block ("Fill Up The Form, We Will Get Back
+  To You"). SEO: the live title and description.
+- Live has no menu link to the page (only search finds it); here About → Become a Dealer and Footer → Company →
+  Become a Dealer now link to it.
+- Checked: 200, title / description, the 8 fields render, both menu links; screenshots at 1440 and 390 px; the
+  scripts' second runs change nothing.
+
+## Phase 51: Tabs block on Pages / industries; Gerber Foils page (/gerber-foils/)
+
+- **Tabs block, general** (`storage/imports/pages/15_tabs_block.php`): the products' Tabs block (text, specifications,
+  downloads, highlights tabs) added to the Pages and Industries builders (Sections, after Card Grid), with Section
+  Settings (spacing, background, CSS Class). `industries/blocks/tabsBlock.twig` renders it in its own section and
+  `industries/_entry` loads the products' tab styles / script when a page has one.
+  - So that can happen safely: product-detail.css's two page-wide spacing rules moved to digital-label-printers.css
+    (product pages load both: unchanged); product-detail.js's gallery code only runs for the product gallery (a Photo
+    Gallery on the same page would have thrown an error); products' detail sections take the Section Settings classes.
+  - Generic styles (craft.css): tables in text (tabs) get borders and striped rows; lists in Card Grid cards get bullets.
+- **/gerber-foils/** (`storage/imports/pages/16_tabbed_page.php gerber_foils`, content in `pages/data/gerber_foils.json` taken from
+  the live page): Page Header, Full-width banner (Gerber-Foils.jpg, uploaded with the live page), "EDGE Series
+  [Foils]" + the live intro, button Request a Quote; Tabs: the six foil series as on live (text, devices / colours /
+  lengths table, part-number and bulletin links); Card Grid: the four feature lists. SEO: the live title and
+  description, social image gerberfoils.jpg (live og:image). Main Menu → Materials → Gerber Foils links here.
+- The live page's two small images (gspinc-era logos) are gone on live (404): left out. Its gspinc.com links now
+  redirect to lectra.com's homepage (Lectra owns Gerber): kept as live, to review with the client.
+- Checked: 200, SEO tags, 6 tabs / 6 tables / every live link; tab switching in a browser, no script errors; a product
+  page unchanged; screenshots at 1440 and 390 px.
+
+## Phase 52: Gerber Premium Cast Vinyl Film page (/gerber-premium-cast-vinyl-film/)
+
+- Same live layout as Gerber Foils (intro + Elementor tabs: text, table, links), so the page script is now general:
+  `storage/imports/pages/16_tabbed_page.php <name>` builds a page from `pages/data/<name>.json` (page details: live URL,
+  slug, title, eyebrow, heading, SEO, banner and social image; the intro; the tabs as HTML; optional feature lists →
+  Card Grid). Gerber Foils' data file now carries its page details too (that page exists: re-running skips it).
+- **/gerber-premium-cast-vinyl-film/** (`16_tabbed_page.php gerber_premium_cast_vinyl_film`): Page Header, Full-width
+  banner (Gerber-Premium-Cast-Vinyl-Film.jpg, uploaded with the live page), "Gerber Premium Cast [Vinyl Film]" + the
+  live intro, button Request a Quote; Tabs: 180mC Controltac Film, 220 High Performance, 225 High Performance, Gerber
+  ImageCast (text, widths / lengths / colours table, part-number and bulletin links: 16, as live). SEO: default title
+  (as live), the live description, social image vinylfilm.jpg. Main Menu → Materials → Gerber Premium Cast Vinyl Film
+  links here. Its gspinc.com links redirect to lectra.com, as on Gerber Foils.
+- Checked: 200, SEO tags, 4 tabs / 4 tables / 16 links; tab switching, no script errors; screenshots at 1440 and 390 px.
+
+## Phase 53: Scotchgard SGH6 product rearranged (review: "cluttered, segments not visible")
+
+- `/product/scotchgard-paint-protection-film-sgh6-84812-8-mil-transparent-12-in-x-40-yd/`
+  (`storage/imports/products/08_scotchgard_sgh6_layout.php`). The import had put the whole live description in the
+  header's text column (description, highlights, two empty headings "Suggested applications" / "Typical properties",
+  two tables) and the suggested applications in a tab labelled "Highlights". Now, with the existing blocks and the live
+  text unchanged: header text = Product Description; Tabs = Highlights (the 7 highlights, check icons) · Suggested
+  Applications (the 8 surfaces) · Typical Properties ("Details" and "Dimensions and Classifications", each its own
+  table). Stats Strip and Applications blocks unchanged.
+- craft.css: the label column of tables in text is 40% wide, so stacked tables line up.
+- 5 other 3M products have the same imported header text ("Typical properties" etc.): not changed (see the list in the
+  reply of 2026-10-21); same treatment on request.
+
+## Phase 54: "All elements" + grid menus in the page builders (CP, 2026-10-22)
+
+- Review: "give one more tab called All elements … popup in grid view like Elementor". In every builder (Pages,
+  Industries, Products, Blog, and the Columns inside them) the add row is now **All elements** (Craft's full menu: every
+  group, search box, icon tiles in a 4-column grid) followed by one button per group (Sections, Text, Lists, Media,
+  Products & CTA, Q&A, Other). Each group's popup is the same tile grid (it was one tile per row).
+- Craft shows either the full button or the group buttons, depending on the room; `modules/builderui/resources/cp.css`
+  now shows both (and grids every menu), `cp.js` labels the full one "All elements". CSS / JS only, no field changes.
+- Checked in the CP (headless, as admin): the Customer Service page's builder (All elements popup, Text popup) and a
+  blog post's builder; no script errors.
+
+## Phase 55: CTA Band, both buttons set by the admin (2026-10-22)
+
+- Review: "why two buttons when there is a button field?". The Pages / industries CTA Band always added "Talk to a
+  Specialist" (a call to Site Settings' toll-free number) before the block's Button. Now the block has **Button** (white)
+  and **Second Button** (outlined; the existing secondaryCta link field), each shown only when filled in, nothing added
+  automatically (`industries/blocks/ctaBand.twig`; the homepage's CTA band shows a Second Button too).
+- Buttons (the shared `ctaLink` field) accept phone and email links, as the Page Header's buttons do.
+- Existing CTA Bands keep their look (`storage/imports/pages/17_cta_band_buttons.php`): Button = Talk to a Specialist
+  (tel:+18886972749), Second Button = their old Button: /support/ (Request a Quote), /our-company/ ×2 (Contact Us,
+  arrow system), /builder-test-industry/. The first run copied page links as URLs (Support's and Our Company's second
+  button disappeared): repaired from the backup and fixed in the script. Homepage CTA band unchanged.
+
+## Phase 56: Pages, Card tab removed (2026-10-22)
+
+- Review: "remove the Card tab, there is no need of it". The page entry type's Card tab (Card Photo `featuredImage`, Card
+  Summary `cardTagline`) is gone (`storage/imports/pages/18_remove_page_card_tab.php`); page tabs are now Page · Page
+  Builder · SEO · Custom CSS. Nothing listed pages as cards; Card Photo was only a fallback for the header / social
+  image, and every page that had one uses the same image in its Page Header (checked per page first: no visible change).
+- The fields stay on industries, products, blog posts and exhibitions. `industries/_entry.twig` reads a page's Card
+  Photo through `??` (absent field = no image); `16_tabbed_page.php` and its data files no longer set the card fields.
+  (01_structure.php created the tab; the older one-off page scripts still mention the fields but only run on a database
+  without those pages.)
+- /our-company/ (2026-10-22): the closing CTA Band "Over 40 Years of [Experience]" had been removed when a "Draft 1"
+  was applied at 11:35 IST; restored from the trash (block 55052, text and buttons unchanged) after "first title",
+  before the test band "testing CTA". Earlier (11:25) the first "testing CTA" was lost the same way after the CTA Band
+  script edited that block while a draft of the page was open: scripts now check for open drafts before editing blocks.
+
+## Phase 57: 3M Aviation Films page (/aviation-films/)
+
+- `storage/imports/pages/19_aviation_films.php`, from the live page (H1 "3M Aviation Films", "Product Category", a grid
+  of 3M products). General blocks only: Page Header, Full-width banner (3M_Banner_website-1.webp, uploaded with the
+  live page: plane + 3M logo, the version without the words; live doesn't show it now), "3M Aviation [Films]", button
+  Request a Quote; Recommended Products "Product [Category]": 15 picked products in the live order (product cards:
+  photo, name, Learn More). SEO: the live title and description. Main Menu → Materials → 3M Aviation Films links here.
+- Recommended Products takes up to 24 picked products (was 12), for any page or industry.
+- Live's 16th product, "Microfluidic Diagnostic Tape 9965", no longer exists on live (its link redirects to this page):
+  left out. Live's "Versatile Print Label 7908V" linked to the A7322 film: here its own product (no photo, on live either).
+- Checked: 200, title, 15 cards, menu link, no broken images; screenshots at 1440 and 390 px.
+
+## Phase 58: product pages' help band managed in the CP (2026-10-22) — superseded by Phase 59 (per product)
+
+- Review: "Not sure which product fits? should be managed by the admin, not fixed; keep the front end as it is". The
+  maroon band at the bottom of every product page now reads Globals → Site Settings → **Product Help Band** (new tab,
+  after Calls to action; `storage/imports/products/09_product_help_band.php`): Heading (`{type}` = "printer" on
+  printer products, else "product"; [words] underlined; empty = no band), Text, Button, Second Button (any link type;
+  each left out when empty). Reuses the sectionHeading / sectionLead / ctaLink / secondaryCta fields.
+- Filled with what the template showed: "Not sure which {type} fits?", "Tell us your application, materials and run
+  lengths.", Talk to a Specialist (tel:+18886972749), Request a Quote (the Request a Quote page). `products/_entry.twig`
+  renders the band from them.
+- Checked: the band's heading, text and both buttons are the same as before on a film product and a printer product.
+
+## Phase 59: product help band per product (2026-10-22)
+
+- Review: "it should not be global, manageable per product; front end the same". Each product has a **Help Band** tab
+  (after Page Builder): Heading ([words] underlined; empty = no band), Text, Button, Second Button (each left out when
+  empty). The Site Settings tab from Phase 58 is removed (`storage/imports/products/10_product_help_band_per_product.php`;
+  09 marked superseded). `products/_entry.twig` renders the band from the product's own fields.
+- All 105 products filled with what they showed: "Not sure which printer fits?" (22, main category slug contains
+  "printer", as the template decided) or "…product fits?" (83), "Tell us your application, materials and run lengths.",
+  Talk to a Specialist (tel:+18886972749), Request a Quote (the Request a Quote page). Saved without validation (the band
+  only). The script stops if a product has an open draft (none had).
+- New products: fill the Help Band tab, else no band.
+- Checked: all 104 enabled product pages (200) show the same band text and buttons as before.
+
+## Phase 60: Media Carousel block (2026-10-22)
+
+- Review: "image carousel option in the page builder, images as well as videos". New general block **Media Carousel**
+  (Pages and Industries builders, Sections group, after Tabs; `storage/imports/pages/20_media_carousel.php`): Heading
+  ([red] words), Intro, **Slides** (Matrix `carouselSlides`, cards view, entry type Carousel Slide: Image, Video File (an
+  uploaded MP4, native player, the Image as poster), YouTube Link (click to play, the site's [data-video] player),
+  Caption; a slide shows its video file, else its YouTube video, else its image), Section Settings (spacing, background,
+  CSS Class).
+- Front end: `industries/blocks/mediaCarousel.twig` (one slide at a time, scroll-snap track), styles `.mcar` in craft.css,
+  behaviour in craft.js (arrows and dots move one slide and wrap around; the dot follows swipes; leaving a slide pauses
+  its video; without JS the track still scrolls / swipes).
+- Checked on a temporary page (deleted, with its test video): image, YouTube (plays) and uploaded-video slides (plays,
+  pauses when left); next / previous / dots / wrap-around / swipe; desktop and 390 px; no script errors.
+
+## Phase 61: 3M Crystal Glass Finishes 7725SE-314 (48 in × 150 ft) rearranged; product layout audit (2026-10-22)
+
+- Review: "design mismatched, you entered all contents inside intro instead of the page builder". Same import problem as
+  Scotchgard (Phase 53). `storage/imports/products/11_product_sections_layout.php <slug> [--dry]` (general version of 08):
+  header text = Product Description (its "(Download)" links are the download tabs' files); Tabs = Highlights (one point per
+  live paragraph, a bold lead-in → its title) · Suggested Applications · Typical Properties (Details + Dimensions and
+  Classifications tables) · the existing Downloads tabs kept as on live ("Data Sheets (2)", "Installation Guide").
+  Stops on an open draft. Applied to this product only; checked by screenshots (header + every tab).
+- Audit of all 103 live products against staging (sections, tabs, tables; side-by-side screenshots for samples): list
+  given to the user to decide (13 more 3M products with the same problem; spec tiles / FAQ / process sections on some
+  machines; Arrow materials' Applications list; test data on a few products). Dry runs of 11 on the 13 3M products: works,
+  but before applying: Highlights written differently on some (1–2 points), tab name to follow live ("Specifications"),
+  9962 has no Tabs block.
+
+## Phase 62: product downloads as live, all products (2026-10-22)
+
+- Review: "live has 2 brochures, staging 3 … fix the brochure issue in all products". Every product's Downloads tabs were
+  compared with the named download links of its live page (56 products, 105 files). Live puts a small PDF icon before
+  each brochure name; the icon is its own link (often to a compressed copy, sometimes to another product's brochure),
+  and the import had turned it into an extra download named "<product> Brochure".
+- `storage/imports/products/12_fix_downloads.php`: 18 icon-made downloads removed (Gerber GSxplus / GS750 Plus / GS15plus,
+  ArrowCut Nova 250R / 330R, ArrowJet Nova 250R / 250R+ / 330R, Aqua 330R Hybrid / Hybrid Pro / Hybrid Pro M / Lite,
+  ArrowJet UV, Arrow EZCut 330R / 330R+ / 350R, Bolt 330R Hybrid Pro M, Matan SprinG3); ArrowJet Aqua 330R Lite
+  (`arrowjet-aqua-330r-lite-2`) now links live's brochure `arrowjet-aqua-330r-lite.pdf` (new file in Documents; it pointed
+  to ArrowJet-Aqua-330R.pdf); 3M Screen Print UV Gloss Clear's file titled "Safety Data Sheet" as live. Stops on open
+  drafts; the removed files stay in Assets.
+- Checked: a fresh comparison of every product = all 84 files match live's named links (titles as live, minus live's
+  " (Download)"); only Builder Test Product's test files are not on live. Controltac's live page has a stray
+  "Scotchpak 9738 Backing Film Flyer" link inside its description (copied from Scotchpak), not a download: left as is.
+- QA: the new file `web/uploads/documents/arrowjet-aqua-330r-lite.pdf` must go with the next uploads zip.
+
+## Phase 63: one product request form with a hidden Product field (2026-10-22)
+
+- Live: 98 of 105 product pages embed their own copy of an Elementor form "Product Request Quote" (98 form IDs): Name,
+  Email, Contact Number, Country/Region (placeholders), button "Request A Sample", under the product photo; a submission
+  knew its product only by the page. 7 pages (WooCommerce default) have none. The header's "Try A Free Sample!" button
+  goes to /try-a-free-sample/ (a separate "Free Sample Request" form; not built here).
+- Decision (user): one form, hidden field instead of copies, button "Request a Free Sample".
+  `storage/imports/forms/06_product_request_quote.php`: Formie form **Product Request Quote** (`productRequestQuote`, copy
+  of Contact Us: honeypot, reCAPTCHA by .env, notifications; admin → admin_arrowsys@yopmail.com): Name, Email, Contact
+  Number (Phone, country picker), Country/Region, all required, labels hidden on screen (screen readers read them) +
+  hidden **Product** (filled by the template) and **Product Page** (Formie fills the page address).
+- `products/_entry.twig`: the form under the photos on every product (`#request-sample`), Product = the product's name
+  (`craft.formie.populateFormValues`); the header's sample button → "Request a Free Sample", scrolls to the form. craft.css:
+  left column (photos + form); on phones the order is photo → name / description / buttons → form.
+- Checked: a browser submission on Arrow EZcut 330R saved Product "Arrow EZcut 330R 13" Blade Finisher" and its page address
+  (test submission deleted); desktop / 390 px; no script errors. Formie → Submissions → Product Request Quote lists every
+  product request with its Product.
+- Not done: Request a Quote button → pre-filled Product Required; the Try a Free Sample page; importing live's product
+  form submissions (export "Product Request Quote" from Elementor, then 04_live_submissions.php with the page → Product).
+
+## Phase 64: live product form submissions imported (2026-10-22)
+
+- Source: the user's export of every Elementor form (`~/Downloads/arrow-system-all-form-submission/`, 190 CSVs, one per
+  form copy). The product form: 89 "Product Request Quote (<id>)" files, **1,007 submissions** (2022-11-08 → 2026-10-20).
+- Form: `06_product_request_quote.php` adds three hidden fields filled only by the import: Live Submission ID, Live Form,
+  User Agent (no other live value is dropped).
+- `storage/imports/forms/07_product_request_quote_submissions.php <folder>`: the field headings are empty in the export
+  (live's fields have only placeholders), so fields are read by position: Name, Email, Contact Number, Country/Region
+  (26 older copies have no Country); Referrer → Product Page (as recorded, with tracking codes) and Product (the staging
+  product with that address; 11 addresses not on staging → their words, e.g. "Arrowjet Aqua 330r", 145 rows from
+  /product/arrowjet-aqua-330r/); Submission ID / Form Name (ID) / User Agent → the hidden fields; User IP → IP; Created At
+  → date (UTC-4) and title. No emails; saved without validation; skips Live Submission IDs already in Formie.
+- Checked: all 1,007 in once each, a second run adds nothing; spot-checked newest, a 3-field copy, a retired product.
+  The form also holds the 5 test submissions from today (no Live Submission ID).
+- Not imported (in the same export, on request): 9 untitled older product-page forms (28 rows), "All product Form"
+  (6, a category page), "Request Quote From Blog" (73 files), "Free Sample Request", "Dealer", landing pages, newsletter.
+
+## Phase 65: more live submissions from the full export (2026-10-22, groups A + B)
+
+- A, forms already imported, re-run with the full export's files (`04_live_submissions.php`, skips what is there):
+  Contact Us 642 (+0), Request a Quote 158 (+1, sent on live 2026-10-21), Customer Service 14 (+0).
+- B, forms that exist on staging: **Dealer** → Become a Dealer, 91 (2022-09 → 2026-09; `04_live_submissions.php` now trims
+  column headings: live's "Existing Business History " has a trailing space); the **9 untitled product-page copies** → Product
+  Request Quote, 28 (`07` now reads them too; their old product addresses — Anytron AnyCut / AnyJet, LF-200 — are not on
+  staging, Product = their words). "All product Form" was left out after a look: its 4th field is a message and its 6
+  rows are all spam (imported, then deleted again).
+- Totals now: Contact Us 646, Request a Quote 159, Customer Service 14, Become a Dealer 91, Product Request Quote 1,040
+  (1,035 live + 5 tests). Second runs add nothing.
+- Still in the export (not imported): Request Quote From Blog 306, Free Sample Request 3, Careers ("New Form") 60 with
+  CV links, event / campaign landing pages ~203, newsletter 333.
+
+## Phase 66: the blog's quote form, as live, on every post; live submissions imported (2026-10-22)
+
+- Live: an Elementor form "Request Quote From Blog" at the end of 244 of 354 posts (one copy per post), heading "Contact
+  With Our Team Now", labels shown: Name*, Email*, Contact No.* ("Place your contact no. with country code"), Message
+  ("Place your requirement or a query"), button "Send". The blog import (D4) had replaced it by a closing CTA box.
+- `storage/imports/forms/08_blog_quote_form.php`: Formie form **Request Quote From Blog** (`requestQuoteFromBlog`; copy of
+  Contact Us): those fields (Contact No. = Phone with a country picker) + hidden Blog Post (filled by the template), Blog
+  Post Page (Formie: the address), Live Submission ID, Live Form, User Agent (import only). Blog Page's "Default CTA" tab →
+  **Article Form**: Form (this one), Heading ("Contact With Our Team Now"), Intro (emptied, live has none), Button (only
+  when no form is chosen).
+- `blog/_entry.twig`: the chosen form at the end of every post (`#contact-our-team`, Blog Post = the post's title); the red
+  CTA box only when no form is chosen. The sidebar's "Not sure which equipment fits?" box is unchanged.
+- `storage/imports/forms/09_blog_quote_submissions.php <folder>`: 73 files, **306** submissions (2022-08 → 2026-10): Blog
+  Post / Blog Post Page from the Referrer; without one, from the post whose live content holds that form copy
+  (blog/data/posts-*.json) — 107 rows; 69 have no post (67 from copy 6284ef8, in no live post today). Skips by Live
+  Submission ID.
+- Checked: all 346 posts (200) have the form; a browser submission saved Blog Post "Mylar Bag Printer" + its address (test
+  deleted); desktop / 390 px; a second import adds nothing.
+- Correction (review: "I do not want the form in every post", e.g. paper-vs-film-labels-where-each-works-and-where-it-fails
+  has none on live): blog posts got a **Quote Form** switch (Settings tab, off by default;
+  `storage/imports/forms/10_blog_quote_form_per_post.php`), on for the posts whose live content holds the form (235 on
+  staging), off for the other 111, which show the closing CTA box as before. `blog/_entry.twig` shows the form only when
+  the switch is on. Not changed (open draft since 2026-10-16): 10-step-guide-for-the-best-frozen-food-pouches-with-water-based-inks
+  (should be on). Checked: 234 posts with the form, 112 without; paper-vs-film has none.
+
+## Phase 67: Product Request Quote submissions show and filter by product (2026-10-22)
+
+- Asked: "how can I tell which submission belongs to which product in the listing? Elementor has a dropdown filter."
+  Formie's list has fixed columns and filters only option, long-text and element fields, so:
+- **Titles "Product · date"**: the form's title format is `{field:product} · {timestamp}` (06_product_request_quote.php);
+  the 1,040 saved before were retitled the same way, keeping their dates (no Product → the date alone, 8).
+- **Product (entry)**: a new Entries field on the form (products section, visibility "disabled", so it's not on the page).
+  `modules/forms` sets it on every save from the Product Page address (`/product/<slug>/`). Formie → Submissions →
+  Product Request Quote → Filter → Add a filter → **Product (entry)** → Choose → pick products → Apply. (The rule's
+  operator reads "has a value"; with products chosen it lists theirs.)
+- `storage/imports/forms/11_product_request_quote_list.php` (one-off, idempotent): links + retitles the existing ones.
+  785 linked (62 products); 255 not, their live product page isn't on staging (Product keeps the live words).
+- Checked: list titles in the CP; the filter offers Product (entry) and its picker lists products; the filter query for
+  White PP returns exactly its 2; a browser submission on White PP got "White PP · <date>" + the link (test deleted).
+  Searching the product name still works too.
+
+## Phase 68: Try a Free Sample and Careers: pages, forms, live submissions (2026-10-22)
+
+- `storage/imports/forms/12_free_sample_and_careers.php`: two Formie forms, copies of Contact Us (honeypot, reCAPTCHA,
+  thank-you, Admin Notification → admin_arrowsys@yopmail.com), live's labels word for word:
+  - **Free Sample Request** (`freeSampleRequest`): Sample type* (live's 5 options, radio buttons as the design) · Full
+    name* | Email* · Phone (optional) | Country / region* · Product or material of interest ("Optional") · What would you
+    like to test? · button "Request my sample".
+  - **Careers** (`careers`): Name* | Email* · Contact* (phone, country picker) · Upload Your CV* (one file, PDF / Word /
+    image, 10 MB) · button "Send".
+  - CVs go to a new volume **Career CVs** (`careerCvs`): `storage/career-cvs`, outside web/, no public URLs; open them
+    in the CP (Assets → Career CVs, or the submission → the file → Download). `storage/career-cvs/` is git-ignored.
+    **Moving the site (QA / production): copy that folder with the database**, or the CV links are empty.
+- `storage/imports/pages/21_free_sample_and_careers.php` (general blocks):
+  - **/try-a-free-sample/**: Page Header "Request a Free [Sample]" + live's line; Columns 3-2: the form (card) | panel
+    "Talk to a Specialist" (Site Settings contacts) + "Looking for something else?" (Request a Quote, Order Supplies,
+    Request Support). Site Settings → Sample Link and 10 blog Button blocks linking to the live page now link here
+    (none of those posts had an open draft); 12 links typed in rich text left as they are.
+  - **/careers/**: Page Header "Looking For A Career Change? Join Arrow [System]!"; Columns 1-1: the form (card) | live's
+    illustration (downloaded, alt as live); Rich Text: the open position (R&D Engineer), resume to shaan@arrsys.com.
+    Live links it from no menu; none added.
+- Live submissions with `04_live_submissions.php` (now downloads file fields' files into the field's volume):
+  Free Sample Request **3**, Careers **60** (all 60 CVs downloaded and attached).
+- Checked: both pages at 1440 / 390 px (no sideways scroll, no JS errors); a browser submission on each saved (sample
+  type, product; the CV in Career CVs), then deleted; the CP's Download returns the PDF; /storage/career-cvs/ is 404.
+
+## Phase 69: Try a Free Sample as the design (2026-10-22)
+
+- Review: "for request a free sample take reference from this page" (Arrowsystem/try-a-free-sample). General parts only:
+  - **Page Header → Header Style "Small illustration"** (new option): compact header, the image small at the right as
+    decoration, desktop only. Here: the design's sample pack, `pages/free-sample-pack.svg` (taken from the design page).
+  - **Form block heading** now has "* Required field" beside it with a line under it (every Form block with a heading,
+    e.g. Become a Dealer).
+  - **Formie styles for any form** (craft.css): Heading fields = numbered steps (1, 2, 3 + a line); radio buttons = cards,
+    an option label `**Title** description` shows the bold part as the title; optional fields' labels end in
+    "(optional)" (Contact Us, Request a Quote, Become a Dealer … too); a form whose last field is an HTML field has it
+    beside the submit button (with an arrow), stacked on phones.
+  - **Side boxes** for an HTML block in a column: `side-stack` with `contact-panel` and `side-card` / `side-links`.
+- Free Sample Request form (forms/12): steps "What would you like to try?" · "Your details" · "Your project" (Heading
+  fields); Sample type's label hidden (kept "Sample type": the live import matches it), options with the design's lines,
+  emails show the plain value; Product hint below the field; Privacy note (HTML field, the Newsletter privacy link);
+  button "Request My Sample". Submissions unchanged (same values).
+- `storage/imports/pages/22_free_sample_design.php`: the page's blocks rebuilt (stops on an open draft): Page Header
+  (small illustration) · Columns 2-1 on grey: form card "Your sample request" | HTML block (Talk to a Specialist panel
+  with the Site Settings contacts + Looking for something else?: Request a Quote, Order Supplies, Request Support).
+- Not as the design: no icons in the sample cards (Formie options have none), Product is plain text (the design's
+  suggestion list isn't a Formie field), the phone keeps its country picker.
+- Checked: 1440 / 390 px against the design, no sideways scroll, no JS errors; a card picked by a click and the form
+  sent (test deleted); Become a Dealer and Contact Us forms still fine.
+
+## Phase 70: blog cover in a fixed full-width frame (2026-10-22)
+
+- Review: "the banner image is too small but it is being stretched and displaying too large" (e.g. /print-custom-mylar-bags/:
+  a 768 × 640 cover shown 1280 × 1067). 146 of 332 covers are taller than 16:9 and 69 are under 1200 px wide.
+- `blog/_entry.twig` + craft.css: the cover sits in a fixed full-width frame, **21:9** (1280 × 549 at full width; **4:3** on
+  phones); the image is shown whole inside it, at most at its own size (never enlarged or cropped), centred on the
+  frame's light grey (a blurred copy of the image behind it was removed on review). Covers wider than 21:9 fill the width.
+- Checked: the Mylar post 658 × 549 (was 1280 × 1067); a 1920 × 1080 cover 975 × 549; phones 358 × 269 frame.
+- Not changed: Pages' Page Header "Full-width banner" (it has its own "Short strip" height option).
+
+## Phase 71: Navigation without the Categories and Dynamic item types (2026-10-23)
+
+- Review: "remove it completely as they are not in use". No menu item uses them (Entries 54, Custom URL 35, Passive 18,
+  Group / Column 9; Categories, Assets, Dynamic 0). `modules/builderui/Module.php` drops Categories and Dynamic from the
+  Navigation plugin's item types (its register event), so they're gone from every menu's Add panel and Permissions tab.
+  Assets stays (for PDF brochures later). The plugin itself is unchanged; delete those lines to bring them back.
+- Checked: Main Menu's Add panel lists Entries, Assets, Passive, Group / Column, Custom URL; all four menus open fine.
+  The website guide's Item types stop updated.
+- Also removed (review: "remove the partner group toggle from the menus"): the Main Menu items' **Partner group** switch
+  (field isPartnerGroup, no item had it on; it only added a border above a Products mega menu group heading).
+  `storage/imports/navigation/04_remove_partner_group.php`; `.mega__label--partner` gone from mega-products.twig and
+  site.css. Backup: arrow-systems-local-staging--2026-10-23-061200.
+- Menu item fields renamed and regrouped (review: "change Second Line to Description; View All Text and its URL together,
+  named View All Text URL; meaningful names"), `storage/imports/navigation/05_menu_item_fields.php`. Main Menu Edit panel:
+  Label · link · **Open in New Tab** · **Dropdown Style** (level 1, was Menu Style) · **Category Panel Heading** (was Panel
+  Title), **View All Text**, **View All Text URL** (new Link field viewAllUrl), **Featured Product** (level 3 Passive =
+  Products categories) · **Industry Icon** (level 3 Entry / Custom URL, was Icon) · **Description** (level 4, was Second
+  Line). Every field has a one-line help text. Open in New Tab (was New Window) in all four menus, only on items with a
+  link. The 4 Products categories that had a link (Digital Label Printers, Label Finishers, Flexible Packaging Printers,
+  UV & Direct-to-Package) got it as View All Text URL and became Passive; mega-products.twig reads viewAllUrl (the 5
+  "View all" links on the page unchanged). Plugin help texts: `translations/en-US/navigation.php`. Website guide and
+  QA_WALKTHROUGH.md use the new names. Backup: arrow-systems-local-staging--2026-10-23-064420.
+
+## Phase 72: Thermal Lamination Film page (2026-10-23)
+
+- From live https://arrsys.com/thermal-lamination-film/ (no design file): the H1 and a grid of 12 films (photo, name,
+  Learn More). `storage/imports/pages/23_thermal_lamination_film.php`, general blocks only (as /aviation-films/):
+  Page Header "Thermal Lamination [Film]" (eyebrow Materials, no image: live has none) · Recommended Products "Our
+  Lamination [Films]": the 10 films with a product page, picked in live order, **4 per row** as live · SEO title and
+  description as live. Main Menu › Materials › Thermal Lamination Film now links to the page (was live's address).
+- Left out: **PET Pouch Film** and **Hot Stamping Foil**: no product page on live (their Learn More goes to "#").
+- Recommended Products got the Card Grid's **Cards per Row** (2 / 3 / 4, default 3: other pages unchanged; large
+  screens only, craft.css `.pgrid--2/--4`).
+- The BOPP film's **Card Title** = "BOPP Thermal Lamination Film" (live's card name; its product page keeps the full
+  name). Backup: arrow-systems-local-staging--2026-10-23-124109.
+- Checked: 1440 / 390 px against live, no sideways scroll, no JS errors; /aviation-films/ still 3 per row.
+
+## Phase 73: ArrowJet UV Label Printers page (2026-10-23)
+
+- From live https://arrsys.com/arrowjet-uv-label-printers/ (no design file; the cards are the design's product
+  listing cards): the H1, an intro and 3 printers. `storage/imports/pages/24_arrowjet_uv_label_printers.php`, general
+  blocks only: Page Header "ArrowJet UV Label [Printers]" + live's intro (eyebrow Products, no image as live) ·
+  Recommended Products "Our UV [Printers]": ArrowJet UV 330H, ArrowJet UV, ArrowJet MTS-48 (live order) · SEO as live.
+- The 3 products' **Card Tagline** and **Key Specs** (empty before) filled with live's text (4 / 5 / 3 specs); they
+  show wherever these products appear as cards.
+- Now link to the page instead of live's address: Footer › Products › UV Printers; Main Menu › UV & Direct-to-Package ›
+  ArrowJet UV and ArrowJet UV 330H (as before: they pointed at this listing, not their product pages); that category's
+  View All Text URL. 13 links typed in rich text (blog posts) left as they are.
+- Checked: 1440 / 390 px against live, no sideways scroll, no JS errors. Backup: …-2026-10-23-125508.
+
+## Phase 74: /all-products/ pages, part 1: All Products, Label Finishers, Arrow Label Finishers (2026-10-23)
+
+- Approach (instead of PRODUCT_CATEGORIES_MIGRATION_PLAN.md's category template): **nested Pages** with general blocks.
+  The Pages structure gives the live paths from the parent pages: All Products → Label Finishers → Arrow Label
+  Finishers = `/all-products/label-finishers/arrow-label-finishers/`; breadcrumbs follow the parents.
+- `storage/imports/pages/25_all_products.php` (data-driven: add the other category pages to its PAGES list):
+  | Page | H1 (live) | Blocks |
+  |---|---|---|
+  | `/all-products/` | All Products | Recommended Products "ArrowJet Digital Label [Printers]" (9, View all → live's digital label printers page until built) + "Digital Label [Finishers]" (10, View all → Label Finishers) |
+  | `/all-products/label-finishers/` | Label Finishers | "Our Label [Finishers]" (10) |
+  | `/all-products/label-finishers/arrow-label-finishers/` | Digital Label Finishing Equipments | "Arrow Label [Finishers]" (10, incl. Arrow Lam 380) |
+  SEO titles and descriptions as live.
+- Live's mix-ups not copied: "Arrow EZCut 330A" → links to the 350R (350R shown once); "Arrow ezcut 330S" (a sheet
+  cutter) → links to the 330R+ (shown as the 330R+); "Aries Laser Label Finishing" → its address redirects to the
+  Taurus Laser Finisher (shown as Taurus); "Arrow slitter" → its address redirects to the homepage (shown as Arrow
+  Slitter 1500, same photo).
+- 11 finishers' product cards filled where empty (live's text): Card Tagline, Key Specs, and a short Card Title where
+  the product name is long (Aries Semi-Rotary Finishing, ArrowCut Nova 330R / 250R, Arrow Eco-300, Arrow EZCut 330R,
+  Arrow Slitter 1500). The printers already had theirs.
+- Now link to the pages: Footer › Label Finishers, Main Menu › Finish Labels, the Label Finishers category's View All
+  Text URL, the Label Finishing Equipments category card, a Button in the blog post "Label Printer vs. Sticker
+  Printer…" (no open draft). The script skips links under an open draft and says so.
+- `config/redirects.php`: live's 301s `label-finishers/lemorau-label-finishers` and `…/quicklabel-label-finishers` →
+  `/all-products/label-finishers/`.
+- Checked: the 3 pages at 1440 px (hub against live) and 390 px, breadcrumbs, no sideways scroll, no JS errors; both
+  redirects 301. Backup: …-2026-10-23-132020.
+
+## Phase 75: /all-products/ pages, part 2: Printers, Gerber Printers (2026-10-23)
+
+- Added to `storage/imports/pages/25_all_products.php` (same approach as Phase 74):
+  | Page | H1 (live) | Blocks |
+  |---|---|---|
+  | `/all-products/printers/` | Printer | "ArrowJet Digital Label [Printers]" (9, live order; View all → live's digital label printers page until built) |
+  | `/all-products/printers/gerber-printers/` | Printers by Gerber | "Gerber [Printers]": Gerber EDGE FX (one product: the wide card) |
+  SEO titles and descriptions as live (Gerber's description is live's "Printing Technology: Thermal transfer").
+- Left out: **ArrowJet VDP** (on live's Printers page): its product address now redirects to the Limitronic printers
+  page and the product isn't on staging (staging redirects `product/arrowjet-vdp` the same way).
+- Gerber EDGE FX card: tagline + 5 Key Specs from live (were empty).
+- Now link here: the "Gerber Printers" buttons on the industry pages Government & Military, Manufacturing & Industrial,
+  Signs and Graphics.
+- `config/redirects.php`: live's 301s `printers/arrow-printers` → `/all-products/printers/`, `printers/kerajet-printers`
+  → `/` (both tested). Checked: both pages at 1440 px, Gerber at 390 px, breadcrumbs, all product photos load, no JS
+  errors. Backup: …-2026-10-23-133433.
+- Fix (review: "you didn't implement the banner, see the live page"): live's banners are **Elementor section
+  backgrounds**, which the page reading missed. Checked every page built today in a browser: two have one, now in their
+  Page Header as a Full-width banner shown whole (1300 × 400, text and logos in the image): **Gerber Printers**
+  (`GERBER-PRINTERS.jpg`) and **Arrow Label Finishers** (`Label-Finishers.jpg`), Assets › Images › pages. The script's
+  PAGES entries take a `banner`; it also adds one to an existing page's header (not under an open draft). All Products,
+  Label Finishers, Printers, Thermal Lamination Film and ArrowJet UV have none on live. Backup: …-2026-10-23-141403.
+
 ## Follow-ups
 
 | # | Item | Where |
@@ -2115,6 +2585,7 @@ Checked: 200, SEO tags, tel: button, form anchor; desktop + phone screenshots.
 | 14 | **Contact form on industry pages**: connect to HubSpot (same as the sample and newsletter forms). | `web/assets/js/industries/industry-detail.js` |
 | 15 | Industry pages imported from live: give the headers **Applications** tags and the Recommended Products **intros / View All links**, and replace the live product-teaser headings where wanted (the pilot shows the target). Product cards of non-design products still need taglines / key specs (follow-up 12). | Entries → Industries |
 | 16 | **12 blog drafts** on live (unpublished, not in the public API): send a WordPress export (Tools → Export → Posts, status Drafts) or an application password, then import them as disabled entries. | WordPress admin |
+| 17 | ~~**Per-product sample / quote requests**~~ — done in Phase 63 (one form + hidden Product); open: quote pre-fill, Try a Free Sample page, live submissions import. (deferred 2026-10-22). Live product pages each embed a "Request A Sample" form (Name, Email, Contact Number, Country/Region) tied to the product by its page; staging's product buttons are plain links, so requests don't record the product. Proposed: one Formie form "Request a Sample" with a hidden Product field filled per product page (`craft.formie.populateFormValues`), and Request a Quote → `/request-quote/?product=…` pre-filling Product Required; import the live sample submissions later (`04_live_submissions.php`). | products/_entry.twig, Formie |
 
 ---
 

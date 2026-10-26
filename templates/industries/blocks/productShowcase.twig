@@ -1,7 +1,8 @@
 {#
   2. Recommended products (design: ".ind-equipment"): heading, intro, "View all" link, product cards (_components/product-card).
   Which products: Show = Picked products → the picked ones in their order; Show = Products from the categories → products
-  in those product categories (newest first), How Many of them. One product: a wide card (craft.css .pgrid--one).
+  in those product categories (newest first), How Many of them. Cards per Row: 2 / 3 (default) / 4 on large screens
+  (craft.css .pgrid--2 / --4). One product: a wide card (craft.css .pgrid--one).
   Left out when there are none. Vars: block
 #}
 {% import '_macros/layout' as layout %}
@@ -26,7 +27,8 @@
         </div>
         {% if block.ctaLink and block.ctaLink.url %}<a class="text-link" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
       </header>
-      <ul class="pgrid{{ products|length == 1 ? ' pgrid--one' }}">
+      {% set perRow = block.cardColumns.value ?? null ?: '3' %}
+      <ul class="pgrid{{ products|length == 1 ? ' pgrid--one' : (perRow != '3' ? ' pgrid--' ~ perRow) }}">
         {% for product in products %}
         {% include '_components/product-card' with { product: product } only %}
         {% endfor %}

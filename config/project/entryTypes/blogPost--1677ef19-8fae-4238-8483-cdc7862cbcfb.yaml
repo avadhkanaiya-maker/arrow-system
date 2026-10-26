@@ -144,6 +144,23 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: e8a02b9a-a62b-4d0c-8e6e-aeace4a0344c # Quote Form
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 86bf922e-ded3-44c5-b8f1-47ce478a4d54
+            userCondition: null
+            warning: null
+            width: 100
         name: Settings
         uid: 0cb049bc-04f0-4cdd-a42e-a017b1283bfa
         userCondition: null

@@ -3,13 +3,18 @@
    Header Style: Image beside text (default) · Full-width banner (.page-banner, craft.css): the text first, then the image
    on its own across the full content width, shown whole (not cropped, nothing on it), as the blog posts' cover; without
    an image it falls back to the default. Banner Height "Short strip": a cropped band instead of the whole image.
+   No image at all: the text across the full width (the banner layout without the picture).
+   "Small illustration": a compact header, the text across the full width and the image small at the right as decoration
+   (desktop only; e.g. Try a Free Sample's sample pack, an SVG).
    Vars: block, entry, listingPage #}
 {% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
 {% set image = block.mediaImage.one() ?? entry.featuredImage.one() ?? entry.socialImage.one() %}
 {% set banner = image and (block.headerStyle.value ?? '') == 'banner' %}
-  <section class="page-hero ind-detail-hero{{ banner ? ' page-banner' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
+{% set art = image and (block.headerStyle.value ?? '') == 'illustration' %}
+  <section class="page-hero ind-detail-hero{{ banner or art or not image ? ' page-banner' }}{{ art ? ' page-hero--art' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
+    {% if art %}<img class="page-hero__art" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="" aria-hidden="true">{% endif %}
     <div class="container">
       {% include 'industries/blocks/_breadcrumb' with { entry: entry, listingPage: listingPage } only %}
       <div class="ind-detail-hero__grid">
@@ -32,7 +37,7 @@
           </div>
           {% endif %}
         </div>
-        {% if image and not banner %}
+        {% if image and not banner and not art %}
         <figure class="ind-detail-hero__media">
           <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
           <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>

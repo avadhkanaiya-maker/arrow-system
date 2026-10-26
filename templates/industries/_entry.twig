@@ -13,6 +13,8 @@
     formBlock         any Formie form (+ heading, intro), centred (inline version: _builder/formBlock, also in Columns)
     columnsBlock      two columns, each with its own common blocks and style (plain / white card / maroon panel)
     cardGrid          heading, intro, cards (title, subtitle, image, text, link), 2-4 per row
+    tabsBlock         Tabs: the products' tab set (text, specifications, downloads, highlights tabs), industries/blocks/tabsBlock
+    mediaCarousel     images / uploaded videos / YouTube videos, one at a time with arrows and dots
     common blocks (shared with the blog and products, _builder/: Heading, Rich Text, Lists, Image, Gallery, Video,
     FAQ …): consecutive ones share one text column (blog-detail.css)
   Without an Industry Header block, a plain header (breadcrumb + name as H1) keeps the page titled.
@@ -28,11 +30,12 @@
 {% set trail = isPage ? entry.ancestors.all() : (listingPage ? [listingPage] : []) %}{# breadcrumb between Home and this page #}
 {% set blocks = (isPage ? entry.pageBuilder : entry.industryBuilder).all() %}
 {% set hasGallery = blocks|filter(b => b.type.handle == 'photoGallery')|length > 0 %}
+{% set hasTabs = blocks|filter(b => b.type.handle == 'tabsBlock')|length > 0 %}
 {% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
 
 {# Group consecutive Content Blocks (the design puts them in one section, where :nth-child alternates the image side) and
    consecutive common blocks (the page-builder blocks shared with the blog, _builder/: one text column) #}
-{% set own = ['industryHeader', 'productShowcase', 'contentBlock', 'contactBlock', 'otherIndustries', 'ctaBand', 'photoGallery', 'statsStrip', 'formBlock', 'columnsBlock', 'cardGrid'] %}
+{% set own = ['industryHeader', 'productShowcase', 'contentBlock', 'contactBlock', 'otherIndustries', 'ctaBand', 'photoGallery', 'statsStrip', 'formBlock', 'columnsBlock', 'cardGrid', 'tabsBlock', 'mediaCarousel'] %}
 {% set groups = [] %}
 {% for block in blocks %}
   {% set key = block.type.handle in own ? block.type.handle : 'common' %}
@@ -48,7 +51,7 @@
 
 {% block seo %}
   {% set header = blocks|filter(b => b.type.handle == 'industryHeader')|first %}
-  {% set social = entry.socialImage.one() ?: (header ? header.mediaImage.one() : null) ?: entry.featuredImage.one() %}
+  {% set social = entry.socialImage.one() ?: (header ? header.mediaImage.one() : null) ?: (entry.featuredImage.one() ?? null) %}
   {% include '_partials/seo' with {
     title: pageTitle,
     description: entry.seoDescription,
@@ -72,10 +75,14 @@
   {% if hasGallery %}<link rel="stylesheet" href="{{ url('assets/css/exhibitions/detail.css') }}">{% endif %}
   {% if groups|filter(g => g.type in ['common', 'columnsBlock'])|length %}<link rel="stylesheet" href="{{ url('assets/css/blog-detail.css') }}">{% endif %}
   {% set first = blocks|first %}
-  {% set heroImage = first and first.type.handle == 'industryHeader' ? (first.mediaImage.one() ?: entry.featuredImage.one()) : null %}
+  {% set heroImage = first and first.type.handle == 'industryHeader' ? (first.mediaImage.one() ?: (entry.featuredImage.one() ?? null)) : null %}
   {% if heroImage %}<link rel="preload" as="image" href="{{ heroImage.url }}" fetchpriority="high">{% endif %}
   <script src="{{ url('assets/js/industries/industry-detail.js') }}" defer></script>
   {% if hasGallery %}<script src="{{ url('assets/js/exhibitions/detail.js') }}" defer></script>{% endif %}
+  {% if hasTabs %}{# the products' tab set: styles + script (products/blocks/tabsBlock) #}
+  <link rel="stylesheet" href="{{ url('assets/css/products/product-detail.css') }}">
+  <script src="{{ url('assets/js/products/product-detail.js') }}" defer></script>
+  {% endif %}
 {% endblock %}
 
 {% block content %}

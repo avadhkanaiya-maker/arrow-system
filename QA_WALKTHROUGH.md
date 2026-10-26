@@ -57,8 +57,8 @@ Click any item to open its settings panel on the right.
 
 - **Label**: the text visitors see. For items linked to a page, it copies that page's title until you change it.
 - **The link itself**: the page you picked, or the address you typed.
-- **Open in new window**: when switched on, the link opens in a new browser tab. Use it for links that leave the
-  site, such as YouTube.
+- **Open in New Tab**: when switched on, the link opens in a new browser tab. Use it for links that leave the
+  site, such as YouTube. Items without a link (Passive, Group / Column) don't have it.
 - **Enabled**: switch an item off to hide it from the website without deleting it. Switch it back on to bring it back.
 
 **Try it:** open **Top Bar**, click **Contact**, change the label to "Contact Us", save, and refresh the website: the
@@ -86,19 +86,19 @@ order on the website, from left to right.
 
 This is the most important menu. Each item on the first level (Products, Solutions, Industries …) becomes a word in the
 header. When a visitor hovers or clicks it, a panel opens. **What that panel looks like is decided by a setting on the
-first-level item, called Menu Style.**
+first-level item, called Dropdown Style.**
 
-### Menu Style (first-level items only)
+### Dropdown Style (first-level items only)
 
-Click a first-level item, for example **Solutions**, and look for **Menu Style**. There are three choices:
+Click a first-level item, for example **Solutions**, and look for **Dropdown Style**. There are three choices:
 
-| Menu Style | What visitors see | Used for |
+| Dropdown Style | What visitors see | Used for |
 |---|---|---|
 | **Simple dropdown** | A plain list of links under the word | Solutions, Materials, Resources, Support, About |
 | **Products mega menu** | A wide panel: categories on the left, products in the middle, a featured product box on the right | Products |
 | **Industries mega menu** | A wide panel: industry groups with small icons, plus a help box on the right | Industries |
 
-Changing the Menu Style changes the whole panel's layout, so the items inside need to be arranged the way that style
+Changing the Dropdown Style changes the whole panel's layout, so the items inside need to be arranged the way that style
 expects (explained below).
 
 ### 4a. Simple dropdown
@@ -106,7 +106,7 @@ expects (explained below).
 **How to arrange it:** the first-level item (for example "About") holds a list of links directly inside it.
 
 ```
-About                     ← first level, Menu Style: Simple dropdown
+About                     ← first level, Dropdown Style: Simple dropdown
   Our Company             ← links shown in the dropdown, top to bottom
   Become a Dealer
   Contact Us
@@ -119,7 +119,7 @@ About                     ← first level, Menu Style: Simple dropdown
 This one has four levels. Open **Products** in the admin panel and compare it with the website's Products panel.
 
 ```
-Products                                  ← level 1: the word in the header (Menu Style: Products mega menu)
+Products                                  ← level 1: the word in the header (Dropdown Style: Products mega menu)
   Arrow Systems equipment                 ← level 2, Group / Column: a group heading on the left
     Digital Label Printers                ← level 3: a category on the left side
       ArrowJet Eco 330R                   ← level 4: a product link in the middle
@@ -137,16 +137,17 @@ Products                                  ← level 1: the word in the header (M
     gets the separate "Partner Brands" look.
 - **Level 2, ordinary links** (Compare Models, Used Equipment) don't appear on the left. They appear as small links in
   the box on the right.
-- **Level 3 items are the categories.** Hovering a category on the left opens its products in the middle. Each
+- **Level 3 items are the categories** (Passive items: a category name opens its panel, it isn't a link). Hovering a category on the left opens its products in the middle. Each
   category has these extra settings:
 
   | Setting | What it does | Where you see it |
   |---|---|---|
-  | **Panel Title** | An optional heading above the product list, e.g. "ArrowJet digital label printers" | Top of the middle area, when the category is open |
-  | **View All Text** | The text of a "View all …" link under the product list; it goes to the category's own link | Bottom of the middle area. Empty = no "View all" link. A category without its own link (Passive) never shows one. |
+  | **Category Panel Heading** | An optional heading above the product list, e.g. "ArrowJet digital label printers" | Top of the middle area, when the category is open |
+  | **View All Text** | The text of a "View all …" link under the product list | Bottom of the middle area. Empty = no "View all" link. |
+  | **View All Text URL** | Where that "View all" link goes: a page of this site or a full address | (the link's destination) |
   | **Featured Product** | Pick one product to feature for this category | The box on the right, while this category is open: the product's card photo, name, short tagline and an "Explore Product" link. Empty = the box shows only the extra links. |
 
-- **Level 4 items are the products** listed in the middle. They have one extra setting, **Second Line**: a short grey
+- **Level 4 items are the products** listed in the middle. They have one extra setting, **Description**: a short grey
   line under the product name (large screens only). Empty = no second line.
 
 **Currently featured:** Digital Label Printers → Digital Sleeking Film, Label Finishers → Trojan T4, Specialty Printers
@@ -167,7 +168,7 @@ Products                                  ← level 1: the word in the header (M
 ### 4c. Industries mega menu
 
 ```
-Industries                                ← level 1 (Menu Style: Industries mega menu)
+Industries                                ← level 1 (Dropdown Style: Industries mega menu)
   Labels                                  ← level 2, Group / Column: a group heading
     Beverage Labels                       ← level 3: a link with a small icon
     Pharmaceutical Labeling
@@ -177,7 +178,7 @@ Industries                                ← level 1 (Menu Style: Industries me
 ```
 
 - **Group / Column items** become the group headings (Labels, Packaging, Specialty).
-- **The links inside them** show with a small line icon. Each link has an **Icon** setting with a list of icons.
+- **The links inside them** show with a small line icon. Each link has an **Industry Icon** setting with a list of icons.
   - Leave it empty and the icon comes from the industry page itself (the industry's **Card** tab → **Icon**).
   - Pick one here to override it in the menu only.
 - **An ordinary level-2 link** ("View all industries") becomes the red "View all …" link under the last group.
@@ -286,7 +287,7 @@ Resize the browser window narrower than a laptop screen (or use the browser's ph
   - at the top, the **Request a Quote** and **Call …** buttons
   - then the main menu: each first-level item opens and closes its links
   - at the bottom, the **Top Bar** links
-- The Products featured box, the Industries help box and the grey "Second Line" under product names are left out on
+- The Products featured box, the Industries help box and the grey Description under product names are left out on
   small screens to keep the menu short. This is intended.
 - The footer columns stack underneath each other.
 
@@ -312,11 +313,11 @@ Resize the browser window narrower than a laptop screen (or use the browser's ph
 
 - [ ] Rename, reorder, add, disable and delete an item in each of the four menus; the website follows every change.
 - [ ] An item linked to a page keeps working after that page's title or web address is changed.
-- [ ] "Open in new window" opens a new tab; without it, the link opens in the same tab.
-- [ ] Switching a first-level item's Menu Style changes its panel (simple list / Products layout / Industries layout).
-- [ ] Products: Panel Title, View All Text, Featured Product, Partner group and Second Line each appear where described
+- [ ] "Open in New Tab" opens a new tab; without it, the link opens in the same tab.
+- [ ] Switching a first-level item's Dropdown Style changes its panel (simple list / Products layout / Industries layout).
+- [ ] Products: Category Panel Heading, View All Text + View All Text URL, Featured Product and Description each appear where described
       in section 4b.
-- [ ] Industries: the item Icon overrides the industry's own icon; the help box fields update the box; an empty
+- [ ] Industries: the item's Industry Icon overrides the industry's own icon; the help box fields update the box; an empty
       title hides it.
 - [ ] Site Settings: logo, tagline, address, both phones, email, Request a Quote button and social icons update the
       header and footer.

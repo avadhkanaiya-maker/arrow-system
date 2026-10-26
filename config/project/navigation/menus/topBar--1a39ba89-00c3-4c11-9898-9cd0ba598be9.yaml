@@ -12,7 +12,7 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
-            dateAdded: null
+            dateAdded: '2026-10-23T10:09:43+00:00'
             disabled: false
             elementCondition: null
             id: null
@@ -36,7 +36,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T10:09:43+00:00'
             elementCondition: null
             instructions: null
             label: null
@@ -48,11 +48,23 @@ fieldLayouts:
             warning: null
           -
             attribute: newWindow
-            dateAdded: null
-            elementCondition: null
+            dateAdded: '2026-10-23T10:09:43+00:00'
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: 47bf8b69-56a8-4c95-b25f-de83d6fc7273
+                  values:
+                    - verbb\navigation\nodetypes\Entry
+                    - verbb\navigation\nodetypes\Custom
+                    - verbb\navigation\nodetypes\Asset
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
             id: null
             instructions: null
-            label: null
+            label: 'Open in New Tab'
             mandatory: false
             orientation: null
             requirable: true
@@ -72,6 +84,20 @@ handle: topBar
 instructions: 'Slim row above the header (desktop), also listed at the bottom of the mobile menu.'
 maxNodes: null
 name: 'Top Bar'
+permissions:
+  verbb\navigation\nodetypes\Asset:
+    enabled: true
+    permissions: '*'
+  verbb\navigation\nodetypes\Custom:
+    enabled: true
+  verbb\navigation\nodetypes\Entry:
+    enabled: true
+    excludeWithoutUri: false
+    permissions: '*'
+  verbb\navigation\nodetypes\GroupColumn:
+    enabled: true
+  verbb\navigation\nodetypes\Passive:
+    enabled: true
 propagationMethod: all
 showSiteMenu: true
 siteSettings:

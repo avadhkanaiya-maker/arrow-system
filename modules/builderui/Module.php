@@ -3,6 +3,10 @@ namespace modules\builderui;
 
 use Craft;
 use craft\web\View;
+use verbb\navigation\events\RegisterNodeTypeEvent;
+use verbb\navigation\nodetypes\Category as CategoryNode;
+use verbb\navigation\nodetypes\Dynamic as DynamicNode;
+use verbb\navigation\services\NodeTypes;
 use yii\base\Event;
 
 /**
@@ -18,6 +22,12 @@ class Module extends \yii\base\Module
         // Lets Yii resolve the module's (empty) controller path, so console commands like `craft help` work
         Craft::setAlias('@modules/builderui', __DIR__);
         parent::init();
+
+        // Navigation: no Categories or Dynamic item types (unused: blog categories are entries; menus are built by hand), so
+        // they're gone from every menu's Add panel and Settings (review 2026-10-23)
+        Event::on(NodeTypes::class, NodeTypes::EVENT_REGISTER_NODE_TYPES, function(RegisterNodeTypeEvent $event) {
+            $event->types = array_values(array_diff($event->types, [CategoryNode::class, DynamicNode::class]));
+        });
 
         $request = Craft::$app->getRequest();
         if ($request->getIsConsoleRequest() || !$request->getIsCpRequest()) {

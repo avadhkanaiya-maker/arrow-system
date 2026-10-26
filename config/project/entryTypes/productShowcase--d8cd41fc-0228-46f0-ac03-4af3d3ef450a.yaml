@@ -132,6 +132,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 9672015d-43cf-4ffb-a80e-792777e09714 # Cards per Row
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 032552a4-d069-4626-af71-38e56287c4a8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
             handle: null
             instructions: 'e.g. “All flexible packaging printers”.'

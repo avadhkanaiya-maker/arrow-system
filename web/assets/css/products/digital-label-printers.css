@@ -320,3 +320,7 @@ button.pagination__page, button.pagination__step { font-family: inherit; cursor:
   .pcard.is-entering { animation: none; }
   .more-card:hover, .more-card:hover .more-card__media img, .more-card:hover .more-card__media--icon .icon { transform: none; }
 }
+
+/* Product page spacing (moved from product-detail.css, which Pages with a Tabs block load too) */
+main { --section-y: clamp(36px, 4vw, 56px); }
+main .section-head { margin-bottom: clamp(20px, 2.4vw, 28px); }

@@ -28,6 +28,80 @@ fieldLayouts:
         name: Content
         uid: ec83cd12-359a-4346-ad1a-eac4d4a512fc
         userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 57d1d2c9-ac0f-40ee-8914-36aa14392881 # Space Above
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0f19dd87-f19f-4223-a30c-b9a3e57733c9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f5aa0ceb-3e8f-47f1-91df-0644c97e3b82 # Space Below
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: de77cb16-0ae2-41ec-bac1-a9ecee7e28ce
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 78f46f52-ad0b-4ac0-8879-936a8e4bb65d # Background
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5f9462da-4d69-4c85-a55a-6173aec8f0bc
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3e590442-e4ec-4026-9ca3-c87081bd9e09
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Section Settings'
+        uid: 4091c480-c5f1-44c9-a656-ede68fe390fb
+        userCondition: null
     thumbFieldKey: null
 handle: tabsBlock
 hasTitleField: false

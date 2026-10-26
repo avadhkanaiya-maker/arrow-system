@@ -128,7 +128,12 @@
         </ol>
       </nav>
 
+      {# The sample request form (Formie "Product Request Quote", one form for every product): under the photos, as live;
+         its hidden Product field gets this product's name, Product Page fills itself with the page address #}
+      {% set sampleForm = craft.formie.forms.handle('productRequestQuote').one() %}
+      {% if sampleForm %}{% do craft.formie.populateFormValues(sampleForm, { product: entry.title }) %}{% endif %}
       <div class="pd-hero__grid">
+        <div class="pd-hero__side">
         {% if photos|length or headerVideoId|length == 11 %}
         {# Gallery: one slide per photo, then the header video. Without JS every slide shows in order and the thumbnails stay hidden. #}
         <div class="pd-gallery" data-gallery>
@@ -167,6 +172,12 @@
           </div>
         </div>
         {% endif %}
+        {% if sampleForm %}
+        <div class="formie-block pd-sample" id="request-sample">
+          {{ craft.formie.renderForm(sampleForm) }}
+        </div>
+        {% endif %}
+        </div>
 
         <div class="pd-hero__body">
           {% if entry.eyebrow or category %}<p class="eyebrow">{{ entry.eyebrow ?: category.title|lower|capitalize }}</p>{% endif %}
@@ -187,7 +198,7 @@
           {% endif %}
           <div class="btn-row pd-hero__actions">
             <a class="btn btn--primary btn--lg" {{ links.attrs(quote, 'Quote page not set (Site Settings)') }}>Request a Quote</a>
-            <a class="btn btn--outline btn--lg" {{ links.attrs(sample, 'Sample page not set (Site Settings)') }}>Request a Sample</a>
+            {% if sampleForm %}<a class="btn btn--outline btn--lg" href="#request-sample">Request a Free Sample</a>{% else %}<a class="btn btn--outline btn--lg" {{ links.attrs(sample, 'Sample page not set (Site Settings)') }}>Request a Sample</a>{% endif %}
           </div>
           {% if brochure or phone %}
           <ul class="pd-quicklinks">
@@ -220,7 +231,7 @@
   {% elseif block.type.handle == 'productApplications' %}
   {% include 'products/blocks/productApplications' with { block: block, product: entry } only %}
   {% else %}
-  <section class="section pd-details"{% if block.type.handle == 'tabsBlock' and detailsId %} id="{{ detailsId }}" aria-labelledby="details-title"{% endif %}>
+  <section class="section pd-details{{ layout.sectionClass(block) }}"{% if block.type.handle == 'tabsBlock' and detailsId %} id="{{ detailsId }}" aria-labelledby="details-title"{% endif %}>
     <div class="container">
       {% if block.type.handle == 'tabsBlock' %}
       {% if detailsId %}<h2 class="visually-hidden" id="details-title">Product details</h2>{% set detailsId = null %}{% endif %}
@@ -253,18 +264,23 @@
   </section>
   {% endif %}
 
-  <!-- ============ 4. HELP BAND (maroon) ============ -->
+  <!-- ============ 4. HELP BAND (maroon): the product's Help Band tab (Heading, Text, Button, Second Button) ============ -->
+  {% set band = entry %}
+  {% if band.sectionHeading ?? null %}
   <section class="sustain cat-cta" aria-labelledby="cat-cta-title">
     <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
     <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
     <div class="container sustain__inner">
       <svg class="reg-mark reg-mark--cta" aria-hidden="true" focusable="false"><use href="#i-reg"/></svg>
-      <h2 id="cat-cta-title">Not sure which {{ isPrinter ? 'printer' : 'product' }} fits?</h2>
-      <p>Tell us your application, materials and run lengths.</p>
+      <h2 id="cat-cta-title">{{ text.highlight(band.sectionHeading) }}</h2>
+      {% if band.sectionLead %}<p>{{ band.sectionLead }}</p>{% endif %}
+      {% if (band.ctaLink and band.ctaLink.url) or (band.secondaryCta and band.secondaryCta.url) %}
       <div class="btn-row cat-cta__actions">
-        {% if phone %}<a class="btn btn--light btn--lg" href="tel:{{ links.tel(phone) }}">Talk to a Specialist</a>{% endif %}
-        <a class="btn btn--outline-light btn--lg" {{ links.attrs(quote, 'Quote page not set (Site Settings)') }}>Request a Quote</a>
+        {% if band.ctaLink and band.ctaLink.url %}<a class="btn btn--light btn--lg" {{ links.attrs(band.ctaLink) }}>{{ band.ctaLink.label }}</a>{% endif %}
+        {% if band.secondaryCta and band.secondaryCta.url %}<a class="btn btn--outline-light btn--lg" {{ links.attrs(band.secondaryCta) }}>{{ band.secondaryCta.label }}</a>{% endif %}
       </div>
+      {% endif %}
     </div>
   </section>
+  {% endif %}
 {% endblock %}

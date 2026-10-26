@@ -10,8 +10,6 @@
    Spacing: tighter vertical rhythm between sections (same as the Digital Flexible Packaging page)
    (home.css default: --section-y up to 104px per side, 48px under section headings). Help band and newsletter keep theirs.
    ========================================================================== */
-main { --section-y: clamp(36px, 4vw, 56px); }
-main .section-head { margin-bottom: clamp(20px, 2.4vw, 28px); }
 
 /* ==========================================================================
    1. Product header: gallery | eyebrow, name, subtitle, description, key specs, actions

@@ -2,7 +2,7 @@
   J. Sustainable printing CTA (design: index.html, "SUSTAINABLE PRINTING CTA"): maroon band, centred white content.
   The leaf illustration is a fixed design element: the design's inline SVG (sustainable-premium.svg redrawn in white
   for the maroon band), so it lives here, not in a field.
-  Fields: Heading ([red] words still work), Intro, Button (white "btn--light") · Anchor ID → the section's id
+  Fields: Heading ([red] words still work), Intro, Button (white "btn--light"), Second Button (outlined, optional) · Anchor ID → the section's id
   (the Benefit card "Sustainable" links to #sustainable). Vars: block (CTA Band entry)
 #}
 {% import '_macros/links' as links %}
@@ -19,6 +19,8 @@
     </svg>
     <h2 id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
     {% if block.sectionLead %}<p>{{ block.sectionLead }}</p>{% endif %}
+    {% if block.secondaryCta ?? null and block.secondaryCta.url %}<div class="btn-row">{% endif %}
     {% if block.ctaLink and block.ctaLink.url %}<a class="btn btn--light btn--lg" {{ links.attrs(block.ctaLink) }}>{{ block.ctaLink.label }}</a>{% endif %}
+    {% if block.secondaryCta ?? null and block.secondaryCta.url %}<a class="btn btn--outline-light btn--lg" {{ links.attrs(block.secondaryCta) }}>{{ block.secondaryCta.label }}</a></div>{% endif %}
   </div>
 </section>

@@ -1,4 +1,4 @@
-// Marks the "Add block" menus of the page builders (Matrix: the blog's Article Body, the products', industries' and pages' Page Builders) with
+// Marks the "Add block" menus ("All elements" and each group's) of the page builders (Matrix: the blog's Article Body, the products', industries' and pages' Page Builders) with
 // .bui-grid, so cp.css shows them as an icon grid.
 // The menus already have Craft's search box; when one opens, the cursor goes into it.
 (function () {
@@ -10,6 +10,9 @@
             if (!btn.closest(FIELD) || btn.closest('.matrixblock .matrixblock')) return;
             var menu = document.getElementById(btn.getAttribute('aria-controls'));
             if (menu && menu.classList.contains('menu')) menu.classList.add('bui-grid');
+            // Craft's full menu (every group): labelled "All elements" next to the group buttons (cp.css shows both)
+            var label = btn.parentNode.classList.contains('expandable-button--collapsed') && btn.querySelector('.label');
+            if (label && label.textContent !== 'All elements') label.textContent = 'All elements';
         });
     }
 

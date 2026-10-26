@@ -223,6 +223,80 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'The maroon band at the bottom of this product page, e.g. “Not sure which product fits?”; [words] in brackets are underlined. Empty = no band.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 41d72117-6816-4edf-a308-93ade1d4e8fb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Text
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 55d07d63-bdcd-4f89-8cbc-72280bf95ac4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'White button, e.g. “Talk to a Specialist” as a phone link. Empty = no button.'
+            label: Button
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dab87c7c-7abe-432e-9af2-e484baa626f5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
+            handle: null
+            instructions: 'Outlined button, e.g. “Request a Quote”. Empty = no button.'
+            label: 'Second Button'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8fd3cd81-7a62-4eea-a080-e95cee72e616
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Help Band'
+        uid: b243c73f-f070-4756-8d5c-0a8074d2ea68
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
             handle: null
             instructions: 'Optional: a shorter name for product cards, e.g. “ArrowJet Hybrid Pro M”. Empty = the product name.'

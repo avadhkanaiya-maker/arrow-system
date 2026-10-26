@@ -1,0 +1,58 @@
+{# Media Carousel (Pages / industries builder): heading, intro, slides one at a time (scroll-snap track; arrows, dots and
+   swipe: web/assets/js/craft.js [data-media-carousel]; styles: craft.css .mcar). A slide shows its uploaded video
+   (native player, the Image as poster), else its YouTube video (click to play: site.js [data-video]), else its image.
+   Section Settings: Space Above / Below, Background, CSS Class. Vars: block #}
+{% import '_macros/layout' as layout %}
+{% import '_macros/text' as text %}
+{% set slides = block.carouselSlides.all() %}
+{% set id = 'carousel-' ~ block.id %}
+{% if slides|length %}
+  <section class="section mcar-section{{ layout.sectionClass(block) }}" aria-labelledby="{{ id }}-title">
+    <div class="container">
+      {% if block.sectionHeading or block.sectionLead %}
+      <header class="section-head">
+        {% if block.sectionHeading %}<h2 class="section-title" id="{{ id }}-title">{{ text.highlight(block.sectionHeading) }}</h2>{% endif %}
+        {% if block.sectionLead %}<p class="section-lead">{{ block.sectionLead }}</p>{% endif %}
+      </header>
+      {% endif %}
+      <div class="mcar" role="region" aria-roledescription="carousel" aria-label="{{ block.sectionHeading ? block.sectionHeading|replace({'[': '', ']': ''}) : 'Images and videos' }}" data-media-carousel>
+        <ul class="mcar__track" data-mcar-track>
+          {% for slide in slides %}
+          {% set image = slide.mediaImage.one() %}
+          {% set video = slide.videoFile.one() %}
+          {% set youtube = video ? '' : text.youtubeId(slide.videoUrl ?? '')|trim %}
+          <li class="mcar__slide" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}">
+            <figure class="mcar__figure">
+              {% if video %}
+              <video class="mcar__media" controls preload="metadata" playsinline{% if image %} poster="{{ image.url }}"{% endif %}>
+                <source src="{{ video.url }}" type="{{ video.mimeType }}">
+              </video>
+              {% elseif youtube|length == 11 %}
+              <div class="video mcar__media" data-video="{{ youtube }}">
+                <img src="{{ image ? image.url : 'https://i.ytimg.com/vi/' ~ youtube ~ '/hqdefault.jpg' }}" loading="lazy" alt="">
+                <button class="video__play" type="button" data-video-play>
+                  <span class="video__icon" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+                  <span class="video__label">Play video{% if slide.headingText %}<span class="visually-hidden">: {{ slide.headingText }}</span>{% endif %}</span>
+                </button>
+              </div>
+              {% elseif image %}
+              <img class="mcar__media" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"{{ loop.first ? '' : ' loading="lazy"' }} alt="{{ image.alt }}">
+              {% endif %}
+              {% if slide.headingText %}<figcaption class="mcar__caption">{{ slide.headingText }}</figcaption>{% endif %}
+            </figure>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if slides|length > 1 %}
+        <div class="mcar__controls" data-mcar-controls hidden>
+          <button class="mcar__arrow" type="button" data-mcar-prev aria-label="Previous slide"><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+          <div class="mcar__dots">
+            {% for slide in slides %}<button class="mcar__dot" type="button" data-mcar-dot aria-label="Slide {{ loop.index }}"{{ loop.first ? ' aria-current="true"' }}></button>{% endfor %}
+          </div>
+          <button class="mcar__arrow" type="button" data-mcar-next aria-label="Next slide"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}

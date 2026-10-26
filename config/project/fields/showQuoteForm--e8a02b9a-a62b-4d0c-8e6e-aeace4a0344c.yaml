@@ -1,7 +1,7 @@
 columnSuffix: null
-handle: isPartnerGroup
-instructions: 'Styles the group label as a separate “Partner Brands” group.'
-name: 'Partner group'
+handle: showQuoteForm
+instructions: 'On = the quote form (Blog Page → Article Form) at the end of this post, as on live. Off = the closing Call to Action box instead.'
+name: 'Quote Form'
 searchable: false
 settings:
   default: false

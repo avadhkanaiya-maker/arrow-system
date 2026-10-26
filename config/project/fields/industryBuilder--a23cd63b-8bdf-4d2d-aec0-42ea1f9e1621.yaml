@@ -52,6 +52,22 @@ settings:
       __assoc__:
         -
           - uid
+          - b50fcb29-ffc3-44a7-9b74-f6145649548a # Tabs
+        -
+          - group
+          - Sections
+    -
+      __assoc__:
+        -
+          - uid
+          - 1724529b-8868-4fd5-84da-99b600a30d10 # Media Carousel
+        -
+          - group
+          - Sections
+    -
+      __assoc__:
+        -
+          - uid
           - 373ec168-076c-4db6-9f3d-4deb3aafa827 # Contact Form
         -
           - group

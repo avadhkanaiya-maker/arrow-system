@@ -168,15 +168,32 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: df624304-92d7-4cbd-9bf2-278048320d79 # Form
+            handle: null
+            instructions: 'The form at the end of every blog post (as live: “Request Quote From Blog”). Its submissions: Formie → Submissions, each with the post it came from. Empty = the red Call to Action box below instead.'
+            label: Form
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e0fe8b76-f519-4dfd-ae7e-98d3411d1083
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-10-19T05:55:35+00:00'
             editCondition: null
             elementCondition: null
             elementEditCondition: null
             fieldUid: 0b27468b-ea05-46f4-92f9-4e618131d1f7 # CTA Heading
             handle: null
-            instructions: 'The closing box at the end of every article that has no Call to Action block of its own.'
-            label: null
-            oldFieldUid: 0b27468b-ea05-46f4-92f9-4e618131d1f7 # CTA Heading
+            instructions: 'Over the form, e.g. “Contact With Our Team Now” (as live).'
+            label: Heading
+            oldFieldUid: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -191,8 +208,8 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 8cbe334a-5712-4c17-b3be-40923a1c8aa0 # CTA Text
             handle: null
-            instructions: null
-            label: null
+            instructions: 'Optional text under the heading.'
+            label: Intro
             oldFieldUid: null
             required: false
             tip: null
@@ -209,7 +226,7 @@ fieldLayouts:
             fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
             handle: null
             instructions: null
-            label: 'CTA Button'
+            label: 'Button (only without a form)'
             oldFieldUid: null
             required: false
             tip: null
@@ -218,7 +235,7 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
-        name: 'Default CTA'
+        name: 'Article Form'
         uid: 0e2c826e-6e4c-4626-bf09-86ceabdef9cb
         userCondition: null
       -

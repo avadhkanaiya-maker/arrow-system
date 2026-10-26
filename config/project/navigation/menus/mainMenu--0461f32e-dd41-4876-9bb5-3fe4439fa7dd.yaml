@@ -12,7 +12,7 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             disabled: false
             elementCondition: null
             id: null
@@ -36,7 +36,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             elementCondition: null
             instructions: null
             label: null
@@ -48,11 +48,23 @@ fieldLayouts:
             warning: null
           -
             attribute: newWindow
-            dateAdded: null
-            elementCondition: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: 634a6e5e-96c2-42a2-848a-da068a9ae768
+                  values:
+                    - verbb\navigation\nodetypes\Entry
+                    - verbb\navigation\nodetypes\Custom
+                    - verbb\navigation\nodetypes\Asset
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
             id: null
             instructions: null
-            label: null
+            label: 'Open in New Tab'
             mandatory: false
             orientation: null
             requirable: true
@@ -65,7 +77,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition:
               class: verbb\navigation\elements\conditions\NodeCondition
@@ -75,15 +87,15 @@ fieldLayouts:
                   maxValue: ''
                   operator: '='
                   step: 1
-                  uid: eee3fe08-6e6f-4b1a-94b2-6bb36c7af7d3
+                  uid: cb20665f-3343-40ff-a870-d43b6eb7b2c2
                   value: '1'
               elementType: verbb\navigation\elements\Node
               fieldContext: global
             elementEditCondition: null
             fieldUid: 6fc3eb31-d21a-43a8-af39-ed3916f72a2a # Menu Style
             handle: null
-            instructions: null
-            label: null
+            instructions: 'What opens under this item: a simple dropdown list, the Products mega menu or the Industries mega menu.'
+            label: 'Dropdown Style'
             oldFieldUid: null
             required: false
             tip: null
@@ -93,7 +105,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition:
               class: verbb\navigation\elements\conditions\NodeCondition
@@ -103,43 +115,21 @@ fieldLayouts:
                   maxValue: ''
                   operator: '='
                   step: 1
-                  uid: 4e298810-bbec-4ee6-a323-5c54eb489b5d
-                  value: '2'
-              elementType: verbb\navigation\elements\Node
-              fieldContext: global
-            elementEditCondition: null
-            fieldUid: b2ac1849-b531-44c4-bc8d-c2a286528fec # Partner group
-            handle: null
-            instructions: 'Products menu groups: style this heading as the separate “Partner Brands” group.'
-            label: null
-            oldFieldUid: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: 25310888-bbcb-4ca2-9a37-98cbfafa3110
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: null
-            editCondition: null
-            elementCondition:
-              class: verbb\navigation\elements\conditions\NodeCondition
-              conditionRules:
-                -
-                  class: craft\elements\conditions\LevelConditionRule
-                  maxValue: ''
-                  operator: '='
-                  step: 1
-                  uid: e45585a3-0776-47a7-b00e-9f59f5a68a7e
+                  uid: 7ca08b9f-af3c-4863-a05f-1bde79b9dc7b
                   value: '3'
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: e997e54d-136b-4542-9513-764df477e28a
+                  values:
+                    - verbb\navigation\nodetypes\Passive
               elementType: verbb\navigation\elements\Node
               fieldContext: global
             elementEditCondition: null
             fieldUid: ae05869d-2cd8-4e20-8b22-83b99c725ce1 # Panel Title
             handle: null
-            instructions: 'Products menu categories: heading inside the open panel, e.g. “ArrowJet digital label printers”. Optional.'
-            label: null
+            instructions: 'Heading at the top of this category’s panel, e.g. “ArrowJet digital label printers”. Optional.'
+            label: 'Category Panel Heading'
             oldFieldUid: null
             required: false
             tip: null
@@ -149,7 +139,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition:
               class: verbb\navigation\elements\conditions\NodeCondition
@@ -159,15 +149,21 @@ fieldLayouts:
                   maxValue: ''
                   operator: '='
                   step: 1
-                  uid: 1112c83f-136a-4fa5-971e-a50376985b36
+                  uid: d2e6b47b-f5e2-40e9-929d-d92b2911c9aa
                   value: '3'
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: 655cd25f-7947-4e7f-b0b5-025eb502022b
+                  values:
+                    - verbb\navigation\nodetypes\Passive
               elementType: verbb\navigation\elements\Node
               fieldContext: global
             elementEditCondition: null
             fieldUid: 4aa2e10e-5601-4b48-888b-b506fd4696a0 # View All Text
             handle: null
-            instructions: null
-            label: null
+            instructions: 'The link at the bottom of this category’s panel, e.g. “View all digital label printers”. Leave empty to hide it.'
+            label: 'View All Text'
             oldFieldUid: null
             required: false
             tip: null
@@ -187,25 +183,31 @@ fieldLayouts:
                   maxValue: ''
                   operator: '='
                   step: 1
-                  uid: cbc71e91-fcd2-42f8-b8f8-404cb40a0b5e
+                  uid: 884f855b-a359-4c7c-a614-d6364f5ea62a
                   value: '3'
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: cc269736-2a1e-46c9-9e93-e0e192939a87
+                  values:
+                    - verbb\navigation\nodetypes\Passive
               elementType: verbb\navigation\elements\Node
               fieldContext: global
             elementEditCondition: null
-            fieldUid: 331d7548-f88e-47fa-b1b7-5bc3af0e3d50 # Menu Icon
+            fieldUid: 3a7bfa6c-6ceb-4b0f-9a2b-27fdec6924c8 # View All Text URL
             handle: null
-            instructions: 'Industries menu: line icon before the name. Leave empty to use the industry’s own icon.'
-            label: Icon
+            instructions: null
+            label: null
             oldFieldUid: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2214a206-4983-48df-acfb-98cfdee3420d
+            uid: 4b7331ae-7f14-4f18-ba49-4eec5aab8c49
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition:
               class: verbb\navigation\elements\conditions\NodeCondition
@@ -215,32 +217,21 @@ fieldLayouts:
                   maxValue: ''
                   operator: '='
                   step: 1
-                  uid: 3e313db1-47ea-4cb4-868a-6b89e4f041f6
-                  value: '4'
+                  uid: 24a3c0f1-eab6-4149-b5a6-9d4f0aa72c7a
+                  value: '3'
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: a5cb0d66-44b7-4957-b7b9-b726e787d54f
+                  values:
+                    - verbb\navigation\nodetypes\Passive
               elementType: verbb\navigation\elements\Node
               fieldContext: global
             elementEditCondition: null
-            fieldUid: 83b9bca3-2c30-4135-874b-14101aad0437 # Description
-            handle: null
-            instructions: 'Grey line under the name. Leave empty to use the product’s Menu Description.'
-            label: 'Second Line'
-            oldFieldUid: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: c39f0b4c-a952-42e8-bdf7-a84250968519
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: null
-            editCondition: null
-            elementCondition: null
-            elementEditCondition: null
             fieldUid: 0d841017-f440-44d6-a3e5-c067dccf690b # Featured Product
             handle: null
-            instructions: null
-            label: null
+            instructions: 'The product in the box on the right while this category is open. Leave empty for no product box.'
+            label: 'Featured Product'
             oldFieldUid: null
             required: false
             tip: null
@@ -249,12 +240,75 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
+          -
+            dateAdded: '2026-10-23T06:00:26+00:00'
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: 17174b2f-1e09-41d6-bea6-0eb08e0a6a27
+                  value: '3'
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: 9e4bb420-09a5-485d-a294-c25d2ffe2a0f
+                  values:
+                    - verbb\navigation\nodetypes\Entry
+                    - verbb\navigation\nodetypes\Custom
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 331d7548-f88e-47fa-b1b7-5bc3af0e3d50 # Menu Icon
+            handle: null
+            instructions: 'Line icon before the industry name. Leave empty to use the industry’s own icon.'
+            label: 'Industry Icon'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2214a206-4983-48df-acfb-98cfdee3420d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-10-23T06:00:26+00:00'
+            editCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: craft\elements\conditions\LevelConditionRule
+                  maxValue: ''
+                  operator: '='
+                  step: 1
+                  uid: e1f14c65-e8e8-4d93-8934-bbcb05ebeeb7
+                  value: '4'
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
+            elementEditCondition: null
+            fieldUid: 83b9bca3-2c30-4135-874b-14101aad0437 # Description
+            handle: null
+            instructions: 'Grey line under the product name. Leave empty to use the product’s Menu Description.'
+            label: Description
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c39f0b4c-a952-42e8-bdf7-a84250968519
+            userCondition: null
+            warning: null
+            width: 100
         name: 'Menu item'
         uid: 4052bcd5-3b38-4b2b-b414-53c56077cbea
         userCondition: null
     thumbFieldKey: null
 handle: mainMenu
-instructions: 'Top menu in the header (desktop and mobile). Level 1: menu items. Under a mega menu, level 2: group headings, level 3: categories or industries, level 4: products.'
+instructions: 'Top menu in the header (desktop and mobile). Level 1: menu items. Under a mega menu, level 2: group headings (Group / Column), level 3: categories (Passive items) or industries, level 4: products.'
 maxNodes: null
 menuFieldLayouts:
   42f558eb-7370-42de-9b59-bc54c4ce0544:
@@ -264,7 +318,7 @@ menuFieldLayouts:
         elementCondition: null
         elements:
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition: null
             elementEditCondition: null
@@ -281,7 +335,7 @@ menuFieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition: null
             elementEditCondition: null
@@ -298,7 +352,7 @@ menuFieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: null
+            dateAdded: '2026-10-23T06:00:26+00:00'
             editCondition: null
             elementCondition: null
             elementEditCondition: null
@@ -319,6 +373,24 @@ menuFieldLayouts:
         userCondition: null
     thumbFieldKey: null
 name: 'Main Menu'
+permissions:
+  verbb\navigation\nodetypes\Asset:
+    enabled: true
+    permissions: '*'
+  verbb\navigation\nodetypes\Category:
+    enabled: false
+  verbb\navigation\nodetypes\Custom:
+    enabled: true
+  verbb\navigation\nodetypes\Dynamic:
+    enabled: false
+  verbb\navigation\nodetypes\Entry:
+    enabled: true
+    excludeWithoutUri: false
+    permissions: '*'
+  verbb\navigation\nodetypes\GroupColumn:
+    enabled: true
+  verbb\navigation\nodetypes\Passive:
+    enabled: true
 propagationMethod: all
 showSiteMenu: true
 siteSettings:

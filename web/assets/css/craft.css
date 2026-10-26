@@ -108,6 +108,11 @@
   .pgrid--one .pcard__title { font-size: 1.5rem; }
   .pgrid--one .pcard__specs { max-width: 560px; }
 }
+/* Recommended Products › Cards per Row on large screens (default 3: industry-detail.css) */
+@media (min-width: 64em) {
+  .pgrid.pgrid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pgrid.pgrid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+}
 
 /* Comparison block: the design's general ".prose ul:not([class]) li::before" (red dot) is more specific than its
    ".compare__col--pro/--con li::before" (tick / cross), so the columns showed red dots. Same rules, more specific. */
@@ -178,6 +183,11 @@
 .rich-text ul { display: grid; gap: 9px; }
 @media (min-width: 48em) { .tab-panel .rich-text ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }
 .rich-text ul li { position: relative; padding-left: 28px; font-size: .9375rem; line-height: 1.5; color: var(--c-text); }
+.rich-text table { width: 100%; margin-top: 18px; border-collapse: collapse; font-size: .9375rem; }   /* tables in text tabs */
+.rich-text td, .rich-text th { padding: 10px 14px; border: 1px solid var(--c-line); vertical-align: top; text-align: left; color: var(--c-text); }
+.rich-text tr:nth-child(odd) td { background: var(--c-surface); }
+.rich-text td:first-child { width: 40%; }   /* label column: the same width in every table */
+.rich-text table + ul { margin-top: 18px; }
 .js .tab-panel__title { display: none; } /* text tabs: the tab label is the heading; shown without JS (every panel in order) */
 .tab-panel__title { margin-bottom: 14px; font-size: 1.25rem; color: var(--c-ink); }
 
@@ -203,6 +213,91 @@
 .formie-block .fui-btn-wrapper { margin-top: 8px; }
 .prose .formie-block ul li::before { content: none; }   /* Formie's lists (errors, options) aren't article bullets */
 .prose .formie-block ul { padding: 0; }
+
+/* The design's enquiry form (Arrowsystem/try-a-free-sample), for any Formie form: the block's heading with "* Required
+   field"; Heading fields = numbered steps; radio buttons = cards (an option label "**Title** description": the bold part is
+   the card's title); "(optional)" after optional fields' labels; a form whose last field is an HTML field (e.g. a privacy
+   note) has it beside the submit button, which gets an arrow. */
+.formie-block__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px;
+  margin-bottom: 6px; padding-bottom: 18px; border-bottom: 1px solid var(--c-line); }
+.formie-block .formie-block__head .formie-block__title { margin: 0; }
+.formie-block .formie-block__req { margin: 0; font-size: .8125rem; color: var(--c-muted); }
+.formie-block__req span { color: var(--c-red); font-weight: 700; }
+.formie-block form { counter-reset: fui-step; }
+.formie-block .fui-row .fui-field .fui-heading { display: flex; align-items: center; gap: 10px; margin: 18px 0 6px; font-family: var(--font-display);
+  font-size: 1.125rem; font-weight: 700; line-height: 1.3; color: var(--c-ink); counter-increment: fui-step; }
+.formie-block .fui-row .fui-field .fui-heading::before { content: counter(fui-step); display: grid; place-items: center; flex-shrink: 0; width: 28px; height: 28px;
+  margin: 0; border-radius: 50%; background: var(--c-maroon); color: var(--c-white); font-size: .875rem; font-weight: 800; }
+.formie-block .fui-row .fui-field .fui-heading::after { content: ""; flex: 1; height: 1px; background: var(--c-line); }
+.formie-block .fui-row:first-child .fui-field .fui-heading { margin-top: 4px; }
+.formie-block .fui-type-radio .fui-layout-wrap { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); }
+.formie-block .fui-type-radio .fui-radio { margin: 0; }
+.formie-block .fui-type-radio .fui-radio label { display: block; height: 100%; padding: 14px 46px 14px 16px; border: 1.5px solid #CACACA;
+  border-radius: 10px; background: var(--c-white); font-size: .9375rem; font-weight: 600; line-height: 1.4; color: var(--c-ink); cursor: pointer; }
+.formie-block .fui-type-radio .fui-radio label:has(strong) { font-size: .8125rem; font-weight: 400; color: var(--c-muted); }
+.formie-block .fui-type-radio .fui-radio label strong { display: block; margin-bottom: 2px; font-size: .9375rem; color: var(--c-ink); }
+.formie-block .fui-type-radio .fui-radio label::before { left: auto; right: 14px; top: 50%; width: 22px; height: 22px; margin-top: -11px; border-width: 1.5px; }
+.formie-block .fui-type-radio .fui-radio label:hover { border-color: #ABABAB; }
+.formie-block .fui-type-radio .fui-radio input:checked + label { border-color: var(--c-maroon); background: #FFFBFB; box-shadow: 0 0 0 3px var(--c-maroon-tint); }
+.formie-block .fui-type-radio .fui-radio input:focus-visible + label { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+.formie-block .fui-field:not(.fui-field-required):not(.fui-type-hidden) .fui-label::after { content: " (optional)"; font-weight: 400; color: var(--c-muted); }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 0; }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) > .fui-page-container { display: contents; }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) .fui-row { grid-column: 1 / -1; }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) .fui-row:last-child { grid-column: 1; }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) > .fui-btn-wrapper { grid-column: 2; padding-left: 24px; }   /* one unbroken line above the note and the button */
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) .fui-row:last-child,
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) > .fui-btn-wrapper { margin: 8px 0 0; padding-top: 22px; border-top: 1px solid var(--c-line); align-self: stretch; }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) .fui-submit:not(.fui-loading)::after { content: "→"; display: inline-block; margin-left: 10px; transition: transform .15s ease; }
+.formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) .fui-submit:hover::after { transform: translateX(3px); }
+.formie-block .fui-type-html p { margin: 0; font-size: .8125rem; line-height: 1.5; color: var(--c-muted); }
+.formie-block .fui-type-html a { color: var(--c-ink); font-weight: 600; }
+@media (max-width: 35.99em) {
+  .formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) { grid-template-columns: minmax(0, 1fr); }
+  .formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) > .fui-btn-wrapper { grid-column: 1; margin: 16px 0 0; padding: 0; border-top: 0; }
+  .formie-block .fui-page:has(.fui-row:last-child > .fui-type-html) .fui-submit { width: 100%; }
+}
+
+/* Page Header, Header Style "Small illustration" (industries/blocks/industryHeader.twig): compact, the image small at the
+   right as decoration, desktop only (the design's .fs-hero / .sample-pack) */
+.page-hero--art.ind-detail-hero { padding-block: clamp(18px, 2.5vw, 28px) clamp(30px, 4vw, 48px); }
+.page-hero--art .ind-detail-hero__body { max-width: 720px; }
+.page-hero--art .ind-detail-hero__title { font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); }
+.page-hero__art { position: absolute; top: 50%; right: max(24px, calc((100vw - var(--max)) / 2)); z-index: -1; display: none;
+  width: 240px; height: auto; transform: translateY(-46%) rotate(3deg); filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .09)); }
+@media (min-width: 64em) { .page-hero__art { display: block; } }
+
+/* Side column boxes (an HTML block in a Columns column, e.g. Try a Free Sample): <div class="side-stack"> holding a
+   .contact-panel (maroon: eyebrow, title, text, white .btn--light, .contact-panel__list with icons) and .side-card boxes
+   with .side-links (icon, title + line, arrow). The design's .fs-aside; .prose resets as it sits in a text column. */
+.side-stack { display: grid; gap: 22px; }
+.side-stack .contact-panel { padding: clamp(24px, 3vw, 32px); }
+.prose .side-stack h2 { margin: 0; }
+.prose .side-stack h2::before { content: none; }
+.prose .side-stack p, .prose .side-stack ul { margin: 0; }
+.prose .side-stack .contact-panel__title { margin: 8px 0; font-size: clamp(1.375rem, 1.15rem + .8vw, 1.625rem); color: var(--c-white); }
+.prose .side-stack .contact-panel p { color: rgba(255, 255, 255, .9); }
+.side-stack .contact-panel .btn--block { margin-top: 18px; text-decoration: none; }
+.side-stack .contact-panel__list { gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, .2); }
+.prose .side-stack .contact-panel__list { margin-top: 20px; }
+.side-stack .contact-panel__list li { font-size: .875rem; }
+.prose .side-stack .contact-panel__list a { color: var(--c-white); }
+.side-card { padding: 22px; background: var(--c-white); border: 1px solid var(--c-line); border-radius: 12px; }
+.side-card__title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 1.0625rem; color: var(--c-ink); }
+.side-card__title::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: var(--c-maroon); }
+.prose .side-stack .side-card__title { margin-bottom: 10px; font-size: 1.0625rem; }
+.prose .side-stack .side-card__title::before { content: ""; display: block; width: 18px; height: 3px; margin: 0; border-radius: 2px; background: var(--c-maroon); }
+.side-links li + li { border-top: 1px solid var(--c-line); }
+.prose .side-links li { margin: 0; padding: 0; }
+.side-links__link { display: flex; align-items: center; gap: 12px; padding: 12px 0; text-decoration: none; color: var(--c-ink); }
+.prose .side-links__link { color: var(--c-ink); text-decoration: none; }
+.side-links__link strong { display: block; font-size: .9375rem; transition: color .15s ease; }
+.side-links__link strong + span { display: block; font-size: .8125rem; color: var(--c-muted); }
+.side-links__icon { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; border-radius: 8px; background: var(--c-maroon-tint); color: var(--c-maroon); }
+.side-links__icon .icon { width: 18px; height: 18px; }
+.side-links__arrow { margin-left: auto; width: 16px; height: 16px; flex-shrink: 0; color: var(--c-muted); transition: transform .15s ease, color .15s ease; }
+.side-links__link:hover strong { color: var(--c-maroon); }
+.side-links__link:hover .side-links__arrow { color: var(--c-maroon); transform: translateX(3px); }
 
 /* Columns (industries/blocks/columnsBlock.twig): two columns, stacked on phones; styles plain / white card / maroon panel */
 .cols { display: grid; gap: clamp(24px, 3vw, 40px); align-items: start; }
@@ -237,6 +332,9 @@
 .g-card__subtitle { margin-top: 4px; font-weight: 700; color: var(--c-maroon); }
 .g-card__text { margin-top: 12px; font-size: .9375rem; line-height: 1.6; color: var(--c-text); overflow-wrap: anywhere; }
 .g-card__text > * + * { margin-top: 10px; }
+.g-card__text ul { display: grid; gap: 6px; }   /* lists in cards: small maroon bullets */
+.g-card__text ul li { position: relative; padding-left: 16px; }
+.g-card__text ul li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--c-maroon); }
 .g-card__text a { position: relative; z-index: 2; color: var(--c-maroon); font-weight: 600; }
 .prose .formie-block__title { margin-top: 0; }
 .section.ind-prose + .card-grid { padding-top: 0; }   /* a heading / text right before a Card Grid belongs to it: no double gap */
@@ -279,3 +377,44 @@
 .page-banner__cover .dot-grid--hero { top: -30px; right: -30px; }
 .page-banner__cover--strip img { height: clamp(160px, 22vw, 320px); object-fit: cover; }   /* Banner Height: Short strip */
 @media (max-width: 47.99em) { .page-banner__cover .crop, .page-banner__cover .dot-grid { display: none; } }   /* the corner marks sit outside the image */
+
+/* Media Carousel (industries/blocks/mediaCarousel.twig, craft.js): one slide at a time, scroll-snap (swipe on touch) */
+.mcar { position: relative; }
+.mcar__track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: 16px; margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.mcar__track::-webkit-scrollbar { display: none; }
+.mcar__slide { scroll-snap-align: start; min-width: 0; }
+.mcar__figure { margin: 0; }
+.mcar__media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; background: var(--c-surface); }
+video.mcar__media { background: var(--c-black); object-fit: contain; }
+.mcar__caption { margin-top: 12px; text-align: center; font-size: .9375rem; color: var(--c-muted); }
+.mcar__controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; }
+.mcar__controls[hidden] { display: none; }
+.mcar__arrow { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--c-line); border-radius: 50%;
+  background: var(--c-white); color: var(--c-ink); cursor: pointer; }
+.mcar__arrow:hover { border-color: var(--c-maroon); color: var(--c-maroon); }
+.mcar__arrow .icon { width: 20px; height: 20px; }
+.mcar__dots { display: flex; flex-wrap: wrap; gap: 8px; }
+.mcar__dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: var(--c-line-strong, #c9cdd3); cursor: pointer; }
+.mcar__dot[aria-current="true"] { background: var(--c-maroon); }
+@media (prefers-reduced-motion: reduce) { .mcar__track { scroll-behavior: auto; } }
+
+/* Product pages: photos + the sample request form (Formie "Product Request Quote") in the left column, as live */
+.pd-hero__side { display: grid; gap: 24px; align-content: start; min-width: 0; }
+.pd-sample { margin: 0; scroll-margin-top: 96px; }
+.pd-sample .fui-row { gap: 12px; }
+@media (max-width: 63.99em) {   /* one column: photo, then name / description / buttons, then the form */
+  .pd-hero__side { display: contents; }
+  .pd-hero__side .pd-gallery { order: 1; }
+  .pd-hero__body { order: 2; }
+  .pd-sample { order: 3; }
+}
+
+/* Blog post cover (blog/_entry.twig): a fixed full-width frame, 21:9 (4:3 on phones); the image whole inside it at most at
+   its own size (never stretched or cropped), centred on the light grey frame. Overrides blog-detail.css's
+   full-width <img>. */
+.post-cover__frame { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 21 / 9;
+  overflow: hidden; border-radius: 12px; box-shadow: var(--shadow-md); background: var(--c-surface); }
+@media (max-width: 47.99em) { .post-cover__frame { aspect-ratio: 4 / 3; } }
+.post-cover .post-cover__frame img { position: relative; width: auto; height: auto; max-width: 100%; max-height: 100%;
+  border-radius: 0; box-shadow: none; background: none; }

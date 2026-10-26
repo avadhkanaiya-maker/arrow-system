@@ -170,13 +170,16 @@
         </div>
 
         {% if cover %}
-        {# Cover: full width under the title, shown whole at its own proportions (design change 2026-10-16) #}
+        {# Cover: a fixed full-width frame under the title (21:9, 4:3 on phones; review 2026-10-22: small or tall covers were
+           stretched huge); the image shown whole inside it, never enlarged or cropped, on the light grey frame #}
         <figure class="post-cover">
           <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
           <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
           <span class="crop crop--bl" aria-hidden="true"></span><span class="crop crop--br" aria-hidden="true"></span>
           {% set coverSize = {width: min(1600, cover.width)} %}{# up to 1600 px wide (shown at 1280 max), never enlarged or cropped #}
-          <img src="{{ cover.getUrl(coverSize) }}" width="{{ cover.getWidth(coverSize) }}" height="{{ cover.getHeight(coverSize) }}" fetchpriority="high" alt="{{ cover.alt }}">
+          <span class="post-cover__frame">
+            <img src="{{ cover.getUrl(coverSize) }}" width="{{ cover.getWidth(coverSize) }}" height="{{ cover.getHeight(coverSize) }}" fetchpriority="high" alt="{{ cover.alt }}">
+          </span>
         </figure>
         {% endif %}
       </div>
@@ -210,7 +213,18 @@
           {{ layout.builderBlock(block, anchors) }}
         {% endfor %}
 
-        {% if not hasCta and blogPage and blogPage.ctaHeading %}
+        {# The quote form at the end of the posts that have it on live (the post's Quote Form switch; Blog Page → Article
+           Form: the form, its heading and intro); the post's title goes into its hidden Blog Post field. Otherwise the red
+           Call to Action box, unless the post has its own. #}
+        {% set articleForm = blogPage and (entry.showQuoteForm ?? false) ? blogPage.formieForm.one() : null %}
+        {% if articleForm %}
+          {% do craft.formie.populateFormValues(articleForm, { blogPost: entry.title }) %}
+          <section class="formie-block post-form" id="contact-our-team" aria-labelledby="post-form-title">
+            <h2 class="formie-block__title" id="post-form-title">{{ blogPage.ctaHeading ?: 'Contact With Our Team Now' }}</h2>
+            {% if blogPage.ctaText %}<p class="formie-block__lead">{{ blogPage.ctaText }}</p>{% endif %}
+            {{ craft.formie.renderForm(articleForm) }}
+          </section>
+        {% elseif not hasCta and blogPage and blogPage.ctaHeading %}
           {% include 'blog/_partials/post-cta' with { heading: blogPage.ctaHeading, body: blogPage.ctaText, link: blogPage.ctaLink, id: 'post-cta-title' } only %}
         {% endif %}
 

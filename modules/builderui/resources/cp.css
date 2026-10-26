@@ -1,18 +1,13 @@
 /*
-  Page builder "Add block" menus (Matrix fields in Blocks view: the blog's Article Body, the products' and industries' Page Builders) as a
-  grid of icon tiles in their groups. Craft's menu already has the search box, the groups and the icons; cp.js adds
+  Page builder "Add block" menus (Matrix fields in Blocks view: the blog's Article Body, the products', industries' and pages' Page
+  Builders) as a grid of icon tiles, like Elementor's widget panel: "All elements" (every group, with search) and each group's menu. Craft's menu already has the search box, the groups and the icons; cp.js adds
   .bui-grid to the menus of these fields only, so other Matrix fields (e.g. Homepage Sections) keep Craft's list.
 */
-/* The builders only: always the single "Add block" button (Craft switches to one button per group when there's room) */
-#fields-articleBody-field .expandable-button--expanded,
-#fields-productBuilder-field .expandable-button--expanded,
-#fields-industryBuilder-field .expandable-button--expanded { display: none !important; }
-#fields-articleBody-field .expandable-button--collapsed,
-#fields-articleBody-field .expandable-button--collapsed.hidden,
-#fields-productBuilder-field .expandable-button--collapsed,
-#fields-productBuilder-field .expandable-button--collapsed.hidden,
-#fields-industryBuilder-field .expandable-button--collapsed,
-#fields-industryBuilder-field .expandable-button--collapsed.hidden { display: block !important; }
+/* The builders only (and the Columns inside them): "All elements" (Craft's full menu, every group) first, then one button per
+   group ("tabs": Sections, Text, Lists …); Craft would show only one of the two, depending on the room */
+:is(#fields-articleBody-field, #fields-productBuilder-field, #fields-industryBuilder-field, #fields-pageBuilder-field) .buttons:has(> .expandable-button--collapsed) { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px; }
+:is(#fields-articleBody-field, #fields-productBuilder-field, #fields-industryBuilder-field, #fields-pageBuilder-field) .expandable-button--collapsed { display: block !important; }
+:is(#fields-articleBody-field, #fields-productBuilder-field, #fields-industryBuilder-field, #fields-pageBuilder-field) .expandable-button--expanded { display: flex !important; flex-wrap: wrap; }
 
 .menu.bui-grid { width: 600px; max-width: calc(100vw - 32px); max-height: 70vh; overflow-y: auto; padding: 0 14px 14px; }
 .menu.bui-grid .search-container { position: sticky; top: 0; z-index: 1; margin: 0 -14px; padding: 14px 14px 4px; background: var(--white, #fff); }
@@ -21,8 +16,9 @@
     margin: 14px 2px 8px; padding: 0; font-size: 11px; font-weight: 700; letter-spacing: .06em;
     text-transform: uppercase; color: var(--gray-550, #606d7b);
 }
-.menu.bui-grid .menu-group ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; }
-.menu.bui-grid .menu-group li { margin: 0; padding: 0; }
+.menu.bui-grid ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; }
+.menu.bui-grid li { margin: 0; padding: 0; }
+.menu.bui-grid > ul:first-child { margin-top: 14px; }   /* a group's own menu: no search box above the tiles */
 .menu.bui-grid ul li .menu-item {
     display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
     width: 100% !important; min-height: 86px; margin: 0 !important; padding: 10px 6px !important;
@@ -35,5 +31,5 @@
 .menu.bui-grid .menu-item-label { align-items: center !important; }
 .menu.bui-grid { overflow-x: hidden; }
 .menu.bui-grid [hidden], .menu.bui-grid .hidden { display: none !important; }
-@media (max-width: 700px) { .menu.bui-grid .menu-group ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .menu.bui-grid ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .bui-form-edit { margin-top: 8px; }

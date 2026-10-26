@@ -353,7 +353,6 @@ body.nav-open .header-cta { visibility: hidden; }
   }
   .mega__cats { grid-column: 1; }
   .mega__label { margin: 0 0 8px 12px; }
-  .mega__label--partner { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--c-line); }
   .mega__cat-btn { padding: 10px 12px; font-size: .9375rem; font-weight: 600; }
   .mega__cat-btn .icon { width: 16px; height: 16px; color: var(--c-muted); }
   .mega__cat-btn[aria-expanded="true"] .icon { transform: none; }

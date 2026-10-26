@@ -1,0 +1,37 @@
+columnSuffix: null
+handle: testMatrixField
+instructions: null
+name: 'test matrix field'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 16dde185-f39f-406d-b493-119ccf64bd1e # Card Grid
+        -
+          - group
+          - General
+    -
+      __assoc__:
+        -
+          - uid
+          - 43a7134f-2531-4cb4-b69f-5517aa9c56ef # CTA Band
+        -
+          - group
+          - General
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

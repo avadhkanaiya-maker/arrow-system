@@ -8,7 +8,7 @@ settings:
   branchLimit: null
   defaultPlacement: end
   maintainHierarchy: false
-  maxRelations: 12
+  maxRelations: 24
   minRelations: null
   selectionLabel: null
   showSearchInput: true

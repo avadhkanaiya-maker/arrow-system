@@ -49,10 +49,22 @@ fieldLayouts:
           -
             attribute: newWindow
             dateAdded: null
-            elementCondition: null
+            elementCondition:
+              class: verbb\navigation\elements\conditions\NodeCondition
+              conditionRules:
+                -
+                  class: verbb\navigation\elements\conditions\TypeConditionRule
+                  operator: in
+                  uid: 209cd32b-cfa6-45f0-944b-29d4addbbbbd
+                  values:
+                    - verbb\navigation\nodetypes\Entry
+                    - verbb\navigation\nodetypes\Custom
+                    - verbb\navigation\nodetypes\Asset
+              elementType: verbb\navigation\elements\Node
+              fieldContext: global
             id: null
             instructions: null
-            label: null
+            label: 'Open in New Tab'
             mandatory: false
             orientation: null
             requirable: true

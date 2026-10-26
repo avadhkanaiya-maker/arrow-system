@@ -82,7 +82,7 @@
 
   /* ---------- Gallery: thumbnails swap the stage; the video thumbnail starts the video ---------- */
   var gallery = document.querySelector('[data-gallery]');
-  if (gallery) {
+  if (gallery && gallery.querySelector('[data-gallery-thumbs]')) { // the product gallery; Pages' photo galleries have no thumbnails
     var thumbs = toArray(gallery.querySelectorAll('[data-gallery-thumb]'));
     var slides = thumbs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
     var showSlide = function (i) {

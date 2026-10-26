@@ -16,6 +16,8 @@ use yii\base\Model;
  * - Phone fields with the country picker: the number must be a valid number for the chosen country. Formie checks this
  *   only in the browser (intl-tel-input), so without this a bot or a browser without JS could send "123".
  * - Submission status colours as Craft's Color enum (StatusesWithColors): the Cards view of Submissions crashed.
+ * - Product Request Quote: each submission's "Product (entry)" field links the product its Product Page address names
+ *   (/product/<slug>/), so Formie → Submissions can be filtered by product. Set here, on save, not by the browser.
  */
 class Module extends \yii\base\Module
 {
@@ -31,6 +33,18 @@ class Module extends \yii\base\Module
         // Formie's statuses service → our subclass, once the plugins are loaded
         Event::on(Plugins::class, Plugins::EVENT_AFTER_LOAD_PLUGINS, function() {
             \verbb\formie\Formie::$plugin?->set('statuses', StatusesWithColors::class);
+        });
+
+        Event::on(Submission::class, \craft\base\Element::EVENT_BEFORE_SAVE, function(\craft\events\ModelEvent $event) {
+            /** @var Submission $submission */
+            $submission = $event->sender;
+            if ($submission->getForm()?->handle !== 'productRequestQuote' || $submission->getFieldValue('productEntry')->ids()) {
+                return;
+            }
+            if (preg_match('#/product/([^/?\#]+)#', (string)$submission->getFieldValue('productPage'), $m)
+                && ($product = \craft\elements\Entry::find()->section('products')->slug($m[1])->status(null)->one())) {
+                $submission->setFieldValue('productEntry', [$product->id]);
+            }
         });
 
         Event::on(Submission::class, Model::EVENT_AFTER_VALIDATE, function(Event $event) {

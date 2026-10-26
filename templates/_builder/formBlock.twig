@@ -1,6 +1,6 @@
 {#
   Form block, inline (in a text column: blog posts, products, industries, Columns): the chosen Formie form in a form card,
-  with an optional heading and intro. Formie renders it and handles the submission (validation, spam checks, Formie →
+  with an optional heading (with the "* Required field" note beside it, as the design's enquiry forms) and intro. Formie renders it and handles the submission (validation, spam checks, Formie →
   Submissions, email notifications, thank-you message). Full-width version (Pages / industries): industries/blocks/formBlock.
   Vars: block
 #}
@@ -8,7 +8,12 @@
 {% if form %}
 {% set id = block.anchorId|trim ?: null %}
 <div class="formie-block"{% if id %} id="{{ id }}"{% endif %}>
-  {% if block.sectionHeading %}<h2 class="formie-block__title">{{ block.sectionHeading }}</h2>{% endif %}
+  {% if block.sectionHeading %}
+  <div class="formie-block__head">
+    <h2 class="formie-block__title">{{ block.sectionHeading }}</h2>
+    <p class="formie-block__req"><span aria-hidden="true">*</span> Required field</p>
+  </div>
+  {% endif %}
   {% if block.sectionLead %}<p class="formie-block__lead">{{ block.sectionLead }}</p>{% endif %}
   {{ craft.formie.renderForm(form) }}
 </div>

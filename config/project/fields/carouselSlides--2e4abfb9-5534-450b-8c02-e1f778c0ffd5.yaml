@@ -1,0 +1,26 @@
+columnSuffix: null
+handle: carouselSlides
+instructions: 'One slide each (image, uploaded video or YouTube video), in this order.'
+name: Slides
+searchable: false
+settings:
+  createButtonLabel: 'Add slide'
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 7fd323b6-b4cd-4b70-8ec7-a4ccff0fdcb0 # Carousel Slide
+  includeTableView: false
+  maxEntries: null
+  minEntries: 1
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

@@ -1,0 +1,151 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Images and videos, one at a time, with arrows and dots.'
+fieldLayouts:
+  e28fb308-8616-4ed6-aa1b-20c8eb636de8:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'Optional, e.g. “See It in [Action]” ([words] in red).'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 30ac2e9e-3f22-4bf5-bd11-0189b703dc4f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 96b732b8-b7d8-4f00-a645-4ac1e09cb477
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2e4abfb9-5534-450b-8c02-e1f778c0ffd5 # Slides
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f65e5730-c6d6-42f1-8cee-49bbf62b7d1a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 4a77e4e1-4740-4c81-be06-076a2af8a703
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 57d1d2c9-ac0f-40ee-8914-36aa14392881 # Space Above
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 557e0a66-9ead-4fbc-9d9b-7c7a8fc0909a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f5aa0ceb-3e8f-47f1-91df-0644c97e3b82 # Space Below
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9cbc3224-3023-4c23-999f-701ac9c35a59
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 78f46f52-ad0b-4ac0-8879-936a8e4bb65d # Background
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8d538d47-e94e-413c-bbec-536247fd140c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 995a5df2-13fb-4c43-86db-59e490c5f0bc
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Section Settings'
+        uid: e9bf1dc9-790b-4f41-b146-9783b1e60f40
+        userCondition: null
+    thumbFieldKey: null
+handle: mediaCarousel
+hasTitleField: false
+icon: images
+name: 'Media Carousel'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

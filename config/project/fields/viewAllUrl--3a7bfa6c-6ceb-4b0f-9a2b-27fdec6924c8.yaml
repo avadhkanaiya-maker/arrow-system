@@ -1,0 +1,17 @@
+columnSuffix: null
+handle: viewAllUrl
+instructions: 'Where the View All link goes: a page of this website or a full address.'
+name: 'View All Text URL'
+searchable: false
+settings:
+  advancedFields:
+    - target
+  fullGraphqlData: true
+  maxLength: 255
+  showLabelField: false
+  types:
+    - entry
+    - url
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Link

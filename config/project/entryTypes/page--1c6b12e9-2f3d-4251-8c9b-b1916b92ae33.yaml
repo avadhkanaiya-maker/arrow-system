@@ -47,46 +47,6 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
-            fieldUid: 1c2748fc-6dc8-4720-80e3-fad0a83163de # Featured Image
-            handle: null
-            instructions: 'The photo when this page is shown as a card (related pages, lists). Optional.'
-            label: 'Card Photo'
-            oldFieldUid: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: ab2c0158-b9f0-4533-b991-0bee315d77de
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            dateAdded: null
-            editCondition: null
-            elementCondition: null
-            elementEditCondition: null
-            fieldUid: 8f40862c-c55a-4bef-830e-b3e5ff88faf4 # Card Tagline
-            handle: null
-            instructions: 'One or two sentences for the card. Optional.'
-            label: 'Card Summary'
-            oldFieldUid: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: 490b8a6c-0d0c-4655-a738-8713d5f6a66e
-            userCondition: null
-            warning: null
-            width: 100
-        name: Card
-        uid: 67b6dbe7-4d88-49bd-97d1-74166dc4900a
-        userCondition: null
-      -
-        elementCondition: null
-        elements:
-          -
-            dateAdded: null
-            editCondition: null
-            elementCondition: null
-            elementEditCondition: null
             fieldUid: 62fd6cf9-891c-40c1-9c6e-caf5e136eeee # Page Builder
             handle: null
             instructions: null

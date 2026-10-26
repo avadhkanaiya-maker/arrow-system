@@ -1,0 +1,17 @@
+{# Tabs block on Pages and industries: the products' tab set (products/blocks/tabsBlock; css/products/product-detail.css,
+   js/products/product-detail.js, loaded by industries/_entry), in its own section. Tab ids from the tab names, unique on
+   the page (#spot-series opens that tab). Section Settings: Space Above / Below, Background, CSS Class. Vars: block #}
+{% import '_macros/layout' as layout %}
+{% set tabs = block.productTabs.all() %}
+{% if tabs|length %}
+{% set tabIds = {} %}
+{% for tab in tabs %}
+  {% set id = tab.headingText|kebab ?: 'tab' %}
+  {% set tabIds = tabIds|merge({('t' ~ tab.id): id in tabIds ? id ~ '-' ~ tab.id : id}) %}
+{% endfor %}
+  <section class="section pd-details{{ layout.sectionClass(block) }}">
+    <div class="container">
+      {% include 'products/blocks/tabsBlock' with { block: block, tabs: tabs, tabIds: tabIds } only %}
+    </div>
+  </section>
+{% endif %}

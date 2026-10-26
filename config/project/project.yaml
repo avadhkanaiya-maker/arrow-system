@@ -1,4 +1,4 @@
-dateModified: 1792578665
+dateModified: 1792759370
 email:
   fromEmail: arrowsysadmin@yopmail.com
   fromName: 'Arrow Systems (Local Staging)'
@@ -12,6 +12,13 @@ email:
     username: $SMTP_USERNAME
   transportType: craft\mail\transportadapters\Smtp
 fs:
+  careerCvs:
+    hasUrls: false
+    name: 'Career CVs'
+    settings:
+      path: '@storage/career-cvs'
+    type: craft\fs\Local
+    url: null
   uploads:
     hasUrls: true
     name: Uploads
@@ -46,8 +53,10 @@ meta:
     2c86f3fb-3899-4738-a756-3b1b4456fc52: 'Homepage Sections' # Homepage Sections
     2dc1a6a0-3996-4d72-8513-321b88d4c946: Level # Level
     2e03667f-e9e9-4db3-b9d0-05129129706c: 'Display Time' # Display Time
+    2e4abfb9-5534-450b-8c02-e1f778c0ffd5: Slides # Slides
     2e4c99f9-7844-4051-942e-0fb350ac475d: Industries # Industries
     2f088e9c-9d5e-453e-9468-003c0b662257: 'Industries Page' # Industries Page
+    3a7bfa6c-6ceb-4b0f-9a2b-27fdec6924c8: 'View All Text URL' # View All Text URL
     3a146d79-623e-4443-9485-ce8d03c902b5: Longitude # Longitude
     3bbec4e9-b141-4e48-bedd-5e22df221055: 'Contact Form' # Contact Form
     3c8d23d6-dac1-4e44-9f35-4067cecd6f95: 'Robots (advanced)' # Robots (advanced)
@@ -57,6 +66,7 @@ meta:
     3de74144-5e32-4f98-a9cb-e138a84a3776: 'Free Sample Link' # Free Sample Link
     3f27e164-a203-43c7-b2e1-5f9c18aac05f: 'Column Style' # Column Style
     3f7390df-90cc-4925-8948-2ad582cb0032: 'Start Date' # Start Date
+    03fc0bc5-2986-4f41-8e59-1bfcdf74fb8b: 'test matrix field' # test matrix field
     4aa2e10e-5601-4b48-888b-b506fd4696a0: 'View All Text' # View All Text
     4b6e83c0-ac6b-4f9e-b50c-d35913b6dd9b: Categories # Categories
     4c3cd3c5-fb90-4f59-a91e-0f74d2ab336f: Homepage # Homepage
@@ -79,6 +89,7 @@ meta:
     7dbe18e9-a4e7-4adf-a418-e02992f14f9a: 'Text Tab' # Text Tab
     7dfa34b6-1551-4035-8187-cbc68182a20b: 'SEO Title' # SEO Title
     7e1cfbd5-d179-4bf5-9dfa-258ac1f2e8b9: Products # Products
+    7fd323b6-b4cd-4b70-8ec7-a4ccff0fdcb0: 'Carousel Slide' # Carousel Slide
     8c117c80-cf06-494a-b509-c89bbda50314: 'Show Dates As' # Show Dates As
     8cbe334a-5712-4c17-b3be-40923a1c8aa0: 'CTA Text' # CTA Text
     8d76c0a8-d4cf-4569-bd5f-69ed28122130: 'Social Image' # Social Image
@@ -91,6 +102,7 @@ meta:
     9c207017-356e-4550-8877-9c6497648b06: 'CSS Class' # CSS Class
     9ea88aa5-524c-4ab0-bbc6-19cc33fa453d: 'Blog Page' # Blog Page
     10aebab9-e4c3-4e9b-b45b-3e84ff8c2d73: 'Product List' # Product List
+    13e46118-fb01-46dc-afa1-001c02658b1c: 'Career CVs' # Career CVs
     16dde185-f39f-406d-b493-119ccf64bd1e: 'Card Grid' # Card Grid
     18b6daf0-afd3-4e27-abbd-f341c7160f1b: 'HTML Code' # HTML Code
     18cbe12d-c7e5-4229-a612-bfd42a85c447: Newsletter # Newsletter
@@ -169,6 +181,7 @@ meta:
     704585f6-ce27-4737-aff7-090d130125a7: 'Direct Phone' # Direct Phone
     819165d7-06c3-43ce-9e01-71bc6e2c55f9: Exhibition # Exhibition
     949825d6-8b89-49af-bbe5-59b2f56ac6c9: Caption # Caption
+    1724529b-8868-4fd5-84da-99b600a30d10: 'Media Carousel' # Media Carousel
     3032854d-b4e5-46a9-add5-2e914d0ee46d: Slides # Slides
     6805077a-554f-47fb-94f9-b53436671aaa: 'Show In' # Show In
     7775817e-d249-4e0d-9ba6-3546bb8709c9: 'Latest Blog Posts' # Latest Blog Posts
@@ -201,7 +214,6 @@ meta:
     afabdab0-fcbc-4be4-8676-eef04e6a7083: Items # Items
     b0857f7a-e2f5-44ef-8163-1b59942677cb: Tags # Tags
     b1be5682-6cd0-4dc2-86a9-96841d04805e: Heading # Heading
-    b2ac1849-b531-44c4-bc8d-c2a286528fec: 'Partner group' # Partner group
     b3b70498-0206-4b1d-a0a5-d8dd21371549: Images # Images
     b6c6513e-722f-4c79-8940-687ec0ce936f: 'Video Cover Image' # Video Cover Image
     b6d5b53f-57c1-4ca1-9cf3-5fb5d343dbd9: 'Blog Tags' # Blog Tags
@@ -247,6 +259,7 @@ meta:
     dfff6f49-bf7b-4ed6-b4de-5080c07efd72: 'Arrow Systems (Local Staging)' # Arrow Systems (Local Staging)
     e2d4a840-f234-432d-a296-8a79a4672bf3: 'Legal Menu' # Legal Menu
     e2edd105-bfb6-4051-afee-87080c91709c: 'Other Industries' # Other Industries
+    e8a02b9a-a62b-4d0c-8e6e-aeace4a0344c: 'Quote Form' # Quote Form
     e8dba96c-e499-4d93-af1e-b030f0b6c672: Industry # Industry
     e9eb2598-10fc-427c-a196-c6547e465723: 'Show Newsletter' # Show Newsletter
     e29ee041-db7d-4246-82e4-3cb95532f2e4: 'Shows to Display' # Shows to Display

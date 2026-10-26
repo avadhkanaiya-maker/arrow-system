@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: headerStyle
-instructions: 'Full-width banner: the image on its own under the text, across the full width and shown whole (like a blog post cover). Use a wide photo, 1600 px wide or more.'
+instructions: 'Full-width banner: the image on its own under the text, across the full width and shown whole (like a blog post cover). Use a wide photo, 1600 px wide or more. Small illustration: a compact header with the image small at the right, as decoration (desktop only), e.g. an SVG.'
 name: 'Header Style'
 searchable: false
 settings:
@@ -25,6 +25,17 @@ settings:
         -
           - value
           - banner
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Small illustration'
+        -
+          - value
+          - illustration
         -
           - default
           - false

@@ -1,0 +1,94 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  815f7933-f6f3-4933-bb19-49196539e835:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
+            handle: null
+            instructions: 'The slide’s picture; for a video slide, the picture shown before it plays. 16:9 works best (e.g. 1600 × 900). Set its alt text.'
+            label: Image
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 79408614-f511-43aa-b927-d70459608101
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0f1b9be9-36a4-4653-b018-d2852e2a07b8 # Video File
+            handle: null
+            instructions: 'Optional: an uploaded MP4. The slide shows the video (with play controls) instead of the image.'
+            label: 'Video File'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aa20777b-7d4a-49a2-abc5-ec59f612bd36
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
+            handle: null
+            instructions: 'Optional: a YouTube address, used when there’s no Video File. Plays when clicked.'
+            label: 'YouTube Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 78900e34-0600-4732-9998-fced06b94756
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: 'Optional text under the slide.'
+            label: Caption
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 85d97818-5218-4666-a535-c0677a846646
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 5badc639-d2e7-4f6b-b73a-d99dd04710ca
+        userCondition: null
+    thumbFieldKey: null
+handle: carouselSlide
+hasTitleField: false
+icon: image
+name: 'Carousel Slide'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

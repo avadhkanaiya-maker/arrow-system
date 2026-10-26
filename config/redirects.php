@@ -70,4 +70,10 @@ return [
     ['from' => 'product/arrowjet-nova-250', 'to' => '/product/arrowjet-nova-250-plus/', 'statusCode' => 301],
     ['from' => 'product/arrowjet-aqua-330r', 'to' => '/product/arrowjet-aqua-330r-lite-2/', 'statusCode' => 301],
     ['from' => 'product/arrow-systems-anycut-iii-13-roll-to-roll-laser-cutter', 'to' => '/product/arrowcut-nova-330r-roll-to-roll-laser-cutter/', 'statusCode' => 301],
+
+    // ---- /all-products/ pages (storage/imports/pages/25_all_products.php): live's 301s within the built part ----
+    ['from' => 'all-products/label-finishers/lemorau-label-finishers', 'to' => '/all-products/label-finishers/', 'statusCode' => 301],
+    ['from' => 'all-products/label-finishers/quicklabel-label-finishers', 'to' => '/all-products/label-finishers/', 'statusCode' => 301],
+    ['from' => 'all-products/printers/arrow-printers', 'to' => '/all-products/printers/', 'statusCode' => 301],
+    ['from' => 'all-products/printers/kerajet-printers', 'to' => '/', 'statusCode' => 301],   // as live: Kerajet is no longer sold
 ];
