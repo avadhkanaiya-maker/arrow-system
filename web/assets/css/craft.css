@@ -19,6 +19,16 @@
   .hero-intro__actions .btn { flex: 1 1 100%; }
 }
 
+/* Space above buttons: the design spaced them with the text field above, so with that field left empty the buttons
+   sat on the text (0px). They now keep the design's gap by themselves (review 2026-10-27). */
+.ind-detail-hero__body .btn-row { margin-top: 26px; }               /* Page Header (= the Applications tags' gap) */
+.sustain h2 + .btn, .sustain h2 + .btn-row { margin-top: 28px; }     /* CTA Bands without an Intro */
+.fact-list + .btn { margin-top: 24px; }                               /* On-Demand Feature without a note */
+.onestop__body .btn { margin-top: 24px; }                             /* Background Video section… */
+.onestop__body .onestop__cta-lead + .btn { margin-top: 14px; }        /* …but right under its Button Intro, as designed */
+.side-cta__title + .btn { margin-top: 18px; }                         /* blog sidebar box without text */
+.page-hero .arrow-line + .btn-row { margin-top: 30px; }               /* Exhibitions / Upcoming heroes without an intro */
+
 /* ==========================================================================
    Blog articles: blocks the design (blogs/css/blog-detail.css) has no styles for. Used by imported posts and the
    Article Body blocks Quote, Image (width), Gallery, Video, Button, Divider, and plain numbered lists / H4 in Rich Text.

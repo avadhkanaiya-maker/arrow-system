@@ -62,3 +62,46 @@
     new MutationObserver(function () { clearTimeout(timer); timer = setTimeout(scan, 200); }).observe(document.body, { childList: true, subtree: true });
     scan();
 })();
+
+// Relation fields with a maximum (e.g. the homepage Exhibitions section's chosen exhibitions, max 3): in the "Choose" window,
+// once as many items are ticked as the field has places left, the other items are disabled; unticking one enables them again.
+// Craft itself lets more be ticked and keeps only some of them on Select (bug report 2026-10-27). Uses Craft's own disable
+// (as for the items already chosen), so clicks, the keyboard and "select all" are all held. Max-1 fields keep Craft's
+// "a new pick replaces the old one".
+(function () {
+    if (!window.Craft || !Craft.BaseElementSelectInput || !Craft.BaseElementSelectorModal) return;
+
+    var createModal = Craft.BaseElementSelectInput.prototype.createModal;
+    Craft.BaseElementSelectInput.prototype.createModal = function () {
+        var input = this, modal = createModal.apply(this, arguments);
+        if (input.settings.limit > 1) {
+            modal.buiPlacesLeft = function () {   // Replace swaps one of the chosen items
+                return input.settings.limit - input.$elements.length + (input._$replaceElement ? 1 : 0);
+            };
+        }
+        return modal;
+    };
+
+    function hold(modal) {
+        var index = modal && modal.buiPlacesLeft && modal.elementIndex;
+        var select = index && index.view && index.view.elementSelect;
+        if (!select) return;
+        var left = modal.buiPlacesLeft(), ids = modal.buiHeldIds || (modal.buiHeldIds = []), $rows = index.view.getAllElements();
+        if (select.$selectedItems.length > left) select.deselectItem(select.$selectedItems.slice(left));   // a shift-click range or "select all"
+        if (select.$selectedItems.length >= left) {
+            var $rest = $rows.not('.sel, .disabled');
+            $rest.each(function () { ids.push($(this).data('id')); });
+            if ($rest.length) index.disableElements($rest);
+        } else if (ids.length) {
+            index.enableElementsById(ids.splice(0));
+        }
+        // cp.css: no tick in a held row's box (Craft ticks disabled rows as "already chosen")
+        $rows.each(function () { $(this).toggleClass('bui-held', ids.indexOf($(this).data('id')) !== -1); });
+    }
+
+    Garnish.on(Craft.BaseElementIndex, 'selectionChange updateElements', function (ev) {
+        var modal = Garnish.Modal.visibleModal;
+        if (modal && modal.elementIndex === ev.target) hold(modal);
+    });
+    Garnish.on(Craft.BaseElementSelectorModal, 'show', function (ev) { hold(ev.target); });   // reopened after a chosen item was removed
+})();

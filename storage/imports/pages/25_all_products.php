@@ -39,8 +39,10 @@
  * Finisher cards (CARDS): empty Card Tagline / Key Specs filled with live's text (from arrow-label-finishers, which
  * names them right; the slitter from label-finishers); a short Card Title where the product name is long. Skipped
  * for a product with an open draft; values already set are kept.
- * Then every menu item and link field pointing at a built page's live address links here (rich text links stay);
- * stops if a menu has unsaved builder changes. Live redirects: config/redirects.php. Skips pages that exist.
+ * Then every menu item, link field and rich text link pointing at a built page's live address links here (a switched-off
+ * page's address: where config/redirects.php sends it; rich text gets the page's path, e.g. /all-products/plotters/, as
+ * the blog's other internal links); skipped under an open draft; stops if a menu has unsaved builder changes. Live
+ * redirects: config/redirects.php. Skips pages that exist.
  * Back up first. Run from the project root: /opt/lampp/bin/php storage/imports/pages/25_all_products.php
  */
 require dirname(__DIR__) . '/blog/_bootstrap.php';
@@ -298,6 +300,9 @@ foreach (PAGES as $path => $spec) {
     }
     if ($spec['enabled'] ?? true) $built["https://arrsys.com/$path/"] = $page;
 }
+foreach (require dirname(__DIR__, 3) . '/config/redirects.php' as $r) {   // a switched-off page → where it redirects
+    if (isset(PAGES[$r['from']]) && isset($built["https://arrsys.com{$r['to']}"])) $built["https://arrsys.com/{$r['from']}/"] = $built["https://arrsys.com{$r['to']}"];
+}
 // menus and link fields pointing at a built page's live address → the page
 $target = fn(?string $url) => $url ? ($built[rtrim($url, '/') . '/'] ?? null) : null;
 $nodes = array_filter(Node::find()->status(null)->all(), fn($n) => $target($n->url));
@@ -315,23 +320,32 @@ foreach ($nodes as $n) {
     $elements->saveElement($n) || fail("menu node {$n->id}", $n);
     say("  ~ menu {$n->menu->handle} “{$n->title}” → /{$page->uri}/");
 }
+// an element's link fields and rich text pointing at a built page's live address → [field handle => new value]
+$fixes = function (craft\base\ElementInterface $el) use ($target): array {
+    $set = [];
+    foreach ($el->getFieldLayout()?->getCustomFields() ?? [] as $f) {
+        $v = $el->getFieldValue($f->handle);
+        if ($f instanceof Link && ($page = $target((string)$v?->url))) {
+            $set[$f->handle] = ['type' => 'entry', 'value' => $page->id, 'label' => $v->label, 'target' => $v->target];
+        } elseif ($v instanceof craft\htmlfield\HtmlFieldData) {
+            $html = preg_replace_callback('#https?://(?:www\.)?arrsys\.com/(all-products/[a-z0-9/-]*)#i',
+                fn($m) => ($page = $target("https://arrsys.com/$m[1]")) ? "/{$page->uri}/" : $m[0], $raw = $v->getRawContent());
+            if ($html !== $raw) $set[$f->handle] = $html;
+        }
+    }
+    return $set;
+};
+$top = function ($el) { for (; $el instanceof Entry && $el->getPrimaryOwner(); $el = $el->getPrimaryOwner()); return $el; };   // the page / post (or its draft) that holds the block: check its canonical for drafts
 $q = (new Query())->select('es.elementId')->from(['es' => '{{%elements_sites}}'])->innerJoin(['e' => '{{%elements}}'], '[[e.id]] = [[es.elementId]]')
     ->where(['e.revisionId' => null, 'e.draftId' => null, 'e.dateDeleted' => null])->andWhere(['like', 'es.content', 'arrsys.com/all-products']);
 foreach ($q->column() as $id) {
     $el = $elements->getElementById($id, null, null, ['status' => null]);
-    if (!$el || !$el->getFieldLayout()) continue;
-    $changed = [];
-    foreach ($el->getFieldLayout()->getCustomFields() as $f) {
-        if (!$f instanceof Link || !($page = $target((string)$el->getFieldValue($f->handle)?->url))) continue;
-        $v = $el->getFieldValue($f->handle);
-        $el->setFieldValue($f->handle, ['type' => 'entry', 'value' => $page->id, 'label' => $v->label, 'target' => $v->target]);
-        $changed[] = "$f->handle → /{$page->uri}/";
-    }
-    if (!$changed) continue;
-    for ($top = $el; $top instanceof Entry && $top->getPrimaryOwner(); $top = $top->getPrimaryOwner());   // the page / post that holds the block
-    if ($hasDraft($top->id)) { say("  ! “{$top->title}” has an open draft: its link to live is left; apply or delete the draft, then run again"); continue; }
+    if (!$el || !($set = $fixes($el))) continue;
+    $owner = $top($el);
+    if ($hasDraft($owner->getCanonicalId())) { say("  ! “{$owner->title}” has an open draft: its link to live is left; apply or delete the draft, then run again"); continue; }
+    $el->setFieldValues($set);
     $elements->saveElement($el) || fail("element $id", $el);
-    say('  ~ ' . ($el instanceof Entry ? "{$el->type->handle} “" . ($el->getPrimaryOwner()?->title ?? $el->title) . '”' : $el::displayName() . ' “' . ($el->title ?? $id) . '”') . ': ' . implode(', ', $changed));
+    say('  ~ ' . ($el instanceof Entry ? "{$el->type->handle} “" . ($el->getPrimaryOwner()?->title ?? $el->title) . '”' : $el::displayName() . ' “' . ($el->title ?? $id) . '”') . ': ' . implode(', ', array_keys($set)));
 }
 
 // self-check: each page loads at its live path with its cards, the breadcrumb shows its parents, nothing links to live
@@ -352,4 +366,8 @@ foreach (PAGES as $path => $spec) {
     !isset($spec['banner']) || str_contains($html, 'page-banner__cover') && str_contains($html, pathinfo($spec['banner'][0], PATHINFO_FILENAME)) || exit("/$path/: no banner\n");
 }
 !array_filter(Node::find()->status(null)->all(), fn($n) => $target($n->url)) || exit("a menu item still links to a live page that is built\n");
+foreach ($q->column() as $id) {
+    $el = $elements->getElementById($id, null, null, ['status' => null]);
+    !$el || !$fixes($el) || $hasDraft($top($el)->getCanonicalId()) || exit("element $id still links to a live page that is built\n");
+}
 say('  = ' . count(PAGES) . ' pages at their live paths with their product cards and breadcrumbs; menus link here');
