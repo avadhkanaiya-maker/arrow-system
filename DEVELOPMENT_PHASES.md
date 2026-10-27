@@ -2742,6 +2742,56 @@ Checked: 200, SEO tags, tel: button, form anchor; desktop + phone screenshots.
 - Checked: rendering `index` without an entry raises the 404 (Craft's ErrorHandler unwraps it from Twig); `/` with the
   homepage on is still 200 with its 6 slide intros. No content or config changes.
 
+## Phase 86: Links to live's all-products pages → ours (2026-10-27)
+
+- Review: "fix the navigation for product detail page or anywhere we are calling live site's all-product page".
+- Templates: product pages' breadcrumb "Products" (link + BreadcrumbList schema) → `/all-products/`
+  (`products/_entry.twig`); blog sidebar Product Categories → our Digital Label Printers (the ArrowJet listing, as the
+  redirect), Label Finishers and Gerber Plotters pages (`blog/_partials/listing.twig`).
+- Content (`25_all_products.php`, rerun): its link step now also rewrites rich text (blog bodies, intros) to the
+  page's path, and maps the switched-off Digital Label Printers address to where `config/redirects.php` sends it.
+  123 links now point here: blog bodies and intros, and the homepage's Category Showcase and Limitronic Text & Media
+  buttons (no longer under a draft).
+  - Fix in the same step: a block that belongs to a draft (its owner is the draft, not the post) was not seen as
+    "under a draft"; the check now uses the owner's canonical entry. The first run had saved 2 such draft blocks
+    (Why Cannabis Labels Fail…, Pharmaceutical Label Version Control…): put back exactly from the backup.
+- Left on live: links to pages not built on staging (Flexible Packaging Printers — menu + 20 blog links, Fume
+  Extraction, Print & Cut Systems, live's brand pages under digital-label-printers), and the links in 4 posts with an
+  open draft (10 Step Guide…, Blade vs. Laser…, Why Cannabis Labels Fail…, Pharmaceutical Label Version Control…):
+  apply or delete those drafts, then rerun 25.
+- Checked: product breadcrumb and schema → `/all-products/`; sidebar and rewritten post links load (200); a rescan
+  finds no other link to a built page on live; script self-check passes; rerun changes nothing. Backup: …-2026-10-27-065518.
+
+## Phase 87: Menu Save no longer switches new items on (2026-10-27)
+
+- Review: a new menu item shows as off until the menu's Save, and Save then switched it on even though its Enabled
+  switch was off. Navigation (4.0.7) stages each added item switched off with a "waiting" flag, and Save switched
+  every waiting item on (`Node::publishPendingAdd()`).
+- `modules/builderui/Module.php` (not vendor, so `composer install` keeps it): before a menu item is saved, if it was
+  waiting and this save publishes it, it stays off. An item whose switch is turned on and saved (its slide-out Save,
+  or Enable in the builder) goes live right then and stops waiting, so only items with the switch off reach Save.
+- Also applies to duplicated items (staged the same way): they stay off after Save until switched on.
+- Checked (rolled back, real staging/publish code, Legal Menu): an item left off stays off after Save; one switched on
+  directly and one switched on in the slide-out (draft applied) are on; without the hook the first comes out on
+  (the bug). No content or config changes. Backup: …-2026-10-27-085353.
+
+## Phase 88: Buttons keep their space above when the text above is empty (2026-10-27)
+
+- Review: the Page Header's buttons sat right under the intro (0px); admins had to add the space with custom CSS.
+  The design spaced buttons with the field above them (the Page Header's Applications tags), so leaving that field
+  empty put the buttons on the text. An audit of every button and link on 207 pages (1280 and 390 px), plus each
+  block with its optional text removed, found the same in 5 more places.
+- `web/assets/css/craft.css` ("Space above buttons"): each now has its own gap, the design's gap with the field filled.
+  - Page Header: 26px under the intro / subtitle / heading (was 0; with tags still 26).
+  - CTA Bands (page builder, homepage, product pages, Upcoming Exhibitions) without an Intro: 28px under the heading.
+  - On-Demand Feature without a note: 24px under the facts.
+  - Background Video section without a Button Intro: 24px (was 14; still 14 right under a Button Intro).
+  - Blog sidebar box without text: 18px; Exhibitions / Upcoming heroes without an intro: 30px.
+- Unchanged (already spaced by themselves): product header, article Button block, post CTA, Locations, Text + Media
+  and Content Block links, form submit buttons, the hero slider.
+- Checked: every case above goes from 0 (or 14) to the gap listed, and every case with the field filled measures the
+  same as before. No custom CSS on the site sets button spacing, so nothing doubles. No content changes.
+
 ## Follow-ups
 
 | # | Item | Where |

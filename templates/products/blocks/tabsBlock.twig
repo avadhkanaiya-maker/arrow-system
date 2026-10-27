@@ -18,7 +18,7 @@
             <h3 class="pd-panel-title">{{ tab.sectionHeading ?: tab.headingText }}</h3>
             <ul class="pd-hl">
               {% for row in tab.highlightItems|filter(row => row.title|trim or row.text|trim) %}
-              <li><span class="pd-hl__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h4>{{ row.title }}</h4>{% endif %}{% if row.text %}<p>{{ row.text }}</p>{% endif %}</div></li>
+              <li><span class="pd-hl__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h4>{{ row.title|md(inlineOnly=true, encode=true) }}</h4>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
               {% endfor %}
             </ul>
             {% if specsTab %}{% set specsId = tabIds['t' ~ specsTab.id] %}
