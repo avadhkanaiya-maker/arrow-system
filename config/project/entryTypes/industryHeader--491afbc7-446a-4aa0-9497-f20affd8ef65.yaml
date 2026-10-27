@@ -47,6 +47,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 88ced113-ac3b-4f02-b14f-131a91f3b3c3 # Subheading
+            handle: null
+            instructions: 'Optional line under the heading, e.g. “Commercial Inkjet Label Printers for Production-Scale Printing”.'
+            label: Subtitle
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 25c978af-52e9-4c33-8e5b-e9c917c613b4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
             handle: null
             instructions: null

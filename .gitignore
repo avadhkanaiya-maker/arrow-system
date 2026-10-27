@@ -16,3 +16,6 @@
 /storage/imports/*/cache/
 .env.*.local
 *.zip
+
+# local logins list, never commit
+/credential.txt

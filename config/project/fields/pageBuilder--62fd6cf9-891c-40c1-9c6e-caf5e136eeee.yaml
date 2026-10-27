@@ -252,6 +252,14 @@ settings:
       __assoc__:
         -
           - uid
+          - dd9f4556-5872-4131-bf7d-0cce62d6e3a1 # Newsletter
+        -
+          - group
+          - Other
+    -
+      __assoc__:
+        -
+          - uid
           - f31f712f-738e-472b-b848-9fef9a4ad724 # Form
         -
           - group

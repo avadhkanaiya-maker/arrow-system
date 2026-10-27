@@ -1,30 +1,35 @@
 {#
-  A. Hero slider (design: index.html, "HERO SLIDER + FREE SAMPLE CTA"). Each slide is a ready-made banner image;
-  the banner already carries the machine, logo and headline, so nothing is overlaid on it. Under the banner the
-  caption bar shows the Category Label + Product Name (left) and the buttons.
-  The Product Name (else the banner's Alt Text) names the slide for screen readers (slide label and dot label).
-  Buttons are fully editable: link + text come from the slide's Primary / Secondary Button fields (text = the Label;
-  if the Label is empty, Craft uses the linked entry's title or the URL). Secondary button: the slide's own, or
-  Globals → Site Settings → Free Sample Link.
+  A. Hero slider (design: index.html, "HERO SLIDER + FREE SAMPLE CTA", revised 2026-10-23). Each slide is a ready-made
+  banner image; the banner already carries the machine, logo and headline, so nothing is overlaid on it. Under the
+  banner one slim caption line: Tag Name · Product Name · the Explore Product Link (text = its Label; if the Label is
+  empty, Craft uses the linked entry's title or the URL). The Product Name (else the banner's Alt Text) names the slide
+  for screen readers (slide label and dot label).
+  Intro under the slider, per slide (the slide's Intro Heading, Description, First / Second Button): a row under the
+  caption that changes with its slide. The first slide with an intro has the homepage's H1, the others an H2 (hidden
+  slides are inert). Empty Intro Heading = no row on that slide.
   Video slides (Slide Type = Video): the design's hero video (site.js): an uploaded Video File (data-hero-video-src, plays
-  instantly) or else the YouTube Link (data-hero-video); muted, autoplaying, no controls, replayed from the start; the
-  Banner Image is the poster (until it plays, and for reduced motion). Display Time = data-interval (empty: the carousel's
-  7 s; video slides 20 s, as the design).
+  instantly) or else the YouTube Link (data-hero-video); muted, autoplaying, no controls, replayed from the start; no
+  banner image (the field is hidden for video slides). Display Time = data-interval (empty: the carousel's 7 s; video
+  slides 20 s, as the design).
   Class names and data-carousel attributes match the design, so site.js runs the carousel unchanged.
   Vars: block (Hero Slider entry)
 #}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
 {% set slides = block.slides.all() %}
+{% set h1Id = (slides|filter(s => s.sectionHeading|trim)|first).id ?? null %}
 {% if slides|length %}
 <section class="hero" aria-roledescription="carousel" aria-label="{{ block.ariaLabel ?: 'Featured equipment' }}" data-carousel>
   <div class="hero__track" aria-live="off" data-carousel-track>
+    {% set names = [] %}
     {% for slide in slides %}
-      {% set image = slide.bannerImage.one() %}
-      {% set name = slide.productName ?: (image.alt ?? null) ?: (image.title ?? 'Slide ' ~ loop.index) %}
-      {% set primary = slide.primaryCta %}
-      {% set secondary = slide.secondaryCta ?: siteSettings.sampleLink %}
       {% set videoFile = (slide.slideType.value ?? '') == 'video' ? slide.videoFile.one() : null %}
       {% set youtube = (slide.slideType.value ?? '') == 'video' and not videoFile ? (slide.videoUrl ?? '')|trim : '' %}
       {% set isVideo = videoFile or youtube %}
+      {% set image = isVideo ? null : slide.bannerImage.one() %}
+      {% set name = slide.productName ?: (image.alt ?? null) ?: (image.title ?? 'Slide ' ~ loop.index) %}
+      {% set names = names|merge([name]) %}
+      {% set primary = slide.primaryCta and slide.primaryCta.url ? slide.primaryCta : null %}
       {% set seconds = slide.slideDuration ?: (isVideo ? 20 : null) %}
       <div class="hero-slide{{ isVideo ? ' hero-slide--video' }}{{ loop.first ? ' is-active' }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}: {{ name }}{{ isVideo ? ' (video)' }}" data-slide{% if seconds %} data-interval="{{ seconds * 1000 }}"{% endif %}>
         <div class="hero-slide__stage">
@@ -35,24 +40,33 @@
           {% if isVideo %}
             <div class="hero-slide__video" {% if videoFile %}data-hero-video-src="{{ videoFile.url }}"{% else %}data-hero-video="{{ youtube }}"{% endif %} data-hero-video-title="{{ name }}" aria-hidden="true"></div>
           {% endif %}
-          {# The whole banner is a pointer shortcut to the primary link (duplicate of the button, hidden from keyboard/AT). #}
+          {# The whole banner is a pointer shortcut to the caption link (a duplicate, hidden from keyboard/AT). #}
           {% if primary %}<a class="hero-slide__hit" href="{{ primary.url }}" tabindex="-1" aria-hidden="true"></a>{% endif %}
         </div>
-        {% if slide.categoryLabel or slide.productName or primary or secondary %}
-          <div class="container hero-caption">
-            {% if slide.categoryLabel or slide.productName %}
-              <div class="hero-caption__text">
-                {% if slide.categoryLabel %}<p class="hero-slide__kicker">{{ slide.categoryLabel }}</p>{% endif %}
-                {% if slide.productName %}<p class="hero-slide__title">{{ slide.productName }}</p>{% endif %}
+        {# always rendered, even empty: the row is where the controls bar sits, so it can't cover the intro below #}
+        <div class="container hero-caption">
+          <p class="hero-caption__line">
+            {%- if slide.categoryLabel %}<span class="hero-slide__kicker">{{ slide.categoryLabel }}</span>{% endif %}
+            {%- if slide.productName %}<span class="hero-slide__title">{{ slide.productName }}</span>{% endif %}
+            {%- if primary %}<a class="text-link" {{ links.attrs(primary) }}>{{ primary.label }}
+              {%- if slide.productName %}<span class="visually-hidden">: {{ slide.productName }}</span>{% endif %} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif -%}
+          </p>
+        </div>
+        {% if slide.sectionHeading %}
+          {% set first = slide.ctaLink and slide.ctaLink.url ? slide.ctaLink : null %}
+          {% set second = slide.secondaryCta and slide.secondaryCta.url ? slide.secondaryCta : null %}
+          {% set tag = slide.id == h1Id ? 'h1' : 'h2' %}
+          <div class="hero-intro">
+            <div class="container hero-intro__inner">
+              <div>
+                <{{ tag }} class="hero-intro__title">{{ text.highlight(slide.sectionHeading) }}</{{ tag }}>
+                {% if slide.sectionLead %}<p class="hero-intro__lead">{{ slide.sectionLead }}</p>{% endif %}
               </div>
-            {% endif %}
-            <div class="btn-row hero-caption__actions">
-              {% if primary %}
-                <a class="btn btn--primary" href="{{ primary.url }}"{{ primary.target ? ' target="_blank" rel="noopener"' }}>{{ primary.label }}
-                  {%- if slide.productName %}<span class="visually-hidden">: {{ slide.productName }}</span>{% endif %}</a>
-              {% endif %}
-              {% if secondary %}
-                <a class="btn btn--outline" href="{{ secondary.url }}"{{ secondary.target ? ' target="_blank" rel="noopener"' }}>{{ secondary.label }}</a>
+              {% if first or second %}
+              <div class="btn-row hero-intro__actions">
+                {% if first %}<a class="btn btn--primary btn--lg" {{ links.attrs(first) }}>{{ first.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
+                {% if second %}<a class="btn btn--outline btn--lg" {{ links.attrs(second) }}>{{ second.label }}</a>{% endif %}
+              </div>
               {% endif %}
             </div>
           </div>
@@ -64,9 +78,8 @@
   <div class="container hero__controls" data-carousel-controls hidden>
     <button class="hero__ctrl" type="button" data-carousel-prev><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg><span class="visually-hidden">Previous slide</span></button>
     <div class="hero__dots" role="group" aria-label="Choose slide">
-      {% for slide in slides %}
-        {% set image = slide.bannerImage.one() %}
-        <button class="hero__dot" type="button"{{ loop.first ? ' aria-current="true"' }} data-carousel-dot><span class="visually-hidden">Slide {{ loop.index }}: {{ slide.productName ?: (image.alt ?? null) ?: (image.title ?? '') }}</span></button>
+      {% for name in names %}
+        <button class="hero__dot" type="button"{{ loop.first ? ' aria-current="true"' }} data-carousel-dot><span class="visually-hidden">Slide {{ loop.index }}: {{ name }}</span></button>
       {% endfor %}
     </div>
     <button class="hero__ctrl" type="button" data-carousel-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="visually-hidden">Next slide</span></button>

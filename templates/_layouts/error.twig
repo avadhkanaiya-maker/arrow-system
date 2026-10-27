@@ -1,0 +1,73 @@
+{#
+  Error pages in the site's design (Craft shows templates/<status code>.twig for site requests: 404.twig, 403.twig;
+  4xx pages also in dev mode). The site header, footer and newsletter, a page header (the industry pages' look) with
+  the code, the message and two buttons, then the main pages so a visitor can carry on. Not indexed.
+  Set by the page: errorCode, errorTitle (the <title>), errorHeading ([red] words), errorLead, errorLeadCp.
+  inCp (set by modules/web/ErrorHandler.php for admin panel pages, e.g. a Reviewer opening Settings): the staff message
+  (errorLeadCp), "Back to Dashboard" and "Go to Website", no Popular Pages.
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+
+{% block title %}{{ errorTitle }} | {{ siteName }}{% endblock %}
+{% block seo %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ siteUrl('assets/css/industries/industries.css') }}">{% endblock %}
+
+{% block content %}
+  {% set contact = craft.entries.uri('contact-us').one() %}
+  {% set phone = siteSettings.tollFreePhone ?? null %}
+  <section class="page-hero error-hero" aria-labelledby="error-title">
+    <div class="container error-hero__grid">
+      <div class="error-hero__body">
+        <p class="eyebrow">Error {{ errorCode }}</p>
+        <h1 class="error-hero__title" id="error-title">{{ text.highlight(errorHeading) }}</h1>
+        {% if inCp ?? false %}
+        <p class="error-hero__lead">{{ errorLeadCp }}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="{{ cpUrl('dashboard') }}">Back to Dashboard</a>
+          <a class="btn btn--outline btn--lg" href="{{ siteUrl }}">Go to Website</a>
+        </div>
+        {% else %}
+        <p class="error-hero__lead">{{ errorLead }}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="{{ siteUrl }}">Go to Homepage</a>
+          {% if contact %}<a class="btn btn--outline btn--lg" href="{{ contact.url }}">Contact Us</a>{% endif %}
+        </div>
+        {% endif %}
+        {% if phone and not (inCp ?? false) %}<p class="error-hero__call">Or call us toll-free: <a href="tel:{{ links.tel(phone) }}">{{ phone }}</a></p>{% endif %}
+      </div>
+      <p class="error-hero__code" aria-hidden="true">{{ errorCode }}</p>
+    </div>
+  </section>
+
+  {% set links = [
+    {uri: 'all-products', icon: 'printer', title: 'All Products', text: 'Printers, finishers and label materials'},
+    {uri: 'industries', icon: 'factory', title: 'Industries', text: 'Solutions for your industry'},
+    {uri: 'blog', icon: 'file', title: 'Guides & Articles', text: 'How-tos, news and buying guides'},
+    {uri: 'support', icon: 'headset', title: 'Support', text: 'Help with equipment you own'},
+    {uri: 'request-quote', icon: 'tag', title: 'Request a Quote', text: 'Pricing for equipment and materials'},
+    {uri: 'try-a-free-sample', icon: 'package', title: 'Try a Free Sample', text: 'Test a label or material first'},
+  ] %}
+  {% if not (inCp ?? false) %}
+  <section class="section section--surface" aria-labelledby="error-links-title">
+    <div class="container">
+      <h2 class="section-title error-links__title" id="error-links-title">{{ text.highlight('Popular [Pages]') }}</h2>
+      <ul class="error-links">
+        {% for link in links %}
+          {% set target = craft.entries.uri(link.uri).one() %}
+          {% if target %}
+          <li>
+            <a href="{{ target.url }}">
+              <span class="error-links__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ link.icon }}"/></svg></span>
+              <span><strong>{{ link.title }}</strong><span>{{ link.text }}</span></span>
+              <svg class="icon error-links__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}

@@ -51,12 +51,17 @@
       <ul class="nav-list">
         {% set items = craft.navigation.nodes('mainMenu').level(1).all() %}
         {% for item in items %}
-          {% include '_partials/navigation/' ~ (partials[item.menuStyle.value ?? 'dropdown'] ?? 'dropdown') with {
-            item: item,
-            menu: mainMenu,
-            panelId: 'panel-' ~ (item.title|kebab),
-            isLast: loop.last,
-          } only %}
+          {% if item.children|length %}
+            {% include '_partials/navigation/' ~ (partials[item.menuStyle.value ?? 'dropdown'] ?? 'dropdown') with {
+              item: item,
+              menu: mainMenu,
+              panelId: 'panel-' ~ (item.title|kebab),
+              isLast: loop.last,
+            } only %}
+          {% else %}
+            {# no (enabled) sub-items: a plain link, no empty panel on hover #}
+            <li class="nav-item"><a class="nav-trigger" {{ nav.attrs(item) }}>{{ item.title }}</a></li>
+          {% endif %}
         {% endfor %}
       </ul>
 

@@ -28,7 +28,7 @@
 {% set isPage = entry.section.handle == 'pages' %}
 {% set listingPage = isPage ? null : craft.entries.section('industriesPage').one() %}
 {% set trail = isPage ? entry.ancestors.all() : (listingPage ? [listingPage] : []) %}{# breadcrumb between Home and this page #}
-{% set blocks = (isPage ? entry.pageBuilder : entry.industryBuilder).all() %}
+{% set blocks = (isPage ? entry.pageBuilder : entry.industryBuilder).type(['not', 'newsletter']).all() %} {# the Newsletter block only switches the band on (base.twig) #}
 {% set hasGallery = blocks|filter(b => b.type.handle == 'photoGallery')|length > 0 %}
 {% set hasTabs = blocks|filter(b => b.type.handle == 'tabsBlock')|length > 0 %}
 {% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}

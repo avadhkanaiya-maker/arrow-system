@@ -33,6 +33,8 @@ return GeneralConfig::create()
     ->addTrailingSlashesToUrls()
     // Paginated listings as on the live site: /blog/page/2/ (Craft's default would be /blog/p2)
     ->pageTrigger('page/')
+    // No GIF uploads anywhere (image fields, the Assets screen …): Craft's default file types minus gif (client request 2026-10-26)
+    ->allowedFileExtensions(array_values(array_diff((new GeneralConfig())->allowedFileExtensions, ['gif'])))
     // Set the @webroot alias so the clear-caches command knows where to find CP resources
     ->aliases([
         '@webroot' => dirname(__DIR__) . '/web',

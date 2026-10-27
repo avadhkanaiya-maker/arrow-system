@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: slides
-instructions: null
+instructions: 'At most 6 slides (more break the slider layout on smaller screens).'
 name: Slides
 searchable: false
 settings:
@@ -17,7 +17,7 @@ settings:
           - group
           - General
   includeTableView: false
-  maxEntries: null
+  maxEntries: 6
   minEntries: 1
   pageSize: 50
   propagationKeyFormat: null

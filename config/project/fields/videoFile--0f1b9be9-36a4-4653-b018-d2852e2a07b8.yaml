@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: videoFile
-instructions: 'Upload an MP4 (H.264, ideally under 10 MB, 16:9). It starts instantly, without YouTube. Leave empty to use the YouTube link.'
+instructions: 'Upload an MP4 (H.264, 16:9), at most 5 MB. It starts instantly, without YouTube. Leave empty to use the YouTube link.'
 name: 'Video File'
 searchable: false
 settings:

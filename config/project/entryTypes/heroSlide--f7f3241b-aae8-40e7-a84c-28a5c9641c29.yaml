@@ -28,12 +28,24 @@ fieldLayouts:
           -
             dateAdded: '2026-10-12T10:09:26+00:00'
             editCondition: null
-            elementCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\OptionsFieldConditionRule
+                  fieldUid: c7a13559-c602-4876-a22f-6450d52e0fd7 # Slide Type
+                  layoutElementUid: ac8c223c-9ebe-4dd4-9388-f2c5a5f5ff56
+                  operator: in
+                  uid: 5f3c7ec2-b2f8-4a3f-8c59-e2c58cc5a026
+                  values:
+                    - image
+              elementType: craft\elements\Entry
+              fieldContext: global
             elementEditCondition: null
             fieldUid: cf2f7a05-3513-4370-85bf-521a72260189 # Banner Image
             handle: null
-            instructions: 'Image slide: the ready-made banner, 1920 × 600 px (16:5). Video slide: the poster shown until the video plays (16:9, e.g. 1280 × 720). Fill in its Alt Text.'
-            label: 'Banner Image / Video Poster'
+            instructions: 'The ready-made banner, 1920 × 600 px (16:5). Fill in its Alt Text.'
+            label: 'Banner Image'
             oldFieldUid: null
             required: true
             tip: null
@@ -107,8 +119,8 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: fb1bcbe6-aac5-47e7-b60b-6d1971337623 # Category Label
             handle: null
-            instructions: null
-            label: null
+            instructions: 'Small label before the product name, e.g. “UV flatbed printer”.'
+            label: 'Tag Name'
             oldFieldUid: null
             required: false
             tip: null
@@ -141,8 +153,8 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 08984390-4496-459b-9a5d-d4224d3088f1 # Primary Button
             handle: null
-            instructions: null
-            label: null
+            instructions: 'Where the slide links (the caption link and the whole banner). Its Label is the link text, e.g. “Explore product”.'
+            label: 'Explore Product Link'
             oldFieldUid: null
             required: true
             tip: null
@@ -152,19 +164,77 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            dateAdded: '2026-10-12T10:44:29+00:00'
+            dateAdded: null
+            elementCondition: null
+            heading: 'Intro under the slider'
+            type: craft\fieldlayoutelements\Heading
+            uid: cfc3af59-6de3-449b-985d-aeb95b3b36c3
+            userCondition: null
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'Shown under the banner with this slide. The first slide’s is the homepage’s main heading (H1). Empty = no intro row on this slide.'
+            label: 'Intro Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 73b3539f-71be-451f-aabf-4cd56f65e26b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: 'One or two lines under the heading.'
+            label: 'Intro Description'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 76e49cb9-07d8-4505-8c7d-c42633bf312d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'Filled button with an arrow, e.g. Book a Demo.'
+            label: 'Intro First Button'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f3bc5a51-e300-4674-ad0d-593dc983bb80
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
             editCondition: null
             elementCondition: null
             elementEditCondition: null
             fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
             handle: null
-            instructions: null
-            label: null
+            instructions: 'Outline button, e.g. Try a Free Sample.'
+            label: 'Intro Second Button'
             oldFieldUid: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 07b3f269-283c-4222-8ac8-460da64575f6
+            uid: 6c36f920-ea11-4e44-96a9-819a34ffe2e0
             userCondition: null
             warning: null
             width: 100
@@ -197,7 +267,7 @@ showSlugField: false
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: "{{ object.bannerImage.one().title ?? 'Slide' }}"
+titleFormat: "{{ object.productName ?: (object.bannerImage.one().title ?? 'Slide') }}"
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
 uiLabelFormat: '{title}'
