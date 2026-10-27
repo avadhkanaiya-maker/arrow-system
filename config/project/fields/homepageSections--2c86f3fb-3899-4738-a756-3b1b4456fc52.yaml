@@ -86,6 +86,11 @@ settings:
         -
           - uid
           - 720c5ac7-9fed-453a-80b3-ac85342a6e52 # Stats Strip
+    -
+      __assoc__:
+        -
+          - uid
+          - dd9f4556-5872-4131-bf7d-0cce62d6e3a1 # Newsletter
   includeTableView: false
   maxEntries: null
   minEntries: null

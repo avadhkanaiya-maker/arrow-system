@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: slideType
-instructions: 'Image = a ready-made banner. Video = an uploaded video file or a YouTube link, with the banner image as its poster.'
+instructions: 'Image = a ready-made banner. Video = an uploaded video file or a YouTube link, autoplaying (no banner).'
 name: 'Slide Type'
 searchable: false
 settings:

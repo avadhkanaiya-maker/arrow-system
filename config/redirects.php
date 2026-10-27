@@ -58,7 +58,7 @@ return [
     ['from' => 'product/3m-microfluidic-diagnostic-film-9962-thin-double-sided-hydrophilic-film-configurable-2', 'to' => '/product/3m-microfluidic-diagnostic-film-9962-thin-double-sided-hydrophilic-film-configurable/', 'statusCode' => 301],
     ['from' => 'product/arrow-ezcut330a-roll-to-roll-or-roll-to-sheet-blade-cutter', 'to' => '/product/arrowezcut-350r/', 'statusCode' => 301],
     ['from' => 'product/arrow-ezcut-330s', 'to' => '/product/arrowezcut-330rplus/', 'statusCode' => 301],
-    ['from' => 'product/arrowjet-vdp', 'to' => 'https://arrsys.com/all-products/corrugate-and-end-of-line-printing/printers-by-limitronic/', 'statusCode' => 301],
+    ['from' => 'product/arrowjet-vdp', 'to' => '/all-products/corrugate-and-end-of-line-printing/printers-by-limitronic/', 'statusCode' => 301],
     ['from' => 'product/arrow-slitter', 'to' => '/', 'statusCode' => 301],
     ['from' => 'product/cpm-200gu', 'to' => '/', 'statusCode' => 301],
     ['from' => 'product/kerajet-digital-inkjet-printer-for-building-materials', 'to' => '/', 'statusCode' => 301],
@@ -76,4 +76,5 @@ return [
     ['from' => 'all-products/label-finishers/quicklabel-label-finishers', 'to' => '/all-products/label-finishers/', 'statusCode' => 301],
     ['from' => 'all-products/printers/arrow-printers', 'to' => '/all-products/printers/', 'statusCode' => 301],
     ['from' => 'all-products/printers/kerajet-printers', 'to' => '/', 'statusCode' => 301],   // as live: Kerajet is no longer sold
+    ['from' => 'all-products/digital-label-printers', 'to' => '/all-products/digital-label-printers/arrow-digital-label-printers/', 'statusCode' => 301],   // as live: the category page is its ArrowJet listing
 ];

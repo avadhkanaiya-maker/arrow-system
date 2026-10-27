@@ -414,14 +414,15 @@ body.nav-open .header-cta { visibility: hidden; }
 .section-head--split { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 32px; }
 .section-head__lead { max-width: 64ch; margin: 16px auto 0; font-size: 1.0625rem; color: var(--c-muted); }
 .section-title { font-size: clamp(1.75rem, 1.2rem + 1.9vw, 2.625rem); color: var(--c-ink); letter-spacing: -.02em; }
-h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
+.section-title--xl { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); } /* the equipment heading: was the H1, the hero intro row now holds it */
 .section-foot { margin-top: 28px; text-align: center; }
 
 /* ==========================================================================
    A. Hero slider
    Finished banner composites (artwork carries its own machine, logo and headline).
    A 16:5 stage matches four of the five sources; every banner is shown uncropped.
-   Live name, CTAs and controls sit in the white caption bar below the artwork.
+   A slim caption (label, name, product link) and the controls sit in the white bar below the artwork;
+   the fixed intro row with the H1 and CTAs follows the slider.
    ========================================================================== */
 .hero {
   --stage-max: 600px;
@@ -460,31 +461,27 @@ h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
 .hero-slide__video.is-ready { opacity: 1; }
 .hero-slide__video iframe { position: absolute; top: 50%; left: 0; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; transform: translateY(-50%); }
 .hero-slide__video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } /* uploaded video file */
-/* Video slide: its poster (the video's thumbnail) fills the stage like the video does. */
-.hero-slide--video .hero-slide__stage { background: #0B0B0C; }
-.hero-slide--video .hero-slide__art { width: 100%; object-fit: cover; object-position: 50% 8%; } /* keep the product name in view */
+.hero-slide--video .hero-slide__stage { background: #0B0B0C; } /* until the video plays */
 
-.hero-caption { display: grid; gap: 18px; padding-block: 72px 32px; } /* top space holds the controls row */
+.hero-caption { padding-block: 68px 16px; } /* top space holds the controls row */
+.hero-caption__line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; min-height: 48px; }
 .hero-slide__kicker {
-  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 6px;
+  display: inline-flex; align-items: center; gap: 10px;
   font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--c-muted);
 }
 .hero-slide__kicker::before { content: ""; width: 24px; height: 2px; background: var(--c-red); }
 .hero-slide__title {
-  font-family: var(--font-display); font-weight: 800; color: var(--c-ink);
-  font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); line-height: 1.12; letter-spacing: -.02em;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; line-height: 1.2; color: var(--c-ink);
 }
-.hero-slide__lead { margin-top: 8px; max-width: 40em; font-size: 1rem; line-height: 1.55; color: var(--c-muted); }
-.hero-slide__tags { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: .875rem; font-weight: 500; color: var(--c-text); }
-.hero-slide__tags li { display: inline-flex; align-items: center; gap: 8px; }
-.hero-slide__tags li::before { content: ""; width: 6px; height: 6px; background: var(--c-red); }
-.hero-caption__actions .btn { min-height: 48px; }
+.hero-caption .text-link { min-height: 0; }
 
 .hero__controls {
   position: absolute; left: 0; right: 0; z-index: 2;
   top: calc(100vw / 3.2 + 12px); top: calc(min(100cqw / 3.2, var(--stage-max)) + 12px);
   display: flex; align-items: center; gap: 6px; height: 48px;
+  pointer-events: none; /* the bar spans the caption row: let clicks reach the caption link */
 }
+.hero__controls > * { pointer-events: auto; }
 .hero__ctrl {
   display: grid; place-items: center; width: 44px; height: 44px;
   border: 1px solid var(--c-line-strong); border-radius: 50%; background: var(--c-white); color: var(--c-ink);
@@ -504,25 +501,26 @@ h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
 .hero__dot:hover::before { background: #8A8A8A; }
 .hero__dot[aria-current="true"]::before { background: var(--c-red); }
 
-@media (max-width: 29.99em) {
-  .hero-caption__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .hero-caption__actions .btn { padding-inline: .5rem; font-size: .875rem; }
-}
 @media (min-width: 64em) {
-  /* One row: name left, CTAs and controls right. Desktop artwork carries the tagline, so the lead/tags are mobile-only. */
-  .hero-caption {
-    grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 32px;
-    padding-block: 22px 26px; padding-right: var(--hero-controls-w, 368px); /* js/home.js sets the controls' real width */
-  }
-  .hero-slide__lead, .hero-slide__tags { display: none; }
-  .hero-caption__actions { margin-top: 4px; flex-wrap: nowrap; }
-  .hero__controls { top: calc(min(100cqw / 3.2, var(--stage-max)) + 26px); justify-content: flex-end; }
+  /* One row: caption left, controls right. */
+  .hero-caption { padding-block: 16px; padding-right: var(--hero-controls-w, 368px); } /* js/home.js sets the controls' real width */
+  .hero-slide__title { padding-left: 18px; border-left: 1px solid var(--c-line-strong); }
+  .hero__controls { top: calc(min(100cqw / 3.2, var(--stage-max)) + 16px); justify-content: flex-end; }
 }
-@media (min-width: 64em) and (max-width: 74.99em) {
-  /* Narrow desktop: name on its own row beside the controls, CTAs below. */
-  .hero-caption { padding-right: 0; grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .hero-caption__text { padding-right: var(--hero-controls-w, 368px); }
+
+/* Fixed intro row under the slider: the page's H1 and main CTAs. */
+.hero-intro { padding-block: clamp(28px, 4vw, 44px); background: var(--c-white); }
+.hero-intro__inner { display: grid; gap: 24px; }
+.hero-intro__title { max-width: 24em; font-size: clamp(1.625rem, 1.2rem + 1.5vw, 2.25rem); line-height: 1.18; letter-spacing: -.02em; color: var(--c-ink); }
+.hero-intro__lead { max-width: 44em; margin-top: 12px; font-size: 1.0625rem; line-height: 1.6; color: var(--c-muted); }
+@media (min-width: 64em) {
+  .hero-intro__inner { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 48px; }
 }
+/* Intro per slide (inside the slide, hero-slider.twig): the line under the caption row, swapping with its slide like
+   the caption; the hero's own bottom line then sits under the intro, so it goes */
+.hero-slide .hero-intro { border-top: 1px solid var(--c-line); opacity: 0; transition: opacity .15s ease; }
+.hero-slide.is-active .hero-intro { opacity: 1; transition: opacity .35s ease .2s; }
+.hero:has(.hero-intro) { border-bottom: 0; }
 
 /* ==========================================================================
    B. Benefit cards
@@ -964,6 +962,7 @@ h1.section-title { font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); }
   width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw);
   transform: translate(-50%, -50%) scale(1.12);
 }
+.onestop__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } /* uploaded video file */
 .onestop__overlay {
   position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(180deg, rgba(20, 20, 20, .84) 0%, rgba(20, 20, 20, .88) 100%);

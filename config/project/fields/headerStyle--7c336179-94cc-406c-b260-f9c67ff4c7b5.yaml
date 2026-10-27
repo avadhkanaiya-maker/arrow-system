@@ -1,6 +1,6 @@
 columnSuffix: null
 handle: headerStyle
-instructions: 'Full-width banner: the image on its own under the text, across the full width and shown whole (like a blog post cover). Use a wide photo, 1600 px wide or more. Small illustration: a compact header with the image small at the right, as decoration (desktop only), e.g. an SVG.'
+instructions: 'Full-width banner: the image on its own under the text, across the full width and shown whole (like a blog post cover). Use a wide photo, 1600 px wide or more. Small illustration: a compact header with the image small at the right, as decoration (desktop only), e.g. an SVG. Cut-out image beside text: a product cut-out (transparent background) shown whole and large beside the text, no frame; hidden on phones and tablets.'
 name: 'Header Style'
 searchable: false
 settings:
@@ -36,6 +36,17 @@ settings:
         -
           - value
           - illustration
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Cut-out image beside text'
+        -
+          - value
+          - cutout
         -
           - default
           - false

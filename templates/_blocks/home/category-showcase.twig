@@ -19,7 +19,7 @@
     <div class="container">
       <header class="section-head section-head--center">
         {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
-        <h1 class="section-title" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h1>
+        <h2 class="section-title section-title--xl" id="{{ titleId }}">{{ text.highlight(block.sectionHeading) }}</h2>
       </header>
       <ul class="category-grid">
         {% for category in categories %}

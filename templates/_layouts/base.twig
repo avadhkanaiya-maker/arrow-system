@@ -27,15 +27,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap">
   <link rel="icon" href="{{ favicon ? favicon.url : 'data:,' }}">
-  <link rel="stylesheet" href="{{ url('assets/css/site.css') }}">
-  <link rel="stylesheet" href="{{ url('assets/css/dark-chrome.css') }}">
-  <link rel="stylesheet" href="{{ url('assets/css/craft.css') }}">
+  <link rel="stylesheet" href="{{ siteUrl('assets/css/site.css') }}">
+  <link rel="stylesheet" href="{{ siteUrl('assets/css/dark-chrome.css') }}">
+  <link rel="stylesheet" href="{{ siteUrl('assets/css/craft.css') }}">
   {% block head %}{% endblock %}
   {# the admin's Custom CSS: site-wide (Site Settings) then this page's, after the site's CSS so it wins; "<" removed so it can't close the tag #}
   {% set customCss = [siteSettings.customCss ?? '', entry.customCss ?? '']|filter(c => c|trim)|join("\n") %}
   {% if customCss %}<style>{{ customCss|replace({'<': ''})|raw }}</style>{% endif %}
-  <script src="{{ url('assets/js/site.js') }}" defer></script>
-  <script src="{{ url('assets/js/craft.js') }}" defer></script>
+  <script src="{{ siteUrl('assets/js/site.js') }}" defer></script>
+  <script src="{{ siteUrl('assets/js/craft.js') }}" defer></script>
 </head>
 <body>
 {% include '_partials/icon-sprite' %}
@@ -47,8 +47,12 @@
 <main id="main">
   {% block content %}{% endblock %}
 
-  {# Newsletter band on every page, above the footer (Globals → Newsletter) #}
-  {% include '_partials/newsletter' %}
+  {# Newsletter band above the footer (Globals → Newsletter). A page with a page builder shows it only while the builder
+     has a Newsletter block (every page gets one by default; where the block sits doesn't matter); other pages always. #}
+  {% set nlBuilder = (entry.fieldLayout.customFields ?? [])|filter(f => f is instance of('craft\\fields\\Matrix') and 'newsletter' in f.entryTypes|map(t => t.handle))|first %}
+  {% if not nlBuilder or craft.entries.ownerId(entry.id).fieldId(nlBuilder.id).type('newsletter').exists() %}
+    {% include '_partials/newsletter' %}
+  {% endif %}
 </main>
 
 {% include '_partials/navigation/footer' %}

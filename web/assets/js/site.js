@@ -265,20 +265,21 @@
     //    adds previous/next buttons and an end screen): it is replayed by seeking to 0 just before the end, the same way as
     //    the One Stop Solution background video below. YouTube may still flash its own play icon for a moment as it starts.
     // Videos keep playing while their slide is hidden (no pause/resume, so YouTube does not show its pause button again on
-    // return; an uploaded file simply loops). Reduced motion: no video, the poster stays.
+    // return; an uploaded file simply loops). Reduced motion: no playback, a still instead (the file's first frame, or
+    // YouTube's thumbnail), as video slides have no banner image.
     var YT_ORIGIN = 'https://www.youtube-nocookie.com';
     var youtubeId = function (value) { // accepts a bare ID or any common YouTube URL form
       var m = String(value || '').match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/);
       return m ? m[1] : (/^[\w-]{11}$/.test(value) ? value : '');
     };
-    var heroVideos = reduceMotion ? [] : Array.prototype.slice.call(carousel.querySelectorAll('[data-hero-video], [data-hero-video-src]'));
+    var heroVideos = Array.prototype.slice.call(carousel.querySelectorAll('[data-hero-video], [data-hero-video-src]'));
     var ytCommand = function (box, func, args) {
       var frame = box.querySelector('iframe');
       if (frame && frame.contentWindow) frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: args || [] }), YT_ORIGIN);
     };
     var videoCommand = function (slide, func) { // func: 'playVideo' | 'pauseVideo'
       var box = slide.querySelector('[data-hero-video], [data-hero-video-src]');
-      if (!box) return;
+      if (!box || reduceMotion) return;
       var file = box.querySelector('video');
       if (file) { if (func === 'playVideo') { var p = file.play(); if (p && p.catch) p.catch(function () {}); } else file.pause(); }
       else ytCommand(box, func);
@@ -295,15 +296,20 @@
       var src = box.getAttribute('data-hero-video-src');
       if (src) {
         var video = document.createElement('video');
-        video.src = src; video.muted = true; video.loop = true; video.autoplay = true; video.playsInline = true;
+        video.src = src; video.muted = true; video.loop = true; video.autoplay = !reduceMotion; video.playsInline = true;
         video.setAttribute('muted', ''); video.setAttribute('playsinline', ''); video.setAttribute('aria-hidden', 'true');
         video.preload = 'auto'; video.title = title;
-        video.addEventListener('playing', function () { box.classList.add('is-ready'); });
+        video.addEventListener(reduceMotion ? 'loadeddata' : 'playing', function () { box.classList.add('is-ready'); });
         box.appendChild(video);
         return;
       }
       var id = youtubeId(box.getAttribute('data-hero-video'));
       if (!id) return;
+      if (reduceMotion) { // hqdefault always exists; its 4:3 letterbox bars fall outside the 16:5 crop
+        box.style.background = 'url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg) center / cover';
+        box.classList.add('is-ready');
+        return;
+      }
       var params = 'autoplay=1&mute=1&controls=0&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1';
       if (/^https?:$/.test(window.location.protocol)) params += '&origin=' + encodeURIComponent(window.location.origin);
       var frame = document.createElement('iframe');
@@ -676,22 +682,39 @@
   }
 
   /* ---------- One Stop Solution background video ---------- */
-  // Muted YouTube embed behind the copy that autoplays and replays with no visible controls (client request).
+  // Muted video behind the copy that autoplays and replays with no visible controls (client request): an uploaded file
+  // (data-bg-video-src) or else a YouTube embed (data-bg-video).
   // Loaded only near the viewport, never for reduced-motion or Save-Data visitors (they keep the poster).
-  // Controlled through the YouTube iframe API's postMessage protocol, so no extra script is loaded.
+  // An uploaded file is a native <video>: shown as soon as it plays, it simply loops, paused while out of view.
+  // YouTube is controlled through the iframe API's postMessage protocol, so no extra script is loaded.
   // YouTube's own overlay buttons appear while the player starts, resumes or reaches the end, so:
   //  - the poster covers the frame until playback has run steadily for a moment;
   //  - the video is replayed by seeking to 0 just before it ends (YouTube's loop/playlist mode adds prev/next buttons
   //    and an end screen, so it is not used).
-  var bgSection = document.querySelector('[data-bg-video]');
+  var bgSection = document.querySelector('[data-bg-video], [data-bg-video-src]');
   if (bgSection) {
     var bgBox = bgSection.querySelector('[data-bg-video-frame]');
     var bgId = bgSection.getAttribute('data-bg-video');
+    var bgSrc = bgSection.getAttribute('data-bg-video-src');
     var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     var saveData = !!(conn && conn.saveData);
     var lessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canPlay = !lessMotion && !saveData && 'IntersectionObserver' in window;
 
-    if (!lessMotion && !saveData && 'IntersectionObserver' in window) {
+    if (canPlay && bgSrc) {
+      var bgVideo = null;
+      new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) { if (bgVideo) bgVideo.pause(); return; }
+        if (!bgVideo) {
+          bgVideo = document.createElement('video');
+          bgVideo.src = bgSrc; bgVideo.muted = true; bgVideo.loop = true; bgVideo.playsInline = true; bgVideo.preload = 'auto';
+          bgVideo.setAttribute('muted', ''); bgVideo.setAttribute('playsinline', ''); bgVideo.setAttribute('aria-hidden', 'true');
+          bgVideo.addEventListener('playing', function () { bgSection.classList.add('is-playing'); });
+          bgBox.appendChild(bgVideo);
+        }
+        var p = bgVideo.play(); if (p && p.catch) p.catch(function () {}); // blocked autoplay: the poster stays
+      }, { rootMargin: '200px 0px' }).observe(bgSection);
+    } else if (canPlay) {
       var YT = 'https://www.youtube-nocookie.com';
       var REVEAL_DELAY = 1200; // ms of steady playback before the poster fades away
       var frame = null, ready = false, inView = false, listenTimer = null, revealTimer = null;

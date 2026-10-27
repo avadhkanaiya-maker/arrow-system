@@ -10,6 +10,26 @@
  *   /all-products/printers/                              "Printer" (9: live's ArrowJet VDP left out, its product address now
  *                                                        redirects to the Limitronic printers page and it isn't on staging)
  *   /all-products/printers/gerber-printers/              "Printers by Gerber" (1: Gerber EDGE FX, a wide card)
+ *   /all-products/printers/trojan-printers/              "Printers by Trojan" (3: T2-L, T2-C, T4)
+ *   /all-products/printers/quicklabel-printers/          "Printers by QuickLabel" (1: QL-300, a wide card)
+ *     Live's two pages are empty (only the H1, since at least April 2024): filled with the brand's printers on staging.
+ *     Trojan T2 is left out: switched off on staging (2026-10-22, by hand). Card texts from live's "Digital Label
+ *     Printers by Trojan" page; T4 and QL-300 have no live listing: their short name and subtitle only.
+ *   /all-products/plotters/                              "Gerber Plotters" (3) + live's banner (Gerber-Envision-375-Plotter.jpg)
+ *   /all-products/digital-label-printers/                switched off, as live (301 → its child, config/redirects.php)
+ *   …/digital-label-printers/arrow-digital-label-printers/ "ArrowJet Digital Label Printers" (12), as the design
+ *     (Arrowsystem/digital-label-printers, client-revised 2026-10-16): Page Header with Subtitle and the product cut-out
+ *     (Header Style "Cut-out image beside text", 27_header_subtitle_cutout.php), the lineup, then Card Grids (about the
+ *     range, who it's for, other categories) and a CTA Band; SEO as live. Left out: the design's search box, pagination
+ *     (12 fit one page), "12 printers" line, section eyebrows and card kickers (no such block fields).
+ *   /all-products/corrugate-and-end-of-line-printing/    "Corrugate and End of Line Printing" (5: the Limitronic printers,
+ *                                                        as live); first made as a switched-off placeholder for its child
+ *   …/corrugate-and-end-of-line-printing/printers-by-limitronic/ "Printers by Limitronic" (5) + live's banner (LIMITRONIC-3.jpg)
+ * 'header': more Page Header fields (Subtitle, intro, a cut-out image from the design); 'after': sections after the
+ * products (['cards', heading, background, [[title, text, image, link]…]] → Card Grid; ['cta', heading, intro, button,
+ * second button] → CTA Band; a link starting with "/" → that page); 'enabled' => false: a page switched off (as live, or
+ * not built yet: a placeholder parent). A switched-off page whose spec is no longer switched off is built in place: its
+ * blocks replaced, SEO set, switched on (stops on an open draft).
  * A page with 'banner' (live's banner image, set as a section background there) gets it in its Page Header as a
  * Full-width banner, shown whole (it has text and logos in it): downloaded from live into Assets › Images › pages.
  * Live's mix-ups not copied: "Arrow EZCut 330A" links to the EZCut 350R (the 350R shows once), "Arrow ezcut 330S"
@@ -31,6 +51,9 @@ use craft\fields\Link;
 use verbb\navigation\elements\Node;
 use verbb\navigation\nodetypes\Entry as EntryNode;
 
+const DESIGN = '/home/avadh/server/theglobalwebdev/demo/public_html/Arrowsystem/assets/';
+const LIMITRONIC = ['limitronic-v6-lite', 'limitronic-v6-2-color-box-printer', 'limitronic-v7-color-box-printer',
+    'limitronic-v7-white-box-printer', 'limitronic-v6-color-box-printer'];
 const FINISHERS = ['aries', 'taurus-laser-finisher', 'arrowcut-nova-330r-roll-to-roll-laser-cutter', 'arrowcut-nova-250r-laser-label-cutter',
     'arrow-eco-300-label-cutter', 'arrow-ezcut-330r', 'arrowezcut-350r', 'arrowezcut-330rplus', 'arrow-ezcut-240', 'arrow-arrow-slitter-1500'];
 // path => page; parent = the path of the parent page; blocks = [heading, product slugs, optional "view all" [label, live
@@ -70,6 +93,62 @@ const PAGES = [
         'seoDescription' => 'Printing Technology: Thermal transfer',
         'banner' => ['GERBER-PRINTERS.jpg', 'Gerber Technology EDGE FX thermal transfer printer beside aircraft safety placards'],
         'blocks' => [['Gerber [Printers]', ['gerber-edge-fx'], null]]],
+    'all-products/printers/trojan-printers' => ['title' => 'Trojan Printers', 'parent' => 'all-products/printers', 'eyebrow' => 'Product category',
+        'h1' => 'Printers by [Trojan]', 'seoTitle' => 'Printers by Trojan - Arrow Systems, Inc.', 'seoDescription' => null,
+        'blocks' => [['Trojan [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer',
+            'trojan-t4-all-in-one-digital-label-printer-and-finisher'], null]]],
+    'all-products/printers/quicklabel-printers' => ['title' => 'QuickLabel Printers', 'parent' => 'all-products/printers', 'eyebrow' => 'Product category',
+        'h1' => 'Printers by [QuickLabel]', 'seoTitle' => 'Printers by QuickLabel - Arrow Systems, Inc.', 'seoDescription' => null,
+        'blocks' => [['QuickLabel [Printers]', ['ql-300-5-color-toner-printer'], null]]],
+    'all-products/plotters' => ['title' => 'Gerber Plotters', 'parent' => 'all-products', 'eyebrow' => 'Product category', 'h1' => 'Gerber [Plotters]',
+        'seoTitle' => 'Gerber Plotters | Arrow Systems for Precision Cutting',
+        'seoDescription' => 'Discover Gerber Plotters and Arrow Systems for precise cutting solutions. Enhance your projects with superior quality and reliability.',
+        'banner' => ['Gerber-Envision-375-Plotter.jpg', 'Gerber Technology plotter cutting labels, beside fruit and logo sticker samples'],
+        'blocks' => [['Our Gerber [Plotters]', ['gerber-gs15-plus-plotter', 'gerber-envision-375-plotter', 'gerber-gsxplus'], null]]],
+    'all-products/digital-label-printers' => ['title' => 'Digital Label Printers', 'parent' => 'all-products', 'enabled' => false,
+        'eyebrow' => 'Product category', 'h1' => 'Digital Label [Printers]', 'seoTitle' => null, 'seoDescription' => null, 'blocks' => []],
+    'all-products/digital-label-printers/arrow-digital-label-printers' => ['title' => 'ArrowJet Digital Label Printers',
+        'parent' => 'all-products/digital-label-printers', 'eyebrow' => 'Product category', 'h1' => 'ArrowJet Digital Label [Printers]',
+        'seoTitle' => 'Digital Label Printers by ArrowJet | Inkjet Solutions',
+        'seoDescription' => 'Discover ArrowJet\'s Digital Label Printers for flexible packaging. High-quality inkjet printers designed to enhance your printing experience.',
+        'header' => ['subheading' => 'Commercial Inkjet Label Printers for Production-Scale Printing',
+            'sectionLead' => 'ArrowJet digital label printers are built for converters, brand owners, and in-house production teams that demand professional output at commercial scale. Powered by Memjet DuraFlex technology, our inkjet label printers deliver high-resolution CMYK output at production speeds — with no plates, no setup waste, and no compromise on quality.',
+            'cutout' => [DESIGN . 'products/web/arrowjet-aqua-330r.webp', 'ArrowJet Aqua 330R digital label printer']],
+        'blocks' => [['ArrowJet Printer [Lineup]', ['arrowjet-eco-330r', 'arrowjet-aqua-330r-lite-2', 'arrowjet-aqua-330r-ii', 'arrowjet-aqua-800m',
+            'arrow-bolt-330r-hybrid-pro-m', 'arrowjet-aqua-330r-hybrid-pro-plus-m', 'arrow-overjet-pro-700', 'arrowjet-nova-250-plus',
+            'arrowjet-nova250r-inline-digital-printer-and-laser-die-cutter-2', 'arrowjet-nova-330r', 'arrowjet-lumina-48f', 'arrowjet-aqua-330r-hybrid-pro-m'], null]],
+        'after' => [
+            ['cards', null, null, [
+                ['Why ArrowJet Inkjet Label Printers?', 'ArrowJet inkjet label printing systems are engineered for the realities of commercial label production — fast job changeovers, consistent color across runs, and substrate flexibility that covers BOPP, PET, PP, paper, and specialty films. Whether you’re producing food and beverage labels, pharmaceutical packaging, or cosmetic product labels, our printers deliver the print quality your customers expect at the throughput your operation demands.'],
+                ['Commercial Color Label Printing for Every Application', 'From short-run boutique batches to high-volume commercial color label production, the ArrowJet range of commercial color label printers scales with your output. Choose aqueous pigment systems for vibrant, water-resistant labels at lower operating cost — or step up to a UV hybrid press for specialty substrates, opaque white, and premium varnish finishes. Both platforms run as standalone production label printers or integrate with inline finishing for a complete print-and-cut workflow.'],
+                ['Label Printing Equipment Built for Real Production Environments', 'ArrowJet label printing equipment is designed to run. Single-pass print engines deliver speeds from 20 to 195 feet per minute, with print widths up to 25 inches across the range. Single-phase power options, compact footprints, and straightforward installation mean you’re producing from day one — without the infrastructure overhead of traditional press equipment. Find your inkjet printer for label printing in the product lineup above, or speak with our team to match the right system to your volume and substrate requirements.'],
+            ]],
+            ['cards', 'Built for Commercial [Label Production]', 'surface', [
+                ['Converters & Label Printers', 'Short-run digital label production with fast job changeovers and no plate costs.'],
+                ['Brand Owners (In-House)', 'Full-color labels for food, beverage, cosmetic, and nutraceutical products — printed on demand.'],
+                ['Industrial & OEM', 'High-volume, durable labels for chemical, pharmaceutical, and manufacturing environments.'],
+            ]],
+            ['cta', 'Not sure which printer fits?', 'Tell us your application, materials and run lengths.',
+                ['Talk to a Specialist', 'tel:+18886972749'], ['Request a Quote', '/request-quote/']],
+            ['cards', 'Other [Categories]', null, [
+                ['Digital Label Finishers', 'Die-cutting, slitting and finishing for printed label rolls.',
+                    [DESIGN . 'categories/web/category-digital-label-finishers.webp', 'Arrow EZCut digital label finisher'], ['Digital Label Finishers', '/all-products/label-finishers/arrow-label-finishers/']],
+                ['Print & Cut Inline', 'Print and finish labels in one pass.',
+                    [DESIGN . 'categories/web/category-print-cut-inline.webp', 'ArrowJet Nova print and cut inline system'], ['Print & Cut Inline', 'https://arrsys.com/all-products/print-and-cut-systems/']],
+                ['Label Materials', 'ArrowJet inkjet receptive media, foils, tag stocks and specialty laminates.',
+                    [DESIGN . 'materials/web/material-holography-1.webp', 'Holographic label printed with water-based ink'], ['Label Materials', 'https://arrsys.com/arrow-materials/']],
+            ]],
+        ]],
+    'all-products/corrugate-and-end-of-line-printing' => ['title' => 'Corrugate and End of Line Printing', 'parent' => 'all-products',
+        'eyebrow' => 'Product category', 'h1' => 'Corrugate and End of Line [Printing]',
+        'seoTitle' => 'Corrugate and End of Line Printing - Arrow Systems, Inc.', 'seoDescription' => 'Printhead resolution: 180dpi',   // as live
+        'blocks' => [['Printers by [Limitronic]', LIMITRONIC, null]]],
+    'all-products/corrugate-and-end-of-line-printing/printers-by-limitronic' => ['title' => 'Printers by Limitronic',
+        'parent' => 'all-products/corrugate-and-end-of-line-printing', 'eyebrow' => 'Product category', 'h1' => 'Printers by [Limitronic]',
+        'seoTitle' => 'Limitronic Printers: V6 Lite, V6 Standard & V7 Color',
+        'seoDescription' => 'Discover Limitronic printers, including V6 Lite, V6 Standard, and V7 Color. Explore their features and find the perfect printer for your needs.',
+        'banner' => ['LIMITRONIC-3.jpg', 'Limitronic V7 Color printing on a wooden crate, beside printed crate, carton and seafood box labels'],
+        'blocks' => [['Limitronic [Printers]', LIMITRONIC, null]]],
 ];
 // product slug => [Card Title (null = keep the product name), tagline, [label, value]…], live's text
 const CARDS = [
@@ -97,6 +176,36 @@ const CARDS = [
     'gerber-edge-fx' => [null, '15″ Thermal Transfer Printer',
         [['Printing Technology', 'Thermal transfer'], ['Max. Printing Width', '11.8″ (30 cm)'], ['Material Width', '15″ (38 cm) punched media'],
          ['Resolution', '300, 600 or 1200 dpi'], ['Colors', 'Over 75 color foils available']]],
+    'trojan-t2-l' => [null, 'Roll-to-Roll Inkjet Mini Press w/ Lamination',
+        [['Resolution', '1600 x 1600 dpi full color'], ['Speed', '6 ips (9 m/min) or 12 ips (18 m/min)'], ['Print and laminate', '6 ips (9 m/min)'],
+         ['Print Area', 'Width: 2″ – 8.76″ (51 – 222.5 mm); length 0.4″ (10 mm) – 60″ (1525 mm) or unlimited stitched'],
+         ['Ink', 'High-performance water-based dye ink, four 2-liter tanks CMYK']]],
+    'trojan-t2-c-large-capacity-tabletop-digital-printer' => ['Trojan T2-C', 'Full Capacity Digital Tabletop Press',
+        [['Resolution', '1600 x 800 dpi or 1600 x 1600 dpi'], ['Speed', '6 ips (9 m/min) or 12 ips (18 m/min)'], ['Print Area', 'Width: 8.8″ (223 mm)'],
+         ['Length without stitching', '0.6″ – 30″ (15 – 762 mm)'], ['Length with stitching', '0.4″ (10 mm) – 60″ (1525 mm) or unlimited'],
+         ['Ink', 'High-performance water-based dye ink, four 2-liter tanks CMYK']]],
+    'trojan-t4-all-in-one-digital-label-printer-and-finisher' => ['Trojan T4', 'All-in-One Digital Label Printer and Finisher', []],
+    'ql-300-5-color-toner-printer' => ['QuickLabel QL-300', '5 Color Laser Label Printer', []],
+    'gerber-gs15-plus-plotter' => [null, 'Tangential Cutting & Swivel Knife Technology',
+        [['Cutting Width', '13.25″ (327 mm)'], ['Cutting Speed', '4 ips (101.6 mm)'], ['Cutting Depth Adj', 'Dial Control'],
+         ['Cutting Technology', 'Tangential or Swivel 30°, 45°, or 60°']]],
+    'gerber-envision-375-plotter' => [null, 'Gerber Sprocket-feed Tabletop 15″ plotter',
+        [['Cutting Width', '13.25″ (327 mm)'], ['Cutting Speed', '36 ips/50 ips (914.4/1270 mm)'], ['Cutting Depth Adj', 'Key Pad'],
+         ['Cutting Technology', 'Swivel Knife 30°, 45° or 60° w/corner compensation']]],
+    'gerber-gsxplus' => [null, 'Use 15″ or 30″ perforated materials',
+        [['Cutting Width', '13.25″ (327 mm)'], ['Cutting Speed', '3.6 ips (91.44 mm)'], ['Cutting Depth Adj', 'Dial Control'],
+         ['Cutting Technology', 'Swivel Knife 30°, 45° or 60° w/corner compensation']]],
+    // Limitronic: live's spec lines joined ("0.2-192 m/min" + "depending resolution"), "injket" and "5 0 mm" corrected
+    'limitronic-v6-lite' => [null, 'Online digital printing of GHS labels',
+        [['Printhead resolution', '180dpi'], ['Speed', '0.2–192 m/min depending on resolution'], ['Height', '72 mm – 140 mm'], ['Densities', '3 levels']]],
+    'limitronic-v6-2-color-box-printer' => [null, 'Modular solutions of high resolution printing',
+        [['Printhead resolution', '180dpi'], ['Speed', '60 m/min @ 180dpi, 0.2–192 m/min depending on resolution'], ['Height', '72 mm / 140 mm per block to 180'], ['Densities', '3 levels']]],
+    'limitronic-v7-color-box-printer' => [null, 'Hi-res full-color printing',
+        [['Printhead resolution', '360dpi'], ['Speed', 'Up to 60 m/min depending on resolution'], ['Height', '70 mm (scalable)'], ['Densities', '7 levels']]],
+    'limitronic-v7-white-box-printer' => [null, 'High resolution inkjet printing on white',
+        [['Printhead resolution', '300dpi'], ['Speed', 'Up to 30 m/min depending on resolution'], ['Height', '50 mm'], ['Densities', '5 levels']]],
+    'limitronic-v6-color-box-printer' => [null, 'All color printing',
+        [['Printhead resolution', '180dpi'], ['Speed', '0.2–192 m/min depending on resolution'], ['Height', '72 mm / 140 mm'], ['Densities', '3 levels']]],
 ];
 
 $elements = Craft::$app->getElements();
@@ -117,14 +226,15 @@ foreach (CARDS as $slug => [$cardTitle, $tagline, $specs]) {
     say("  ~ {$p->title}: " . implode(', ', array_keys($set)));
 }
 
-// live's banner image → Assets › Images › pages (downloaded once)
-$bannerAsset = function (array $banner) use ($elements): craft\elements\Asset {
-    [$file, $alt] = $banner;
+// an image → Assets › Images › pages (once): live's banner (its /media/ file name) or a design file (a full path)
+$imageAsset = function (string $path, string $alt) use ($elements): craft\elements\Asset {
+    $file = basename($path);
     $volume = Craft::$app->getVolumes()->getVolumeByHandle('images');
     $folder = Craft::$app->getAssets()->ensureFolderByFullPathAndVolume('pages', $volume, false);
     if ($a = craft\elements\Asset::find()->folderId($folder->id)->filename($file)->one()) return $a;
-    $bytes = @file_get_contents("https://arrsys.com/media/$file", false, stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0 (Arrow Systems staging migration)\r\n", 'timeout' => 90]]))
-        ?: exit("could not download $file\n");
+    $bytes = (str_starts_with($path, '/') ? @file_get_contents($path)
+        : @file_get_contents("https://arrsys.com/media/$file", false, stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0 (Arrow Systems staging migration)\r\n", 'timeout' => 90]])))
+        ?: exit("could not read $path\n");
     $tmp = Craft::$app->getPath()->getTempPath() . '/' . uniqid('banner') . "-$file";
     file_put_contents($tmp, $bytes);
     $a = new craft\elements\Asset(['tempFilePath' => $tmp, 'filename' => $file, 'volumeId' => $volume->id, 'newFolderId' => $folder->id]);
@@ -134,29 +244,47 @@ $bannerAsset = function (array $banner) use ($elements): craft\elements\Asset {
     say("  + asset pages/$file");
     return $a;
 };
-$bannerFields = fn(array $banner) => ['mediaImage' => [$bannerAsset($banner)->id], 'headerStyle' => 'banner', 'bannerHeight' => 'whole'];
+$bannerFields = fn(array $banner) => ['mediaImage' => [$imageAsset(...$banner)->id], 'headerStyle' => 'banner', 'bannerHeight' => 'whole'];
+$headerFields = fn(array $h) => array_diff_key($h, ['cutout' => 1]) + (isset($h['cutout']) ? ['mediaImage' => [$imageAsset(...$h['cutout'])->id], 'headerStyle' => 'cutout'] : []);
+// sections after the products (see 'after' above)
+$link = fn(?array $l) => !$l ? null : (str_starts_with($l[1], '/')
+    ? ['type' => 'entry', 'value' => (Entry::find()->section('pages')->uri(trim($l[1], '/'))->status(null)->one() ?? exit("no page {$l[1]}\n"))->id, 'label' => $l[0]]
+    : ['type' => str_starts_with($l[1], 'tel:') ? 'tel' : 'url', 'value' => $l[1], 'label' => $l[0]]);
+$sectionBlock = fn(array $s) => $s[0] === 'cta'
+    ? ['type' => 'ctaBand', 'fields' => ['sectionHeading' => $s[1], 'sectionLead' => $s[2], 'ctaLink' => $link($s[3]), 'secondaryCta' => $link($s[4])]]
+    : ['type' => 'cardGrid', 'fields' => ['sectionHeading' => $s[1], 'sectionBackground' => $s[2], 'cardColumns' => '3', 'cardShadow' => 'none',
+        'cardItems' => ['sortOrder' => array_map(fn($i) => "c$i", array_keys($s[3])), 'entries' => array_combine(array_map(fn($i) => "c$i", array_keys($s[3])),
+            array_map(fn($c) => ['type' => 'card', 'fields' => ['headingText' => $c[0], 'richText' => '<p>' . htmlspecialchars($c[1]) . '</p>',
+                'mediaImage' => isset($c[2]) ? [$imageAsset(...$c[2])->id] : [], 'ctaLink' => $link($c[3] ?? null)]], $s[3]))]]];
 
 // pages, parents first
 $pagesSection = Craft::$app->getEntries()->getSectionByHandle('pages');
 $built = [];
 foreach (PAGES as $path => $spec) {
     $page = Entry::find()->section('pages')->uri($path)->status(null)->one();
-    if (!$page) {
+    $placeholder = $page && !$page->enabled && ($spec['enabled'] ?? true);   // a switched-off placeholder, built now
+    if (!$page || $placeholder) {
         $blocks = ['b0' => ['type' => 'industryHeader', 'fields' => ['eyebrow' => $spec['eyebrow'], 'sectionHeading' => $spec['h1']]
-            + (isset($spec['banner']) ? $bannerFields($spec['banner']) : [])]];
+            + (isset($spec['banner']) ? $bannerFields($spec['banner']) : []) + $headerFields($spec['header'] ?? [])]];
         foreach ($spec['blocks'] as $i => [$heading, $slugs, $viewAll]) {
             $blocks['b' . ($i + 1)] = ['type' => 'productShowcase', 'fields' => ['sectionHeading' => $heading, 'productSource' => 'picked',
                 'selectedProducts' => array_map(fn($s) => $product($s)->id, $slugs),
                 'ctaLink' => $viewAll ? ['type' => 'url', 'value' => $viewAll[1], 'label' => $viewAll[0]] : null]];
         }
-        $page = new Entry(['sectionId' => $pagesSection->id, 'typeId' => Craft::$app->getEntries()->getEntryTypeByHandle('page')->id,
-            'title' => $spec['title'], 'slug' => basename($path)]);
-        if ($spec['parent']) $page->setParentId(Entry::find()->section('pages')->uri($spec['parent'])->status(null)->one()?->id ?? exit("no parent page {$spec['parent']}\n"));
+        foreach ($spec['after'] ?? [] as $s) $blocks['b' . count($blocks)] = $sectionBlock($s);
+        if ($placeholder) {
+            !$hasDraft($page->id) || exit("/$path/ has an open draft: apply or delete it, then run again\n");
+            $page->enabled = true;
+        } else {
+            $page = new Entry(['sectionId' => $pagesSection->id, 'typeId' => Craft::$app->getEntries()->getEntryTypeByHandle('page')->id,
+                'title' => $spec['title'], 'slug' => basename($path), 'enabled' => $spec['enabled'] ?? true]);
+            if ($spec['parent']) $page->setParentId(Entry::find()->section('pages')->uri($spec['parent'])->status(null)->one()?->id ?? exit("no parent page {$spec['parent']}\n"));
+        }
         $page->setFieldValues(['seoTitle' => $spec['seoTitle'], 'seoDescription' => $spec['seoDescription'],
             'pageBuilder' => ['sortOrder' => array_keys($blocks), 'entries' => $blocks]]);
         $elements->saveElement($page) || fail("page $path", $page);
         $page->uri === $path || exit("the page got /{$page->uri}/, expected /$path/\n");
-        say("  + page /{$page->uri}/ (" . implode(', ', array_map(fn($b) => count($b[1]) . ' products', $spec['blocks'])) . ')');
+        say(($placeholder ? '  ~ placeholder' : '  +') . " page /{$page->uri}/ (" . implode(', ', array_map(fn($b) => count($b[1]) . ' products', $spec['blocks'])) . ')');
     }
     // a banner added to the spec after the page was built: into its Page Header (not under an open draft)
     $header = Entry::find()->ownerId($page->id)->type('industryHeader')->status(null)->one();
@@ -168,7 +296,7 @@ foreach (PAGES as $path => $spec) {
             say("  ~ /$path/: Page Header banner {$spec['banner'][0]}");
         }
     }
-    $built["https://arrsys.com/$path/"] = $page;
+    if ($spec['enabled'] ?? true) $built["https://arrsys.com/$path/"] = $page;
 }
 // menus and link fields pointing at a built page's live address → the page
 $target = fn(?string $url) => $url ? ($built[rtrim($url, '/') . '/'] ?? null) : null;
@@ -208,10 +336,19 @@ foreach ($q->column() as $id) {
 
 // self-check: each page loads at its live path with its cards, the breadcrumb shows its parents, nothing links to live
 foreach (PAGES as $path => $spec) {
+    if (!($spec['enabled'] ?? true)) {   // switched off: redirected as live, or not found until built
+        !str_contains(get_headers("http://localhost:8081/$path/")[0], '200') || exit("/$path/ is switched off but shows\n");
+        continue;
+    }
     $html = @file_get_contents("http://localhost:8081/$path/") ?: exit("/$path/ does not load\n");
     $want = array_sum(array_map(fn($b) => count($b[1]), $spec['blocks']));
     ($n = substr_count($html, 'class="pcard"')) === $want || exit("/$path/: $n cards, expected $want\n");
-    !$spec['parent'] || str_contains($html, '>' . PAGES[$spec['parent']]['title'] . '</a></li>') || exit("/$path/: breadcrumb without its parent\n");
+    for ($crumb = $spec['parent']; $crumb && !(PAGES[$crumb]['enabled'] ?? true); $crumb = PAGES[$crumb]['parent']);   // switched-off parents aren't in it
+    !$crumb || str_contains($html, '>' . PAGES[$crumb]['title'] . '</a></li>') || exit("/$path/: breadcrumb without its parent\n");
+    $want = array_sum(array_map(fn($s) => $s[0] === 'cards' ? count($s[3]) : 0, $spec['after'] ?? []));
+    ($n = substr_count($html, '<li class="g-card')) === $want || exit("/$path/: $n section cards, expected $want\n");
+    !isset($spec['header']['subheading']) || str_contains($html, 'ind-detail-hero__subtitle') || exit("/$path/: no subtitle\n");
+    !isset($spec['header']['cutout']) || str_contains($html, 'ind-detail-hero__cutout') || exit("/$path/: no cut-out image\n");
     !isset($spec['banner']) || str_contains($html, 'page-banner__cover') && str_contains($html, pathinfo($spec['banner'][0], PATHINFO_FILENAME)) || exit("/$path/: no banner\n");
 }
 !array_filter(Node::find()->status(null)->all(), fn($n) => $target($n->url)) || exit("a menu item still links to a live page that is built\n");

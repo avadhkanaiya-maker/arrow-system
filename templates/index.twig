@@ -4,6 +4,8 @@
 #}
 {% extends '_layouts/base' %}
 
+{# Homepage switched off: Craft opens this file as a plain template for "/", with no entry. #}
+{% if entry is not defined %}{% exit 404 %}{% endif %}
 {% set sections = entry.homepageSections.all() %}
 {% set firstSlider = sections|filter(s => s.type.handle == 'heroSlider')|first %}
 {% set firstBanner = firstSlider ? (firstSlider.slides.one().bannerImage.one() ?? null) : null %}

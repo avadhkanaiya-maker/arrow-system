@@ -7,6 +7,17 @@
    Let clicks pass through the empty part of the bar; the controls themselves stay clickable. */
 .hero__controls { pointer-events: none; }
 .hero__controls > * { pointer-events: auto; }
+/* Phones: the arrows and pause keep their size and the dots narrow to fit (6 slides overflowed at 375px) */
+.hero__ctrl { flex-shrink: 0; }
+.hero__dots { min-width: 0; }
+.hero__dot { min-width: 0; }
+
+/* Long button labels (e.g. an email address): a button too wide for its row wraps its text instead of running off
+   the screen; on phones the hero's buttons are full width, one per line */
+.btn-row .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+@media (max-width: 29.99em) {
+  .hero-intro__actions .btn { flex: 1 1 100%; }
+}
 
 /* ==========================================================================
    Blog articles: blocks the design (blogs/css/blog-detail.css) has no styles for. Used by imported posts and the
@@ -267,6 +278,16 @@
   width: 240px; height: auto; transform: translateY(-46%) rotate(3deg); filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .09)); }
 @media (min-width: 64em) { .page-hero__art { display: block; } }
 
+/* Page Header: Subtitle (an H2 line under the heading) and Header Style "Cut-out image beside text": a product cut-out
+   whole and large beside the text, no frame, desktop only (the design's .cat-hero__subtitle / .cat-hero__art) */
+.ind-detail-hero__subtitle { margin-top: 12px; font-size: clamp(1.0625rem, 1rem + .35vw, 1.25rem); font-weight: 700; line-height: 1.35; letter-spacing: -.01em; color: var(--c-ink); }
+.ind-detail-hero__subtitle + .ind-detail-hero__lead { margin-top: 8px; }
+.page-hero--cutout.ind-detail-hero { padding-block: clamp(18px, 2.5vw, 28px) clamp(30px, 4vw, 48px); }
+.page-hero--cutout .ind-detail-hero__title { font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); }
+.page-hero--cutout .ind-detail-hero__lead { max-width: 82ch; }
+.ind-detail-hero__cutout { display: none; width: 100%; max-width: 640px; height: auto; justify-self: end; filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .12)); }
+@media (min-width: 64em) { .ind-detail-hero__cutout { display: block; } }
+
 /* Side column boxes (an HTML block in a Columns column, e.g. Try a Free Sample): <div class="side-stack"> holding a
    .contact-panel (maroon: eyebrow, title, text, white .btn--light, .contact-panel__list with icons) and .side-card boxes
    with .side-links (icon, title + line, arrow). The design's .fs-aside; .prose resets as it sits in a text column. */
@@ -418,3 +439,33 @@ video.mcar__media { background: var(--c-black); object-fit: contain; }
 @media (max-width: 47.99em) { .post-cover__frame { aspect-ratio: 4 / 3; } }
 .post-cover .post-cover__frame img { position: relative; width: auto; height: auto; max-width: 100%; max-height: 100%;
   border-radius: 0; box-shadow: none; background: none; }
+
+/* Error pages (templates/404.twig, 403.twig → _layouts/error.twig): the page header look (industries.css .page-hero)
+   with the status code drawn large and outlined at the right, then the main pages as link cards */
+.error-hero__grid { display: grid; gap: 8px 48px; align-items: center; }
+@media (min-width: 64em) { .error-hero__grid { grid-template-columns: minmax(0, 1fr) auto; } }
+.error-hero__title { font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; color: var(--c-ink); }
+.error-hero__body .eyebrow { margin-bottom: 14px; }
+.error-hero__lead { max-width: 56ch; margin: 18px 0 30px; font-size: 1.0625rem; color: var(--c-muted); }
+.error-hero__call { margin-top: 18px; font-size: .9375rem; color: var(--c-muted); }
+.error-hero__call a { color: var(--c-ink); font-weight: 600; }
+.error-hero__code { order: -1; margin: 0; font-family: var(--font-display); font-weight: 800; line-height: .85; letter-spacing: -.05em;
+  font-size: clamp(4.5rem, 2.5rem + 9vw, 11.5rem); color: transparent; -webkit-text-stroke: 2px var(--c-maroon); user-select: none; }
+@media (min-width: 64em) { .error-hero__code { order: 0; } }
+.error-links__title { margin-bottom: clamp(24px, 3vw, 36px); }
+.error-links { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); margin: 0; padding: 0; list-style: none; }
+@media (min-width: 40em) { .error-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64em) { .error-links { grid-template-columns: repeat(3, minmax(0, 1fr)); } }   /* 6 pages: 2 even rows */
+.error-links a { display: flex; align-items: center; gap: 14px; height: 100%; padding: 18px 20px; border: 1px solid var(--c-line); border-radius: 12px;
+  background: var(--c-white); color: var(--c-ink); text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease; }
+.error-links a:hover { border-color: var(--c-maroon); box-shadow: 0 14px 28px -20px rgba(0, 0, 0, .35); }
+.error-links a:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+.error-links strong { display: block; font-size: 1rem; }
+.error-links strong + span { display: block; margin-top: 2px; font-size: .875rem; color: var(--c-muted); }
+.error-links__icon { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: var(--c-maroon-tint); color: var(--c-maroon); }
+.error-links__icon .icon { width: 20px; height: 20px; }
+.error-links__arrow { flex-shrink: 0; width: 16px; height: 16px; margin-left: auto; color: var(--c-muted); transition: transform .15s ease, color .15s ease; }
+.error-links a:hover .error-links__arrow { color: var(--c-maroon); transform: translateX(3px); }
+
+/* Main menu item without sub-items (header.twig): a plain link styled like the dropdown triggers */
+a.nav-trigger { text-decoration: none; }

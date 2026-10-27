@@ -2565,6 +2565,183 @@ Checked: 200, SEO tags, tel: button, form anchor; desktop + phone screenshots.
   PAGES entries take a `banner`; it also adds one to an existing page's header (not under an open draft). All Products,
   Label Finishers, Printers, Thermal Lamination Film and ArrowJet UV have none on live. Backup: …-2026-10-23-141403.
 
+## Phase 76: /all-products/ pages, part 3: Trojan Printers, QuickLabel Printers (2026-10-26)
+
+- Live https://arrsys.com/all-products/printers/trojan-printers/ and …/quicklabel-printers/ are **empty**: only the H1
+  ("Printers by Trojan" / "Printers by QuickLabel"), no products, no description, no banner (checked in a browser; the
+  Wayback Machine shows them empty since at least April 2024). No menu on live or staging links to them (nor to
+  /all-products/printers/); live's sitemap lists them.
+- Added to `storage/imports/pages/25_all_products.php`, filled with the brands' printers on staging:
+  | Page | H1 | Products |
+  |---|---|---|
+  | `/all-products/printers/trojan-printers/` | Printers by [Trojan] | Trojan T2-L, Trojan T2-C, Trojan T4 |
+  | `/all-products/printers/quicklabel-printers/` | Printers by [QuickLabel] | QuickLabel QL-300 (wide card) |
+  SEO titles as live (live has no descriptions). **Trojan T2** left out: switched off on staging on 2026-10-22 (by
+  hand; still live on arrsys.com).
+- Product cards: T2-L and T2-C tagline + Key Specs from live's "Digital Label Printers by Trojan" page (typos fixed:
+  "dp" → "dpi", a missing bracket); Card Titles "Trojan T2-C", "Trojan T4", "QuickLabel QL-300"; T4 and QL-300 have no
+  live listing, so only their subtitle ("All-in-One Digital Label Printer and Finisher", "5 Color Laser Label
+  Printer"). Checked: both pages at 1440 px, Trojan at 390 px, breadcrumbs, photos, no JS errors. Backup:
+  …-2026-10-26-054908.
+
+## Phase 77: 404 and 403 pages in the site design (2026-10-26)
+
+- Craft showed its own error pages. Now `templates/404.twig` (Page Not [Found]) and `templates/403.twig` (Access
+  [Denied]) use one layout, `templates/_layouts/error.twig`: the site header, footer and newsletter; a page header in the
+  industry pages' look with "Error 404/403", the heading, a plain message, **Go to Homepage** and **Contact Us**, the
+  toll-free number (Site Settings), and the status code drawn large and outlined (maroon) at the right (above the text
+  on phones); then **Popular Pages**: All Products, Industries, Guides & Articles, Support, Request a Quote, Try a Free
+  Sample (link cards; a page that doesn't exist is left out). `noindex, follow`; the real 404 / 403 status is kept.
+  Styles: craft.css (`.error-hero`, `.error-links`). The wording is in 404.twig / 403.twig (one line each).
+- **Dev mode:** with `CRAFT_DEV_MODE=true` (local staging) Craft shows its developer error screen with the stack trace
+  for every error, by design; these pages show when dev mode is off (QA, production). Checked on a temporary server
+  with dev mode off: `/this-page-does-not-exist/` → 404 with this page, `/actions/utilities/index` (logged out) → 403
+  with this page; 1440 / 390 px, no JS errors.
+- Also in dev mode (review: "the new 404 page is not working" on staging): `modules/web/ErrorHandler.php` (Craft's error
+  handler, registered in the new `config/app.web.php`) shows the 404 / 403 pages for site requests even with dev mode
+  on; every other error (500s …) still gets Craft's developer screen with the stack trace. Checked on staging (dev
+  mode on): `/gerber/plotters` → 404 page, `/actions/utilities/index` → 403 page, homepage and admin login unchanged.
+- Admin panel too (review: a Reviewer opening Settings got Craft's developer screen / bare "Unauthorized" box): for
+  admin-panel page requests the handler renders the same 403 / 404 template (site mode, so Site Settings and menus
+  load) with `inCp`: a staff message ("Your account doesn't have permission to open this part of the admin panel. Ask
+  an administrator…"), **Back to Dashboard** and **Go to Website**, no Popular Pages. JSON requests keep Craft's JSON
+  errors; if the page fails, Craft's own page is shown. The base and error layouts now link CSS / JS with
+  `siteUrl('assets/…')` (was `url()`, which points under /admin/ during admin requests; same addresses on the site).
+  Checked as qa_reviewer: /admin/settings → 403 page, /admin/this-does-not-exist → 404 page, JSON request → JSON 403;
+  website pages unchanged.
+
+## Phase 78: /customer-service/ restored (2026-10-26)
+
+- Review: "the design of this page is broken". Its revision history: on 2026-10-21 16:18 (IST) one save from the control
+  panel ("Applied Draft 1", admin account), while Custom CSS was being tried out, deleted the **Form block** "Fill Up Our
+  Customer Service form", added an **empty Columns** block and an **empty Data Table** (8 blank columns: the empty box
+  of lines), gave the Page Header the class `contact-us-section` and the page the CSS `.contact-us-section {
+  background: red; }` (the red header). No script changed the page then.
+- `storage/imports/pages/26_restore_customer_service.php`: the Form block back from the trash (the same block, the
+  Customer Service form), the two empty blocks to the trash, the test class and CSS removed. Page = Page Header + Form,
+  as built in Phase 45. Checked at 1440 px. Backup: …-2026-10-26-071129.
+
+## Phase 79: /all-products/plotters/ (Gerber Plotters) (2026-10-26)
+
+- From live https://arrsys.com/all-products/plotters/ (H1 "Gerber Plotters", 3 plotters with tagline + 4 specs, a
+  section-background banner `Gerber-Envision-375-Plotter.jpg`, found with the browser check). Added to
+  `storage/imports/pages/25_all_products.php`: Page Header "Gerber [Plotters]" with the banner (Full-width, whole) ·
+  Recommended Products "Our Gerber [Plotters]": Gerber GS15plus, Gerber Envision 375, Gerber GSxplus (live order) · SEO
+  title and description as live.
+- The 3 plotters' cards (empty before): tagline + Key Specs from live (live's "13.25” 327 mm)" → "13.25″ (327 mm)").
+- Now link here: Footer › Products › Plotters, Main Menu › Label Finishers › Gerber Plotters (were live's address).
+- Checked: 1440 px against live, 390 px, breadcrumb Home › All Products › Gerber Plotters, photos, no JS errors.
+  Backup: …-2026-10-26-071431.
+
+## Phase 80: Digital Label Printers listing (2026-10-26)
+
+- Live https://arrsys.com/all-products/digital-label-printers/arrow-digital-label-printers/ (its parent
+  `/all-products/digital-label-printers/` 301s to it), built as the design `Arrowsystem/digital-label-printers`
+  (client-revised 2026-10-16); SEO title and description as live.
+- **Page Header, two general options** (`storage/imports/pages/27_header_subtitle_cutout.php`,
+  `industries/blocks/industryHeader.twig`, `craft.css`): **Subtitle** (the existing Subheading field: an H2 line under the
+  heading) and Header Style **"Cut-out image beside text"** (a product cut-out shown whole and large beside the text, no
+  frame or crop marks; hidden on phones and tablets, as the design's `.cat-hero__art`). Any page can use them.
+- `storage/imports/pages/25_all_products.php` now also takes `header` (more Page Header fields), `after` (Card Grid /
+  CTA Band sections after the products) and `enabled => false`. Added:
+  - `/all-products/digital-label-printers/`: switched off, + redirect in `config/redirects.php` (as live)
+  - `/all-products/digital-label-printers/arrow-digital-label-printers/` "ArrowJet Digital Label Printers": Page Header
+    (subtitle, intro, the Aqua 330R cut-out) · Recommended Products "ArrowJet Printer [Lineup]" (the design's 12, its
+    order) · Card Grid (the 3 "about the range" paragraphs) · Card Grid "Built for Commercial [Label Production]" · CTA
+    Band "Not sure which printer fits?" (Talk to a Specialist tel, Request a Quote page) · Card Grid "Other [Categories]"
+    (Digital Label Finishers → staging page; Print & Cut Inline and Label Materials → live, not built yet).
+  - Images from the design into Assets › Images › pages: arrowjet-aqua-330r, category-digital-label-finishers,
+    category-print-cut-inline, material-holography-1 (.webp).
+- Now link here: Main Menu "Print Labels", Footer "Digital Label Printers", the Products mega menu's View All, the
+  "View all digital label printers" links on All Products and Printers, product category "Digital label Printers", 28
+  blog posts' Button blocks. **Not relinked (open drafts):** Homepage, blog post "10 Step Guide For the best Frozen Food
+  Pouches…": apply or delete the drafts, then run 25 again.
+- Left out (no block fields for them): the design's search box and pagination (12 fit one page), "12 printers" line,
+  section eyebrows ("Who it's for", "Keep exploring"), card kickers and "View …" card links, centred headings.
+- Checked: 1440 px against the design, 390 px, breadcrumb Home › All Products › ArrowJet Digital Label Printers, parent
+  301. Backups: …-2026-10-26-072631 (before 27), …-2026-10-26-073223 (before the page).
+
+## Phase 81: Limitronic listing (2026-10-26)
+
+- Live https://arrsys.com/all-products/corrugate-and-end-of-line-printing/printers-by-limitronic/ (no design page; built
+  as the other brand pages). Added to `storage/imports/pages/25_all_products.php`:
+  - `/all-products/corrugate-and-end-of-line-printing/`: **switched off placeholder** (the Corrugate listing, #13, not
+    built yet; 404 until then), there so the Limitronic page gets its live path. Building #13 means switching it on and
+    adding its blocks (the script skips pages that exist).
+  - `…/printers-by-limitronic/` "Printers by Limitronic": Page Header "Printers by [Limitronic]" with live's
+    section-background banner `LIMITRONIC-3.jpg` (Full-width, whole; found with the browser check) · Recommended Products
+    "Limitronic [Printers]": V6 Lite, V6 Standard, V7 Color, V7 White, V6 Color (live order) · SEO title and description
+    as live.
+- The 5 products' cards (empty before): tagline + 4 Key Specs from live; live's split lines joined ("0.2-192 m/min" +
+  "depending resolution" → "0.2–192 m/min depending on resolution"), "injket" → "inkjet", "5 0 mm" → "50 mm". The cards
+  show each product's own photo (live's listing uses other photos for V7 Color and V7 White).
+- Now link here: Main Menu "Corrugated & End-of-Line Printers" and "Industrial & End-of-Line Printing" (were live's
+  address); `config/redirects.php` `product/arrowjet-vdp` → this page on staging (was live's address).
+- Checked: 1440 px, 390 px, breadcrumb Home › All Products › Printers by Limitronic (the switched-off parent is left
+  out), placeholder 404, `/product/arrowjet-vdp/` 301 here. Backup: …-2026-10-26-075535.
+
+## Phase 82: Corrugate and End of Line Printing listing (2026-10-26)
+
+- Live https://arrsys.com/all-products/corrugate-and-end-of-line-printing/ (no design page, no banner: browser check):
+  H1 "Corrugate and End of Line Printing" + "Printers By Limitronic", the same 5 printers as the Limitronic page.
+- `storage/imports/pages/25_all_products.php`: the Phase 81 placeholder is built in place (a switched-off page whose spec
+  is no longer switched off: its blocks replaced, SEO set, switched on; stops on an open draft). Page Header
+  "Corrugate and End of Line [Printing]" · Recommended Products "Printers by [Limitronic]" (live order; the cards filled
+  in Phase 81) · SEO title as live; SEO description as live too, "Printhead resolution: 180dpi" (live's own, worth a
+  better one).
+- The Limitronic page's breadcrumb now shows it: Home › All Products › Corrugate and End of Line Printing › Printers by
+  Limitronic.
+- Checked: 1440 px against live, 390 px, the page = Page Header + Recommended Products only. Backup: …-2026-10-26-075914.
+
+## Phase 83: Homepage hero, revised design: slim slide captions + intro row (2026-10-26)
+
+- Design `Arrowsystem/index.html` + `css/home.css` (2026-10-23): each slide's caption is one slim line (tag · product
+  name · "Explore product" link, no buttons), and a fixed row under the slider holds the page's only H1, a description
+  and two buttons (Book a Demo, Try a Free Sample). The equipment heading below became an H2.
+- `storage/imports/homepage/02_hero_intro.php` (existing fields only):
+  - Hero Slide: Category Label → **Tag Name**, Primary Button → **Explore Product Link** (its Label = the link text),
+    Secondary Button taken off the slide (slide 6 had a test value "try now": no longer shown).
+  - Hero Slider block: + **Intro under the slider**: Heading (the H1), Description, First Button, Second Button.
+  - Content into the homepage's Hero Slider block: the design's heading and description, Book a Demo →
+    `mailto:sales@arrsys.com?subject=Demo%20request` (the design's interim, no demo page yet), Try a Free Sample →
+    /try-a-free-sample/. Written with the user's OK while the admin's unsaved homepage draft (Draft 325, 2026-10-23) was
+    open: that draft only has its own copy of the Benefit cards, the Hero Slider block is shared, so applying it keeps
+    the intro. The script stops if a draft has its own copy of the Hero Slider block.
+- Templates: `_blocks/home/hero-slider.twig` (caption line, intro row after the slider), `_blocks/home/category-showcase.twig`
+  (H1 → H2 `.section-title--xl`). `site.css`: the hero caption / controls / intro CSS = the design's.
+- Not as the design: the video slide (slide 1) still shows its caption ("Watch it run · ArrowJet MTS-48 in Action"),
+  the design has none there: clear its Tag Name and Product Name to hide it. Slide links read "Explore Product" (the
+  slides' Label), the design "Explore product".
+- Checked: 1440, 1100 and 390 px against the design, one H1, 6 caption lines for 6 slides, project config in sync.
+  Backup: …-2026-10-26-091155.
+
+## Phase 84: Intro under the slider, per slide (2026-10-26)
+
+- Review: "support of Intro under the slider for each slide, from admin as well as frontend". Supersedes Phase 83's one
+  fixed row on the Hero Slider block (`02_hero_intro.php` steps 2–3: don't run 02 again).
+- `storage/imports/homepage/03_hero_slide_intro.php` (existing fields only):
+  - Hero Slide: + **Intro under the slider**: Intro Heading (`sectionHeading`), Intro Description (`sectionLead`), Intro
+    First Button (`ctaLink`), Intro Second Button (`secondaryCta`), before Display Time.
+  - The block's intro copied to all 6 slides (same text and buttons for now; Book a Demo stays an email link, Try a
+    Free Sample an entry link), then the block's intro fields taken off.
+  - Same open admin draft as Phase 83 (Draft 325, only the Benefit cards): the Hero Slider block and its slides are
+    shared, so applying it keeps the slides' intros. The script stops if a draft has its own copy of the block.
+- Front end (`_blocks/home/hero-slider.twig`, `site.css`): the intro row sits inside its slide, under the caption, and
+  swaps with it (same fade as the caption; hidden slides are inert, so their buttons can't be tabbed to). The first
+  slide with an intro has the H1, the others an H2 with the same look. A slide with an empty Intro Heading has no row.
+- Checked: in Chrome, slide 1's intro shown and the rest hidden + inert; after Next, only slide 2's; one H1; 1440 and
+  390 px as before; project config in sync. Backup: …-2026-10-26-092046.
+
+## Phase 85: Switched-off homepage gives a 404, not an error (2026-10-26)
+
+- Review: switching the Homepage single off showed "Variable "entry" does not exist in "index" at line 7". With no
+  enabled entry at `/`, Craft falls back to rendering `templates/index.twig` as a plain template, without `entry`
+  (with dev mode off it would have been a 500). The other section templates start with `_`, so only `index.twig` had this.
+- `templates/index.twig`: `{% if entry is not defined %}{% exit 404 %}{% endif %}` before the first use of `entry`, so
+  `/` shows the site's 404 page while the homepage is off.
+- Checked: rendering `index` without an entry raises the 404 (Craft's ErrorHandler unwraps it from Twig); `/` with the
+  homepage on is still 200 with its 6 slide intros. No content or config changes.
+
 ## Follow-ups
 
 | # | Item | Where |

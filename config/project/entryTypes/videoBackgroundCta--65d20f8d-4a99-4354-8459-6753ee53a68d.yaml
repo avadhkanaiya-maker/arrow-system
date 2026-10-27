@@ -117,14 +117,31 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
+            dateAdded: '2026-10-26T00:00:00+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0f1b9be9-36a4-4653-b018-d2852e2a07b8 # Video File
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f335571e-7369-4207-9ff6-3e75a9400014
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2026-10-13T06:18:04+00:00'
             editCondition: null
             elementCondition: null
             elementEditCondition: null
             fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
             handle: null
-            instructions: null
-            label: null
+            instructions: 'Or a YouTube link (watch, youtu.be, shorts …) or the video ID. Used when no Video File is uploaded.'
+            label: 'YouTube Link'
             oldFieldUid: null
             required: false
             tip: null

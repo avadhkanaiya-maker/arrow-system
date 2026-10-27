@@ -1,19 +1,22 @@
 {#
   I. One stop solution (design: index.html, "ONE STOP SOLUTION"): full-section background video with a dark overlay
-  and white text on top. The video is a muted YouTube embed that loops with no controls; it's decorative (inert,
-  hidden from assistive tech). site.js plays it from data-bg-video (the YouTube ID) into [data-bg-video-frame], only
-  when the section nears the viewport, and never for reduced-motion / Save-Data visitors, who keep the poster.
-  site.js handles one background-video section per page (the first data-bg-video).
-  Fields: Small Heading, Heading ([red] words), Subheading, Body Text, Button Intro, Button · Video Link, Video Cover
-  Image · Anchor ID. Vars: block (Background Video Section entry)
+  and white text on top. The video is muted and loops with no controls: an uploaded Video File (data-bg-video-src, a
+  native <video>) or else the YouTube Link (data-bg-video, the YouTube ID). It's decorative (inert, hidden from
+  assistive tech). site.js plays it into [data-bg-video-frame], only when the section nears the viewport, and never for
+  reduced-motion / Save-Data visitors, who keep the poster.
+  site.js handles one background-video section per page (the first data-bg-video / data-bg-video-src).
+  Fields: Small Heading, Heading ([red] words), Subheading, Body Text, Button Intro, Button · Video File, YouTube Link,
+  Video Cover Image · Anchor ID. Vars: block (Background Video Section entry)
 #}
 {% import '_macros/links' as links %}
 {% import '_macros/text' as text %}
 {% set anchor = block.anchorId|trim ?: 'section-' ~ block.id %}
 {% set titleId = anchor ~ '-title' %}
-{% set videoId = text.youtubeId(block.videoUrl)|trim %}
+{% set videoFile = block.videoFile.one() %}
+{% set videoId = videoFile ? '' : text.youtubeId(block.videoUrl)|trim %}
 {% set poster = block.videoPoster.one() %}
-<section class="onestop" id="{{ anchor }}" aria-labelledby="{{ titleId }}"{% if videoId %} data-bg-video="{{ videoId }}"{% endif %}>
+<section class="onestop" id="{{ anchor }}" aria-labelledby="{{ titleId }}"
+  {%- if videoFile %} data-bg-video-src="{{ videoFile.url }}"{% elseif videoId %} data-bg-video="{{ videoId }}"{% endif %}>
   <div class="onestop__bg" aria-hidden="true">
     {% if poster %}<img class="onestop__poster" src="{{ poster.url }}" width="{{ poster.width }}" height="{{ poster.height }}" loading="lazy" alt="">{% endif %}
     <div class="onestop__frame" inert data-bg-video-frame></div>

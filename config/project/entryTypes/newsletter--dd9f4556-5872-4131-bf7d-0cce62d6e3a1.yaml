@@ -1,0 +1,35 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'Shows the newsletter sign-up band at the bottom of this page, above the footer (its text: Globals → Newsletter). Delete this block to hide the band on this page.'
+fieldLayouts:
+  166679f4-96dc-4dee-a2f7-a10af1f8ecdc:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-10-26T00:00:00+00:00'
+            dismissible: false
+            elementCondition: null
+            style: tip
+            tip: 'This block switches the newsletter band on for this page. The band always sits at the bottom of the page, above the footer, wherever this block is in the list. Edit its text in Globals → Newsletter. Delete this block to hide the band on this page.'
+            type: craft\fieldlayoutelements\Tip
+            uid: e6833731-6cb4-4ad8-85e3-e624eeb4b4c0
+            userCondition: null
+        name: Content
+        uid: b5b6c379-bc5e-4726-a1d1-1b634b4e03d4
+        userCondition: null
+    thumbFieldKey: null
+handle: newsletter
+hasTitleField: false
+icon: envelope
+name: Newsletter
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: Newsletter
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

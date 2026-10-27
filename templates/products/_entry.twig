@@ -23,7 +23,7 @@
 {% set categoryName = category ? (category.headingText ?: category.title) : null %}
 {% set categoryUrl = category ? (category.url ?: (category.ctaLink and category.ctaLink.url ? category.ctaLink.url : null)) : null %}
 {% set image = entry.mediaImage.one() ?? entry.featuredImage.one() %}
-{% set blocks = entry.productBuilder.all() %}
+{% set blocks = entry.productBuilder.type(['not', 'newsletter']).all() %} {# the Newsletter block only switches the band on (base.twig) #}
 {# Video blocks shown in the header (Show In: Header, the default) vs the blocks below it #}
 {% set headerVideos = blocks|filter(b => b.type.handle == 'productVideo' and (b.placement.value ?: 'header') == 'header') %}
 {% set pageBlocks = blocks|filter(b => not (b.type.handle == 'productVideo' and (b.placement.value ?: 'header') == 'header')) %}

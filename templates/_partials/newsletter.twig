@@ -1,6 +1,7 @@
 {#
   N. Newsletter band (design: index.html, "NEWSLETTER"), at the end of <main> on every page (included by base.twig).
-  Content: Globals → Newsletter. "Show Newsletter" off hides it everywhere.
+  Content: Globals → Newsletter. "Show Newsletter" off hides it everywhere; on a page with a page builder it shows only
+  while the builder has a Newsletter block (base.twig).
   The form does NOT send data yet: site.js checks the email and says sign-up isn't connected. When the client sends
   the HubSpot portal ID + form GUID (Globals → Newsletter → HubSpot tab), data-integration switches to "hubspot" and
   both IDs are exposed as data attributes for the integration.

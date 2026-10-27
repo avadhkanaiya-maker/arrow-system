@@ -5,7 +5,9 @@
    an image it falls back to the default. Banner Height "Short strip": a cropped band instead of the whole image.
    No image at all: the text across the full width (the banner layout without the picture).
    "Small illustration": a compact header, the text across the full width and the image small at the right as decoration
-   (desktop only; e.g. Try a Free Sample's sample pack, an SVG).
+   (desktop only; e.g. Try a Free Sample's sample pack, an SVG). "Cut-out image beside text": a product cut-out
+   (transparent background) whole and large beside the text, no frame; desktop only (e.g. the Digital Label Printers listing).
+   Subtitle (Subheading): an H2 line under the heading.
    Vars: block, entry, listingPage #}
 {% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
@@ -13,7 +15,8 @@
 {% set image = block.mediaImage.one() ?? entry.featuredImage.one() ?? entry.socialImage.one() %}
 {% set banner = image and (block.headerStyle.value ?? '') == 'banner' %}
 {% set art = image and (block.headerStyle.value ?? '') == 'illustration' %}
-  <section class="page-hero ind-detail-hero{{ banner or art or not image ? ' page-banner' }}{{ art ? ' page-hero--art' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
+{% set cutout = image and (block.headerStyle.value ?? '') == 'cutout' %}
+  <section class="page-hero ind-detail-hero{{ banner or art or not image ? ' page-banner' }}{{ art ? ' page-hero--art' }}{{ cutout ? ' page-hero--cutout' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
     {% if art %}<img class="page-hero__art" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="" aria-hidden="true">{% endif %}
     <div class="container">
       {% include 'industries/blocks/_breadcrumb' with { entry: entry, listingPage: listingPage } only %}
@@ -21,6 +24,7 @@
         <div class="ind-detail-hero__body">
           {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
           <h1 class="ind-detail-hero__title" id="page-title">{{ text.highlight(block.sectionHeading ?: entry.title) }}</h1>
+          {% if block.subheading ?? null %}<h2 class="ind-detail-hero__subtitle">{{ block.subheading }}</h2>{% endif %}
           {% for para in (block.sectionLead ?? '')|split('\n\n')|map(p => p|trim)|filter(p => p) %}<p class="ind-detail-hero__lead">{{ para }}</p>{% endfor %}
           {% set apps = (block.listItems ?? [])|filter(row => row.text|trim) %}
           {% if apps|length %}
@@ -37,7 +41,9 @@
           </div>
           {% endif %}
         </div>
-        {% if image and not banner and not art %}
+        {% if cutout %}
+        <img class="ind-detail-hero__cutout" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" fetchpriority="high" alt="{{ image.alt }}">
+        {% elseif image and not banner and not art %}
         <figure class="ind-detail-hero__media">
           <span class="dot-grid dot-grid--hero" aria-hidden="true"></span>
           <span class="crop crop--tl" aria-hidden="true"></span><span class="crop crop--tr" aria-hidden="true"></span>
