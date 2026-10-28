@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 3de7ebf0-d500-43e5-af9d-81e4dddb71a0 # Answers Page
+handle: answersPage
+maxAuthors: 1
+minAuthors: 1
+name: 'Answers Page'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  dfff6f49-bf7b-4ed6-b4de-5080c07efd72: # Arrow Systems (Local Staging)
+    enabledByDefault: true
+    hasUrls: true
+    template: answers/_index
+    uriFormat: answers
+type: single

@@ -1708,6 +1708,12 @@ Posts published on live after the Oct 13 export: `storage/imports/blog/10_fetch_
 tags only) and `05_import.php --slugs=…` (existing posts are always skipped). Imported: `paper-vs-film-labels-where-each-works-and-where-it-fails`,
 `in-house-label-printing-vs-print-on-demand-cost-by-volume` (+3 tags): 200, SEO = live, cover, categories, tags, found by
 the blog search. Blog: 345 posts (+ the builder test post). Re-run the same 3 steps before launch for later posts.
+**Top-up 2 (2026-10-27):** 7 posts (Oct 16–27) + 10 tags, then `11_social_images.php` and `12_live_seo.php --slugs=…`
+(new option: without it the script gives posts edited on staging live's modified date back). Craft's time zone is now
+Asia/Kolkata, so `postDate()` and 12 read WordPress dates as America/New_York explicitly. Live sent its "One moment,
+please…" bot check for 2 posts' `<head>` (`water-based-vs-uv-cured-label-adhesive`,
+`confectionery-flexible-packaging-in-house`): they have no live meta description / share image yet (fetch their SEO
+later, then `05_import.php --slugs=… --update`); 10 now skips such pages instead of saving them.
 **Drafts:** the 12 unpublished WordPress drafts are not in the public API; they need a WordPress export
 (Tools → Export → Posts, Drafts) or an application password (Follow-up 16).
 
@@ -2791,6 +2797,88 @@ Checked: 200, SEO tags, tel: button, form anchor; desktop + phone screenshots.
   and Content Block links, form submit buttons, the hero slider.
 - Checked: every case above goes from 0 (or 14) to the gap listed, and every case with the field filled measures the
   same as before. No custom CSS on the site sets button spacing, so nothing doubles. No content changes.
+
+## Phase 89: Answers module, the live /answers/ hub + 30 answers (2026-10-27)
+
+Live https://arrsys.com/answers/ is a WordPress page with 30 child pages (24 in the design, 6 added on live on Oct 20
+and 26), each built from hand-written Elementor HTML widgets. Built as **its own module** (`PAGES_MIGRATION_PLAN.md`
+D1: own section, not nested Pages), content from general page-builder blocks only. Scripts in
+`storage/imports/answers/` (data: `cache/`, fetched 2026-10-27; backup before: `…-2026-10-27-114835`):
+- `01_structure.php`: **Entries → Answers** (`answers`, Structure, 1 level: drag = listing order, URL
+  `answers/{slug}`, `answers/_entry` = the Pages / industries template) · **Answer** entry type: Answer Title, Slug ·
+  Card: Card Summary, Card Icon · Page Builder (the shared `pageBuilder`) · SEO · **Answers Page** single (`answers`,
+  `answers/_index`, the design's listing: header, search + 9 per page from the design's `answers.js`, help band:
+  small heading, heading, text, button + the toll-free phone). Card Icon = the menus' icon list + 11 design icons (also
+  in the icon sprite). General options added: **Small Heading** on Heading, Card Grid and CTA Band; **Section Link** on
+  Card Grid (at the right of the heading, as Recommended Products).
+- `02_content.php` (`--dry` prints the mapping; `--update` rebuilds, stops on open drafts): reads each live widget by
+  structure, not class names: short answer → Callout · H1 + audience + button + product photo → Page Header · criteria
+  → Card Grid · product fits → Card Grid with photos, fit label as subtitle, tags as a list, link · decision table →
+  Heading + intro + Data Table · workflow → Heading + Steps (titled steps) or a numbered list, + the related links ·
+  questions → Heading (#faq) + FAQ (+ the "Next step" band some pages put in that widget) · CTA → CTA Band · linked
+  answers → Card Grid. SEO from each live head (title only when not the default, description, robots when not the site
+  default, og:image as Social Image), live publish date (America/New_York), hub order + card text. Links to staging
+  pages root-relative; 2 broken live links (`/contact-us//-us/`, a doubled all-products path) → their page.
+- `03_menus.php`: Main Menu and Footer "Answers" (Custom items without a URL) → the Answers Page.
+- Answers get **FAQPage** structured data from their FAQ blocks (`industries/_entry.twig`, answers only).
+- The CP Outline names blocks by their heading, not the Small Heading (`navigator.js`).
+- `verify.py`: /answers/ 200 with 30 cards in the live order; 30 × 200; SEO 0 differences (29 compared); every live
+  text found except: the hero product photo's label (and on the 6 newer pages its "Equipment to evaluate" note), the
+  "The short answer" tag, and the cards' "View Product Page / Request Quote" buttons (the cards link to the product).
+  FAQPage on every answer. Create / edit / delete of an answer checked (test entry hard-deleted); CP form + Outline;
+  1440 / 390 px; search and pages; other modules 200.
+- Open: `reliable-color-consistency-digital-label-printers`: live sent its bot check for the page's `<head>`, so its
+  SEO title / description are not set yet (re-fetch `cache/<slug>.html`, then `02_content.php --slugs=… --update`).
+  Links to 6 live pages not on staging yet stay on arrsys.com (anytron-products, arrow-materials, flexible-packaging …).
+
+## Phase 90: Digital Label Printers by Trojan (2026-10-27)
+
+- Live https://arrsys.com/all-products/digital-label-printers/trojan-digital-label-printers/ (no design page; no banner:
+  browser check): H1 "Digital Label Printers by Trojan" + 3 printers. Added to `storage/imports/pages/25_all_products.php`
+  under the switched-off `/all-products/digital-label-printers/` (breadcrumb Home › All Products › this page): Page Header
+  "Digital Label Printers by [Trojan]" · Recommended Products "Trojan Digital Label [Printers]": Trojan T2-L, Trojan T2-C
+  (their cards were filled from this live page in Phase 76) · SEO title and description as live.
+- Review: "you still missed one product from the live": **Trojan T2** is now on the page too (3 printers, live order). It
+  had been switched off on staging ("Draft 1" applied in the CP on 2026-10-16); the script switches it on (`SWITCH_ON`;
+  /product/trojan-t2/ → 200, as live) and fills its card from live (same text as the T2-C). Trojan Printers
+  (`/all-products/printers/trojan-printers/`) gets it as well (T2-L, T2-C, T2, T4). The script now also updates an
+  existing page's product list when its spec names more products (only when the spec covers every product on the page;
+  not under an open draft). Backup: …-2026-10-27-130340.
+- Links now pointing here: the blog post "The Beginner's Guidebook To Digital Printing" (was live's address). The same
+  run also relinked the 7 posts imported today (Blog top-up 2) to the /all-products/ pages built before; links under
+  open drafts left (Blade vs. Laser…, Why Cannabis Labels Fail…, 10 Step Guide…, Pharmaceutical Label Version Control…).
+- Checked: 1440 / 390 px, breadcrumb, SEO, the parent still 301s. Backup: …-2026-10-27-125654.
+
+## Phase 91: Contact Us admin email template; no visitor email (2026-10-27)
+
+- Live's Contact Us form (Elementor) sends one email: To sales@arrsys.com, Subject "New Contact Form Submission", From
+  email@arrsys.com / "Arrow Systems, Inc.", Reply-To email@arrsys.com, no Cc / Bcc, no copy to the visitor (read from
+  live's form settings, screenshots from the user).
+- `storage/imports/forms/13_contact_us_email_template.php` (idempotent): Formie → Settings → Email Templates →
+  **Contact Us – Admin** (`contactUsAdmin`) = `templates/_emails/contact-us-admin.twig`; the Contact Us **Admin
+  Notification** uses it, Subject "New Contact Form Submission" (as live), Content = a short intro (the template lists
+  the fields itself); the **User Notification** is switched off (as live; switch it on in the form builder if wanted).
+  Formie links templates per notification (Notifications → a notification → Templates → Email Template), not per form.
+- The template: email-safe HTML (tables, inline styles, 600 px): the logo (`web/assets/email/arrow-systems-logo.png`, a
+  PNG copy: Outlook doesn't show WebP), form name, subject as heading, the notification's Content, every filled-in field
+  (label + Formie's value output, line breaks kept), a "Reply to <visitor email>" button, footer with the date and a
+  link to the submission in the admin panel.
+- Unchanged on purpose: To (the dummy inbox until launch, D8; live: sales@arrsys.com), From (site default; live:
+  email@arrsys.com), Reply-To (the visitor; live: email@arrsys.com).
+- Checked: rendered for a test submission (not saved, not sent) at 600 and 400 px; second run changes nothing.
+  Backup: …-2026-10-27-134548.
+
+## Phase 92: Exhibitions header buttons managed in the CP (2026-10-28)
+
+- Review: the Exhibitions page's Contact Link "is not reflecting on the frontend": it only showed on the next-show ticket,
+  hidden while no show is upcoming (PACK EXPO International, the last one, ended 2026-10-21); the header's "Upcoming
+  Exhibitions" / "Past Exhibitions" buttons were fixed in the template.
+- `storage/imports/exhibitions/03_header_buttons.php`: Exhibitions page → **First Button** (the Contact Link, relabelled;
+  still the next-show ticket's Contact button too) + **Second Button** (`secondaryCta`, filled "Past Exhibitions" →
+  `#past`). `exhibitions/_index.twig`: the header shows each button when it has a text and a URL, no other condition
+  (first red, second outline); the fixed buttons are gone.
+- Checked: both set / first without text / second without URL / neither → 2 / 1 / 1 / 0 buttons (no empty row).
+  Backup: …-2026-10-28-051507.
 
 ## Follow-ups
 

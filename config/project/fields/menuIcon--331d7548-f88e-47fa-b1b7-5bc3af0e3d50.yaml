@@ -270,6 +270,127 @@ settings:
         -
           - default
           - false
+    -
+      __assoc__:
+        -
+          - label
+          - Alert
+        -
+          - value
+          - alert
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Award
+        -
+          - value
+          - award
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Coffee cup'
+        -
+          - value
+          - coffee
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Palette
+        -
+          - value
+          - palette
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'QR code'
+        -
+          - value
+          - qr-code
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Bag / pouch'
+        -
+          - value
+          - shopping-bag
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Sliders
+        -
+          - value
+          - sliders
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Sparkles
+        -
+          - value
+          - sparkles
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Sun / UV'
+        -
+          - value
+          - sun
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Trending up'
+        -
+          - value
+          - trending-up
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - Lightning
+        -
+          - value
+          - zap
+        -
+          - default
+          - false
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Dropdown

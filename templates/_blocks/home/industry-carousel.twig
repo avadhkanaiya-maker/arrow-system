@@ -13,7 +13,7 @@
   {% set link = tile.ctaLink %}
   {% set linked = link ? link.element : null %}
   {% set name = tile.headingText ?: (linked ? linked.title : (link ? link.label : '')) %}
-  {% set photo = tile.mediaImage.one() ?? (linked and linked.featuredImage is defined ? linked.featuredImage.one() : null) %}
+  {% set photo = tile.mediaImage.one() ?? linked.featuredImage.one() ?? null %}{# ?? also skips a linked entry without a Card Photo field #}
   {% if name and link and link.url %}
     {% set tiles = tiles|merge([{name: name, photo: photo, link: link}]) %}
   {% endif %}

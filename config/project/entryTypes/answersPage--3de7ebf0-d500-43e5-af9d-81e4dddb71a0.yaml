@@ -1,0 +1,264 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  0b1ebe36-63c0-4e96-82e5-217e16007e37:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: 'Page Title'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 17f0ba41-ef57-4060-9fd8-ced606c0a791
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d19b58d6-6763-49f3-b2ed-28d515e44789
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: '[brackets] = red, e.g. “Arrow Systems [Answers]”.'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0ab04242-e9da-4a53-b067-6200287f9f1b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4d655fbc-76d3-4587-a29a-6ba70567f0f2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 949825d6-8b89-49af-bbe5-59b2f56ac6c9 # Caption
+            handle: null
+            instructions: 'Shown after “24 answers”, e.g. “Equipment, workflows and applications”.'
+            label: 'Count Line'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1e6f98f1-cb41-459a-a193-8c3485a10da3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 88ced113-ac3b-4f02-b14f-131a91f3b3c3 # Subheading
+            handle: null
+            instructions: 'The maroon band under the cards, e.g. “Need Help Choosing?”.'
+            label: 'Help Band Small Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6f58abbc-32fd-4e5d-84ac-d3f8211d9f36
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0b27468b-ea05-46f4-92f9-4e618131d1f7 # CTA Heading
+            handle: null
+            instructions: null
+            label: 'Help Band Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 895169f7-09c8-401a-9c53-2a1da4370bc7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8cbe334a-5712-4c17-b3be-40923a1c8aa0 # CTA Text
+            handle: null
+            instructions: null
+            label: 'Help Band Text'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1b42ff36-831e-4982-aad1-fa0def2c8277
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'e.g. “Contact Arrow” → the Contact Us page. The second button calls the toll-free number (Site Settings).'
+            label: 'Help Band Button'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 539f0109-1ef8-4a42-bfce-b708388d0664
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 8fe0a03d-dd4d-41d2-a965-bc02b4548dd5
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7dfa34b6-1551-4035-8187-cbc68182a20b # SEO Title
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 82133ec6-25d7-45c3-be53-96aecfbba27b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 27b666a4-f7ec-4a58-ae34-d68b27259f94 # Meta Description
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 79f12f44-e7cd-4f14-a36d-7053a34926cf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8d76c0a8-d4cf-4569-bd5f-69ed28122130 # Social Image
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: af891592-3354-42cd-a268-19e67d0341be
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1e40dc65-7d54-45b8-b533-3709d3c2087e # Hide from Search Engines
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: db9c8ab9-0eb9-4d81-b675-7f62eb20aea9
+            userCondition: null
+            warning: null
+            width: 100
+        name: SEO
+        uid: a55819c2-6ac6-48b6-bdf8-ad82f81b48bb
+        userCondition: null
+    thumbFieldKey: null
+handle: answersPage
+hasTitleField: true
+icon: circle-question
+name: 'Answers Page'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

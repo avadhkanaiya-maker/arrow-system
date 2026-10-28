@@ -1,7 +1,8 @@
 {#
   An industry page: /{slug}/ (the live root URLs). Design: Arrowsystem_local/industries/industry-detail.html
   Also every page of the Pages section (pages/_entry extends this): its Page Builder (pageBuilder) offers the same
-  section blocks (minus Other Industries) and the breadcrumb is Home › the parent pages › this page.
+  section blocks (minus Other Industries) and the breadcrumb is Home › the parent pages › this page. And every answer
+  (answers/_entry): the same pageBuilder, breadcrumb Home › Answers › this answer, + FAQPage schema from its FAQ blocks.
   The page is the industry's Page Builder (industryBuilder), top to bottom; each block type has its partial in
   industries/blocks/ (named after the entry type handle):
     industryHeader    1. "Page Header": breadcrumb, small heading, H1 ([red] words), intro, applications, image, 2 buttons
@@ -26,9 +27,10 @@
 {% import '_macros/text' as text %}
 
 {% set isPage = entry.section.handle == 'pages' %}
-{% set listingPage = isPage ? null : craft.entries.section('industriesPage').one() %}
+{% set isAnswer = entry.section.handle == 'answers' %}
+{% set listingPage = isPage ? null : craft.entries.section(isAnswer ? 'answersPage' : 'industriesPage').one() %}
 {% set trail = isPage ? entry.ancestors.all() : (listingPage ? [listingPage] : []) %}{# breadcrumb between Home and this page #}
-{% set blocks = (isPage ? entry.pageBuilder : entry.industryBuilder).type(['not', 'newsletter']).all() %} {# the Newsletter block only switches the band on (base.twig) #}
+{% set blocks = (isPage or isAnswer ? entry.pageBuilder : entry.industryBuilder).type(['not', 'newsletter']).all() %} {# the Newsletter block only switches the band on (base.twig) #}
 {% set hasGallery = blocks|filter(b => b.type.handle == 'photoGallery')|length > 0 %}
 {% set hasTabs = blocks|filter(b => b.type.handle == 'tabsBlock')|length > 0 %}
 {% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
@@ -51,6 +53,7 @@
 
 {% block seo %}
   {% set header = blocks|filter(b => b.type.handle == 'industryHeader')|first %}
+  {% set faqs = isAnswer ? blocks|filter(b => b.type.handle == 'faq')|reduce((all, b) => all|merge(b.faqItems.all()), []) : [] %}
   {% set social = entry.socialImage.one() ?: (header ? header.mediaImage.one() : null) ?: (entry.featuredImage.one() ?? null) %}
   {% include '_partials/seo' with {
     title: pageTitle,
@@ -65,7 +68,8 @@
       {'@type': 'BreadcrumbList', '@id': entry.url ~ '#breadcrumb', itemListElement: [{'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl}]
         |merge(trail|map((p, i) => {'@type': 'ListItem', position: i + 2, name: p.title, item: p.url}))
         |merge([{'@type': 'ListItem', position: trail|length + 2, name: entry.title, item: entry.url}])},
-    ],
+    ]|merge(faqs|length ? [{'@type': 'FAQPage', '@id': entry.url ~ '#faq', mainEntity: faqs|map(q => {'@type': 'Question', name: q.headingText,
+        acceptedAnswer: {'@type': 'Answer', text: q.richText|striptags|trim}})}] : []),
   } %}
 {% endblock %}
 

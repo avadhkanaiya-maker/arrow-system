@@ -9,6 +9,7 @@
  *   - Share image alt text (og:image:alt; the cover's is also its <img alt>): the live og:image:alt, on the Social Image
  *     (11_social_images.php) or else the cover when its file is the live og:image, if its alt is empty (data/seo.json).
  * Idempotent. Run from the project root after 05_import.php: /opt/lampp/bin/php storage/imports/blog/12_live_seo.php
+ * --slugs=a,b only these posts (a top-up: without it, posts edited on staging get live's modified date back)
  */
 require __DIR__ . '/_bootstrap.php';
 require __DIR__ . '/_helpers.php';
@@ -16,14 +17,15 @@ require __DIR__ . '/_helpers.php';
 use craft\elements\Entry;
 use craft\helpers\Db;
 
-$tz = new DateTimeZone(Craft::$app->getTimeZone());
+$tz = new DateTimeZone('America/New_York'); // live WordPress's time zone (Craft's is now Asia/Kolkata)
+$only = preg_match('/^--slugs=(.+)$/', $argv[1] ?? '', $m) ? explode(',', $m[1]) : null;
 $seo = json_decode(file_get_contents(__DIR__ . '/data/seo.json'), true);
 $name = fn(?string $url) => rtrim(strtolower(pathinfo(preg_replace('/-\d+x\d+(?=\.\w+$)/', '', rawurldecode(parse_url((string)$url, PHP_URL_PATH) ?? '')), PATHINFO_FILENAME)), '-'); // Craft drops a trailing "-" from file names
 $posts = [];
 foreach (glob(__DIR__ . '/data/posts-*.json') as $file) foreach (json_decode(file_get_contents($file), true) as $p) $posts[$p['slug']] = $p;
 
 $dates = $modified = $alts = $dayChanged = 0;
-foreach (Entry::find()->section('blog')->status(null)->all() as $entry) {
+foreach (Entry::find()->section('blog')->status(null)->slug($only)->all() as $entry) {
     // the import keeps the live slug, except the post that lost its URL to the LabelExpo exhibition (Phase 16)
     $p = $posts[$entry->slug] ?? $posts[preg_replace('/-article$/', '', $entry->slug)] ?? null;
     if (!$p) continue;

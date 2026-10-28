@@ -1,0 +1,4 @@
+handle: contactUsAdmin
+name: 'Contact Us – Admin'
+sortOrder: 1
+template: _emails/contact-us-admin

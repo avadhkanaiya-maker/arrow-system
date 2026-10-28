@@ -128,13 +128,30 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
             handle: null
-            instructions: 'The “Contact Us” button next to the next show (e.g. the Contact page).'
-            label: 'Contact Link'
+            instructions: 'The first (red) button in the page header, shown when it has a text and a URL, e.g. “Contact Us” → the Contact page. Also the Contact button on the next-show ticket.'
+            label: 'First Button'
             oldFieldUid: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 10d4b1b1-83dd-4ceb-9056-0de3be713bbf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
+            handle: null
+            instructions: 'The second (outline) button in the page header, shown when it has a text and a URL, e.g. “Past Exhibitions” → #past (the list below).'
+            label: 'Second Button'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5d9980e3-2d07-434b-bd57-4aebfc1d32f5
             userCondition: null
             warning: null
             width: 100

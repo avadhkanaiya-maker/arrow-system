@@ -1,5 +1,6 @@
-{# Heading block: H2 (section, with id for "On this page") / H3 / H4, + optional answer lead (p.answer) #}
+{# Heading block: H2 (section, with id for "On this page") / H3 / H4, + optional small heading (p.eyebrow) and answer lead (p.answer) #}
 {% set level = block.headingLevel.value ?: 'h2' %}
 {% set id = anchors['b' ~ block.id] ?? (block.anchorId|trim ?: null) %}{# anchors: the blog's contents list; elsewhere the Anchor ID #}
+{% if block.eyebrow ?? null %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
 <{{ level }}{% if id %} id="{{ id }}"{% endif %}>{{ block.headingText }}</{{ level }}>
 {% if block.answerLead %}<p class="answer">{{ block.answerLead }}</p>{% endif %}
