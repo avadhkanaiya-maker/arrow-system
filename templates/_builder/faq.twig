@@ -1,7 +1,7 @@
 {# FAQ block: div.faq, one details.faq__item per FAQ Item in its nested field (faqItems) #}
 <div class="faq">
   {% for item in block.faqItems.all() %}
-  <details class="faq__item">
+  <details class="faq__item" name="faq-{{ block.id }}">{# shared name: opening one closes the others #}
     <summary class="faq__q">{{ item.headingText }}</summary>
     <div class="faq__a">{{ item.richText }}</div>
   </details>
