@@ -102,7 +102,10 @@ if {c for p in posts for c in p['categories']} - {c['id'] for c in cats}:
     print('categories.json re-fetched (a new post uses a new category): run 03_taxonomy.php')
 
 seo = json.load(open(f'{D}/seo.json'))
-for p in posts: seo[p['slug']] = seo_of(p['link'])
+for p in posts:
+    s = seo_of(p['link'])
+    if 'One moment' in (s['title'] or ''): print(f"! {p['slug']}: live sent its bot check, SEO not saved (fetch it later)"); continue
+    seo[p['slug']] = s
 json.dump(seo, open(f'{D}/seo.json', 'w'), ensure_ascii=False, indent=1)
 
 print(f'saved {len(posts)} new posts, {len(media_ids)} images, {len(tag_ids)} new tags' + (f'; {len(redirected)} already redirect on live' if redirected else ''))

@@ -30,11 +30,12 @@
     }
     function entryOf(el) { return window.jQuery ? jQuery(el).data('entry') : null; }
     function textOf(html) { var d = document.createElement('div'); d.innerHTML = (html || '').replace(/</g, ' <'); return d.textContent.replace(/\s+/g, ' ').trim(); }   // the space keeps "Heading" and "Paragraph" apart
-    // preview: the block's first filled text field (its own, not a nested block's), else Craft's preview (e.g. image titles)
+    // preview: the block's first filled text field (its own, not a nested block's; not the Small Heading above the heading),
+    // else Craft's preview (e.g. image titles)
     function previewOf(el) {
         var inputs = el.querySelectorAll('input[type="text"], textarea');
         for (var i = 0; i < inputs.length; i++) {
-            if (inputs[i].closest('.matrixblock') !== el || !inputs[i].value.trim()) continue;
+            if (inputs[i].closest('.matrixblock') !== el || !inputs[i].value.trim() || /\[eyebrow\]$/.test(inputs[i].name)) continue;
             return textOf(inputs[i].value);
         }
         var e = entryOf(el);

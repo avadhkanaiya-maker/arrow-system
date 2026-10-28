@@ -13,6 +13,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'Optional small label above the heading, e.g. “Buying Criteria”.'
+            label: 'Small Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dfa4672b-6307-499d-8820-1ff8bfada812
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
             handle: null
             instructions: '[brackets] = red. Optional.'
@@ -39,6 +56,23 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 4d7efcc4-1f23-4830-b3a0-e3cd02192787
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'Optional link at the right of the heading, e.g. “View Equipment”.'
+            label: 'Section Link'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 29412e45-6d47-4ffe-8353-d308665e3233
             userCondition: null
             warning: null
             width: 100

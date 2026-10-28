@@ -1,4 +1,4 @@
-{# CTA Band (shared with the homepage: Heading, Intro, Button, Second Button, Anchor ID) as the industries' maroon help band (design: industries/index.html "HELP BAND"). Both buttons are the admin's, each shown when filled in. Vars: block #}
+{# CTA Band (shared with the homepage: Small Heading, Heading, Intro, Button, Second Button, Anchor ID) as the industries' maroon help band (design: industries/index.html "HELP BAND"). Both buttons are the admin's, each shown when filled in. Vars: block #}
 {% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
 {% import '_macros/links' as links %}
@@ -7,6 +7,7 @@
     <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
     <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
     <div class="container sustain__inner">
+      {% if block.eyebrow ?? null %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
       <h2 id="{{ anchor }}-title">{{ text.highlight(block.sectionHeading) }}</h2>
       {% if block.sectionLead %}<p>{{ block.sectionLead }}</p>{% endif %}
       <div class="btn-row ind-cta__actions">

@@ -3,6 +3,7 @@ namespace modules\builderui;
 
 use Craft;
 use craft\base\Model;
+use craft\db\Query;
 use craft\elements\Asset;
 use craft\elements\Entry;
 use craft\events\DefineRulesEvent;
@@ -10,8 +11,10 @@ use craft\events\ModelEvent;
 use craft\events\ReplaceAssetEvent;
 use craft\fields\Matrix;
 use craft\helpers\Assets as AssetsHelper;
+use craft\helpers\Json;
 use craft\services\Assets;
 use craft\web\View;
+use verbb\navigation\elements\Node;
 use verbb\navigation\events\RegisterNodeTypeEvent;
 use verbb\navigation\nodetypes\Category as CategoryNode;
 use verbb\navigation\nodetypes\Dynamic as DynamicNode;
@@ -39,6 +42,23 @@ class Module extends \yii\base\Module
         // they're gone from every menu's Add panel and Settings (review 2026-10-23)
         Event::on(NodeTypes::class, NodeTypes::EVENT_REGISTER_NODE_TYPES, function(RegisterNodeTypeEvent $event) {
             $event->types = array_values(array_diff($event->types, [CategoryNode::class, DynamicNode::class]));
+        });
+
+        // Navigation: a new menu item waits (switched off) until the menu's Save, and that Save switched every waiting item
+        // on. Now it stays off: an item whose Enabled switch is turned on and saved goes live right then and stops waiting,
+        // so anything still waiting at Save has its switch off (user request 2026-10-27). Skipped: a node draft being
+        // applied (the item's slide-out Save), and saves that keep the waiting flag.
+        Event::on(Node::class, Node::EVENT_BEFORE_SAVE, function(ModelEvent $event) {
+            /** @var Node $node */
+            $node = $event->sender;
+            if (!$node->id || !$node->enabled || $node->getIsDraft() || $node->updatingFromDerivative || $node->getIsPendingPublish()) {
+                return;
+            }
+            $saved = Json::decodeIfJson((new Query())->select('data')->from('{{%navigation_nodes}}')->where(['id' => $node->id])->scalar() ?: '');
+            if (!empty($saved[Node::PENDING_PUBLISH_DATA_KEY])) {   // was waiting, and this save is the menu's Save publishing it
+                $node->enabled = false;
+                $node->setEnabledForSite(false);
+            }
         });
 
         // Video uploads (the Video File field of hero slides, carousel slides and the One Stop section, or the Assets

@@ -3448,5 +3448,55 @@
   "ogImageAlt": "In-House Label Printing vs. Print on Demand",
   "crumbCategory": "https://arrsys.com/category/blog/",
   "readTime": "12 minutes"
+ },
+ "cannabis-label-versioning-workflow": {
+  "title": "Cannabis Label Versioning Workflow for Multi-State Brands - Arrow Systems, Inc.",
+  "description": "A cannabis label versioning workflow produces state-specific labels from one master template by moving state-variable fields in as print data.",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "canonical": "https://arrsys.com/cannabis-label-versioning-workflow/",
+  "ogImage": "https://arrsys.com/media/Cannabis-Label-Versioning-Workflow.webp",
+  "ogImageAlt": "Cannabis Label Versioning Workflow",
+  "crumbCategory": "https://arrsys.com/category/blog/",
+  "readTime": "16 minutes"
+ },
+ "label-slitting-matrix-removal": {
+  "title": "Label Slitting, Matrix Removal & Rewinding: Hidden Costs",
+  "description": "Die-cutting gets the attention, but slitting, matrix removal, and rewinding are where converters lose time. See what each costs and when one pass helps.",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "canonical": "https://arrsys.com/label-slitting-matrix-removal/",
+  "ogImage": "https://arrsys.com/media/Label-Slitting-and-Matrix-Removal-Banner-Image.webp",
+  "ogImageAlt": "Label slitting and matrix removal on a roll-to-roll label finishing line.",
+  "crumbCategory": "https://arrsys.com/category/blog/",
+  "readTime": "14 minutes"
+ },
+ "limited-edition-spirits-label-printing": {
+  "title": "Limited Edition Spirits Label Printing: 4 Holiday Fixes",
+  "description": "Limited-edition spirits labels keep missing the holiday window. Diagnose the four lead-time failures and see how in-house printing compresses the timeline.",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "canonical": "https://arrsys.com/limited-edition-spirits-label-printing/",
+  "ogImage": "https://arrsys.com/media/Spirits_Labels_ArrowJet_Aqua330RII_UV330H_ArrowCut_Nova330.webp",
+  "ogImageAlt": "Limited-edition spirits label printing featuring ArrowJet Aqua 330R II, ArrowJet UV 330H, and ArrowCut Nova 330R machines for premium bottle labels, faster turnaround, and on-demand production.",
+  "crumbCategory": "https://arrsys.com/category/blog/",
+  "readTime": "12 minutes"
+ },
+ "section-179-label-printer": {
+  "title": "Section 179 & Year-End Label Press Purchases: Timing Guide",
+  "description": "Planning a label press purchase before December 31? Here's how Section 179 timing, delivery lead times, and installation dates fit together for a year-end buy.",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "canonical": "https://arrsys.com/section-179-label-printer/",
+  "ogImage": "https://arrsys.com/media/section-179-label-printer-year-end-install.webp",
+  "ogImageAlt": "Digital label press installed and placed in service before December 31 for Section 179 year-end planning.",
+  "crumbCategory": "https://arrsys.com/category/blog/",
+  "readTime": "13 minutes"
+ },
+ "beer-label-curling-cold-storage": {
+  "title": "Beer Label Curling in Cold Storage: Diagnose the Mismatch │ Arrow Systems",
+  "description": "Beer labels curl in cold storage from a facestock, adhesive, or application mismatch. Diagnostic steps, material specs, and a validation protocol.",
+  "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+  "canonical": "https://arrsys.com/beer-label-curling-cold-storage/",
+  "ogImage": "https://arrsys.com/media/beer-label-curling-cold-storage-bottle.webp",
+  "ogImageAlt": "Curled beer label on a chilled bottle showing cold-storage adhesion failure.",
+  "crumbCategory": "https://arrsys.com/category/blog/",
+  "readTime": "11 minutes"
  }
 }

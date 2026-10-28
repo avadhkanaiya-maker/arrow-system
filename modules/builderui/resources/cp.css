@@ -33,3 +33,7 @@
 .menu.bui-grid [hidden], .menu.bui-grid .hidden { display: none !important; }
 @media (max-width: 700px) { .menu.bui-grid ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .bui-form-edit { margin-top: 8px; }
+
+/* "Choose" window of a relation field at its maximum (cp.js): the held items are greyed out with an empty box, unlike
+   Craft's ticked "already chosen" ones */
+.elementselectormodal .body .content .main .elements .disabled.bui-held .checkbox::before { content: none; }

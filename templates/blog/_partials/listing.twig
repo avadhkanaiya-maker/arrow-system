@@ -107,14 +107,14 @@
         </div>
 
         <aside class="blog-sidebar" aria-label="Blog sidebar">
-          {# TODO(product categories migration): links to the live product category pages until those exist in Craft #}
+          {# Our /all-products/ pages; Fume Extraction isn't built yet, so it still links to live #}
           <section class="side-card" aria-labelledby="side-cats-title">
             <h2 class="side-card__title" id="side-cats-title">Product Categories</h2>
             <ul class="side-cats">
-              <li><a class="side-cats__link" href="https://arrsys.com/all-products/digital-label-printers/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-printer"/></svg></span>Digital Label Printers<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+              <li><a class="side-cats__link" href="{{ url('all-products/digital-label-printers/arrow-digital-label-printers') }}"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-printer"/></svg></span>Digital Label Printers<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
               <li><a class="side-cats__link" href="https://arrsys.com/all-products/fume-extraction/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-refresh"/></svg></span>Fume Extraction<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-              <li><a class="side-cats__link" href="https://arrsys.com/all-products/label-finishers/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-scissors"/></svg></span>Label Finishers<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
-              <li><a class="side-cats__link" href="https://arrsys.com/all-products/plotters/"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>Gerber Plotters<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+              <li><a class="side-cats__link" href="{{ url('all-products/label-finishers') }}"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-scissors"/></svg></span>Label Finishers<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+              <li><a class="side-cats__link" href="{{ url('all-products/plotters') }}"><span class="side-cats__icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>Gerber Plotters<svg class="icon side-cats__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
             </ul>
           </section>
 

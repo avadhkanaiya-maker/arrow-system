@@ -1,10 +1,10 @@
 # Blog import report
 
-Run: 2026-10-15 07:05 · 2 posts selected
-**2 created, 0 updated, 0 skipped, 0 failed** in 10 s
+Run: 2026-10-27 16:45 · 2 posts selected
+**0 created, 2 updated, 0 skipped, 0 failed** in 5 s
 
 
 | Post | Result | Blocks | H2 | Headings (Craft / live) | Images (Craft / live) | Notes |
 |---|---|---|---|---|---|---|
-| [paper-vs-film-labels-where-each-works-and-where-it-fails](/paper-vs-film-labels-where-each-works-and-where-it-fails/) | created | 28 | 10 | 10 / 11 | 1 / 1 |  |
-| [in-house-label-printing-vs-print-on-demand-cost-by-volume](/in-house-label-printing-vs-print-on-demand-cost-by-volume/) | created | 25 | 10 | 10 / 11 | 2 / 2 |  |
+| [water-based-vs-uv-cured-label-adhesive](/water-based-vs-uv-cured-label-adhesive/) | updated | 38 | 10 | 16 / 17 | 2 / 2 |  |
+| [confectionery-flexible-packaging-in-house](/confectionery-flexible-packaging-in-house/) | updated | 35 | 11 | 15 / 16 | 2 / 2 |  |

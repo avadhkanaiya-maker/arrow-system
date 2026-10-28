@@ -11,8 +11,8 @@
   {% set product = link and link.type == 'entry' ? link.element : null %}
   {% set name = item.productName ?: (product ? ((product.headingText ?? null) ?: product.title) : null) %}
   {% set image = item.mediaImage.one() %}
-  {% if not image and product %}{# any entry type: the product fields may not exist on it #}
-    {% set image = (product.featuredImage is defined ? product.featuredImage.one() : null) ?: (product.mediaImage is defined ? product.mediaImage.one() : null) %}
+  {% if not image and product %}{# any entry type: a field missing from its layout is null ("is defined" is still true), so ?? skips it #}
+    {% set image = product.featuredImage.one() ?? product.mediaImage.one() ?? null %}
   {% endif %}
   {% if name %}
     {% set rows = rows|merge([{item: item, link: link, name: name, image: image, text: item.sectionBody ?: (product.cardTagline ?? null)}]) %}

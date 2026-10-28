@@ -19,6 +19,16 @@
   .hero-intro__actions .btn { flex: 1 1 100%; }
 }
 
+/* Space above buttons: the design spaced them with the text field above, so with that field left empty the buttons
+   sat on the text (0px). They now keep the design's gap by themselves (review 2026-10-27). */
+.ind-detail-hero__body .btn-row { margin-top: 26px; }               /* Page Header (= the Applications tags' gap) */
+.sustain h2 + .btn, .sustain h2 + .btn-row { margin-top: 28px; }     /* CTA Bands without an Intro */
+.fact-list + .btn { margin-top: 24px; }                               /* On-Demand Feature without a note */
+.onestop__body .btn { margin-top: 24px; }                             /* Background Video section… */
+.onestop__body .onestop__cta-lead + .btn { margin-top: 14px; }        /* …but right under its Button Intro, as designed */
+.side-cta__title + .btn { margin-top: 18px; }                         /* blog sidebar box without text */
+.page-hero .arrow-line + .btn-row { margin-top: 30px; }               /* Exhibitions / Upcoming heroes without an intro */
+
 /* ==========================================================================
    Blog articles: blocks the design (blogs/css/blog-detail.css) has no styles for. Used by imported posts and the
    Article Body blocks Quote, Image (width), Gallery, Video, Button, Divider, and plain numbered lists / H4 in Rich Text.
@@ -135,6 +145,9 @@
 
 /* [red] words in a maroon band (CTA Band, homepage "J"): red on maroon was unreadable → white, underlined */
 .sustain .hl { color: inherit; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+/* CTA Band Small Heading on maroon (as the answers design's .ans-cta__eyebrow) */
+.sustain .eyebrow { color: rgba(255, 255, 255, .85); }
+.sustain .eyebrow::before { background: currentColor; }
 
 /* ".spec-list" is styled by both blog-detail.css (cards) and products/product-detail.css (rows). A product page that uses
    common blocks loads both, so each look is pinned to its place: cards in the common-block column (.prose), rows in the
@@ -469,3 +482,9 @@ video.mcar__media { background: var(--c-black); object-fit: contain; }
 
 /* Main menu item without sub-items (header.twig): a plain link styled like the dropdown triggers */
 a.nav-trigger { text-decoration: none; }
+
+/* Heading block's Small Heading in a text column: it takes the H2's space above and replaces its red bar */
+.prose > .eyebrow { margin-top: 60px; }
+.prose > .eyebrow:first-child { margin-top: 0; }
+.prose > .eyebrow + h2 { margin-top: 0; }
+.prose > .eyebrow + h2::before { display: none; }

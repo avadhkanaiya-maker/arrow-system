@@ -49,7 +49,7 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 3173d625-786e-4c0d-9024-eff97060aeb7
             handle: null
-            instructions: null
+            instructions: 'Use \*text\* for italic and \*\*text\*\* for bold (Title and Text).'
             label: Highlights
             oldFieldUid: null
             required: true

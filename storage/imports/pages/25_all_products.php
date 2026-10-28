@@ -10,11 +10,11 @@
  *   /all-products/printers/                              "Printer" (9: live's ArrowJet VDP left out, its product address now
  *                                                        redirects to the Limitronic printers page and it isn't on staging)
  *   /all-products/printers/gerber-printers/              "Printers by Gerber" (1: Gerber EDGE FX, a wide card)
- *   /all-products/printers/trojan-printers/              "Printers by Trojan" (3: T2-L, T2-C, T4)
+ *   /all-products/printers/trojan-printers/              "Printers by Trojan" (4: T2-L, T2-C, T2, T4)
  *   /all-products/printers/quicklabel-printers/          "Printers by QuickLabel" (1: QL-300, a wide card)
  *     Live's two pages are empty (only the H1, since at least April 2024): filled with the brand's printers on staging.
- *     Trojan T2 is left out: switched off on staging (2026-10-22, by hand). Card texts from live's "Digital Label
- *     Printers by Trojan" page; T4 and QL-300 have no live listing: their short name and subtitle only.
+ *     Card texts from live's "Digital Label Printers by Trojan" page; T4 and QL-300 have no live listing: their short
+ *     name and subtitle only.
  *   /all-products/plotters/                              "Gerber Plotters" (3) + live's banner (Gerber-Envision-375-Plotter.jpg)
  *   /all-products/digital-label-printers/                switched off, as live (301 → its child, config/redirects.php)
  *   …/digital-label-printers/arrow-digital-label-printers/ "ArrowJet Digital Label Printers" (12), as the design
@@ -22,6 +22,9 @@
  *     (Header Style "Cut-out image beside text", 27_header_subtitle_cutout.php), the lineup, then Card Grids (about the
  *     range, who it's for, other categories) and a CTA Band; SEO as live. Left out: the design's search box, pagination
  *     (12 fit one page), "12 printers" line, section eyebrows and card kickers (no such block fields).
+ *   …/digital-label-printers/trojan-digital-label-printers/ "Digital Label Printers by Trojan" (3: T2-L, T2-C, T2, as live;
+ *     no banner on live). Trojan T2 had been switched off on staging (Draft 1 applied in the CP, 2026-10-16): switched on
+ *     here (SWITCH_ON), since live shows it on this page and at /product/trojan-t2/
  *   /all-products/corrugate-and-end-of-line-printing/    "Corrugate and End of Line Printing" (5: the Limitronic printers,
  *                                                        as live); first made as a switched-off placeholder for its child
  *   …/corrugate-and-end-of-line-printing/printers-by-limitronic/ "Printers by Limitronic" (5) + live's banner (LIMITRONIC-3.jpg)
@@ -39,8 +42,12 @@
  * Finisher cards (CARDS): empty Card Tagline / Key Specs filled with live's text (from arrow-label-finishers, which
  * names them right; the slitter from label-finishers); a short Card Title where the product name is long. Skipped
  * for a product with an open draft; values already set are kept.
- * Then every menu item and link field pointing at a built page's live address links here (rich text links stay);
- * stops if a menu has unsaved builder changes. Live redirects: config/redirects.php. Skips pages that exist.
+ * Then every menu item, link field and rich text link pointing at a built page's live address links here (a switched-off
+ * page's address: where config/redirects.php sends it; rich text gets the page's path, e.g. /all-products/plotters/, as
+ * the blog's other internal links); skipped under an open draft; stops if a menu has unsaved builder changes. Live
+ * redirects: config/redirects.php. Skips pages that exist, except: a page whose product list lacks products its spec
+ * now names gets the spec's list (only when the spec covers every product on the page: CP additions are kept; not under
+ * an open draft).
  * Back up first. Run from the project root: /opt/lampp/bin/php storage/imports/pages/25_all_products.php
  */
 require dirname(__DIR__) . '/blog/_bootstrap.php';
@@ -95,7 +102,7 @@ const PAGES = [
         'blocks' => [['Gerber [Printers]', ['gerber-edge-fx'], null]]],
     'all-products/printers/trojan-printers' => ['title' => 'Trojan Printers', 'parent' => 'all-products/printers', 'eyebrow' => 'Product category',
         'h1' => 'Printers by [Trojan]', 'seoTitle' => 'Printers by Trojan - Arrow Systems, Inc.', 'seoDescription' => null,
-        'blocks' => [['Trojan [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer',
+        'blocks' => [['Trojan [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer', 'trojan-t2',
             'trojan-t4-all-in-one-digital-label-printer-and-finisher'], null]]],
     'all-products/printers/quicklabel-printers' => ['title' => 'QuickLabel Printers', 'parent' => 'all-products/printers', 'eyebrow' => 'Product category',
         'h1' => 'Printers by [QuickLabel]', 'seoTitle' => 'Printers by QuickLabel - Arrow Systems, Inc.', 'seoDescription' => null,
@@ -139,6 +146,10 @@ const PAGES = [
                     [DESIGN . 'materials/web/material-holography-1.webp', 'Holographic label printed with water-based ink'], ['Label Materials', 'https://arrsys.com/arrow-materials/']],
             ]],
         ]],
+    'all-products/digital-label-printers/trojan-digital-label-printers' => ['title' => 'Digital Label Printers by Trojan',
+        'parent' => 'all-products/digital-label-printers', 'eyebrow' => 'Product category', 'h1' => 'Digital Label Printers by [Trojan]',
+        'seoTitle' => 'Digital Label Printers by Trojan - Arrow Systems, Inc.', 'seoDescription' => 'DIGITAL LABEL PRINTERS BY TROJAN',   // as live
+        'blocks' => [['Trojan Digital Label [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer', 'trojan-t2'], null]]],
     'all-products/corrugate-and-end-of-line-printing' => ['title' => 'Corrugate and End of Line Printing', 'parent' => 'all-products',
         'eyebrow' => 'Product category', 'h1' => 'Corrugate and End of Line [Printing]',
         'seoTitle' => 'Corrugate and End of Line Printing - Arrow Systems, Inc.', 'seoDescription' => 'Printhead resolution: 180dpi',   // as live
@@ -184,6 +195,10 @@ const CARDS = [
         [['Resolution', '1600 x 800 dpi or 1600 x 1600 dpi'], ['Speed', '6 ips (9 m/min) or 12 ips (18 m/min)'], ['Print Area', 'Width: 8.8″ (223 mm)'],
          ['Length without stitching', '0.6″ – 30″ (15 – 762 mm)'], ['Length with stitching', '0.4″ (10 mm) – 60″ (1525 mm) or unlimited'],
          ['Ink', 'High-performance water-based dye ink, four 2-liter tanks CMYK']]],
+    'trojan-t2' => [null, 'Full Capacity Digital Tabletop Press',   // live's card: the same text as the T2-C's
+        [['Resolution', '1600 x 800 dpi or 1600 x 1600 dpi'], ['Speed', '6 ips (9 m/min) or 12 ips (18 m/min)'], ['Print Area', 'Width: 8.8″ (223 mm)'],
+         ['Length without stitching', '0.6″ – 30″ (15 – 762 mm)'], ['Length with stitching', '0.4″ (10 mm) – 60″ (1525 mm) or unlimited'],
+         ['Ink', 'High-performance water-based dye ink, four 2-liter tanks CMYK']]],
     'trojan-t4-all-in-one-digital-label-printer-and-finisher' => ['Trojan T4', 'All-in-One Digital Label Printer and Finisher', []],
     'ql-300-5-color-toner-printer' => ['QuickLabel QL-300', '5 Color Laser Label Printer', []],
     'gerber-gs15-plus-plotter' => [null, 'Tangential Cutting & Swivel Knife Technology',
@@ -211,6 +226,17 @@ const CARDS = [
 $elements = Craft::$app->getElements();
 $product = fn(string $slug) => Entry::find()->section('products')->slug($slug)->status(null)->one() ?? exit("no product $slug\n");
 $hasDraft = fn(int $id) => (new Query())->from('{{%drafts}}')->where(['canonicalId' => $id])->exists();
+
+// products a page lists that were switched off on staging but live shows (product page and listings)
+const SWITCH_ON = ['trojan-t2'];   // off since "Draft 1" was applied in the CP on 2026-10-16; live: /product/trojan-t2/ + the Trojan listing
+foreach (SWITCH_ON as $slug) {
+    $p = $product($slug);
+    if ($p->enabled) continue;
+    if ($hasDraft($p->id)) { say("  ! {$p->title}: open draft, not switched on"); continue; }
+    $p->enabled = true;
+    $elements->saveElement($p) || fail("product $slug", $p);
+    say("  ~ {$p->title}: switched on");
+}
 
 // product cards: fill what's empty
 foreach (CARDS as $slug => [$cardTitle, $tagline, $specs]) {
@@ -286,6 +312,16 @@ foreach (PAGES as $path => $spec) {
         $page->uri === $path || exit("the page got /{$page->uri}/, expected /$path/\n");
         say(($placeholder ? '  ~ placeholder' : '  +') . " page /{$page->uri}/ (" . implode(', ', array_map(fn($b) => count($b[1]) . ' products', $spec['blocks'])) . ')');
     }
+    // products added to the spec after the page was built: the page gets the spec's list, when it covers every product on it
+    foreach (Entry::find()->ownerId($page->id)->type('productShowcase')->status(null)->all() as $i => $grid) {
+        $want = array_map(fn($s) => $product($s)->id, $spec['blocks'][$i][1] ?? []);
+        $have = $grid->getFieldValue('selectedProducts')->status(null)->ids();
+        if (!$want || $have === $want || array_diff($have, $want)) continue;
+        if ($hasDraft($page->id)) { say("  ! /$path/ has an open draft: products not updated"); continue; }
+        $grid->setFieldValue('selectedProducts', $want);
+        $elements->saveElement($grid) || fail("products of $path", $grid);
+        say("  ~ /$path/: " . count($want) . ' products (was ' . count($have) . ')');
+    }
     // a banner added to the spec after the page was built: into its Page Header (not under an open draft)
     $header = Entry::find()->ownerId($page->id)->type('industryHeader')->status(null)->one();
     if (isset($spec['banner']) && $header && !$header->getFieldValue('mediaImage')->exists()) {
@@ -297,6 +333,9 @@ foreach (PAGES as $path => $spec) {
         }
     }
     if ($spec['enabled'] ?? true) $built["https://arrsys.com/$path/"] = $page;
+}
+foreach (require dirname(__DIR__, 3) . '/config/redirects.php' as $r) {   // a switched-off page → where it redirects
+    if (isset(PAGES[$r['from']]) && isset($built["https://arrsys.com{$r['to']}"])) $built["https://arrsys.com/{$r['from']}/"] = $built["https://arrsys.com{$r['to']}"];
 }
 // menus and link fields pointing at a built page's live address → the page
 $target = fn(?string $url) => $url ? ($built[rtrim($url, '/') . '/'] ?? null) : null;
@@ -315,23 +354,32 @@ foreach ($nodes as $n) {
     $elements->saveElement($n) || fail("menu node {$n->id}", $n);
     say("  ~ menu {$n->menu->handle} “{$n->title}” → /{$page->uri}/");
 }
+// an element's link fields and rich text pointing at a built page's live address → [field handle => new value]
+$fixes = function (craft\base\ElementInterface $el) use ($target): array {
+    $set = [];
+    foreach ($el->getFieldLayout()?->getCustomFields() ?? [] as $f) {
+        $v = $el->getFieldValue($f->handle);
+        if ($f instanceof Link && ($page = $target((string)$v?->url))) {
+            $set[$f->handle] = ['type' => 'entry', 'value' => $page->id, 'label' => $v->label, 'target' => $v->target];
+        } elseif ($v instanceof craft\htmlfield\HtmlFieldData) {
+            $html = preg_replace_callback('#https?://(?:www\.)?arrsys\.com/(all-products/[a-z0-9/-]*)#i',
+                fn($m) => ($page = $target("https://arrsys.com/$m[1]")) ? "/{$page->uri}/" : $m[0], $raw = $v->getRawContent());
+            if ($html !== $raw) $set[$f->handle] = $html;
+        }
+    }
+    return $set;
+};
+$top = function ($el) { for (; $el instanceof Entry && $el->getPrimaryOwner(); $el = $el->getPrimaryOwner()); return $el; };   // the page / post (or its draft) that holds the block: check its canonical for drafts
 $q = (new Query())->select('es.elementId')->from(['es' => '{{%elements_sites}}'])->innerJoin(['e' => '{{%elements}}'], '[[e.id]] = [[es.elementId]]')
     ->where(['e.revisionId' => null, 'e.draftId' => null, 'e.dateDeleted' => null])->andWhere(['like', 'es.content', 'arrsys.com/all-products']);
 foreach ($q->column() as $id) {
     $el = $elements->getElementById($id, null, null, ['status' => null]);
-    if (!$el || !$el->getFieldLayout()) continue;
-    $changed = [];
-    foreach ($el->getFieldLayout()->getCustomFields() as $f) {
-        if (!$f instanceof Link || !($page = $target((string)$el->getFieldValue($f->handle)?->url))) continue;
-        $v = $el->getFieldValue($f->handle);
-        $el->setFieldValue($f->handle, ['type' => 'entry', 'value' => $page->id, 'label' => $v->label, 'target' => $v->target]);
-        $changed[] = "$f->handle → /{$page->uri}/";
-    }
-    if (!$changed) continue;
-    for ($top = $el; $top instanceof Entry && $top->getPrimaryOwner(); $top = $top->getPrimaryOwner());   // the page / post that holds the block
-    if ($hasDraft($top->id)) { say("  ! “{$top->title}” has an open draft: its link to live is left; apply or delete the draft, then run again"); continue; }
+    if (!$el || !($set = $fixes($el))) continue;
+    $owner = $top($el);
+    if ($hasDraft($owner->getCanonicalId())) { say("  ! “{$owner->title}” has an open draft: its link to live is left; apply or delete the draft, then run again"); continue; }
+    $el->setFieldValues($set);
     $elements->saveElement($el) || fail("element $id", $el);
-    say('  ~ ' . ($el instanceof Entry ? "{$el->type->handle} “" . ($el->getPrimaryOwner()?->title ?? $el->title) . '”' : $el::displayName() . ' “' . ($el->title ?? $id) . '”') . ': ' . implode(', ', $changed));
+    say('  ~ ' . ($el instanceof Entry ? "{$el->type->handle} “" . ($el->getPrimaryOwner()?->title ?? $el->title) . '”' : $el::displayName() . ' “' . ($el->title ?? $id) . '”') . ': ' . implode(', ', array_keys($set)));
 }
 
 // self-check: each page loads at its live path with its cards, the breadcrumb shows its parents, nothing links to live
@@ -352,4 +400,8 @@ foreach (PAGES as $path => $spec) {
     !isset($spec['banner']) || str_contains($html, 'page-banner__cover') && str_contains($html, pathinfo($spec['banner'][0], PATHINFO_FILENAME)) || exit("/$path/: no banner\n");
 }
 !array_filter(Node::find()->status(null)->all(), fn($n) => $target($n->url)) || exit("a menu item still links to a live page that is built\n");
+foreach ($q->column() as $id) {
+    $el = $elements->getElementById($id, null, null, ['status' => null]);
+    !$el || !$fixes($el) || $hasDraft($top($el)->getCanonicalId()) || exit("element $id still links to a live page that is built\n");
+}
 say('  = ' . count(PAGES) . ' pages at their live paths with their product cards and breadcrumbs; menus link here');

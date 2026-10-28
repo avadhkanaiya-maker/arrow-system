@@ -1,6 +1,7 @@
 {#
   /exhibitions/ (Exhibitions Page single; design: Arrowsystem_local/exhibitions/index.html).
-    1. Header: texts, stats (past shows, next show), the two header photos
+    1. Header: texts, the First / Second Button (CP; each shown when it has a text and a URL), stats (past shows, next
+       show), the two header photos
     2. Upcoming Exhibitions: a ticket for the next show (the first show with exact dates that hasn't ended); hidden
        when none is announced. Countdown: js/exhibitions/exhibitions.js
     3. Where We Have Exhibited: the shows with a page, in the Exhibitions structure order, grouped by year (the 5 latest
@@ -77,10 +78,13 @@
           <h1 class="page-hero__title" id="page-title">{{ text.highlight(entry.sectionHeading ?: entry.title) }}</h1>
           <svg class="arrow-line" viewBox="0 0 132 14" aria-hidden="true" focusable="false"><path d="M1 7h126M120 1.5 127 7l-7 5.5"/></svg>
           {% if entry.sectionLead %}<p class="page-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
+          {# First / Second Button (CP): each shown when it has a text and a URL #}
+          {% set buttons = [{link: entry.ctaLink, style: 'btn--primary'}, {link: entry.secondaryCta, style: 'btn--outline'}]|filter(b => b.link and b.link.url and b.link.getLabel(true)) %}
+          {% if buttons|length %}
           <div class="btn-row">
-            {% if nextShow %}<a class="btn btn--primary btn--lg" href="#upcoming">Upcoming Exhibitions</a>{% endif %}
-            <a class="btn btn--outline btn--lg" href="#past">Past Exhibitions</a>
+            {% for b in buttons %}<a class="btn {{ b.style }} btn--lg" {{ links.attrs(b.link) }}>{{ b.link.getLabel(true) }}</a>{% endfor %}
           </div>
+          {% endif %}
           <dl class="hero-stats">
             <div class="hero-stat">
               <dt>Past exhibitions</dt>
