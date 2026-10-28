@@ -64,6 +64,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 331d7548-f88e-47fa-b1b7-5bc3af0e3d50 # Menu Icon
+            handle: null
+            instructions: 'Shown on top of a Link card that has no image.'
+            label: Icon
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 98875b1c-e375-409c-be9c-6286c6bee143
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 165a5425-18d7-4566-a557-6e0a6e9a64f1 # Rich Text
             handle: null
             instructions: null
@@ -73,6 +90,23 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 7ec90f8c-17b2-4b0a-89fd-fe2efabe5269
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b9225e97-f40f-4ff5-87eb-1115692b0d1b # Terms
+            handle: null
+            instructions: 'Optional rows under the text of a Standard card, e.g. “Application” / “Food Packaging”.'
+            label: Details
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bae8167d-058e-4c29-95c8-088d378090d0
             userCondition: null
             warning: null
             width: 100

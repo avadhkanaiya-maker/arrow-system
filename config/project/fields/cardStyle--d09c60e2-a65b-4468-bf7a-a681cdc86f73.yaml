@@ -1,0 +1,55 @@
+columnSuffix: null
+handle: cardStyle
+instructions: 'Link cards: the image (or else the card’s Icon) on top, the Subtitle as a small heading above the title and the link’s Label (e.g. “View films”) at the bottom; the heading is centred. For “More from …” sections. Image tiles: the title on the image (e.g. industries). Image cards: no box, the image framed, then title and text (e.g. pouch formats).'
+name: 'Card Style'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Standard
+        -
+          - value
+          - standard
+        -
+          - default
+          - true
+    -
+      __assoc__:
+        -
+          - label
+          - 'Link cards'
+        -
+          - value
+          - link
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Image tiles'
+        -
+          - value
+          - tile
+        -
+          - default
+          - false
+    -
+      __assoc__:
+        -
+          - label
+          - 'Image cards'
+        -
+          - value
+          - plain
+        -
+          - default
+          - false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

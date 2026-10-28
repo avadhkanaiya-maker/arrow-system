@@ -1,0 +1,418 @@
+columnSuffix: null
+handle: highlightItems
+instructions: null
+name: Highlights
+searchable: false
+settings:
+  addRowLabel: 'Add highlight'
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - Icon
+            -
+              - handle
+              - icon
+            -
+              - type
+              - select
+            -
+              - width
+              - 18%
+            -
+              - options
+              -
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Gauge (speed)'
+                    -
+                      - value
+                      - gauge
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Scan (resolution)'
+                    -
+                      - value
+                      - scan
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Ruler (width / size)'
+                    -
+                      - value
+                      - ruler
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Droplet (ink)'
+                    -
+                      - value
+                      - droplet
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Printer
+                    -
+                      - value
+                      - printer
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Layers (materials)'
+                    -
+                      - value
+                      - layers
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Plus (options)'
+                    -
+                      - value
+                      - plus
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Calendar (years)'
+                    -
+                      - value
+                      - calendar
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Headset (support / customers)'
+                    -
+                      - value
+                      - headset
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Factory
+                    -
+                      - value
+                      - factory
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Globe (countries)'
+                    -
+                      - value
+                      - globe
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Leaf (sustainable)'
+                    -
+                      - value
+                      - leaf
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Wrench (service)'
+                    -
+                      - value
+                      - wrench
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Chip (technology)'
+                    -
+                      - value
+                      - cpu
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Tag (labels)'
+                    -
+                      - value
+                      - tag
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Scissors (cutting)'
+                    -
+                      - value
+                      - scissors
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Package
+                    -
+                      - value
+                      - package
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Shield (quality)'
+                    -
+                      - value
+                      - shield
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Check
+                    -
+                      - value
+                      - check
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Thermometer
+                    -
+                      - value
+                      - thermometer
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Columns
+                    -
+                      - value
+                      - columns
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Info
+                    -
+                      - value
+                      - info
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Lock
+                    -
+                      - value
+                      - lock
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Sparkles (quality)'
+                    -
+                      - value
+                      - sparkles
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Shirt (apparel)'
+                    -
+                      - value
+                      - shirt
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Wine (beverage)'
+                    -
+                      - value
+                      - wine
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Pill (pharma)'
+                    -
+                      - value
+                      - pill
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Flask (chemical)'
+                    -
+                      - value
+                      - flask
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - 'Clock (time)'
+                    -
+                      - value
+                      - clock
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Refresh
+                    -
+                      - value
+                      - refresh
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - File
+                    -
+                      - value
+                      - file
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Image
+                    -
+                      - value
+                      - image
+                    -
+                      - default
+                      - false
+      -
+        - col2
+        -
+          __assoc__:
+            -
+              - heading
+              - Title
+            -
+              - handle
+              - title
+            -
+              - type
+              - singleline
+            -
+              - width
+              - 28%
+      -
+        - col3
+        -
+          __assoc__:
+            -
+              - heading
+              - Text
+            -
+              - handle
+              - text
+            -
+              - type
+              - multiline
+            -
+              - width
+              - ''
+  maxRows: null
+  minRows: null
+  staticRows: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

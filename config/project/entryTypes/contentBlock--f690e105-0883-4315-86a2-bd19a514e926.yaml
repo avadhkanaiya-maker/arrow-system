@@ -64,6 +64,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 3173d625-786e-4c0d-9024-eff97060aeb7 # Highlights
+            handle: null
+            instructions: 'Optional points under the text. One per row: an Icon, a short Title and a line of Text. A block with points shows its image on the right, in a frame.'
+            label: Points
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e87bfa36-1546-4382-9d97-98386dc4d107
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
             handle: null
             instructions: null

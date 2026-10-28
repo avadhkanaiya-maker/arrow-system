@@ -232,10 +232,11 @@
   {% elseif block.type.handle == 'productApplications' %}
   {% include 'products/blocks/productApplications' with { block: block, product: entry } only %}
   {% else %}
-  <section class="section pd-details{{ layout.sectionClass(block) }}"{% if block.type.handle == 'tabsBlock' and detailsId %} id="{{ detailsId }}" aria-labelledby="details-title"{% endif %}>
+  {% set tabsHead = block.type.handle == 'tabsBlock' and (block.sectionHeading ?? null) %}{# the Tabs block's own heading labels its section #}
+  <section class="section pd-details{{ layout.sectionClass(block) }}"{% if block.type.handle == 'tabsBlock' and detailsId %} id="{{ detailsId }}" aria-labelledby="{{ tabsHead ? 'tabs-' ~ block.id ~ '-title' : 'details-title' }}"{% elseif block.type.handle == 'tabsBlock' and (block.anchorId ?? '')|trim %} id="{{ block.anchorId|trim }}"{% endif %}>
     <div class="container">
       {% if block.type.handle == 'tabsBlock' %}
-      {% if detailsId %}<h2 class="visually-hidden" id="details-title">Product details</h2>{% set detailsId = null %}{% endif %}
+      {% if detailsId %}{% if not tabsHead %}<h2 class="visually-hidden" id="details-title">Product details</h2>{% endif %}{% set detailsId = null %}{% endif %}
       {% include 'products/blocks/tabsBlock' with { block: block, tabs: tabSets['b' ~ block.id], tabIds: tabIds } only %}
       {% else %}
       {% include 'products/blocks/' ~ block.type.handle ignore missing with { block: block } only %}

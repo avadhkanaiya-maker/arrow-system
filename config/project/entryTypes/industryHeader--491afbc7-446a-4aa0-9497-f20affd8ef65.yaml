@@ -98,6 +98,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 3173d625-786e-4c0d-9024-eff97060aeb7 # Highlights
+            handle: null
+            instructions: 'Optional points under the heading. One per row: an Icon, a short Title and a line of Text.'
+            label: Highlights
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3b936e30-f370-4417-95d7-06e960db98b1
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
             handle: null
             instructions: 'Image beside text: a 16:9 photo (e.g. 1280 × 720). Full-width banner: a wide photo, 1600 px or more, shown whole under the text. Set its alt text. Empty = the page’s Card Photo.'

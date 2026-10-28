@@ -19,11 +19,20 @@ settings:
             -
               - allowAnchors
               - true
+      -
+        - asset
+        -
+          __assoc__:
+            -
+              - sources
+              -
+                - 'volume:27700ccc-93c9-4400-890c-e467e6a5c958' # Documents
   types:
     - url
     - entry
     - tel
     - email
+    - asset
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Link

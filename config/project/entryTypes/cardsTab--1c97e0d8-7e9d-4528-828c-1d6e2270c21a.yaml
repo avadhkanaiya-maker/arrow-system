@@ -1,0 +1,60 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A tab of cards, e.g. one material per card with its spec sheet.'
+fieldLayouts:
+  28b67e00-b352-4e18-9efc-d2e105308a47:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
+            handle: null
+            instructions: null
+            label: 'Tab Title'
+            oldFieldUid: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0c563070-5233-4d1a-883e-8772657a2bbb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2af357ab-38c2-4e85-9609-4bf82ec09e84 # Cards
+            handle: null
+            instructions: 'One card per item: Title, Text and a Link (a page, or a file such as a spec sheet PDF; its Label is the button text, e.g. “Download Spec Sheet”).'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 85efd6e1-79c2-4971-9f02-dfee5a3a03fe
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 666c04f4-8ee7-4658-b704-d70016a6380e
+        userCondition: null
+    thumbFieldKey: null
+handle: cardsTab
+hasTitleField: false
+icon: table-cells-large
+name: 'Cards Tab'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{headingText}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

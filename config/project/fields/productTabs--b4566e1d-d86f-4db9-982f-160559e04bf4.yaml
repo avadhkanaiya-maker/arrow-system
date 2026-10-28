@@ -28,6 +28,11 @@ settings:
         -
           - uid
           - 62511633-848a-4c46-a3dc-93dff754212a # Downloads Tab
+    -
+      __assoc__:
+        -
+          - uid
+          - 1c97e0d8-7e9d-4528-828c-1d6e2270c21a # Cards Tab
   includeTableView: false
   maxEntries: null
   minEntries: null

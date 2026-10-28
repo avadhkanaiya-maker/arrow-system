@@ -1,4 +1,4 @@
-dateModified: 1793164508
+dateModified: 1793178929
 email:
   fromEmail: arrowsysadmin@yopmail.com
   fromName: 'Arrow Systems (Local Staging)'
@@ -41,6 +41,7 @@ meta:
     1c6b12e9-2f3d-4251-8c9b-b1916b92ae33: Page # Page
     1c29af44-a759-4095-90c2-ea536560d0d1: Homepage # Homepage
     1c82b38b-a11c-41e3-b257-4cb3ce43d0cf: Show # Show
+    1c97e0d8-7e9d-4528-828c-1d6e2270c21a: 'Cards Tab' # Cards Tab
     1c2748fc-6dc8-4720-80e3-fad0a83163de: 'Featured Image' # Featured Image
     1cf537dd-80ca-4d3d-a774-ccd2e5e23b09: 'Request a Quote Link' # Request a Quote Link
     1d118cfc-2af2-403e-b53a-17583a66076d: Divider # Divider
@@ -162,6 +163,7 @@ meta:
     0982c37c-37b2-46da-b915-41fc7a89f1f3: 'FAQ Item' # FAQ Item
     1677ef19-8fae-4238-8483-cdc7862cbcfb: 'Blog Post' # Blog Post
     2663b822-43f0-48c5-a077-83b90c6d5529: Columns # Columns
+    3173d625-786e-4c0d-9024-eff97060aeb7: Highlights # Highlights
     4055abcd-d97e-47b5-9f50-d3307f4f3f56: Latitude # Latitude
     4307aaf7-f83f-4d28-98ef-a4305e405976: 'Left Column' # Left Column
     4324bf77-8b8a-40d1-8758-fd26b223c037: Tagline # Tagline
@@ -169,6 +171,7 @@ meta:
     5478b72c-864d-42de-89ce-e5d3eb52759b: 'Toll-free Phone' # Toll-free Phone
     6318cb98-edfc-4071-82af-2983ace0118a: Callout # Callout
     06540dd4-4fea-4ea5-b353-aa2b7c21f024: Products # Products
+    17552c29-6afd-47f5-b93f-788116b2cf42: 'Filter Tabs and Search' # Filter Tabs and Search
     27700ccc-93c9-4400-890c-e467e6a5c958: Documents # Documents
     61266fd8-e371-4796-b8e5-b6d420d01f94: Location # Location
     71736ea4-0de2-4c02-9ebe-5cbf489571fd: Button # Button
@@ -247,6 +250,7 @@ meta:
     cf2f7a05-3513-4370-85bf-521a72260189: 'Banner Image' # Banner Image
     cf87c31a-d7f7-4661-ba62-0ad940e4ff68: Download # Download
     cf169567-e457-4e36-a713-ebe1b0da1255: 'Upcoming Exhibitions Page' # Upcoming Exhibitions Page
+    d09c60e2-a65b-4468-bf7a-a681cdc86f73: 'Card Style' # Card Style
     d5fb0934-c311-4b15-8104-d8d6dcc6f69a: 'Spec List' # Spec List
     d6b87abd-3aac-4bb1-8350-02376ad8bb51: 'Note Text' # Note Text
     d8cd41fc-0228-46f0-ac03-4af3d3ef450a: 'Recommended Products' # Recommended Products
@@ -262,6 +266,7 @@ meta:
     df624304-92d7-4cbd-9bf2-278048320d79: Form # Form
     dfff6f49-bf7b-4ed6-b4de-5080c07efd72: 'Arrow Systems (Local Staging)' # Arrow Systems (Local Staging)
     e2d4a840-f234-432d-a296-8a79a4672bf3: 'Legal Menu' # Legal Menu
+    e2db5805-6e61-4740-a4e3-0fac842879e5: 'Product Spotlight' # Product Spotlight
     e2edd105-bfb6-4051-afee-87080c91709c: 'Other Industries' # Other Industries
     e8a02b9a-a62b-4d0c-8e6e-aeace4a0344c: 'Quote Form' # Quote Form
     e8dba96c-e499-4d93-af1e-b030f0b6c672: Industry # Industry

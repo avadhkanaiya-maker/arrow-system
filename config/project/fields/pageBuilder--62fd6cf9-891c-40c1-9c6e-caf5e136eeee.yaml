@@ -60,6 +60,14 @@ settings:
       __assoc__:
         -
           - uid
+          - e2db5805-6e61-4740-a4e3-0fac842879e5 # Product Spotlight
+        -
+          - group
+          - Sections
+    -
+      __assoc__:
+        -
+          - uid
           - f690e105-0883-4315-86a2-bd19a514e926 # Content Block
         -
           - group

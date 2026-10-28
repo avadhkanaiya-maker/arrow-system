@@ -2,7 +2,9 @@
   3. Content blocks (design: ".ind-blocks"): consecutive Content Blocks share this section; the design CSS alternates the
   media side (.content-block:nth-child(even)). Each: image or a YouTube video (click to play), small heading, heading,
   text, optional link (the design's markup). Without image / video: heading left, text right (craft.css
-  .content-block--text); without a heading too, the text spans the width (--plain). Vars: blocks, entry
+  .content-block--text); without a heading too, the text spans the width (--plain). Points (icon, title, text) under
+  the text: the image on the right, framed (--points, the flexible-packaging design's "control" section). The heading
+  can have [red] words. Vars: blocks, entry
 #}
 {% import '_macros/layout' as layout %}
 {% import '_macros/links' as links %}
@@ -16,8 +18,9 @@
       {% set hasText = (block.richText ?? '')|striptags|trim %}
       {% set link = block.ctaLink and block.ctaLink.url ? block.ctaLink : null %}
       {% set anchor = block.anchorId|trim ?: 'block-' ~ block.id %}
+      {% set points = (block.highlightItems ?? [])|filter(row => row.title|trim or row.text|trim) %}
       {% if image or video %}
-      <article class="content-block{{ layout.customClass(block) }}" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
+      <article class="content-block{{ points|length ? ' content-block--points' }}{{ layout.customClass(block) }}" id="{{ anchor }}"{% if block.headingText %} aria-labelledby="{{ anchor }}-title"{% endif %}>
         {% if video %}
         <div class="content-block__media content-block__media--video">
           <div class="video" data-video="{{ videoId }}">
@@ -35,11 +38,18 @@
         {% endif %}
         <div class="content-block__body">
           {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
-          {% if block.headingText %}<h2 class="content-block__title" id="{{ anchor }}-title">{{ block.headingText }}</h2>{% endif %}
+          {% if block.headingText %}<h2 class="content-block__title" id="{{ anchor }}-title">{{ text.highlight(block.headingText) }}</h2>{% endif %}
           {% if hasText %}
           <div class="content-block__text">
             {{ block.richText }}
           </div>
+          {% endif %}
+          {% if points|length %}
+          <ul class="ctrl-points">
+            {% for row in points %}
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true) }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
+            {% endfor %}
+          </ul>
           {% endif %}
           {% if link %}<a class="text-link" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
         </div>
@@ -49,7 +59,7 @@
         {% if block.headingText or block.eyebrow %}
         <div class="content-block__head">
           {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
-          {% if block.headingText %}<h2 class="content-block__title" id="{{ anchor }}-title">{{ block.headingText }}</h2>{% endif %}
+          {% if block.headingText %}<h2 class="content-block__title" id="{{ anchor }}-title">{{ text.highlight(block.headingText) }}</h2>{% endif %}
         </div>
         {% endif %}
         <div class="content-block__body">
@@ -57,6 +67,13 @@
           <div class="content-block__text">
             {{ block.richText }}
           </div>
+          {% endif %}
+          {% if points|length %}
+          <ul class="ctrl-points">
+            {% for row in points %}
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true) }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
+            {% endfor %}
+          </ul>
           {% endif %}
           {% if link %}<a class="text-link" {{ links.attrs(link) }}>{{ link.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
         </div>
