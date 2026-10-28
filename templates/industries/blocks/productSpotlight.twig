@@ -1,0 +1,59 @@
+{#
+  Product Spotlight (Pages / industries builder; the flexible-packaging design's "Print Beyond Limits", craft.css .spotlight):
+  small heading, heading ([red] words), intro, centred; then Points (icon, title, text) | the image (empty = the product's
+  Main Image, else its Card Photo) | a card: the product's name (linked), "Specifications" (icon + title rows) and the two
+  buttons (the first red, the second outlined). Product: the first one picked. Section Settings: Space Above / Below,
+  Background, CSS Class, Anchor ID. Vars: block
+#}
+{% import '_macros/layout' as layout %}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
+{% set product = block.selectedProducts.one() %}
+{% set image = block.mediaImage.one() ?? (product ? product.mediaImage.one() ?? product.featuredImage.one() : null) %}
+{% set points = (block.highlightItems ?? [])|filter(row => row.title|trim or row.text|trim) %}
+{% set specs = (block.specChips ?? [])|filter(row => row.title|trim) %}
+{% set buttons = [block.primaryCta, block.secondaryCta]|filter(b => b and b.url) %}
+{% set anchor = block.anchorId|trim ?: 'spotlight-' ~ block.id %}
+  <section class="section spotlight{{ layout.sectionClass(block) }}" id="{{ anchor }}"{% if block.sectionHeading %} aria-labelledby="{{ anchor }}-title"{% endif %}>
+    <div class="container">
+      {% if block.eyebrow or block.sectionHeading or block.sectionLead %}
+      <header class="section-head section-head--center">
+        {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+        {% if block.sectionHeading %}<h2 class="section-title" id="{{ anchor }}-title">{{ text.highlight(block.sectionHeading) }}</h2>{% endif %}
+        {% if block.sectionLead %}<p class="section-lead">{{ block.sectionLead }}</p>{% endif %}
+      </header>
+      {% endif %}
+      <div class="spotlight__grid">
+        {% if points|length %}
+        <ul class="spot-points">
+          {% for row in points %}
+          <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true) }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if image %}
+        <figure class="spotlight__media">
+          <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt ?: (product ? product.title) }}">
+        </figure>
+        {% endif %}
+        {% if product or specs|length or buttons|length %}
+        <div class="spotlight__product">
+          {% if product %}<h3 class="spotlight__name"><a href="{{ product.url }}">{{ product.title }}</a></h3>{% endif %}
+          {% if specs|length %}
+          <p class="spotlight__label">Specifications</p>
+          <ul class="spec-chips">
+            {% for row in specs %}
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span>{{ row.title|md(inlineOnly=true, encode=true) }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if buttons|length %}
+          <div class="btn-row">
+            {% for button in buttons %}<a class="btn {{ loop.first ? 'btn--primary' : 'btn--outline' }}" {{ links.attrs(button) }}>{{ button.label }}</a>{% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>

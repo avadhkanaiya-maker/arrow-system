@@ -189,6 +189,40 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: d09c60e2-a65b-4468-bf7a-a681cdc86f73 # Card Style
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 53fb6f3d-387a-4efc-96b5-7e0c96640851
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 17552c29-6afd-47f5-b93f-788116b2cf42 # Filter Tabs and Search
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 19b7adda-f13e-4e78-b318-f25026ba3d84
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
             handle: null
             instructions: null

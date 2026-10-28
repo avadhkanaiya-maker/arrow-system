@@ -1,19 +1,35 @@
 {#
   Card Grid (Pages / industries builder): small heading, heading ([red] words), intro, section link (right), cards (title, subtitle, image, text, link),
   2 / 3 / 4 per row on large screens. A card with a link is clickable as a whole. Section Settings: Space Above / Below,
-  Background, Card Shadow. Vars: block
+  Background, Card Shadow, Card Style: Standard · Link cards (design "More from Arrow", craft.css .more-card: the image or
+  else the card's Icon on top, every other icon on maroon; Subtitle as the small heading above the title; the link's
+  label as "View … →" at the bottom; the heading centred) · Image tiles (.tile: the title on the image with an arrow, the
+  whole tile is the link; 2 per row on phones) · Image cards (.img-card: no box, the image framed, a short rule, title,
+  text). Cards per Row also 5 / 6. A Standard card's Details (term + description rows) show under its text
+  (.g-card__facts; Link cards too). The last three: the flexible-packaging design's tiles, pouch formats and media cards.
+  Filter Tabs and Search (the arrow-material design's toolbar, craft.js "Card filter"): a tab per Subtitle with its count,
+  a search box (title, subtitle, text, details), 3 rows per page with page links; without JS every card shows. Vars: block
 #}
+{%- macro filterAttrs(item) -%}
+  {%- set details = (item.specItems ?? [])|map(row => row.term ~ ' ' ~ row.description)|join(' ') -%}
+  {{- (' data-group="' ~ (item.subheading|trim ? item.subheading|kebab : 'none')|e('html_attr') ~ '" data-search="'
+    ~ [item.headingText, item.subheading, (item.richText ?? '')|striptags, details]|join(' ')|lower|e('html_attr') ~ '"')|raw -}}
+{%- endmacro -%}
 {% import '_macros/text' as text %}
 {% import '_macros/layout' as layout %}
 {% import '_macros/links' as links %}
 {% set items = block.cardItems.with(['mediaImage']).all() %}
 {% set id = 'cards-' ~ block.id %}
+{% set style = block.cardStyle.value ?? '' %}
+{% set linkCards = style == 'link' %}
+{% import _self as grid %}
+{% set filters = block.cardFilters ?? false %}
 {% if items|length %}
   <section class="section card-grid{{ layout.sectionClass(block) }}"{% if block.sectionHeading %} aria-labelledby="{{ id }}"{% endif %}>
     <div class="container">
       {% set more = (block.ctaLink ?? null) and block.ctaLink.url ? block.ctaLink : null %}
       {% if block.eyebrow or block.sectionHeading or block.sectionLead or more %}
-      <header class="section-head{{ more ? ' section-head--split' }}">
+      <header class="section-head{{ more ? ' section-head--split' : (linkCards ? ' section-head--center') }}">
         <div>
         {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
         {% if block.sectionHeading %}<h2 class="section-title" id="{{ id }}">{{ text.highlight(block.sectionHeading) }}</h2>{% endif %}
@@ -23,18 +39,92 @@
       </header>
       {% endif %}
       {% set shadow = block.cardShadow.value ?? null %}
-      <ul class="card-grid__list card-grid__list--{{ block.cardColumns.value ?: '3' }}{{ shadow and shadow != 'none' ? ' card-grid__list--shadow-' ~ shadow }}">
+      {% set cols = block.cardColumns.value ?: '3' %}
+      {% if filters %}
+      {% set groups = {} %}
+      {% for item in items|filter(item => item.subheading|trim) %}{% set groups = groups|merge({(item.subheading|kebab): {label: item.subheading, n: (groups[item.subheading|kebab].n ?? 0) + 1}}) %}{% endfor %}
+      <div class="card-filter" data-card-filter hidden>
+        <div class="card-filter__tabs" role="group" aria-label="Filter">
+          <button class="card-filter__tab" type="button" data-filter="all" aria-pressed="true">All <span class="card-filter__count">{{ items|length }}</span></button>
+          {% for key, group in groups %}
+          <button class="card-filter__tab" type="button" data-filter="{{ key }}" aria-pressed="false">{{ group.label }} <span class="card-filter__count">{{ group.n }}</span></button>
+          {% endfor %}
+        </div>
+        <div class="card-filter__search">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <label class="visually-hidden" for="{{ id }}-search">Search</label>
+          <input id="{{ id }}-search" type="search" placeholder="Search" autocomplete="off" data-filter-search>
+        </div>
+      </div>
+      <p class="card-filter__status" role="status" aria-live="polite" data-filter-status></p>
+      {% endif %}
+      <ul class="card-grid__list card-grid__list--{{ cols }}{{ style == 'tile' ? ' card-grid__list--tiles' }}{{ shadow and shadow != 'none' ? ' card-grid__list--shadow-' ~ shadow }}"{% if filters %} data-filter-grid data-page-size="{{ cols * 3 }}"{% endif %}>
+        {% if linkCards %}
+        {% set icons = 0 %}
         {% for item in items %}
         {% set image = item.mediaImage.one() %}
         {% set link = item.ctaLink and item.ctaLink.url ? item.ctaLink : null %}
-        <li class="g-card{{ link ? ' g-card--link' }}">
+        {% set icon = image ? null : (item.menuIcon.value ?? null) %}
+        <li class="more-card{{ icon ? ' more-card--icon' }}"{{ filters ? grid.filterAttrs(item) }}>
+          {% if image %}<div class="more-card__media"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}"></div>
+          {% elseif icon %}<div class="more-card__media more-card__media--icon{{ icons is odd ? ' more-card__media--maroon' }}" aria-hidden="true"><svg class="icon"><use href="#i-{{ icon }}"/></svg></div>{% set icons = icons + 1 %}{% endif %}
+          <div class="more-card__body">
+            {% if item.subheading %}<p class="more-card__kicker">{{ item.subheading }}</p>{% endif %}
+            <h3 class="more-card__title">{% if link %}<a class="stretched-link" {{ links.attrs(link) }}>{{ item.headingText }}</a>{% else %}{{ item.headingText }}{% endif %}</h3>
+            {% if (item.richText ?? '')|striptags|trim %}<div class="more-card__text">{{ item.richText }}</div>{% endif %}
+            {% set details = (item.specItems ?? [])|filter(row => row.term|trim or row.description|trim) %}
+            {% if details|length %}<dl class="more-card__facts">{% for row in details %}<div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true) }}</dd></div>{% endfor %}</dl>{% endif %}
+            {% if link and link.label %}<span class="more-card__more" aria-hidden="true">{{ link.label }} <svg class="icon"><use href="#i-arrow-right"/></svg></span>{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+        {% elseif style == 'tile' %}
+        {% for item in items %}
+        {% set image = item.mediaImage.one() %}
+        {% set link = item.ctaLink and item.ctaLink.url ? item.ctaLink : null %}
+        <li class="tile"{{ filters ? grid.filterAttrs(item) }}>
+          {% if link %}<a class="tile__link" {{ links.attrs(link) }}>{% else %}<div class="tile__link">{% endif %}
+            {% if image %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async" alt="{{ image.alt }}">{% endif %}
+            <span class="tile__title">{{ item.headingText }}{% if link %} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>{% endif %}</span>
+          {% if link %}</a>{% else %}</div>{% endif %}
+        </li>
+        {% endfor %}
+        {% elseif style == 'plain' %}
+        {% for item in items %}
+        {% set image = item.mediaImage.one() %}
+        {% set link = item.ctaLink and item.ctaLink.url ? item.ctaLink : null %}
+        <li class="img-card"{{ filters ? grid.filterAttrs(item) }}>
+          {% if image %}<figure class="img-card__media"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" decoding="async" alt="{{ image.alt }}"></figure>{% endif %}
+          <h3 class="img-card__title">{% if link %}<a class="stretched-link" {{ links.attrs(link) }}>{{ item.headingText }}</a>{% else %}{{ item.headingText }}{% endif %}</h3>
+          {% if (item.richText ?? '')|striptags|trim %}<div class="img-card__text">{{ item.richText }}</div>{% endif %}
+        </li>
+        {% endfor %}
+        {% else %}
+        {% for item in items %}
+        {% set image = item.mediaImage.one() %}
+        {% set link = item.ctaLink and item.ctaLink.url ? item.ctaLink : null %}
+        {% set details = (item.specItems ?? [])|filter(row => row.term|trim or row.description|trim) %}
+        <li class="g-card{{ link ? ' g-card--link' }}"{{ filters ? grid.filterAttrs(item) }}>
           {% if image %}<div class="g-card__media"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}"></div>{% endif %}
           <h3 class="g-card__title">{% if link %}<a class="stretched-link" href="{{ link.url }}"{% if link.target %} target="{{ link.target }}" rel="noopener"{% endif %}>{{ item.headingText }}</a>{% else %}{{ item.headingText }}{% endif %}</h3>
           {% if item.subheading %}<p class="g-card__subtitle">{{ item.subheading }}</p>{% endif %}
           {% if (item.richText ?? '')|striptags|trim %}<div class="g-card__text">{{ item.richText }}</div>{% endif %}
+          {% if details|length %}
+          <dl class="g-card__facts">
+            {% for row in details %}<div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true) }}</dd></div>{% endfor %}
+          </dl>
+          {% endif %}
         </li>
         {% endfor %}
+        {% endif %}
       </ul>
+      {% if filters %}
+      <div class="card-filter__empty" data-filter-empty hidden>
+        <p><strong>Nothing matches your search.</strong> Try another word, or <button class="card-filter__reset" type="button" data-filter-reset>show all</button>.</p>
+      </div>
+      <nav class="pagination" aria-label="{{ block.sectionHeading ? text.plain(block.sectionHeading) ~ ': pages' : 'Pages' }}" data-pagination hidden></nav>
+      <p class="pagination__summary" data-page-summary hidden></p>
+      {% endif %}
     </div>
   </section>
 {% endif %}

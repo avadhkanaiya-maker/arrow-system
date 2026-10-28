@@ -7,7 +7,8 @@
    "Small illustration": a compact header, the text across the full width and the image small at the right as decoration
    (desktop only; e.g. Try a Free Sample's sample pack, an SVG). "Cut-out image beside text": a product cut-out
    (transparent background) whole and large beside the text, no frame; desktop only (e.g. the Digital Label Printers listing).
-   Subtitle (Subheading): an H2 line under the heading.
+   Subtitle (Subheading): an H2 line under the heading. Highlights (icon, title, text): a row of points under the text
+   (craft.css .highlights); with them a cut-out image shows on wide screens only (the design's .fp-hero).
    Vars: block, entry, listingPage #}
 {% import '_macros/layout' as layout %}
 {% import '_macros/text' as text %}
@@ -16,7 +17,8 @@
 {% set banner = image and (block.headerStyle.value ?? '') == 'banner' %}
 {% set art = image and (block.headerStyle.value ?? '') == 'illustration' %}
 {% set cutout = image and (block.headerStyle.value ?? '') == 'cutout' %}
-  <section class="page-hero ind-detail-hero{{ banner or art or not image ? ' page-banner' }}{{ art ? ' page-hero--art' }}{{ cutout ? ' page-hero--cutout' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
+{% set highlights = (block.highlightItems ?? [])|filter(row => row.title|trim or row.text|trim) %}
+  <section class="page-hero ind-detail-hero{{ banner or art or not image ? ' page-banner' }}{{ art ? ' page-hero--art' }}{{ cutout ? ' page-hero--cutout' }}{{ highlights|length ? ' page-hero--highlights' }}{{ layout.customClass(block) }}" aria-labelledby="page-title">
     {% if art %}<img class="page-hero__art" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="" aria-hidden="true">{% endif %}
     <div class="container">
       {% include 'industries/blocks/_breadcrumb' with { entry: entry, listingPage: listingPage } only %}
@@ -31,6 +33,13 @@
           <ul class="app-tags" aria-label="Applications">
             {% for row in apps %}
             <li>{{ row.text }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if highlights|length %}
+          <ul class="highlights" aria-label="Highlights">
+            {% for row in highlights %}
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><span>{% if row.title %}<strong>{{ row.title|md(inlineOnly=true, encode=true) }}</strong>{% endif %}{{ row.text|md(inlineOnly=true, encode=true) }}</span></li>
             {% endfor %}
           </ul>
           {% endif %}

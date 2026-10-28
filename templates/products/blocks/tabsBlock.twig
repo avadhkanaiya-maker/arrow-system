@@ -1,18 +1,32 @@
 {# Tabs block: the design's tab set (div.tabs[data-tabs], js/products/product-detail.js). Vars: block, tabs (its tab entries), tabIds ({'t' ~ tab.id: id})
+   Optional head above the tabs: Small Heading, Heading ([red] words, id tabs-{block.id}-title), Intro.
    Panels: Highlights (icon cards + "View full specifications" → the first Specifications tab), Specifications, Downloads,
-   text. Each panel has a heading (Highlights: its Panel Heading; text tabs: the tab title, shown only without JS). #}
+   Cards (the Card Grid's cards as .prod cards, craft.css; a link to a file shows a download icon; several cards: their
+   number on the tab), text. Each panel has a heading (Highlights: its Panel Heading; text and cards tabs: the tab title,
+   shown only without JS). #}
+{% import '_macros/text' as text %}
+{% import '_macros/links' as links %}
 {% set specsTab = tabs|filter(t => t.type.handle == 'specsTab')|first %}
+{% set heading = block.sectionHeading ?? null %}
+        {% if (block.eyebrow ?? null) or heading or (block.sectionLead ?? null) %}
+        <header class="section-head">
+          {% if block.eyebrow ?? null %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
+          {% if heading %}<h2 class="section-title" id="tabs-{{ block.id }}-title">{{ text.highlight(heading) }}</h2>{% endif %}
+          {% if block.sectionLead ?? null %}<p class="tabs-block__intro">{{ block.sectionLead }}</p>{% endif %}
+        </header>
+        {% endif %}
         <div class="tabs" data-tabs>
-          <div class="tabs__list" role="tablist" aria-label="Product details" data-tablist hidden>
+          <div class="tabs__list" role="tablist" aria-label="{{ heading ? heading|replace({'[': '', ']': ''}) : 'Product details' }}" data-tablist hidden>
             {% for tab in tabs %}
             {% set id = tabIds['t' ~ tab.id] %}
-            <button class="tabs__tab" type="button" role="tab" id="tab-{{ id }}" aria-controls="{{ id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ tab.headingText }}</button>
+            {% set count = tab.type.handle == 'cardsTab' ? tab.cardItems.count() : 0 %}
+            <button class="tabs__tab" type="button" role="tab" id="tab-{{ id }}" aria-controls="{{ id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ tab.headingText }}{% if count > 1 %} <span class="tabs__count">{{ count }}</span>{% endif %}</button>
             {% endfor %}
           </div>
           {% for tab in tabs %}
           {% set id = tabIds['t' ~ tab.id] %}
 
-          <div class="tab-panel" id="{{ id }}" role="tabpanel" aria-labelledby="tab-{{ id }}" data-panel>
+          <div class="tab-panel{{ tab.type.handle == 'cardsTab' ? ' tab-panel--cards' }}" id="{{ id }}" role="tabpanel" aria-labelledby="tab-{{ id }}" data-panel>
             {% switch tab.type.handle %}
               {% case 'highlightsTab' %}
             <h3 class="pd-panel-title">{{ tab.sectionHeading ?: tab.headingText }}</h3>
@@ -30,6 +44,22 @@
               {% case 'downloadsTab' %}
             <h3 class="pd-panel-title">Downloads</h3>
             {% include 'products/blocks/_downloads' with { items: tab.downloadItems.with(['downloadFile']).all() } only %}
+              {% case 'cardsTab' %}
+            <h3 class="tab-panel__title">{{ tab.headingText }}</h3>
+            <div class="prod-grid">
+              {% for card in tab.cardItems.with(['mediaImage']).all() %}
+              {% set image = card.mediaImage.one() %}
+              {% set link = card.ctaLink and card.ctaLink.url ? card.ctaLink : null %}
+              {% set file = link and link.type == 'asset' %}
+              <article class="prod">
+                {% if image %}<img class="prod__img" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt }}">{% endif %}
+                <h4 class="prod__name">{{ card.headingText }}</h4>
+                {% if card.subheading %}<p class="prod__subtitle">{{ card.subheading }}</p>{% endif %}
+                {% if (card.richText ?? '')|striptags|trim %}<div class="prod__desc">{{ card.richText }}</div>{% endif %}
+                {% if link %}<a class="prod__pdf" {{ links.attrs(link) }}>{% if file %}<svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>{% endif %}{{ link.label ?: (file ? 'Download' : 'Learn more') }}<span class="visually-hidden"> for {{ card.headingText }}</span>{% if not file %}<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>{% endif %}</a>{% endif %}
+              </article>
+              {% endfor %}
+            </div>
               {% default %}
             <h3 class="tab-panel__title">{{ tab.headingText }}</h3>
             <div class="rich-text">

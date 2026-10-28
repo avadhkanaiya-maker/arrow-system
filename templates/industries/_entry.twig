@@ -7,6 +7,7 @@
   industries/blocks/ (named after the entry type handle):
     industryHeader    1. "Page Header": breadcrumb, small heading, H1 ([red] words), intro, applications, image, 2 buttons
     productShowcase   2. Recommended products: picked products or products from categories (dynamic), product cards
+    productSpotlight  one product: points | image | name, specifications, 2 buttons (the flexible-packaging design)
     contentBlock      3. image + text blocks; consecutive ones share one section and alternate the image side (design CSS)
     contactBlock      4. contact panel (Site Settings) + form (js/industries/industry-detail.js; not connected yet)
     otherIndustries   5. three industry cards: picked, else the next listed industries after this one
@@ -37,7 +38,7 @@
 
 {# Group consecutive Content Blocks (the design puts them in one section, where :nth-child alternates the image side) and
    consecutive common blocks (the page-builder blocks shared with the blog, _builder/: one text column) #}
-{% set own = ['industryHeader', 'productShowcase', 'contentBlock', 'contactBlock', 'otherIndustries', 'ctaBand', 'photoGallery', 'statsStrip', 'formBlock', 'columnsBlock', 'cardGrid', 'tabsBlock', 'mediaCarousel'] %}
+{% set own = ['industryHeader', 'productShowcase', 'productSpotlight', 'contentBlock', 'contactBlock', 'otherIndustries', 'ctaBand', 'photoGallery', 'statsStrip', 'formBlock', 'columnsBlock', 'cardGrid', 'tabsBlock', 'mediaCarousel'] %}
 {% set groups = [] %}
 {% for block in blocks %}
   {% set key = block.type.handle in own ? block.type.handle : 'common' %}

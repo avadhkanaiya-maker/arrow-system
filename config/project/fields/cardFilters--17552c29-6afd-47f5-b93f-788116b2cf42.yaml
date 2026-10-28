@@ -1,0 +1,13 @@
+columnSuffix: null
+handle: cardFilters
+instructions: 'On: a tab per card Subtitle (e.g. the material type) and a search box above the cards, which are shown 3 rows at a time with page links. For long lists, e.g. all materials.'
+name: 'Filter Tabs and Search'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+  showLabelsInCards: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

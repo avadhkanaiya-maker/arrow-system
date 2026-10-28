@@ -1,0 +1,270 @@
+allowLineBreaksInTitles: false
+color: null
+description: 'A product with its key points, photo, specifications and buttons.'
+fieldLayouts:
+  1d93a8fe-5ab1-4857-899d-bb7199f6f7c0:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'e.g. “With ArrowJet Aqua 800M”.'
+            label: 'Small Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 66d9c4a9-4b3d-4af1-a730-8056cceaf213
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 60b8fa30-2623-4698-b82c-b9513123547c # Heading
+            handle: null
+            instructions: 'e.g. “Print Beyond [Limits]” ([words] in red).'
+            label: Heading
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5abbe61f-ea64-4ea7-b5e6-7a59809abc1f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
+            handle: null
+            instructions: null
+            label: Intro
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: eb125afe-c5f8-43e4-afc5-594dbbc99aa9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3173d625-786e-4c0d-9024-eff97060aeb7 # Highlights
+            handle: null
+            instructions: 'Shown left of the image. One per row: an Icon, a short Title and a line of Text.'
+            label: Points
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d14ffc74-e5ae-4ac3-b9c0-7d4c76e65fb9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c9114061-45a4-44b1-b467-f026aa6985b5 # Products
+            handle: null
+            instructions: 'The product in the spotlight (the first one picked): its name links to its page.'
+            label: Product
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: bbcd7b70-7468-4cfe-bb58-00c1c27c1e36
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
+            handle: null
+            instructions: 'Empty = the product’s Main Image. A cut-out (transparent or white background) works best.'
+            label: Image
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c4bee1f4-0646-4537-b7e9-4ca9587f7e76
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 3173d625-786e-4c0d-9024-eff97060aeb7 # Highlights
+            handle: specChips
+            instructions: 'Under the product name: an Icon and the spec as the Title per row, e.g. Gauge · “Speed: up to 150 meters/min”. Text is not used.'
+            label: Specifications
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 28ab4250-c6df-4826-8c69-2c69c4d98aaf
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 08984390-4496-459b-9a5d-d4224d3088f1 # Primary Button
+            handle: null
+            instructions: 'e.g. “Request Quote” → Request a Quote.'
+            label: 'Button 1'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cdaeae5a-3033-4b39-abb1-230ebd5ebc91
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
+            handle: null
+            instructions: 'e.g. “View Printer” → the product.'
+            label: 'Button 2'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a8bcd803-8597-4380-942a-54ba052a4c72
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 6aefd8f8-76d3-47fc-8cd6-93470b39675b
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 57d1d2c9-ac0f-40ee-8914-36aa14392881 # Space Above
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8afc5cb0-9f44-4cb7-8b48-7a827fbb56bd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: f5aa0ceb-3e8f-47f1-91df-0644c97e3b82 # Space Below
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 71dc31b4-2466-451d-be12-4ab4b81ff398
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 78f46f52-ad0b-4ac0-8879-936a8e4bb65d # Background
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a44a6a5d-646a-4a1e-bc74-4463d1d8355a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 9c207017-356e-4550-8877-9c6497648b06 # CSS Class
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 93d236d1-c993-4cd5-95c2-f0bb2fd17428
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: c28cb0bb-637c-4069-8162-871afa0f7937 # Anchor ID
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2b4c4727-1d88-4492-b8af-3be2733dad56
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Section Settings'
+        uid: cf278740-7995-4976-8fad-26d84f215628
+        userCondition: null
+    thumbFieldKey: null
+handle: productSpotlight
+hasTitleField: false
+icon: star
+name: 'Product Spotlight'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{sectionHeading}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

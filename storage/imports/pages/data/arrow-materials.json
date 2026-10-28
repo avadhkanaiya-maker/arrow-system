@@ -1,0 +1,286 @@
+{
+ "_source": "Design: demo.theglobalwebdev.com/Arrowsystem/arrow-materials/ (index.html, read 2026-10-28). Read by 31_arrow_materials_design.php.",
+ "header": {
+  "eyebrow": "Arrow materials",
+  "heading": "ArrowJet Water-Based Inkjet Receptive Media",
+  "lead": [
+   "We offer a wide variety of roll label materials for digital label printing. If you are in need of continuous or pre-cut materials call our knowledgeable staff today and they will be happy to help you find the right materials for your label printing equipment.",
+   "In addition to all forms of label stock, we offer high-security foils, non-transfer void material, tag stocks, specialty laminates, and much more! Contact us today to learn more!"
+  ],
+  "image": {
+   "url": "https://demo.theglobalwebdev.com/Arrowsystem/assets/materials/web/material-holography-1.webp",
+   "alt": "Holographic label of a classic car, printed with water-based ink on ArrowJet media"
+  },
+  "buttons": [
+   {
+    "label": "Material Specifications",
+    "href": "#specifications"
+   },
+   {
+    "label": "Talk to a Specialist",
+    "href": "tel:+18886972749"
+   }
+  ]
+ },
+ "tabSets": [
+  {
+   "anchor": "specialty",
+   "background": "surface",
+   "eyebrow": "Specialty materials",
+   "heading": "Foils, Tags and [Security Materials]",
+   "intro": null,
+   "tabs": [
+    {
+     "title": "AD5050A High Resin – FAR Foil",
+     "cards": [
+      {
+       "name": "AD5050A High Resin – FAR Foil",
+       "text": "Specifically designed for unparalleled versatility and dependability. Specially formulated for Arrow Systems, Inc.’s Fabritag FAR material as well as for polypropylene & polyester materials. For use in the most challenging environments and applications from textiles and pharmaceutical labeling to chemical drum and heat shrink wrap labeling. Withstands washing, dry cleaning, ironing, and autoclaving. Provides halogen-type solvent resistance.",
+       "file": "far-foil.pdf",
+       "label": "Download PDF"
+      }
+     ]
+    },
+    {
+     "title": "AD5010A Fabritag – FAR Material",
+     "cards": [
+      {
+       "name": "AD5010A Fabritag – FAR Material",
+       "text": "Arrow Systems, Inc.’s highly durable, heat-resistant fabritag material is ideal for a wide array of uses from clothing and seatbelt tags to high-stress environment tags. Specially formulated for High Resin FAR Foil for unmatched strength and longevity. Withstands washing, dry cleaning, and ironing. The ideal material for demanding industrial applications.",
+       "file": "far-material.pdf",
+       "label": "Download PDF"
+      }
+     ]
+    },
+    {
+     "title": "Non-Transfer Void Materials",
+     "cards": [
+      {
+       "name": "Non-Transfer Void Materials",
+       "text": "Custom print and cut your own non-transfer void materials for industrial security applications. When the material is peeled it shows “VOID” or any other custom message to show that the label has been tampered with. There is no adhesive transfer onto the object the label is attached to, the label itself voids. Perfect for airline doors, as well as other industrial security applications!",
+       "file": null,
+       "label": null
+      }
+     ]
+    },
+    {
+     "title": "Specialty Laminates and Foils",
+     "cards": [
+      {
+       "name": "Specialty Laminates and Foils",
+       "text": "We offer a wide selection of specialty laminates and foils, both for security labels, as well as unique branding. We have a wide selection of digitally printable foils, as well as overlaminates that can be used for finishing labels. To see our full catalog of these materials, contact us today!",
+       "file": null,
+       "label": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "anchor": "specifications",
+   "background": null,
+   "eyebrow": "ArrowJet inkjet media",
+   "heading": "Arrow Material [Specifications]",
+   "intro": "Choose a material type, then download the spec sheet for the full technical details.",
+   "tabs": [
+    {
+     "title": "Film Label Stocks",
+     "cards": [
+      {
+       "name": "Arrow IJ White PP/ASI01/40# White Kraft",
+       "text": "A white inkjet printable polypropylene label facestock with high gloss finish.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-1.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "3.5 mil Arrow IJ White PP/ASI02/40# White Kraft",
+       "text": "A white inkjet printable polypropylene label facestock with high gloss finish.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-2.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "3.1 mil Arrow IJ Clear PP/ASI01/3.2 mil White Kraft",
+       "text": "A clear inkjet printable polypropylene label facestock.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-3.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "2.4 mil Arrow IJ Matte White PP/ASI01/40# White Kraft",
+       "text": "Matte white PP, polyolefin-based film top coated with a universal waterfast ink-jet coating.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-4.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "4.5 mil Arrow Polyjet Laser Matte White Vinyl/ASI02/3.2 mil White Kraft",
+       "text": "Designed to work in all current ink-jet and hot fusion-based laser printers using dye-based, pigment, solvent and UV inks.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-5.pdf",
+       "label": "Download Spec Sheet"
+      }
+     ]
+    },
+    {
+     "title": "Paper Label Stocks",
+     "cards": [
+      {
+       "name": "Arrow Coated IJ Color Paper/ASI03/2.7 mil White Kraft",
+       "text": "Special-coated, matte finished paper.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-6.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "4.1 mil Arrow Coated IJ Paper/ASI02/2.8 mil White Kraft",
+       "text": "High Gloss machine finished paper suitable for inkjet printing.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-7.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "3.9 mil Arrow IJ Gloss Pro Paper/ASI02/40# White Kraft",
+       "text": "Designed to be compatible with dye and pigmented ink-jet inks.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-8.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "3.5 mil Arrow IJ Satin/ASI02/40# White Kraft",
+       "text": "Special-coated paper with a silky surface.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-9.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "Arrow Gloss Coated IJ Paper/ASI02/40# White Kraft",
+       "text": "Machine finished paper suitable for inkjet printing.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-10.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "Arrow Super Bright Laser Jet/ASI45/3.4 Mil Laser Liner",
+       "text": "Exceptionally bright, uncoated, multi-purpose sheet for both laser and ink jet printing.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-11.pdf",
+       "label": "Download Spec Sheet"
+      }
+     ]
+    },
+    {
+     "title": "Overlaminates",
+     "cards": [
+      {
+       "name": "1.5 mil Arrow Matte Polypropylene Overlaminate",
+       "text": "Soft non-glare finish, receptive to pen, pencil or marker. Ideal for beverage, food, and cosmetic labels where an attractive, high-end appearance is desired.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-12.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "1.42 mil Arrow Matte Polyester Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides a soft non-glare finish. Meets UL standard 969; File number MH18515. Ideal for durable applications requiring a high end appearance.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-13.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "1.42 mil Arrow Clear Polyester Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides the ultimate UV resistance, maintains vibrant colors and protects label from deterioration. Ideal for bumper stickers, window decals and outdoor applications. Meets UL standard 969; File number MH18515.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-14.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "0.89 mil Arrow Matte Polyester Sofsens",
+       "text": "Matte modified surface with tactile enhancements. Excellent adhesion to challenging digitally printed surfaces. Ideal for use in labeling and flexible packaging applications such as food and cosmetics.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-15.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "1.62 mil Arrow Clear Easy Release Polyester Overlaminate",
+       "text": "Clear polyester (PET) film with an easy release treatment and a 0.70 mil high grade clear emulsion acrylic adhesive.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-16.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "1.42 mil Arrow Clear Easy Release Polyester Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides stability, durability and UV protection. Treated with a platinum based silicone to facilitate smooth unwind. Ideal where a quiet unwind is desired or for multi-ply labels where an easy release is required.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-17.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "2.34 mil Arrow Clear Linered Polyester Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides stability, durability and UV protection. Top coated for flexographic, secondary thermal transfer and laser printing.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-18.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "2.34 mil Arrow Clear Linered Polyester Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides stability, durability and UV protection. Provides high clarity and offers an attractive “no label” appearance. Ideal for applications where optimal clarity or thermal transfer printing is required.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-19.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "0.91 mil Arrow Ultra Thin Matte Polypropylene",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides a soft non-glare finish. Ideal for beverage, food and cosmetic labels.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-20.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "1.3 mil Arrow Clear Polypropylene Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides additional overall stability. Ideal for food, beverage and health and beauty labels.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-21.pdf",
+       "label": "Download Spec Sheet"
+      },
+      {
+       "name": "1.5 mil Arrow Clear Polypropylene Overlaminate",
+       "text": "Excellent acid, chemical, oil and scuff resistance. Provides additional stability and excellent clarity. Ideal for more demanding label applications.",
+       "file": "Arrow-Material-Spec-Sheets-Masterlist-V1-22.pdf",
+       "label": "Download Spec Sheet"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "cta": {
+  "heading": "Need continuous or pre-cut materials?",
+  "text": "Call our knowledgeable staff and they will be happy to help you find the right materials for your label printing equipment.",
+  "buttons": [
+   {
+    "label": "Call 1-888-697-2749",
+    "href": "tel:+18886972749"
+   },
+   {
+    "label": "Request a Quote",
+    "href": "https://arrsys.com/request-quote/"
+   }
+  ]
+ },
+ "more": {
+  "eyebrow": "Keep exploring",
+  "heading": "More from [Arrow]",
+  "cards": [
+   {
+    "kicker": "Labels and flexible packaging",
+    "title": "Arrow Material",
+    "text": "Self-adhesive label stocks, laminated flexible packaging rolls and specialty films.",
+    "more": "View materials",
+    "href": "https://arrsys.com/arrow-material/",
+    "image": {
+     "url": "https://demo.theglobalwebdev.com/Arrowsystem/assets/materials/web/material-arrow-coating-lamination-1.webp",
+     "alt": "Printed and laminated flexible packaging pouch"
+    },
+    "icon": null
+   },
+   {
+    "kicker": "Finishing",
+    "title": "Thermal Lamination Film",
+    "text": "Films for laminating printed labels and packaging.",
+    "more": "View films",
+    "href": "https://arrsys.com/thermal-lamination-film/",
+    "image": null,
+    "icon": "layers"
+   },
+   {
+    "kicker": "Try before you buy",
+    "title": "Get a Free Sample",
+    "text": "Tell us what you would like to try and we will follow up with the right sample.",
+    "more": "Request a sample",
+    "href": "https://arrsys.com/try-a-free-sample/",
+    "image": null,
+    "icon": "package"
+   }
+  ]
+ }
+}
