@@ -1,19 +1,25 @@
 {#
-  Card Grid (Pages / industries builder): heading ([red] words), intro, cards (title, subtitle, image, text, link),
+  Card Grid (Pages / industries builder): small heading, heading ([red] words), intro, section link (right), cards (title, subtitle, image, text, link),
   2 / 3 / 4 per row on large screens. A card with a link is clickable as a whole. Section Settings: Space Above / Below,
   Background, Card Shadow. Vars: block
 #}
 {% import '_macros/text' as text %}
 {% import '_macros/layout' as layout %}
+{% import '_macros/links' as links %}
 {% set items = block.cardItems.with(['mediaImage']).all() %}
 {% set id = 'cards-' ~ block.id %}
 {% if items|length %}
   <section class="section card-grid{{ layout.sectionClass(block) }}"{% if block.sectionHeading %} aria-labelledby="{{ id }}"{% endif %}>
     <div class="container">
-      {% if block.sectionHeading or block.sectionLead %}
-      <header class="section-head">
+      {% set more = (block.ctaLink ?? null) and block.ctaLink.url ? block.ctaLink : null %}
+      {% if block.eyebrow or block.sectionHeading or block.sectionLead or more %}
+      <header class="section-head{{ more ? ' section-head--split' }}">
+        <div>
+        {% if block.eyebrow %}<p class="eyebrow">{{ block.eyebrow }}</p>{% endif %}
         {% if block.sectionHeading %}<h2 class="section-title" id="{{ id }}">{{ text.highlight(block.sectionHeading) }}</h2>{% endif %}
         {% if block.sectionLead %}<p class="section-lead">{{ block.sectionLead }}</p>{% endif %}
+        </div>
+        {% if more %}<a class="text-link" {{ links.attrs(more) }}>{{ more.label }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>{% endif %}
       </header>
       {% endif %}
       {% set shadow = block.cardShadow.value ?? null %}

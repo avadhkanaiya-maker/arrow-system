@@ -1,7 +1,9 @@
-{# FAQ block: div.faq, one details.faq__item per FAQ Item in its nested field (faqItems) #}
+{# FAQ block: div.faq, one details.faq__item per FAQ Item in its nested field (faqItems). One shared name per block:
+   the browser keeps one question open at a time (opening one closes the other).
+   shortcut: browsers older than 2024 (Chrome 120, Safari 17.2, Firefox 130) ignore the name and allow several open; add JS if they matter #}
 <div class="faq">
   {% for item in block.faqItems.all() %}
-  <details class="faq__item">
+  <details class="faq__item" name="faq-{{ block.id }}">
     <summary class="faq__q">{{ item.headingText }}</summary>
     <div class="faq__a">{{ item.richText }}</div>
   </details>

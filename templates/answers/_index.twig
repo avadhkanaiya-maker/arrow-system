@@ -1,0 +1,110 @@
+{#
+  /answers/ (Answers Page single). Design: Arrowsystem_local/answers/index.html
+    1. Header: breadcrumb, small heading, heading ([red] words), intro, "N answers" + the count line
+    2. All Answers: search + cards (the Answers structure order: Card Icon, title, Card Summary), 9 per page. Search and
+       pages are js/answers/answers.js (the design's, unchanged); without JS every answer is listed.
+    3. Help band (maroon): small heading, heading, text, the page's button + the toll-free phone from Site Settings
+  SEO: CollectionPage + BreadcrumbList.
+#}
+{% extends '_layouts/base' %}
+{% import '_macros/links' as links %}
+{% import '_macros/text' as text %}
+
+{% set answers = craft.entries.section('answers').all() %}
+{% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
+{% set phone = siteSettings.tollFreePhone ?? null %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block seo %}
+  {% include '_partials/seo' with {
+    title: pageTitle,
+    description: entry.seoDescription,
+    canonical: entry.url,
+    noindex: entry.seoNoIndex,
+    ogType: 'article',
+    image: entry.socialImage.one(),
+    schema: [
+      {'@type': 'CollectionPage', '@id': entry.url ~ '#webpage', url: entry.url, name: pageTitle,
+        mainEntity: {'@type': 'ItemList', itemListElement: answers|map((a, k) => {'@type': 'ListItem', position: k + 1, url: a.url, name: a.title})}},
+      {'@type': 'BreadcrumbList', itemListElement: [
+        {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl},
+        {'@type': 'ListItem', position: 2, name: entry.title, item: entry.url},
+      ]},
+    ],
+  } %}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url('assets/css/answers/answers.css') }}">
+  <script src="{{ url('assets/js/answers/answers.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <!-- ============ 1. PAGE HEADER ============ -->
+  <section class="page-hero ans-hero" aria-labelledby="page-title">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ siteUrl }}">Home</a></li>
+          <li><a href="{{ entry.url }}" aria-current="page">{{ entry.title }}</a></li>
+        </ol>
+      </nav>
+      <div class="ans-hero__intro">
+        {% if entry.eyebrow %}<p class="eyebrow">{{ entry.eyebrow }}</p>{% endif %}
+        <h1 class="ans-hero__title" id="page-title">{{ text.highlight(entry.sectionHeading ?: entry.title) }}</h1>
+        {% if entry.sectionLead %}<p class="ans-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
+        <p class="ans-hero__meta"><span><strong data-answer-count>{{ answers|length }}</strong> {{ answers|length == 1 ? 'answer' : 'answers' }}</span>{% if entry.caption %}<span>{{ entry.caption }}</span>{% endif %}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. ANSWERS: toolbar (title + search) + cards ============ -->
+  <section class="section section--surface ans-list" id="answers" aria-labelledby="answers-title">
+    <div class="container">
+      <div class="ans-toolbar">
+        <h2 class="ans-toolbar__title" id="answers-title">All Answers</h2>
+        <div class="lm-search" data-toolbar hidden>
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <label class="visually-hidden" for="answer-search">Search answers</label>
+          <input id="answer-search" type="search" placeholder="Search answers" autocomplete="off" data-search>
+        </div>
+      </div>
+      <p class="lm-status" role="status" aria-live="polite" data-status></p>
+      <ul class="ans-grid" data-grid data-page-size="9">
+        {% for answer in answers %}
+        <li class="ans-card" data-search="{{ (answer.title ~ ' ' ~ answer.cardTagline)|lower }}">
+          <article class="ans-card__inner">
+            <p class="ans-card__kicker"><span class="ans-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ answer.menuIcon.value ?: 'file' }}"/></svg></span>Answer</p>
+            <h2 class="ans-card__title"><a class="stretched-link" href="{{ answer.url }}">{{ answer.title }}</a></h2>
+            {% if answer.cardTagline %}<p class="ans-card__text">{{ answer.cardTagline }}</p>{% endif %}
+            <span class="ans-card__more" aria-hidden="true">Read the answer <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+          </article>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="lm-empty" data-empty hidden>
+        <p><strong>No answers match your search.</strong> Try a word such as &ldquo;flexo&rdquo; or &ldquo;pouch&rdquo;, or <button class="lm-empty__reset" type="button" data-reset>show all answers</button>.</p>
+      </div>
+      <nav class="pagination" aria-label="Answer pages" data-pagination hidden></nav>
+      <p class="pagination__summary" data-page-summary hidden></p>
+    </div>
+  </section>
+
+  {% if entry.ctaHeading %}
+  <!-- ============ 3. HELP BAND (maroon) ============ -->
+  <section class="sustain ans-cta" aria-labelledby="ans-cta-title">
+    <span class="dot-grid dot-grid--cta-a" aria-hidden="true"></span>
+    <span class="dot-grid dot-grid--cta-b" aria-hidden="true"></span>
+    <div class="container sustain__inner">
+      {% if entry.subheading %}<p class="ans-cta__eyebrow">{{ entry.subheading }}</p>{% endif %}
+      <h2 id="ans-cta-title">{{ text.highlight(entry.ctaHeading) }}</h2>
+      {% if entry.ctaText %}<p>{{ entry.ctaText }}</p>{% endif %}
+      <div class="btn-row ans-cta__actions">
+        {% if entry.ctaLink and entry.ctaLink.url %}<a class="btn btn--light btn--lg" {{ links.attrs(entry.ctaLink) }}>{{ entry.ctaLink.label }}</a>{% endif %}
+        {% if phone %}<a class="btn btn--outline-light btn--lg" href="tel:{{ links.tel(phone) }}">Call {{ phone }}</a>{% endif %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}

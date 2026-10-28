@@ -33,28 +33,27 @@ function builderValue(array $blocks): array {
     return $out;
 }
 
-/** Images volume folder blog/ */
-function blogFolder(): \craft\models\VolumeFolder {
-    static $folder;
-    if ($folder) return $folder;
+/** Images volume folder blog/ (or another one, e.g. answers/) */
+function blogFolder(string $path = 'blog'): \craft\models\VolumeFolder {
+    static $folders = [];
     $volume = Craft::$app->getVolumes()->getVolumeByHandle('images');
-    return $folder = Craft::$app->getAssets()->ensureFolderByFullPathAndVolume('blog', $volume, false);
+    return $folders[$path] ??= Craft::$app->getAssets()->ensureFolderByFullPathAndVolume($path, $volume, false);
 }
 
 /**
- * The asset for an image URL (or a local file path), imported into Images → blog/ once (matched by file name).
+ * The asset for an image URL (or a local file path), imported into Images → blog/ (or $folder) once (matched by file name).
  * Sets the alt text when the asset has none. Returns null (and logs to $GLOBALS['report']) if it can't be fetched.
  */
-function importImage(string $src, ?string $alt = null): ?Asset {
+function importImage(string $src, ?string $alt = null, string $folder = 'blog'): ?Asset {
     static $cache = [];
     $src = html_entity_decode(trim($src));
     if ($src === '') return null;
     if (str_starts_with($src, '//')) $src = 'https:' . $src;
-    $key = $src;
+    $key = "$folder|$src";
     if (array_key_exists($key, $cache)) {
         $asset = $cache[$key];
     } else {
-        $folder = blogFolder();
+        $folder = blogFolder($folder);
         $path = parse_url($src, PHP_URL_PATH) ?: $src;
         $filename = AssetsHelper::prepareAssetName(rawurldecode(basename($path)));
         if (!pathinfo($filename, PATHINFO_EXTENSION)) $filename .= '.jpg';
@@ -159,8 +158,8 @@ function postSeo(array $post, string $title): array {
     return array_filter($out);
 }
 
-/** The post's publish date: WordPress's local `date` in the site's time zone (as live shows it; `date_gmt` equals `date`
-    on older posts, so it can be hours off) */
+/** The post's publish date: WordPress's local `date` in live's time zone, America/New_York (as live shows it; `date_gmt`
+    equals `date` on older posts, so it can be hours off). Not Craft's time zone: it was changed to Asia/Kolkata later */
 function postDate(array $post): DateTime {
-    return new DateTime($post['date'], new DateTimeZone(Craft::$app->getTimeZone()));
+    return new DateTime($post['date'], new DateTimeZone('America/New_York'));
 }

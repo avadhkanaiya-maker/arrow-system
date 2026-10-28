@@ -13,6 +13,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: da5c1b6d-df3b-4a5c-ac35-e166c3f29ca6 # Small Heading
+            handle: null
+            instructions: 'Optional small label above the heading, e.g. “Buying Criteria”.'
+            label: 'Small Heading'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 43d48096-c8e2-4a6a-ab12-389a11769395
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: fee06267-06c3-47c7-849b-44302f0313fb # Heading Text
             handle: null
             instructions: null

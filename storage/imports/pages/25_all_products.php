@@ -10,11 +10,11 @@
  *   /all-products/printers/                              "Printer" (9: live's ArrowJet VDP left out, its product address now
  *                                                        redirects to the Limitronic printers page and it isn't on staging)
  *   /all-products/printers/gerber-printers/              "Printers by Gerber" (1: Gerber EDGE FX, a wide card)
- *   /all-products/printers/trojan-printers/              "Printers by Trojan" (3: T2-L, T2-C, T4)
+ *   /all-products/printers/trojan-printers/              "Printers by Trojan" (4: T2-L, T2-C, T2, T4)
  *   /all-products/printers/quicklabel-printers/          "Printers by QuickLabel" (1: QL-300, a wide card)
  *     Live's two pages are empty (only the H1, since at least April 2024): filled with the brand's printers on staging.
- *     Trojan T2 is left out: switched off on staging (2026-10-22, by hand). Card texts from live's "Digital Label
- *     Printers by Trojan" page; T4 and QL-300 have no live listing: their short name and subtitle only.
+ *     Card texts from live's "Digital Label Printers by Trojan" page; T4 and QL-300 have no live listing: their short
+ *     name and subtitle only.
  *   /all-products/plotters/                              "Gerber Plotters" (3) + live's banner (Gerber-Envision-375-Plotter.jpg)
  *   /all-products/digital-label-printers/                switched off, as live (301 → its child, config/redirects.php)
  *   …/digital-label-printers/arrow-digital-label-printers/ "ArrowJet Digital Label Printers" (12), as the design
@@ -22,6 +22,9 @@
  *     (Header Style "Cut-out image beside text", 27_header_subtitle_cutout.php), the lineup, then Card Grids (about the
  *     range, who it's for, other categories) and a CTA Band; SEO as live. Left out: the design's search box, pagination
  *     (12 fit one page), "12 printers" line, section eyebrows and card kickers (no such block fields).
+ *   …/digital-label-printers/trojan-digital-label-printers/ "Digital Label Printers by Trojan" (3: T2-L, T2-C, T2, as live;
+ *     no banner on live). Trojan T2 had been switched off on staging (Draft 1 applied in the CP, 2026-10-16): switched on
+ *     here (SWITCH_ON), since live shows it on this page and at /product/trojan-t2/
  *   /all-products/corrugate-and-end-of-line-printing/    "Corrugate and End of Line Printing" (5: the Limitronic printers,
  *                                                        as live); first made as a switched-off placeholder for its child
  *   …/corrugate-and-end-of-line-printing/printers-by-limitronic/ "Printers by Limitronic" (5) + live's banner (LIMITRONIC-3.jpg)
@@ -42,7 +45,9 @@
  * Then every menu item, link field and rich text link pointing at a built page's live address links here (a switched-off
  * page's address: where config/redirects.php sends it; rich text gets the page's path, e.g. /all-products/plotters/, as
  * the blog's other internal links); skipped under an open draft; stops if a menu has unsaved builder changes. Live
- * redirects: config/redirects.php. Skips pages that exist.
+ * redirects: config/redirects.php. Skips pages that exist, except: a page whose product list lacks products its spec
+ * now names gets the spec's list (only when the spec covers every product on the page: CP additions are kept; not under
+ * an open draft).
  * Back up first. Run from the project root: /opt/lampp/bin/php storage/imports/pages/25_all_products.php
  */
 require dirname(__DIR__) . '/blog/_bootstrap.php';
@@ -97,7 +102,7 @@ const PAGES = [
         'blocks' => [['Gerber [Printers]', ['gerber-edge-fx'], null]]],
     'all-products/printers/trojan-printers' => ['title' => 'Trojan Printers', 'parent' => 'all-products/printers', 'eyebrow' => 'Product category',
         'h1' => 'Printers by [Trojan]', 'seoTitle' => 'Printers by Trojan - Arrow Systems, Inc.', 'seoDescription' => null,
-        'blocks' => [['Trojan [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer',
+        'blocks' => [['Trojan [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer', 'trojan-t2',
             'trojan-t4-all-in-one-digital-label-printer-and-finisher'], null]]],
     'all-products/printers/quicklabel-printers' => ['title' => 'QuickLabel Printers', 'parent' => 'all-products/printers', 'eyebrow' => 'Product category',
         'h1' => 'Printers by [QuickLabel]', 'seoTitle' => 'Printers by QuickLabel - Arrow Systems, Inc.', 'seoDescription' => null,
@@ -141,6 +146,10 @@ const PAGES = [
                     [DESIGN . 'materials/web/material-holography-1.webp', 'Holographic label printed with water-based ink'], ['Label Materials', 'https://arrsys.com/arrow-materials/']],
             ]],
         ]],
+    'all-products/digital-label-printers/trojan-digital-label-printers' => ['title' => 'Digital Label Printers by Trojan',
+        'parent' => 'all-products/digital-label-printers', 'eyebrow' => 'Product category', 'h1' => 'Digital Label Printers by [Trojan]',
+        'seoTitle' => 'Digital Label Printers by Trojan - Arrow Systems, Inc.', 'seoDescription' => 'DIGITAL LABEL PRINTERS BY TROJAN',   // as live
+        'blocks' => [['Trojan Digital Label [Printers]', ['trojan-t2-l', 'trojan-t2-c-large-capacity-tabletop-digital-printer', 'trojan-t2'], null]]],
     'all-products/corrugate-and-end-of-line-printing' => ['title' => 'Corrugate and End of Line Printing', 'parent' => 'all-products',
         'eyebrow' => 'Product category', 'h1' => 'Corrugate and End of Line [Printing]',
         'seoTitle' => 'Corrugate and End of Line Printing - Arrow Systems, Inc.', 'seoDescription' => 'Printhead resolution: 180dpi',   // as live
@@ -186,6 +195,10 @@ const CARDS = [
         [['Resolution', '1600 x 800 dpi or 1600 x 1600 dpi'], ['Speed', '6 ips (9 m/min) or 12 ips (18 m/min)'], ['Print Area', 'Width: 8.8″ (223 mm)'],
          ['Length without stitching', '0.6″ – 30″ (15 – 762 mm)'], ['Length with stitching', '0.4″ (10 mm) – 60″ (1525 mm) or unlimited'],
          ['Ink', 'High-performance water-based dye ink, four 2-liter tanks CMYK']]],
+    'trojan-t2' => [null, 'Full Capacity Digital Tabletop Press',   // live's card: the same text as the T2-C's
+        [['Resolution', '1600 x 800 dpi or 1600 x 1600 dpi'], ['Speed', '6 ips (9 m/min) or 12 ips (18 m/min)'], ['Print Area', 'Width: 8.8″ (223 mm)'],
+         ['Length without stitching', '0.6″ – 30″ (15 – 762 mm)'], ['Length with stitching', '0.4″ (10 mm) – 60″ (1525 mm) or unlimited'],
+         ['Ink', 'High-performance water-based dye ink, four 2-liter tanks CMYK']]],
     'trojan-t4-all-in-one-digital-label-printer-and-finisher' => ['Trojan T4', 'All-in-One Digital Label Printer and Finisher', []],
     'ql-300-5-color-toner-printer' => ['QuickLabel QL-300', '5 Color Laser Label Printer', []],
     'gerber-gs15-plus-plotter' => [null, 'Tangential Cutting & Swivel Knife Technology',
@@ -213,6 +226,17 @@ const CARDS = [
 $elements = Craft::$app->getElements();
 $product = fn(string $slug) => Entry::find()->section('products')->slug($slug)->status(null)->one() ?? exit("no product $slug\n");
 $hasDraft = fn(int $id) => (new Query())->from('{{%drafts}}')->where(['canonicalId' => $id])->exists();
+
+// products a page lists that were switched off on staging but live shows (product page and listings)
+const SWITCH_ON = ['trojan-t2'];   // off since "Draft 1" was applied in the CP on 2026-10-16; live: /product/trojan-t2/ + the Trojan listing
+foreach (SWITCH_ON as $slug) {
+    $p = $product($slug);
+    if ($p->enabled) continue;
+    if ($hasDraft($p->id)) { say("  ! {$p->title}: open draft, not switched on"); continue; }
+    $p->enabled = true;
+    $elements->saveElement($p) || fail("product $slug", $p);
+    say("  ~ {$p->title}: switched on");
+}
 
 // product cards: fill what's empty
 foreach (CARDS as $slug => [$cardTitle, $tagline, $specs]) {
@@ -287,6 +311,16 @@ foreach (PAGES as $path => $spec) {
         $elements->saveElement($page) || fail("page $path", $page);
         $page->uri === $path || exit("the page got /{$page->uri}/, expected /$path/\n");
         say(($placeholder ? '  ~ placeholder' : '  +') . " page /{$page->uri}/ (" . implode(', ', array_map(fn($b) => count($b[1]) . ' products', $spec['blocks'])) . ')');
+    }
+    // products added to the spec after the page was built: the page gets the spec's list, when it covers every product on it
+    foreach (Entry::find()->ownerId($page->id)->type('productShowcase')->status(null)->all() as $i => $grid) {
+        $want = array_map(fn($s) => $product($s)->id, $spec['blocks'][$i][1] ?? []);
+        $have = $grid->getFieldValue('selectedProducts')->status(null)->ids();
+        if (!$want || $have === $want || array_diff($have, $want)) continue;
+        if ($hasDraft($page->id)) { say("  ! /$path/ has an open draft: products not updated"); continue; }
+        $grid->setFieldValue('selectedProducts', $want);
+        $elements->saveElement($grid) || fail("products of $path", $grid);
+        say("  ~ /$path/: " . count($want) . ' products (was ' . count($have) . ')');
     }
     // a banner added to the spec after the page was built: into its Page Header (not under an open draft)
     $header = Entry::find()->ownerId($page->id)->type('industryHeader')->status(null)->one();

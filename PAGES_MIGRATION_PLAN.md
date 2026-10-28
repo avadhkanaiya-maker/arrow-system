@@ -178,7 +178,7 @@ Back up before each phase; record each in `DEVELOPMENT_PHASES.md`.
 
 | # | Question | Recommendation |
 |---|---|---|
-| **D1** | **Answers** (hub + 24): ordinary Pages nested under "Answers" (as live), or their own section with fixed fields? | **Pages, nested**: the design's answer sections all map to common blocks (Takeaways, Product List, Data Table, Steps, FAQ); one module to learn |
+| **D1** | **Answers** (hub + 24): ordinary Pages nested under "Answers" (as live), or their own section with fixed fields? | **Pages, nested**: the design's answer sections all map to common blocks (Takeaways, Product List, Data Table, Steps, FAQ); one module to learn · **Decided 2026-10-27: own Answers section** (CRUD for answers), content from the general blocks: built, `DEVELOPMENT_PHASES.md` Phase 89 |
 | **D2** | **Latest News** (+1 child): pages as live, or move into the blog as posts? | **Pages as live** now (URLs kept); merging into the blog is a later content decision |
 | **D3** | One **section block set** shared by Pages **and** Industries (rename "Industry Header" → "Page Header", etc., handles unchanged), or separate sets? | **Shared**: same idea as the common page builder; nothing changes on the industry pages |
 | **D4** | **Cart / My Account / Checkout** (WooCommerce, no shop in Craft): migrate, or 301 them? | **301 to the label printers category** (the same target live uses for `/shop/`) |

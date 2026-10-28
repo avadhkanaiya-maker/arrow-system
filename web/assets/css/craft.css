@@ -145,6 +145,9 @@
 
 /* [red] words in a maroon band (CTA Band, homepage "J"): red on maroon was unreadable → white, underlined */
 .sustain .hl { color: inherit; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+/* CTA Band Small Heading on maroon (as the answers design's .ans-cta__eyebrow) */
+.sustain .eyebrow { color: rgba(255, 255, 255, .85); }
+.sustain .eyebrow::before { background: currentColor; }
 
 /* ".spec-list" is styled by both blog-detail.css (cards) and products/product-detail.css (rows). A product page that uses
    common blocks loads both, so each look is pinned to its place: cards in the common-block column (.prose), rows in the
@@ -479,3 +482,9 @@ video.mcar__media { background: var(--c-black); object-fit: contain; }
 
 /* Main menu item without sub-items (header.twig): a plain link styled like the dropdown triggers */
 a.nav-trigger { text-decoration: none; }
+
+/* Heading block's Small Heading in a text column: it takes the H2's space above and replaces its red bar */
+.prose > .eyebrow { margin-top: 60px; }
+.prose > .eyebrow:first-child { margin-top: 0; }
+.prose > .eyebrow + h2 { margin-top: 0; }
+.prose > .eyebrow + h2::before { display: none; }
