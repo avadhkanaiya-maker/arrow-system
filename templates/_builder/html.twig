@@ -1,2 +1,4 @@
-{# HTML block (admins only): output as-is #}
-{{ block.htmlCode|raw }}
+{# HTML block (admins only): output as-is, in its own box (craft.css .prose-html): spaced like the other blocks, and its
+   floats, positioning and z-index stay inside it, so it never covers the blocks after it.
+   parseRefs: links to our pages are reference tags ({entry:ID@1:url}, Utilities → Fix live links), resolved here. #}
+<div class="prose-html">{{ block.htmlCode|parseRefs|raw }}</div>

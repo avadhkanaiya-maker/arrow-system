@@ -1,0 +1,4 @@
+handle: adminNotification
+name: 'Admin Notification'
+sortOrder: 1
+template: _emails/admin-notification

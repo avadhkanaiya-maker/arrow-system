@@ -3,8 +3,8 @@
     1. Post header: breadcrumb, categories (all; the first is the main one), author, date, reading time, H1 ([brackets] = red),
        lead, cover image
     2. Article + rail: "On this page" (from the H2 Heading and Key Takeaways blocks) + the help box; the article is the
-       Article Body blocks, each rendered by _builder/{handle}.twig (the common page-builder blocks, shared with products and industries); then the closing Call to Action
-       (the post's own CTA block, else the default from Entries → Blog Page → Default CTA) and the post foot
+       Article Body blocks, each rendered by _builder/{handle}.twig (the common page-builder blocks, shared with products and industries); a Call to Action
+       only when the editor adds a CTA block (no default, QA 2026-10-29); then the quote form (the post's switch) and the post foot
     3. More Insights: the post's "More Insights" picks, else the latest posts of its main category, else the latest posts
   Reading time = words in the blocks ÷ 225 (the design: 3,127 words → 14 min).
 #}
@@ -39,7 +39,6 @@
 {% set used = [] %}
 {% set toc = [] %}
 {% set words = [] %}
-{% set hasCta = false %}
 {% for block in allBlocks %}
   {% set handle = block.type.handle %}
   {% set isSection = (handle == 'heading' and (block.headingLevel.value ?? 'h2') == 'h2') or handle == 'takeaways' %}
@@ -53,7 +52,6 @@
       {% set toc = toc|merge([{id: id, title: block.tocLabel ?? null ?: block.headingText}]) %}
     {% endif %}
   {% endif %}
-  {% if handle == 'cta' %}{% set hasCta = true %}{% endif %}
   {% set words = words|merge([
     block.headingText ?? '', block.answerLead ?? '', block.richText ?? '', block.shortRichText ?? '', block.tableText ?? '',
     block.sectionBody ?? '', block.quoteText ?? '', block.ctaHeading ?? '', block.ctaText ?? '', block.caption ?? '',
@@ -165,7 +163,7 @@
             <span class="post-hero__fact"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><time datetime="{{ entry.postDate|date('Y-m-d') }}">{{ entry.postDate|date('F j, Y') }}</time></span>
             <span class="post-hero__fact"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>{{ readMinutes }} min read</span>
           </p>
-          <h1 class="post-hero__title" id="page-title">{{ text.highlight(entry.title) }}</h1>
+          <h1 class="post-hero__title" id="page-title">{{ text.highlight(entry.headline ?: entry.title) }}</h1>{# Headline: live's in-content H1 where it differs from the title #}
           {% if entry.sectionLead %}<p class="post-hero__lead">{{ entry.sectionLead }}</p>{% endif %}
         </div>
 
@@ -214,8 +212,7 @@
         {% endfor %}
 
         {# The quote form at the end of the posts that have it on live (the post's Quote Form switch; Blog Page → Article
-           Form: the form, its heading and intro); the post's title goes into its hidden Blog Post field. Otherwise the red
-           Call to Action box, unless the post has its own. #}
+           Form: the form, its heading and intro); the post's title goes into its hidden Blog Post field. #}
         {% set articleForm = blogPage and (entry.showQuoteForm ?? false) ? blogPage.formieForm.one() : null %}
         {% if articleForm %}
           {% do craft.formie.populateFormValues(articleForm, { blogPost: entry.title }) %}
@@ -224,8 +221,6 @@
             {% if blogPage.ctaText %}<p class="formie-block__lead">{{ blogPage.ctaText }}</p>{% endif %}
             {{ craft.formie.renderForm(articleForm) }}
           </section>
-        {% elseif not hasCta and blogPage and blogPage.ctaHeading %}
-          {% include 'blog/_partials/post-cta' with { heading: blogPage.ctaHeading, body: blogPage.ctaText, link: blogPage.ctaLink, id: 'post-cta-title' } only %}
         {% endif %}
 
         <footer class="post-foot">

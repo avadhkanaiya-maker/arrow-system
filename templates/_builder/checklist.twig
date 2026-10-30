@@ -1,6 +1,6 @@
 {# Checklist block: ul.checklist (red ticks) #}
 <ul class="checklist">
   {% for row in block.listItems ?? [] %}
-  <li>{{ row.text|md(inlineOnly=true, encode=true) }}</li>
+  <li>{{ row.text|md(inlineOnly=true, encode=true)|parseRefs }}</li>
   {% endfor %}
 </ul>

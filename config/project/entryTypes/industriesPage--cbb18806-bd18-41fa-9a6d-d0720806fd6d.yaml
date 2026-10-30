@@ -111,7 +111,7 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 0b27468b-ea05-46f4-92f9-4e618131d1f7 # CTA Heading
             handle: null
-            instructions: 'The maroon band under the cards. Its buttons use the phone and quote link from Site Settings.'
+            instructions: 'The maroon band under the cards.'
             label: 'Help Band Heading'
             oldFieldUid: null
             required: false
@@ -135,6 +135,40 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: ef3a4969-3b7f-4850-8656-a61260ec61ab
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 71736ea4-0de2-4c02-9ebe-5cbf489571fd # Button
+            handle: null
+            instructions: 'The first (white) button in the maroon band, shown when it has a text and a link, e.g. “Talk to a Specialist” → phone 1-888-697-2749.'
+            label: 'Help Band First Button'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f8f2c555-1ae1-4393-96b6-0bef50c5d8ae
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2a3a0908-8956-4112-9e48-722319b57ef1 # Secondary Button
+            handle: null
+            instructions: 'The second (outline) button, shown when it has a text and a link, e.g. “Request a Quote” → the Request a Quote page.'
+            label: 'Help Band Second Button'
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ee24f8e2-64fd-46ff-975b-6f707f42b813
             userCondition: null
             warning: null
             width: 100

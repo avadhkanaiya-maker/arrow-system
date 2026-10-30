@@ -1,4 +1,4 @@
 handle: contactUsAdmin
 name: 'Contact Us – Admin'
-sortOrder: 1
-template: _emails/contact-us-admin
+sortOrder: 9
+template: _emails/admin/contact-us

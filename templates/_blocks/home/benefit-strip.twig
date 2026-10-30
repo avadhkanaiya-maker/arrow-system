@@ -17,7 +17,9 @@
           <div class="benefit__body">
             <h2 class="benefit__title"><a class="stretched-link" {{ links.attrs(link, item.title ~ ' link') }}>{{ item.title }}</a></h2>
             {% if link and link.getLabel(true) %}
-              <span class="benefit__more" aria-hidden="true">{{ link.getLabel(true) }} <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              {# the last word and the arrow never part, so the arrow is never alone on a line #}
+              {% set words = link.getLabel(true)|split(' ') %}
+              <span class="benefit__more" aria-hidden="true">{{ words|slice(0, -1)|join(' ') }} <span class="benefit__more-end">{{ words|last }} <svg class="icon"><use href="#i-arrow-right"/></svg></span></span>
             {% endif %}
           </div>
         </li>

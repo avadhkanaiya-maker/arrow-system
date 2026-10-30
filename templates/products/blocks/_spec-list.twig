@@ -1,6 +1,6 @@
 {# dl.spec-list rows (term / description). Vars: rows #}
             <dl class="spec-list">
               {% for row in rows %}
-              <div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true) }}</dd></div>
+              <div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true)|parseRefs }}</dd></div>
               {% endfor %}
             </dl>

@@ -1,10 +1,15 @@
-{# Video block: a YouTube embed, 16:9 (craft.css .prose-video) #}
+{# Video block: a YouTube embed, or else the Video File (MP4) in a player with controls, 16:9 (craft.css .prose-video) #}
 {% import '_macros/text' as text %}
 {% set id = text.youtubeId(block.videoUrl)|trim %}
-{% if id|length == 11 %}
+{% set file = id|length == 11 ? null : block.videoFile.one() %}
+{% if id|length == 11 or file %}
 <figure class="prose-video">
   <div class="prose-video__frame">
+    {% if file %}
+    <video src="{{ file.url }}" controls preload="metadata" playsinline{% if block.caption %} aria-label="{{ block.caption }}"{% endif %}></video>
+    {% else %}
     <iframe src="https://www.youtube-nocookie.com/embed/{{ id }}" title="{{ block.caption ?: 'YouTube video' }}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    {% endif %}
   </div>
   {% if block.caption %}<figcaption>{{ block.caption }}</figcaption>{% endif %}
 </figure>

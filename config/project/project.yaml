@@ -1,4 +1,4 @@
-dateModified: 1793178929
+dateModified: 1793258138
 email:
   fromEmail: arrowsysadmin@yopmail.com
   fromName: 'Arrow Systems (Local Staging)'
@@ -38,6 +38,7 @@ meta:
     1a052a88-6591-4eaf-91e0-31d2a757eabe: Quote # Quote
     1a39ba89-00c3-4c11-9898-9cd0ba598be9: 'Top Bar' # Top Bar
     1b40bd1b-a8c7-4208-882e-c96459dffc80: Exhibitions # Exhibitions
+    1b14871d-4082-480c-bcf3-5c8a5ac04164: 'Header Photos' # Header Photos
     1c6b12e9-2f3d-4251-8c9b-b1916b92ae33: Page # Page
     1c29af44-a759-4095-90c2-ea536560d0d1: Homepage # Homepage
     1c82b38b-a11c-41e3-b257-4cb3ce43d0cf: Show # Show
@@ -60,6 +61,7 @@ meta:
     3a7bfa6c-6ceb-4b0f-9a2b-27fdec6924c8: 'View All Text URL' # View All Text URL
     3a146d79-623e-4443-9485-ce8d03c902b5: Longitude # Longitude
     3bbec4e9-b141-4e48-bedd-5e22df221055: 'Contact Form' # Contact Form
+    03c4ee80-2072-4766-85e7-53885072e98b: 'Careers – Admin' # Careers – Admin
     3c8d23d6-dac1-4e44-9f35-4067cecd6f95: 'Robots (advanced)' # Robots (advanced)
     3cb6f238-7c92-4d4f-ac52-81f5bf882f80: 'Right Column' # Right Column
     3cba1260-baab-4373-8f27-5cb10e8aa6c8: 'What You Can Print' # What You Can Print
@@ -92,6 +94,7 @@ meta:
     7dfa34b6-1551-4035-8187-cbc68182a20b: 'SEO Title' # SEO Title
     7e1cfbd5-d179-4bf5-9dfa-258ac1f2e8b9: Products # Products
     7fd323b6-b4cd-4b70-8ec7-a4ccff0fdcb0: 'Carousel Slide' # Carousel Slide
+    08a5d4c3-0f73-4efe-9fe6-58cef9ea722a: Headline # Headline
     8c117c80-cf06-494a-b509-c89bbda50314: 'Show Dates As' # Show Dates As
     8cbe334a-5712-4c17-b3be-40923a1c8aa0: 'CTA Text' # CTA Text
     8d76c0a8-d4cf-4569-bd5f-69ed28122130: 'Social Image' # Social Image
@@ -116,10 +119,12 @@ meta:
     26f00ef3-5144-45ce-8180-2e1bd5dab42a: Favicon # Favicon
     27b666a4-f7ec-4a58-ae34-d68b27259f94: 'Meta Description' # Meta Description
     28b51163-205f-4ad6-8b16-59c3c2633aa0: 'Accessible Name' # Accessible Name
+    033d7a52-3ae2-40e5-9945-8297f4f4860b: 'Product Request Quote – Admin' # Product Request Quote – Admin
     39ac01db-5a9c-4da2-8949-c547207a56d6: 'Help Box Button' # Help Box Button
     41e079be-7a19-4826-9ae8-5c462e78c2a8: 'Categories to Display' # Categories to Display
     43a7134f-2531-4cb4-b69f-5517aa9c56ef: 'CTA Band' # CTA Band
     46b0b4d9-6f90-4bbe-91dc-4f93a1195d0d: Columns # Columns
+    48d26079-cdac-4f8a-ac67-682bf3a83bb6: 'Customer Service – Admin' # Customer Service – Admin
     55eb5891-8e8d-495e-afcf-eed5a49a4487: 'Video Caption' # Video Caption
     55ef28f6-ebbb-4837-a0e4-a87bff36ad18: Subscriber # Subscriber
     56b569ff-7906-477c-9f6c-51e386e35ec8: 'Contents Label' # Contents Label
@@ -157,6 +162,7 @@ meta:
     774c8a49-7473-43f4-93b7-2ddd78e1224c: Facts # Facts
     782eb571-943e-4ca4-b880-4a0afc810158: 'Email Placeholder' # Email Placeholder
     830dfb89-3efb-43f1-b7d0-dfc9f570f200: Downloads # Downloads
+    832ab0f6-a20f-4c5a-8e74-f00b845ec8b0: 'Mobile Banner Image' # Mobile Banner Image
     910f8d08-fa12-41d3-8fc9-df2b1636f21f: Logo # Logo
     923daa95-33ab-4cac-b7bf-5107cc130090: 'Specifications Tab' # Specifications Tab
     935e3101-88f3-4a61-a974-2659a9989ad3: Step # Step
@@ -164,6 +170,7 @@ meta:
     1677ef19-8fae-4238-8483-cdc7862cbcfb: 'Blog Post' # Blog Post
     2663b822-43f0-48c5-a077-83b90c6d5529: Columns # Columns
     3173d625-786e-4c0d-9024-eff97060aeb7: Highlights # Highlights
+    03401d31-d4f4-47f2-bae0-1e3fb51908a9: 'Contact Us – Admin' # Contact Us – Admin
     4055abcd-d97e-47b5-9f50-d3307f4f3f56: Latitude # Latitude
     4307aaf7-f83f-4d28-98ef-a4305e405976: 'Left Column' # Left Column
     4324bf77-8b8a-40d1-8758-fd26b223c037: Tagline # Tagline
@@ -183,6 +190,7 @@ meta:
     461968e6-aa9e-4856-8271-890d431235ae: 'Related Products' # Related Products
     610374ab-5885-4260-824c-81d2b283e8ac: 'Page Builder' # Page Builder
     704585f6-ce27-4737-aff7-090d130125a7: 'Direct Phone' # Direct Phone
+    732574f7-14c9-4012-b1d3-7e9471b86ea1: Link # Link
     819165d7-06c3-43ce-9e01-71bc6e2c55f9: Exhibition # Exhibition
     949825d6-8b89-49af-bbe5-59b2f56ac6c9: Caption # Caption
     1724529b-8868-4fd5-84da-99b600a30d10: 'Media Carousel' # Media Carousel
@@ -204,6 +212,7 @@ meta:
     a6f2c663-0e16-4b45-8606-e297d96a0670: Country # Country
     a8fa3b9a-94c0-4e6f-a2c0-ad32f2b98f31: 'Button Style' # Button Style
     a23cd63b-8bdf-4d2d-aec0-42ea1f9e1621: 'Page Builder' # Page Builder
+    a87adc08-44a2-453b-87d5-ac9a0fcbf137: 'Free Sample Request – Admin' # Free Sample Request – Admin
     a688c7ca-d4a2-4292-9c6f-efaa74d2af4f: Steps # Steps
     a22495d9-f01f-4004-9b3d-7d6b7b264c62: Relationship # Relationship
     a2857477-2cb2-4a92-8eb3-996c9084ceb8: 'Product Category' # Product Category
@@ -215,7 +224,7 @@ meta:
     ae05869d-2cd8-4e20-8b22-83b99c725ce1: 'Panel Title' # Panel Title
     ae8d9f3a-f387-46e2-9d8f-799ea7fb328b: 'Other Industries' # Other Industries
     aed81651-8b94-4d06-8cbe-f894ceef91f3: 'Sales Email' # Sales Email
-    af978ec9-03cd-433b-8bd5-4920ef195294: 'Contact Us – Admin' # Contact Us – Admin
+    af978ec9-03cd-433b-8bd5-4920ef195294: 'Admin Notification' # Admin Notification
     afabdab0-fcbc-4be4-8676-eef04e6a7083: Items # Items
     b0857f7a-e2f5-44ef-8163-1b59942677cb: Tags # Tags
     b1be5682-6cd0-4dc2-86a9-96841d04805e: Heading # Heading
@@ -236,6 +245,7 @@ meta:
     bed52a97-4d5d-478f-90f1-7d64c583fd04: Answers # Answers
     c0dba6b7-0116-4bd7-80b4-dae679f9ac30: 'Upcoming Exhibitions Page' # Upcoming Exhibitions Page
     c062ee6d-7608-48d2-8faa-f9aa15094ebd: 'Blog Page' # Blog Page
+    c0845e3f-b56b-42fa-8192-2e5fa73595c7: 'Request a Quote – Admin' # Request a Quote – Admin
     c6b3cd74-346e-44ed-87fd-e656cbc77636: City # City
     c7a13559-c602-4876-a22f-6450d52e0fd7: 'Slide Type' # Slide Type
     c28cb0bb-637c-4069-8162-871afa0f7937: 'Anchor ID' # Anchor ID
@@ -286,10 +296,12 @@ meta:
     f5aa0ceb-3e8f-47f1-91df-0644c97e3b82: 'Space Below' # Space Below
     f7f3241b-aae8-40e7-a84c-28a5c9641c29: 'Hero SLide' # Hero SLide
     f9c6211e-be8e-4171-8676-bb2a76f56faf: Table # Table
+    f16b924c-1359-49bb-a0ee-42ec8a867021: 'Request Quote From Blog – Admin' # Request Quote From Blog – Admin
     f31f712f-738e-472b-b848-9fef9a4ad724: Form # Form
     f34a66a3-41a4-4b33-bdd7-8f9a7e744471: Image # Image
     f502a820-04b4-44ab-b1a6-c2bdaf06675c: 'Public Schema' # Public Schema
     f690e105-0883-4315-86a2-bd19a514e926: 'Content Block' # Content Block
+    f95371e1-cd90-4603-90c0-2c5a92c23a14: 'Become a Dealer – Admin' # Become a Dealer – Admin
     fa8edeab-e3dc-42db-a9ba-2a5f48f327a3: 'Key Takeaways' # Key Takeaways
     fb1bcbe6-aac5-47e7-b60b-6d1971337623: 'Category Label' # Category Label
     fd7d5248-e909-48c5-9758-673cc8499ef8: 'Help Box Text' # Help Box Text
@@ -303,7 +315,7 @@ plugins:
   formie:
     edition: standard
     enabled: true
-    licenseKey: 1DDQFQZOKEHGA81CZDOWZMV8
+    licenseKey: $FORMIE_LICENSE_KEY
     schemaVersion: 3.4.13
     settings:
       ajaxTimeout: 10
@@ -420,7 +432,7 @@ plugins:
   navigation:
     edition: standard
     enabled: true
-    licenseKey: MEQ2C7QPNKZLH179QC796EH3
+    licenseKey: $NAVIGATION_LICENSE_KEY
     schemaVersion: 4.0.10
 system:
   edition: pro

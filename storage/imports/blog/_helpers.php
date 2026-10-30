@@ -61,8 +61,13 @@ function importImage(string $src, ?string $alt = null, string $folder = 'blog'):
         if (!$asset) {
             // non-ASCII characters in the path (e.g. "Looking-2400-×-600-px.webp") must be percent-encoded
             $fetch = is_file($src) ? $src : preg_replace_callback('/[^\x21-\x7e]/', fn($m) => rawurlencode($m[0]), $src);
-            $data = is_file($src) ? file_get_contents($src)
-                : @file_get_contents($fetch, false, stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0 (Arrow Systems staging migration)\r\n", 'timeout' => 60]]));
+            // Guzzle (cURL) fails on a download that ends early; file_get_contents() returned a video cut at 1 of 11 MB
+            try {
+                $data = is_file($src) ? file_get_contents($src) : (string)Craft::createGuzzleClient(['timeout' => 600])
+                    ->get($fetch, ['headers' => ['User-Agent' => 'Mozilla/5.0 (Arrow Systems staging migration)']])->getBody();
+            } catch (Throwable) {
+                $data = false;
+            }
             if (!$data) {
                 $GLOBALS['report'][] = "could not download $src";
                 return $cache[$key] = null;

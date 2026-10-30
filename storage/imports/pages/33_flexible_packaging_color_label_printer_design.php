@@ -67,9 +67,8 @@ $newsletter = ['newsletter', []];
 
 // The design's page layer (flexible-packaging.css spacing + flexible-packaging-black-accents.css): the logo's black next to red
 $css = <<<'CSS'
-/* The Flexible Packaging design's page layer: tighter section spacing, and the logo's black (always next to red) in
-   section labels, small labels, icons and arrow badges */
-main { --section-y: clamp(36px, 4vw, 56px); }
+/* The Flexible Packaging design's page layer: the logo's black (always next to red) in section labels, small labels,
+   icons and arrow badges */
 main .section-head { margin-bottom: clamp(20px, 2.4vw, 28px); }
 main .eyebrow { color: #141414; }
 main .eyebrow::before { width: 28px; background: linear-gradient(90deg, #141414 0 70%, var(--c-red) 70% 100%); }

@@ -39,7 +39,7 @@
           {% if highlights|length %}
           <ul class="highlights" aria-label="Highlights">
             {% for row in highlights %}
-            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><span>{% if row.title %}<strong>{{ row.title|md(inlineOnly=true, encode=true) }}</strong>{% endif %}{{ row.text|md(inlineOnly=true, encode=true) }}</span></li>
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><span>{% if row.title %}<strong>{{ row.title|md(inlineOnly=true, encode=true)|parseRefs }}</strong>{% endif %}{{ row.text|md(inlineOnly=true, encode=true)|parseRefs }}</span></li>
             {% endfor %}
           </ul>
           {% endif %}

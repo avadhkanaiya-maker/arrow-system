@@ -7,16 +7,20 @@
  *   closing Call to Action, D4), the banner image at the top (it is the cover image) and the repeated title are left out.
  *
  *   Elementor widget        → block
- *   heading (h2 / h3 / h4+) → Heading (H2 / H3 / H4)
+ *   heading (h2–h6)         → Heading (same level, + the link on it); a heading widget styled as text (<p> / <div>)
+ *                             → a bold Rich Text line
  *   text-editor             → Rich Text, split into: Heading (h2–h6 inside the text), Spec List (<dl> term lists),
- *                             Image (<img>), Video (YouTube <iframe>); tables stay in the Rich Text
+ *                             Image (<img>, also inside headings, lists and text), Video (YouTube <iframe>, WordPress
+ *                             [video] MP4 player); tables stay in the Rich Text
  *   image                   → Image (+ caption; the width from the live image size)
- *   video                   → Video (YouTube)
+ *   video                   → Video (YouTube, or a self-hosted MP4 as the Video File)
  *   accordion               → FAQ → FAQ Items
  *   gallery / image-gallery / media-carousel / image-carousel → Gallery
  *   button                  → Button
  *   divider                 → Divider
- *   html                    → HTML
+ *   html                    → HTML; a boxed note (<aside>) → Callout
+ * A post without Elementor (classic WordPress editor) is converted like one text-editor widget.
+ * The live H1 at the top of the article is not a block: when it differs from the title it is kept as $headline.
  * Anything else is listed in the report.
  */
 
@@ -30,6 +34,8 @@ class ElementorConverter
     public array $stats = ['headings' => 0, 'images' => 0, 'liveHeadings' => 0, 'liveImages' => 0];
     /** the top banner image left out of the article (used as the cover when the post has no featured image) */
     public ?string $bannerUrl = null;
+    /** the live page's H1 (an in-content heading at the top) when it differs from the title: the post's Headline */
+    public ?string $headline = null;
 
     private array $rich = [];
     private DOMXPath $x;
@@ -61,6 +67,12 @@ class ElementorConverter
         $this->x = new DOMXPath($doc);
 
         $widgets = iterator_to_array($this->x->query('//*[@data-element_type="widget"]'));
+        if (!$widgets) {
+            // classic WordPress editor (no Elementor): the whole content is one text
+            $this->walk($this->x->query('//*[@id="__root"]')->item(0));
+            $this->flush();
+            return $this->blocks;
+        }
         // live counts (all article widgets), for the report
         $skipCols = $this->sidebarColumns();
         $sequence = [];
@@ -99,6 +111,12 @@ class ElementorConverter
                 case 'divider': $this->flush(); $this->blocks[] = nb('divider'); break;
                 case 'html':
                     $this->flush();
+                    $aside = $this->x->query('.//aside', $w)->item(0);
+                    if ($aside && !$this->x->query('.//script|.//iframe|.//form|.//img', $w)->length) {
+                        // a boxed note (e.g. "Planning an in-house workflow?" + a link): the design's Callout
+                        $this->blocks[] = nb('callout', ['shortRichText' => $this->cleanBlock($aside), 'calloutStyle' => 'callout']);
+                        break;
+                    }
                     $this->blocks[] = nb('html', ['htmlCode' => trim($this->inner($this->container($w)))]);
                     $this->notes[] = 'HTML widget kept as an HTML block (check it renders)';
                     break;
@@ -173,34 +191,55 @@ class ElementorConverter
         return strtolower(preg_replace('/[^a-z0-9]+/i', '', html_entity_decode($s, ENT_QUOTES | ENT_HTML5)));
     }
 
-    private function addHeading(string $text, string $level, bool $allowTitleSkip = false): void
+    private function addHeading(string $text, string $level, bool $allowTitleSkip = false, ?string $link = null): void
     {
         $text = trim($text);
         if ($text === '') return;
         $this->stats['liveHeadings']++;
         if ($allowTitleSkip && self::norm($text) === self::norm($this->title)) return; // the repeated post title (the H1 is the template's)
         $this->flush();
-        $level = match ($level) { 'h1', 'h2' => 'h2', 'h3' => 'h3', default => 'h4' };
-        $this->blocks[] = nb('heading', ['headingText' => $text, 'headingLevel' => $level, 'showInContents' => $level === 'h2']);
+        $level = $level === 'h1' ? 'h2' : $level;
+        $this->blocks[] = nb('heading', array_filter(['headingText' => $text, 'headingLevel' => $level, 'showInContents' => $level === 'h2',
+            'headingLink' => $link ? ['type' => 'url', 'value' => $link] : null], fn($v) => $v !== null));
         $this->stats['headings']++;
+    }
+
+    /** The link on a heading (its first one), as the Heading block's Link */
+    private function headingLink(DOMElement $h): ?string
+    {
+        $a = $this->x->query('.//a[@href]', $h)->item(0);
+        return $a ? ($this->href($a->getAttribute('href')) ?: null) : null;
+    }
+
+    /**
+     * An H1 at the top of the article (only images / videos above it) is the live post's big headline (the theme's
+     * small title sits above it on live): not a block. Kept as the Headline when it differs from the title.
+     * A linked line set as H1 (e.g. "Check out our list…") stays a heading with its link. True if $text was the H1.
+     */
+    private function liveH1(string $text, bool $linked): bool
+    {
+        if ($this->headline !== null || $text === '' || $this->rich || $linked) return false;
+        foreach ($this->blocks as $b) if (!in_array($b['type'], ['image', 'video'], true)) return false;
+        $this->stats['liveHeadings']++;
+        $this->headline = self::norm($text) === self::norm($this->title) ? '' : $text;
+        return true;
     }
 
     private function heading(DOMElement $w, bool $atStart): void
     {
         $h = $this->x->query('.//h1|.//h2|.//h3|.//h4|.//h5|.//h6|.//p|.//div[contains(@class, "elementor-heading-title")]', $w)->item(0);
         if (!$h) return;
-        $level = in_array($h->tagName, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true) ? $h->tagName : 'h4';
-        if ($this->x->query('.//a[@href]', $h)->length) $this->notes[] = 'link on heading "' . mb_substr(self::text($h), 0, 40) . '" dropped';
-        $isH1 = $level === 'h1';
-        $text = self::text($h);
-        if ($isH1 && $atStart) {
-            // the live page's own H1 (a variant of the title): the template's H1 is the post title
-            if (self::norm($text) !== self::norm($this->title)) $this->notes[] = 'live H1 "' . mb_substr($text, 0, 60) . '" differs from the title (the title is the H1 now)';
-            $this->stats['liveHeadings']++;
+        if (!in_array($h->tagName, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true)) {
+            // a heading widget styled as text (<p> / <div>): a bold line, not a heading
+            $html = $this->clean($this->inner($h));
+            if (!self::isBlank($html)) $this->rich[] = "<p><strong>$html</strong></p>";
             return;
         }
-        if ($isH1) $this->notes[] = 'H1 "' . mb_substr($text, 0, 40) . '" inside the article kept as an H2';
-        $this->addHeading($text, $level, $atStart);
+        $text = self::text($h);
+        $link = $this->headingLink($h);
+        if ($h->tagName === 'h1' && $this->liveH1($text, (bool)$link)) return;
+        if ($h->tagName === 'h1') $this->notes[] = 'H1 "' . mb_substr($text, 0, 40) . '" inside the article kept as an H2';
+        $this->addHeading($text, $h->tagName, $atStart, $link);
     }
 
     private function richWidget(DOMElement $w): void
@@ -228,7 +267,11 @@ class ElementorConverter
             $flushInline();
             switch ($tag) {
                 case 'h1': case 'h2': case 'h3': case 'h4': case 'h5': case 'h6':
-                    $this->addHeading(self::text($n), $tag);
+                    $text = self::text($n);
+                    $link = $this->headingLink($n);
+                    if (!($tag === 'h1' && $this->liveH1($text, (bool)$link))) $this->addHeading($text, $tag, !$this->blocks && !$this->rich, $link);
+                    // an image placed inside a heading (older posts): after it
+                    foreach ($this->x->query('.//img', $n) as $img) $this->imageBlock($img, null);
                     break;
                 case 'p':
                     if ($this->x->query('.//img|.//iframe', $n)->length) { $this->walkMixed($n); break; }
@@ -236,8 +279,7 @@ class ElementorConverter
                     if (!self::isBlank($html)) $this->rich[] = "<p>$html</p>";
                     break;
                 case 'ul': case 'ol':
-                    if ($this->x->query('.//img|.//iframe', $n)->length) $this->notes[] = 'image inside a list kept as a link-less list (image dropped)';
-                    $this->rich[] = "<$tag>" . $this->cleanList($n) . "</$tag>";
+                    $this->listWithImages($n);
                     break;
                 case 'blockquote':
                     $this->rich[] = '<blockquote>' . $this->cleanBlock($n) . '</blockquote>';
@@ -253,6 +295,9 @@ class ElementorConverter
                     break;
                 case 'iframe':
                     $this->iframe($n);
+                    break;
+                case 'video':
+                    $this->hostedVideo($n);
                     break;
                 case 'figure':
                     $img = $this->x->query('.//img', $n)->item(0);
@@ -274,23 +319,74 @@ class ElementorConverter
         $flushInline();
     }
 
-    /** A paragraph holding images / iframes: text parts stay Rich Text, images and videos become blocks */
+    /**
+     * A paragraph holding images / iframes: text parts stay Rich Text, images and videos become blocks. The text around
+     * an image inside a <span> / <a> is kept too. An image floated beside the text on live (alignleft / alignright)
+     * goes after the paragraph, so its text is not cut in two.
+     */
     private function walkMixed(DOMElement $p): void
     {
         $buf = '';
+        $floated = [];
         $emit = function () use (&$buf) {
             $html = $this->clean($buf);
             if (!self::isBlank($html)) $this->rich[] = "<p>$html</p>";
             $buf = '';
         };
-        foreach (iterator_to_array($p->childNodes) as $n) {
-            $img = $n instanceof DOMElement ? ($n->tagName === 'img' ? $n : $this->x->query('.//img', $n)->item(0)) : null;
-            $iframe = $n instanceof DOMElement ? ($n->tagName === 'iframe' ? $n : $this->x->query('.//iframe', $n)->item(0)) : null;
-            if ($img) { $emit(); $this->imageBlock($img, null); continue; }
-            if ($iframe) { $emit(); $this->iframe($iframe); continue; }
-            $buf .= $n->ownerDocument->saveHTML($n);
-        }
+        $visit = function (DOMNode $parent) use (&$visit, &$buf, &$floated, $emit) {
+            foreach (iterator_to_array($parent->childNodes) as $n) {
+                if ($n instanceof DOMElement && $n->tagName === 'img') {
+                    if (preg_match('/\balign(left|right)\b/', $n->getAttribute('class'))) { $floated[] = $n; continue; }
+                    $emit();
+                    $this->imageBlock($n, null);
+                } elseif ($n instanceof DOMElement && $n->tagName === 'iframe') {
+                    $emit();
+                    $this->iframe($n);
+                } elseif ($n instanceof DOMElement && $this->x->query('.//img|.//iframe', $n)->length) {
+                    $visit($n);
+                } else {
+                    $buf .= $n->ownerDocument->saveHTML($n);
+                }
+            }
+        };
+        $visit($p);
         $emit();
+        foreach ($floated as $img) $this->imageBlock($img, null);
+    }
+
+    /** A list: its images (e.g. a product picture under each item) become Image blocks after their item; the list is
+        split there (a numbered list continues its numbers) */
+    private function listWithImages(DOMElement $list): void
+    {
+        $tag = strtolower($list->tagName);
+        $items = '';
+        $count = 0;
+        $start = 1;
+        foreach (iterator_to_array($list->childNodes) as $li) {
+            if (!$li instanceof DOMElement || $li->tagName !== 'li') continue;
+            $only = $this->x->query('./*', $li);
+            if ($only->length === 1 && in_array($only->item(0)->tagName, ['ul', 'ol'], true) && trim($li->textContent) === trim($only->item(0)->textContent)
+                && $this->x->query('.//img', $li)->length) {
+                // an item that only wraps a list (pasted HTML): that list instead
+                if ($items !== '') { $this->rich[] = "<$tag>$items</$tag>"; $items = ''; $count = 0; }
+                $this->listWithImages($only->item(0));
+                continue;
+            }
+            $imgs = iterator_to_array($this->x->query('.//img', $li));
+            foreach ($imgs as $img) $img->parentNode->removeChild($img);
+            $one = $list->ownerDocument->createElement($tag);
+            $one->appendChild($li->cloneNode(true));
+            $items .= $this->cleanList($one);
+            $count++;
+            if ($imgs) {
+                $this->rich[] = "<$tag" . ($tag === 'ol' && $start > 1 ? " start=\"$start\"" : '') . ">$items</$tag>";
+                foreach ($imgs as $img) $this->imageBlock($img, null);
+                $start += $count;
+                $items = '';
+                $count = 0;
+            }
+        }
+        if ($items !== '') $this->rich[] = "<$tag" . ($tag === 'ol' && $start > 1 ? " start=\"$start\"" : '') . ">$items</$tag>";
     }
 
     private function definitionList(DOMElement $dl): void
@@ -299,7 +395,7 @@ class ElementorConverter
         $term = null;
         foreach ($dl->childNodes as $c) {
             if (!$c instanceof DOMElement) continue;
-            if ($c->tagName === 'dt') { if ($term !== null) $rows[] = ['col1' => $term, 'col2' => '']; $term = self::text($c); }
+            if ($c->tagName === 'dt') { if ($term !== null) $rows[] = ['col1' => $term, 'col2' => '']; $term = $this->term($c); }
             elseif ($c->tagName === 'dd') {
                 if ($term === null) { $this->walk($c); continue; } // a lone <dd> wrapper (pasted text): its content
                 $rows[] = ['col1' => $term, 'col2' => $this->markdown($c)];
@@ -307,7 +403,7 @@ class ElementorConverter
             } elseif ($c->tagName === 'div') {
                 $dt = $this->x->query('./dt', $c)->item(0);
                 $dd = $this->x->query('./dd', $c)->item(0);
-                if ($dt) $rows[] = ['col1' => self::text($dt), 'col2' => $dd ? $this->markdown($dd) : ''];
+                if ($dt) $rows[] = ['col1' => $this->term($dt), 'col2' => $dd ? $this->markdown($dd) : ''];
                 else $this->walk($c);
             }
         }
@@ -316,6 +412,13 @@ class ElementorConverter
             $this->flush();
             $this->blocks[] = nb('specList', ['specItems' => $rows]);
         }
+    }
+
+    /** A Spec List term: plain text, or [text](url) when it is a link on live (the template renders it as Markdown) */
+    private function term(DOMElement $dt): string
+    {
+        if (!$this->x->query('.//a[@href]', $dt)->length) return self::text($dt);
+        return preg_replace('/^\*\*(.*)\*\*$/s', '$1', $this->markdown($dt)); // the term is bold already
     }
 
     /** Inline HTML → *italic* / **bold** / [link](url) for the Table fields */
@@ -454,6 +557,8 @@ class ElementorConverter
     {
         $href = trim(html_entity_decode($href));
         if ($href === '' || $href === '#') return '';
+        // live's broken button link (404 on live too): the contact page, as in the other posts
+        $href = preg_replace('#^(https?://(www\.)?arrsys\.com)?/contact-us//-us/?$#i', 'https://arrsys.com/contact-us/', $href);
         if (preg_match('#^https?://(www\.)?arrsys\.com(/[^?\#]*)?(.*)$#i', $href, $m)) {
             $path = $m[2] ?? '/';
             $first = explode('/', trim($path, '/'))[0] ?? '';
@@ -485,6 +590,9 @@ class ElementorConverter
         $asset = importImage($url, $img->getAttribute('alt'));
         if (!$asset) { $this->notes[] = "image not imported: $url"; return; }
         $w = (int)$img->getAttribute('width');
+        // no width on live: the file's own width (a 300 px file is not stretched to the column)
+        if (!$w && ($asset->width ?? 0) && $asset->width <= 300) $w = 299;
+        elseif (!$w) $w = (int)($asset->width ?? 0);
         $width = $w && $w < 300 ? 'small' : ($w && $w < 500 ? 'medium' : ($w && $w < 700 ? 'large' : 'full'));
         $link = $img->parentNode instanceof DOMElement && $img->parentNode->tagName === 'a' ? $img->parentNode->getAttribute('href') : null;
         if ($link && self::baseFile($link) !== self::baseFile($url)) $this->notes[] = "link on image {$asset->filename} dropped ($link)";
@@ -515,6 +623,17 @@ class ElementorConverter
         $this->blocks[] = nb('video', ['videoUrl' => "https://www.youtube.com/watch?v=$id"]);
     }
 
+    /** A self-hosted MP4 (WordPress [video] player, or an Elementor video widget's hosted file): the Video File */
+    private function hostedVideo(DOMElement $video, ?string $url = null): void
+    {
+        $url ??= $video->getAttribute('src') ?: ($this->x->query('.//source[@src]', $video)->item(0)?->getAttribute('src') ?? '');
+        $url = preg_replace('/\?_=\d+$/', '', html_entity_decode($url)); // WordPress's player counter
+        $asset = $url ? importImage($url) : null;
+        if (!$asset) { $this->notes[] = "video file not imported: $url"; return; }
+        $this->flush();
+        $this->blocks[] = nb('video', ['videoFile' => [$asset->id]]);
+    }
+
     private function video(DOMElement $w): void
     {
         $s = json_decode(html_entity_decode($w->getAttribute('data-settings')), true) ?: [];
@@ -523,6 +642,8 @@ class ElementorConverter
         if (!$id) {
             $iframe = $this->x->query('.//iframe', $w)->item(0);
             if ($iframe) { $this->iframe($iframe); return; }
+            $file = $this->x->query('.//video', $w)->item(0);
+            if ($file || preg_match('/\.(mp4|webm|mov)$/i', parse_url($url, PHP_URL_PATH) ?? '')) { $this->hostedVideo($file ?? $w, $file ? null : $url); return; }
             $this->notes[] = 'video not converted (' . ($s['video_type'] ?? '?') . "): $url";
             return;
         }

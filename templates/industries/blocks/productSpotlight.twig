@@ -27,7 +27,7 @@
         {% if points|length %}
         <ul class="spot-points">
           {% for row in points %}
-          <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true) }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
+          <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true)|parseRefs }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true)|parseRefs }}</p>{% endif %}</div></li>
           {% endfor %}
         </ul>
         {% endif %}
@@ -43,7 +43,7 @@
           <p class="spotlight__label">Specifications</p>
           <ul class="spec-chips">
             {% for row in specs %}
-            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span>{{ row.title|md(inlineOnly=true, encode=true) }}</li>
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span>{{ row.title|md(inlineOnly=true, encode=true)|parseRefs }}</li>
             {% endfor %}
           </ul>
           {% endif %}

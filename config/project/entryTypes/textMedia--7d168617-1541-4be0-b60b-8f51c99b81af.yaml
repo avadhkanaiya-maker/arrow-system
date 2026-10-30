@@ -79,7 +79,19 @@ fieldLayouts:
           -
             dateAdded: null
             editCondition: null
-            elementCondition: null
+            elementCondition:
+              class: craft\elements\conditions\entries\EntryCondition
+              conditionRules:
+                -
+                  class: craft\fields\conditions\OptionsFieldConditionRule
+                  fieldUid: 7bbe8361-b6da-451a-ae3f-5eba0250025f # Layout
+                  layoutElementUid: 9a8cccc3-4b6e-418f-b10a-1d71853c7c07
+                  operator: in
+                  uid: 8946f353-11ed-4d59-a582-319fe9ee8fe5
+                  values:
+                    - textImage
+              elementType: craft\elements\Entry
+              fieldContext: global
             elementEditCondition: null
             fieldUid: 1f972162-4019-4b4f-9f5f-2e902f0a71b0 # Image
             handle: null

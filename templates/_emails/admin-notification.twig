@@ -1,11 +1,14 @@
 {#
-  Formie email template "Contact Us – Admin" (Formie → Settings → Email Templates), picked by the Contact Us form's
-  Admin Notification (form → Notifications → Admin Notification → Templates → Email Template).
-  Email-safe HTML: tables, inline styles, 600px wide, a PNG logo (Outlook doesn't show WebP):
+  The admin email design, shared by every form: each form has its own Formie email template ("<Form> – Admin",
+  Formie → Settings → Email Templates), a file in _emails/admin/ that extends this one. To change one form's email,
+  override a block below in that form's file; to change all of them, edit this file. Nothing here is form-specific,
+  so it is also registered as "Admin Notification" for a new form.
+  Email-safe HTML: tables, inline styles, 600px wide, a PNG logo (Outlook doesn't show WebP). Blocks:
     header      the logo
     intro       small heading (the form's name), the email subject as heading, then the notification's Content (its
                 text is edited in the notification itself)
-    details     every filled-in field: label, then value (Formie's own value output: line breaks kept, …)
+    details     every filled-in field: label, then value (Formie's own value output: line breaks kept, …); fields set
+                to not "Include in Email" or hidden by conditions are left out, as in Formie's {allFields}
     reply       a button that writes to the visitor's email address
     footer      when it was sent, and a link to the submission in the admin panel
   Variables from Formie: form, submission, notification, contentHtml, email.
@@ -29,11 +32,14 @@
   <tr>
     <td align="center" style="padding:24px 12px;">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background:#FFFFFF; border-top:4px solid {{ red }};">
+        {% block header %}
         <tr>
           <td style="padding:22px 32px; border-bottom:1px solid {{ line }};">
             <img src="{{ siteUrl('assets/email/arrow-systems-logo.png') }}" width="120" alt="Arrow Systems, Inc." style="display:block; width:120px; height:auto; border:0;">
           </td>
         </tr>
+        {% endblock %}
+        {% block intro %}
         <tr>
           <td style="padding:28px 32px 4px; font-family:{{ font }}; color:{{ ink }};">
             <p style="margin:0 0 6px; font-size:12px; font-weight:bold; letter-spacing:1.5px; text-transform:uppercase; color:{{ maroon }};">{{ form.title }}</p>
@@ -41,12 +47,14 @@
             <div style="font-size:15px; line-height:1.6; color:{{ muted }};">{{ contentHtml }}</div>
           </td>
         </tr>
+        {% endblock %}
+        {% block details %}
         <tr>
           <td style="padding:12px 32px 8px;">
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
               {% for field in form.getCustomFields() %}
                 {% set value = submission.getFieldValue(field.fieldKey) %}
-                {% if not field.isValueEmpty(value, submission) %}
+                {% if field.includeInEmail and not field.isConditionallyHidden(submission) and not field.isValueEmpty(value, submission) %}
                 <tr>
                   <td style="padding:12px 0; border-bottom:1px solid {{ line }}; font-family:{{ font }};">
                     <p style="margin:0 0 4px; font-size:12px; font-weight:bold; letter-spacing:.5px; text-transform:uppercase; color:{{ muted }};">{{ field.label }}</p>
@@ -58,6 +66,8 @@
             </table>
           </td>
         </tr>
+        {% endblock %}
+        {% block reply %}
         {% if visitorEmail %}
         <tr>
           <td style="padding:20px 32px 28px;">
@@ -71,12 +81,15 @@
           </td>
         </tr>
         {% endif %}
+        {% endblock %}
+        {% block footer %}
         <tr>
           <td style="padding:18px 32px; background:#FAFAFA; border-top:1px solid {{ line }}; font-family:{{ font }}; font-size:12px; line-height:1.6; color:{{ muted }};">
             Sent from the {{ form.title }} form on {{ siteUrl|trim('/') }} on {{ submission.dateCreated|date('F j, Y \\a\\t g:i A') }}.
             {% if submission.cpEditUrl %}<br><a href="{{ submission.cpEditUrl }}" style="color:{{ maroon }};">View this submission in the admin panel</a>{% endif %}
           </td>
         </tr>
+        {% endblock %}
       </table>
     </td>
   </tr>

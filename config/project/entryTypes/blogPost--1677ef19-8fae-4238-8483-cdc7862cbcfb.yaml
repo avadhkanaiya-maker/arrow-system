@@ -41,12 +41,29 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 08a5d4c3-0f73-4efe-9fe6-58cef9ea722a # Headline
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e85e06c7-7997-404e-aa67-e8a1211b2900
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 360233b1-dacd-47b0-829b-05ebe99d64e9 # Intro
             handle: null
             instructions: 'One or two sentences under the title. Also the excerpt on the blog cards.'
             label: Lead
             oldFieldUid: null
-            required: false
+            required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 421f5cd0-f719-48e7-aded-bbd94d0f5c14

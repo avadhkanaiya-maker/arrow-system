@@ -1,0 +1,4 @@
+handle: requestQuoteAdmin
+name: 'Request a Quote – Admin'
+sortOrder: 7
+template: _emails/admin/request-quote

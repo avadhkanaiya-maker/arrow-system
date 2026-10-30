@@ -92,15 +92,15 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
-            fieldUid: c42b6543-8b75-403b-b77e-8d8d6ecb64a3 # Photos
+            fieldUid: 1b14871d-4082-480c-bcf3-5c8a5ac04164 # Header Photos
             handle: null
-            instructions: 'First = the large photo, second = the small one.'
-            label: 'Header Photos'
+            instructions: null
+            label: null
             oldFieldUid: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: f013864c-4811-438a-837b-eec61baf85ea
+            uid: ff86e9d3-9012-4330-a481-90893dd82a79
             userCondition: null
             warning: null
             width: 100

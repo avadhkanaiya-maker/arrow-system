@@ -11,6 +11,8 @@
   instantly) or else the YouTube Link (data-hero-video); muted, autoplaying, no controls, replayed from the start; no
   banner image (the field is hidden for video slides). Display Time = data-interval (empty: the carousel's 7 s; video
   slides 20 s, as the design).
+  Phones (craft.css): a square stage showing the slide's Mobile Banner Image (square, as live's mobile slider) whole, or
+  else the whole Banner Image; never cropped.
   Class names and data-carousel attributes match the design, so site.js runs the carousel unchanged.
   Vars: block (Hero Slider entry)
 #}
@@ -27,6 +29,7 @@
       {% set youtube = (slide.slideType.value ?? '') == 'video' and not videoFile ? (slide.videoUrl ?? '')|trim : '' %}
       {% set isVideo = videoFile or youtube %}
       {% set image = isVideo ? null : slide.bannerImage.one() %}
+      {% set mobile = image ? slide.mobileBannerImage.one() : null %}
       {% set name = slide.productName ?: (image.alt ?? null) ?: (image.title ?? 'Slide ' ~ loop.index) %}
       {% set names = names|merge([name]) %}
       {% set primary = slide.primaryCta and slide.primaryCta.url ? slide.primaryCta : null %}
@@ -34,8 +37,10 @@
       <div class="hero-slide{{ isVideo ? ' hero-slide--video' }}{{ loop.first ? ' is-active' }}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ slides|length }}: {{ name }}{{ isVideo ? ' (video)' }}" data-slide{% if seconds %} data-interval="{{ seconds * 1000 }}"{% endif %}>
         <div class="hero-slide__stage">
           {% if image %}
+            {% if mobile %}<picture><source media="(max-width: 29.99em)" srcset="{{ mobile.url }}" width="{{ mobile.width }}" height="{{ mobile.height }}">{% endif %}
             <img class="hero-slide__art" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"
               {{- loop.first ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low" decoding="async"' }} alt="{{ image.alt }}">
+            {% if mobile %}</picture>{% endif %}
           {% endif %}
           {% if isVideo %}
             <div class="hero-slide__video" {% if videoFile %}data-hero-video-src="{{ videoFile.url }}"{% else %}data-hero-video="{{ youtube }}"{% endif %} data-hero-video-title="{{ name }}" aria-hidden="true"></div>
@@ -83,11 +88,6 @@
       {% endfor %}
     </div>
     <button class="hero__ctrl" type="button" data-carousel-next><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="visually-hidden">Next slide</span></button>
-    <button class="hero__ctrl hero__ctrl--pause" type="button" aria-pressed="false" data-carousel-pause>
-      <svg class="icon icon--pause" aria-hidden="true"><use href="#i-pause"/></svg>
-      <svg class="icon icon--play" aria-hidden="true"><use href="#i-play"/></svg>
-      <span class="visually-hidden" data-carousel-pause-label>Pause slideshow</span>
-    </button>
   </div>
 </section>
 {% endif %}
