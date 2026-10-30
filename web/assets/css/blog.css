@@ -172,7 +172,6 @@ input[type="search"]::-webkit-search-cancel-button:hover { background-color: var
 /* ==========================================================================
    C. Articles: toolbar, cards, pagination
    ========================================================================== */
-.blog-body { padding-top: clamp(28px, 3.5vw, 44px); }
 
 .blog-toolbar {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;

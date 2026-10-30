@@ -4,8 +4,9 @@
  *
  *   Per post: title, slug (= the live URL), post date (live), author admin, Lead + Meta Description (the live Rank Math
  *   description), SEO Title (only when it differs from "{title} - Arrow Systems, Inc."), Cover Image (the featured image,
- *   with its alt text), Categories (the live breadcrumb category first), Tags, and the Article Body converted from
- *   Elementor by _converter.php. Images are downloaded once into Assets → Images → blog/.
+ *   with its alt text), Categories (the live breadcrumb category first), Tags, the Article Body converted from
+ *   Elementor by _converter.php, and the Headline (live's big in-content H1 when it differs from the title).
+ *   Images and videos are downloaded once into Assets → Images → blog/.
  *   Posts that redirect on the live site (data/live-redirects.tsv) are not imported; config/redirects.php sends their
  *   URLs on, as live.
  *
@@ -126,6 +127,7 @@ foreach ($posts as $n => $post) {
         'articleBody' => builderValue($blocks),
         'blogCategories' => postCategories($post),
         'blogTags' => postTags($post),
+        'headline' => $conv->headline ?: null,
         'seoTitle' => null,
     ], $seo));
     if (!$elements->saveElement($entry)) {

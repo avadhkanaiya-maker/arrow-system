@@ -1,6 +1,6 @@
 allowLineBreaksInTitles: false
 color: null
-description: 'A YouTube video'
+description: 'A YouTube video or an MP4 file'
 fieldLayouts:
   6c0bc9e2-e0f9-47ac-9dcd-b2439a23e05f:
     cardThumbAlignment: end
@@ -15,13 +15,30 @@ fieldLayouts:
             elementEditCondition: null
             fieldUid: 0682eca3-5e9f-4b5d-941d-13299d495921 # Video Link
             handle: null
-            instructions: null
+            instructions: 'A YouTube link, e.g. https://youtu.be/PbjRZJS6dbQ. Or leave it empty and choose a Video File.'
             label: null
             oldFieldUid: null
-            required: true
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: f16e1cfa-5b8f-474f-8352-1f21bb347e07
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 0f1b9be9-36a4-4653-b018-d2852e2a07b8 # Video File
+            handle: null
+            instructions: 'An MP4 file, played in a player with controls (used when there is no YouTube link).'
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f0b77905-8983-46b4-aed9-b1ff291179a8
             userCondition: null
             warning: null
             width: 100

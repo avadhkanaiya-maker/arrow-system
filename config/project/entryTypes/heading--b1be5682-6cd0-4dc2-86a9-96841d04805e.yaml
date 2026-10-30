@@ -47,6 +47,23 @@ fieldLayouts:
             editCondition: null
             elementCondition: null
             elementEditCondition: null
+            fieldUid: 732574f7-14c9-4012-b1d3-7e9471b86ea1 # Link
+            handle: null
+            instructions: null
+            label: null
+            oldFieldUid: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a88e552b-cce8-4f7f-849d-dd8388cf6ffe
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: null
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
             fieldUid: 2dc1a6a0-3996-4d72-8513-321b88d4c946 # Level
             handle: null
             instructions: null

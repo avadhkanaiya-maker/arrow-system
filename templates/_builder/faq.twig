@@ -1,11 +1,13 @@
 {# FAQ block: div.faq, one details.faq__item per FAQ Item in its nested field (faqItems). One shared name per block:
    the browser keeps one question open at a time (opening one closes the other).
-   shortcut: browsers older than 2024 (Chrome 120, Safari 17.2, Firefox 130) ignore the name and allow several open; add JS if they matter #}
+   shortcut: browsers older than 2024 (Chrome 120, Safari 17.2, Firefox 130) ignore the name and allow several open; add JS if they matter
+   Tables in an answer get the Rich Text block's table (.table-wrap / .data-table: lines, sideways scroll), QA 2026-10-29 #}
+{% import '_macros/blog' as blog %}
 <div class="faq">
   {% for item in block.faqItems.all() %}
   <details class="faq__item" name="faq-{{ block.id }}">
     <summary class="faq__q">{{ item.headingText }}</summary>
-    <div class="faq__a">{{ item.richText }}</div>
+    <div class="faq__a">{{ blog.tables(item.richText) }}</div>
   </details>
   {% endfor %}
 </div>

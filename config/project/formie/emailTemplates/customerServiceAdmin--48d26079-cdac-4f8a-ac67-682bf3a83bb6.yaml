@@ -1,0 +1,4 @@
+handle: customerServiceAdmin
+name: 'Customer Service – Admin'
+sortOrder: 8
+template: _emails/admin/customer-service

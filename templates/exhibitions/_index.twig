@@ -33,7 +33,7 @@
   {% set groups = groups|merge([{key: 'earlier', min: earlierYears|last, max: earlierYears|first, shows: pastShows|filter(s => s.startDate|date('Y') in earlierYears)}]) %}
 {% endif %}
 
-{% set photos = entry.exhibitionPhotos.all() %}
+{% set photos = entry.headerPhotos.all() %}
 {% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
 
 {% block title %}{{ pageTitle }}{% endblock %}

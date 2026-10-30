@@ -4,7 +4,7 @@
    - Products category level (desktop: one panel at a time; mobile: accordions)
    - Mobile drawer with focus containment and Escape to close
    - Search panel, compact sticky header
-   - Hero slider (autoplay with pause, dots, prev/next, reduced-motion aware)
+   - Hero slider (autoplay, paused on hover/focus; dots, prev/next; reduced-motion aware; no pause button, QA 2026-10-28)
    - Industries carousel (infinite scroll-snap row with prev/next arrows and industry chips)
    - Click-to-play YouTube facades
    - Worldwide locations map (pins, clusters, tooltips)
@@ -236,8 +236,6 @@
   if (carousel) {
     var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-slide]'));
     var dots = Array.prototype.slice.call(carousel.querySelectorAll('[data-carousel-dot]'));
-    var pauseBtn = carousel.querySelector('[data-carousel-pause]');
-    var pauseLabel = carousel.querySelector('[data-carousel-pause-label]');
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var current = 0;
     var timer = null;
@@ -348,17 +346,10 @@
         timer = setTimeout(function () { showSlide(current + 1); start(); }, Number(slides[current].getAttribute('data-interval')) || INTERVAL);
       }
     };
-    var setUserPaused = function (paused) {
-      userPaused = paused;
-      pauseBtn.setAttribute('aria-pressed', String(paused));
-      pauseLabel.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
-      start();
-    };
 
     carousel.querySelector('[data-carousel-prev]').addEventListener('click', function () { showSlide(current - 1); start(); });
     carousel.querySelector('[data-carousel-next]').addEventListener('click', function () { showSlide(current + 1); start(); });
     dots.forEach(function (dot, i) { dot.addEventListener('click', function () { showSlide(i); start(); }); });
-    pauseBtn.addEventListener('click', function () { setUserPaused(!userPaused); });
 
     // Pause while the pointer or keyboard focus is inside the hero.
     carousel.addEventListener('mouseenter', function () { hoverPaused = true; stop(); });
@@ -372,6 +363,20 @@
       if (e.key === 'ArrowLeft') { showSlide(current - 1); e.preventDefault(); }
       if (e.key === 'ArrowRight') { showSlide(current + 1); e.preventDefault(); }
     });
+    // Swipe on touch screens: a mostly horizontal drag of 40px+ changes slide; vertical drags still scroll the page.
+    var touchX = null, touchY = 0;
+    carousel.addEventListener('touchstart', function (e) {
+      touchX = e.touches.length === 1 ? e.touches[0].clientX : null; // ignore pinch-zoom
+      touchY = e.touches[0].clientY;
+    }, { passive: true });
+    carousel.addEventListener('touchcancel', function () { touchX = null; });
+    carousel.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      var dy = e.changedTouches[0].clientY - touchY;
+      touchX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { showSlide(current + (dx < 0 ? 1 : -1)); start(); }
+    }, { passive: true });
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
 
     carousel.querySelector('[data-carousel-controls]').hidden = false;
@@ -385,7 +390,7 @@
     sizeControls();
     window.addEventListener('resize', sizeControls);
     showSlide(0);
-    setUserPaused(userPaused);
+    start();
   }
 
   /* ---------- Industries carousel (infinite scroll-snap row + arrows and chips) ---------- */
@@ -396,6 +401,7 @@
     var indReal = Array.prototype.slice.call(indTrack.querySelectorAll('[data-ind-slide]'));
     var indCount = indReal.length;
     var indChips = Array.prototype.slice.call(document.querySelectorAll('[data-ind-chip]'));
+    var indChipRow = document.querySelector('[data-ind-chips]');
     var indPrev = document.querySelector('[data-ind-prev]');
     var indNext = document.querySelector('[data-ind-next]');
 
@@ -440,6 +446,15 @@
       indChips.forEach(function (chip, j) {
         if (j === active) chip.setAttribute('aria-current', 'true'); else chip.removeAttribute('aria-current');
       });
+      // Keep the active chip in view, centred in its row (phones show two or three chips; QA 2026-10-28). Only the row
+      // scrolls, never the page.
+      var chip = indChips[active];
+      if (chip && indChipRow.scrollWidth > indChipRow.clientWidth) {
+        indChipRow.scrollTo({
+          left: chip.getBoundingClientRect().left - indChipRow.getBoundingClientRect().left + indChipRow.scrollLeft - (indChipRow.clientWidth - chip.offsetWidth) / 2,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+      }
     };
 
     indPrev.addEventListener('click', function () { goTo(nearestSlide() - 1); });
@@ -793,7 +808,7 @@
   /* ---------- Newsletter ---------- */
   var form = document.querySelector('[data-newsletter]');
   if (form) {
-    var email = form.elements.email;
+    var email = form.querySelector('#nl-email');
     var consent = form.elements.consent; // optional: the live form is email-only
     var status = form.querySelector('.form-status');
 
@@ -840,10 +855,37 @@
         return;
       }
 
-      // TODO(integration): submit to HubSpot here (Forms API or embedded form; portal ID and
-      // form GUID pending). Show a success message only after HubSpot confirms the submission.
-      setStatus('Newsletter signup is not connected yet, so your email address has not been sent. ' +
-        'In the meantime, email sales@arrsys.com to ask for updates.', 'pending');
+      if (form.getAttribute('data-integration') !== 'formie') {   // the Formie form "Newsletter" doesn't exist (yet)
+        setStatus('Newsletter signup is not connected yet, so your email address has not been sent. ' +
+          'In the meantime, email sales@arrsys.com to ask for updates.', 'pending');
+        return;
+      }
+
+      // Formie stores the address (form "Newsletter"); a known address comes back as "must be unique"
+      var button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      setStatus('Subscribing…');
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, credentials: 'same-origin' })
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          var errors = [];   // the field errors, whatever the email field's handle
+          Object.keys(data.errors || {}).forEach(function (k) { errors = errors.concat(data.errors[k]); });
+          var general = document.createElement('div');   // Formie's message is HTML ("<p>…</p>")
+          general.innerHTML = data.errorMessage || '';
+          if (data.success) {
+            form.reset();
+            setStatus('Thank you for subscribing! You’ll hear from us about news and upcoming events.', 'success');
+          } else if (/unique/i.test(errors.join(' '))) {
+            setStatus('This email address is already subscribed. Thank you!', 'success');
+          } else {
+            email.setAttribute('aria-invalid', 'true');
+            setStatus(errors[0] || general.textContent.trim() || 'Sorry, we couldn’t subscribe you. Please check the address and try again.', 'error');
+          }
+        })
+        .catch(function () {
+          setStatus('Sorry, we couldn’t subscribe you right now. Please try again in a moment.', 'error');
+        })
+        .then(function () { button.disabled = false; });
     });
   }
 })();

@@ -5,7 +5,7 @@
     <h3>{{ col.headingText }}</h3>
     <ul>
       {% for row in col.listItems ?? [] %}
-      <li>{{ row.text|md(inlineOnly=true, encode=true) }}</li>
+      <li>{{ row.text|md(inlineOnly=true, encode=true)|parseRefs }}</li>
       {% endfor %}
     </ul>
   </div>

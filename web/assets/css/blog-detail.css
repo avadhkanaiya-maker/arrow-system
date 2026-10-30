@@ -13,7 +13,7 @@
 /* ==========================================================================
    1. Post header: meta, title, summary, then the full-width cover image
    ========================================================================== */
-.post-hero { padding-block: clamp(18px, 2.5vw, 28px) clamp(40px, 5vw, 64px); }
+.post-hero { padding-block: clamp(18px, 2.5vw, 28px) clamp(28px, 3vw, 40px); }
 .post-hero .breadcrumb { margin-bottom: clamp(18px, 3vw, 36px); }
 .post-hero .breadcrumb li:last-child a { display: inline-block; max-width: 34ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
 .post-hero__grid { display: grid; gap: 28px; align-items: center; }
@@ -34,7 +34,8 @@
 /* ==========================================================================
    2. Layout: article + rail ("On this page" + specialist card)
    ========================================================================== */
-.post-body { padding-top: clamp(32px, 5vw, 64px); }
+.post-body { padding-top: clamp(28px, 3vw, 40px); } /* matches the hero's bottom padding (QA 2026-10-29: the gap under the cover was ~190px) */
+.post-body .prose > :first-child { margin-top: 0; }
 .post-layout { display: grid; gap: 28px; }
 .prose { min-width: 0; max-width: 760px; }
 .post-rail { min-width: 0; }
@@ -92,6 +93,7 @@
 
 /* Opening paragraph with a drop cap */
 .prose .post-intro { margin-top: 0; padding-bottom: 28px; border-bottom: 1px solid var(--c-line); font-size: 1.1875rem; line-height: 1.7; color: var(--c-ink); }
+.prose * + .post-intro { margin-top: 28px; } /* an Intro block further down the article: the gap boxed blocks have (QA 2026-10-28) */
 .post-intro::first-letter { float: left; margin: 6px 12px 0 0; font-family: var(--font-display); font-size: 3.6em; font-weight: 800; line-height: .82; color: var(--c-maroon); }
 
 /* Short answer under each section heading */
@@ -166,6 +168,7 @@
 .data-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: .9375rem; line-height: 1.5; }
 .data-table caption { caption-side: top; padding: 14px 18px; text-align: left; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); }
 .data-table th, .data-table td { padding: 12px 18px; border-top: 1px solid var(--c-line); text-align: left; vertical-align: top; }
+.data-table :is(th, td) + :is(th, td) { border-left: 1px solid var(--c-line); } /* column lines too (QA 2026-10-29); the outer frame is .table-wrap's */
 .data-table thead th { background: #FAFAFA; font-size: .8125rem; font-weight: 700; color: var(--c-ink); }
 .data-table tbody th { font-weight: 600; color: var(--c-ink); }
 .data-table tbody tr:hover { background: #FCFAFA; }
@@ -232,8 +235,9 @@
 /* Article footer */
 .post-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--c-line); }
 .prose .post-foot__filed { display: flex; align-items: center; gap: 10px; margin: 0; font-size: .875rem; color: var(--c-muted); }
-.prose .post-foot .text-link { text-decoration: none; }
+.prose .post-foot .text-link { margin-left: auto; text-decoration: none; } /* always on the right, whatever line it wraps to */
 .post-foot__back { transform: rotate(180deg); }
+.post-foot .text-link:hover .post-foot__back { transform: rotate(180deg) translateX(3px); } /* keep it turned: the nudge then goes left */
 
 @media (max-width: 47.99em) {
   .prose { font-size: 1rem; }

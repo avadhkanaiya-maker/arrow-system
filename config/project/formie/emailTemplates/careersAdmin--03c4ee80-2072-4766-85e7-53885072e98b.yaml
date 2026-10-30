@@ -1,0 +1,4 @@
+handle: careersAdmin
+name: 'Careers – Admin'
+sortOrder: 3
+template: _emails/admin/careers

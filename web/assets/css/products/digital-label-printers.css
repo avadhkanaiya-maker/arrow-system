@@ -321,6 +321,6 @@ button.pagination__page, button.pagination__step { font-family: inherit; cursor:
   .more-card:hover, .more-card:hover .more-card__media img, .more-card:hover .more-card__media--icon .icon { transform: none; }
 }
 
-/* Product page spacing (moved from product-detail.css, which Pages with a Tabs block load too) */
-main { --section-y: clamp(36px, 4vw, 56px); }
+/* Product page spacing (moved from product-detail.css, which Pages with a Tabs block load too); sections keep the
+   site's --section-y (QA 2026-10-28: one section rhythm site-wide, craft.css) */
 main .section-head { margin-bottom: clamp(20px, 2.4vw, 28px); }

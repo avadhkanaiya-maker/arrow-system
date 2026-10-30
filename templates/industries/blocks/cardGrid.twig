@@ -73,7 +73,7 @@
             <h3 class="more-card__title">{% if link %}<a class="stretched-link" {{ links.attrs(link) }}>{{ item.headingText }}</a>{% else %}{{ item.headingText }}{% endif %}</h3>
             {% if (item.richText ?? '')|striptags|trim %}<div class="more-card__text">{{ item.richText }}</div>{% endif %}
             {% set details = (item.specItems ?? [])|filter(row => row.term|trim or row.description|trim) %}
-            {% if details|length %}<dl class="more-card__facts">{% for row in details %}<div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true) }}</dd></div>{% endfor %}</dl>{% endif %}
+            {% if details|length %}<dl class="more-card__facts">{% for row in details %}<div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true)|parseRefs }}</dd></div>{% endfor %}</dl>{% endif %}
             {% if link and link.label %}<span class="more-card__more" aria-hidden="true">{{ link.label }} <svg class="icon"><use href="#i-arrow-right"/></svg></span>{% endif %}
           </div>
         </li>
@@ -111,7 +111,7 @@
           {% if (item.richText ?? '')|striptags|trim %}<div class="g-card__text">{{ item.richText }}</div>{% endif %}
           {% if details|length %}
           <dl class="g-card__facts">
-            {% for row in details %}<div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true) }}</dd></div>{% endfor %}
+            {% for row in details %}<div><dt>{{ row.term }}</dt><dd>{{ row.description|md(inlineOnly=true, encode=true)|parseRefs }}</dd></div>{% endfor %}
           </dl>
           {% endif %}
         </li>

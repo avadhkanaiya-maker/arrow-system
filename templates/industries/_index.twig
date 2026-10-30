@@ -3,7 +3,7 @@
     1. Header: breadcrumb, small heading, heading ([red] words), intro, "N industries" + the count line, and the design's
        decorative mosaic of industry icons (fixed)
     2. Grid: the industries with "Show on Listing" on, in the Industries structure order, numbered 01, 02 …
-    3. Help band (maroon): heading + text from this page; buttons = phone + quote link from Site Settings
+    3. Help band (maroon): heading, text and the First / Second Button (CP; each shown when it has a text and a link)
   SEO: CollectionPage + BreadcrumbList.
 #}
 {% extends '_layouts/base' %}
@@ -12,8 +12,6 @@
 
 {% set industries = craft.entries.section('industries').showOnListing(true).with(['featuredImage']).all() %}
 {% set pageTitle = entry.seoTitle ?: entry.title ~ ' - ' ~ siteName %}
-{% set phone = siteSettings.tollFreePhone ?? null %}
-{% set quote = siteSettings.quoteLink ?? null %}
 
 {% block title %}{{ pageTitle }}{% endblock %}
 
@@ -81,10 +79,12 @@
     <div class="container sustain__inner">
       <h2 id="ind-cta-title">{{ text.highlight(entry.ctaHeading) }}</h2>
       {% if entry.ctaText %}<p>{{ entry.ctaText }}</p>{% endif %}
+      {% set buttons = [{link: entry.ctaLink, style: 'btn--light'}, {link: entry.secondaryCta, style: 'btn--outline-light'}]|filter(b => b.link and b.link.url and b.link.getLabel(true)) %}
+      {% if buttons|length %}
       <div class="btn-row ind-cta__actions">
-        {% if phone %}<a class="btn btn--light btn--lg" href="tel:{{ links.tel(phone) }}">Talk to a Specialist</a>{% endif %}
-        <a class="btn btn--outline-light btn--lg" {{ links.attrs(quote, 'Quote page not set (Site Settings)') }}>Request a Quote</a>
+        {% for b in buttons %}<a class="btn {{ b.style }} btn--lg" {{ links.attrs(b.link) }}>{{ b.link.getLabel(true) }}</a>{% endfor %}
       </div>
+      {% endif %}
     </div>
   </section>
   {% endif %}

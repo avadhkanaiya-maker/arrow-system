@@ -1,0 +1,4 @@
+handle: freeSampleRequestAdmin
+name: 'Free Sample Request – Admin'
+sortOrder: 2
+template: _emails/admin/free-sample-request

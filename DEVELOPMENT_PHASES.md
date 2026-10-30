@@ -2880,6 +2880,37 @@ D1: own section, not nested Pages), content from general page-builder blocks onl
 - Checked: both set / first without text / second without URL / neither → 2 / 1 / 1 / 0 buttons (no empty row).
   Backup: …-2026-10-28-051507.
 
+## Phase 93: The admin email template for every form (2026-10-29)
+
+- The Phase 91 template had nothing Contact Us-specific (it lists the form's own fields, every form has `emailAddress`
+  for the Reply button), so all forms share it: renamed **Admin Notification** (`adminNotification`) =
+  `templates/_emails/admin-notification.twig` (YAML + file renamed; 13 updated to the new handle). It now also leaves
+  out fields set to not "Include in Email" or hidden by conditions, as Formie's `{allFields}` does.
+- `storage/imports/forms/14_admin_email_all_forms.php` (idempotent): the Admin Notification of Customer Service,
+  Request a Quote, Become a Dealer, Product Request Quote, Request Quote From Blog, Free Sample Request, Careers uses
+  it; Subject per form ("New Quote Request", "New Job Application", …); Content = a short intro instead of Formie's
+  default text with `{allFields}` (would have listed the fields twice). Careers › Upload Your CV: email link = the
+  control panel URL (CV volume has no public URLs, the link was empty); the CV is still attached.
+- Unchanged: recipients, Reply-To, User Notifications (still on for the 7 forms).
+- Code changed on the server directly (template, YAML, project.yaml), local copy identical. Checked: all 8 rendered for
+  their newest submission (not sent), all 8 screenshotted; second run changes nothing. Backups: …-2026-10-29-063849
+  (before), …-2026-10-29-063952 (after). Server: no DB import (user); Apply YAML Changes + the same settings set by
+  hand in the server CP.
+
+## Phase 94: Each form its own admin email template (2026-10-29)
+
+- User: a separate template per form, same design for now, so one form's email can change later without the others.
+- `templates/_emails/admin-notification.twig` is the shared design, now in blocks (`header`, `intro`, `details`,
+  `reply`, `footer`). `templates/_emails/admin/<form>.twig` (8 files) only extend it; to change one form's email,
+  override a block in its file (e.g. `{% block reply %}{% endblock %}` drops the Reply button).
+- `storage/imports/forms/15_admin_email_template_per_form.php` (idempotent): Formie → Settings → Email Templates →
+  **<Form> – Admin** (`<formHandle>Admin`) per form, and its Admin Notification uses it. "Admin Notification" stays
+  registered (unused) for a new form. 13 and 14 no longer set the template (re-running them can't undo 15).
+- Checked: all 8 render the same email as before (only whitespace differs); a block override changes only that part;
+  13 → 14 → 15 re-run changes nothing. Backup before: …-2026-10-29-071516.
+- Server: template files, YAML and project.yaml copied; Apply YAML Changes + pick each form's own template in its
+  Admin Notification in the CP (no DB import).
+
 ## Follow-ups
 
 | # | Item | Where |

@@ -1,0 +1,4 @@
+handle: becomeADealerAdmin
+name: 'Become a Dealer – Admin'
+sortOrder: 6
+template: _emails/admin/become-a-dealer

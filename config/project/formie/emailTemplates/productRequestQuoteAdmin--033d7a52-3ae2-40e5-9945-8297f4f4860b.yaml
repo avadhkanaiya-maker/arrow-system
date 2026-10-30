@@ -1,0 +1,4 @@
+handle: productRequestQuoteAdmin
+name: 'Product Request Quote – Admin'
+sortOrder: 5
+template: _emails/admin/product-request-quote

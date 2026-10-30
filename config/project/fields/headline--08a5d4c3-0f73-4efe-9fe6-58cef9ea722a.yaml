@@ -1,0 +1,16 @@
+columnSuffix: null
+handle: headline
+instructions: 'The H1 on the post page, when it should differ from the Title. Listings, breadcrumbs and the SEO title keep using the Title.'
+name: Headline
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

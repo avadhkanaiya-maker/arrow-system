@@ -194,3 +194,39 @@
     apply(false);
   });
 })();
+
+/* Internal links: a full-page loader (craft.css .page-loader: the page covered, a red spinner in the middle) from the
+   click until the next page shows (QA 2026-10-30: menus first, then every internal link). Any same-site page link opened
+   in this tab: menus, buttons, cards, links in text …; not new tabs, # links on this page, files (PDF, images,
+   documents: they download or open in a viewer, the page stays), phone / email, other sites, or links a script
+   already handles (lightboxes, filters: their click is cancelled first). Screen readers hear "Loading page…". The
+   browser's Back / Forward (page cache) hides it again; it also goes after 15 s if the navigation was cancelled. */
+(function () {
+  'use strict';
+  var bar = document.createElement('div');
+  bar.className = 'page-loader';
+  bar.setAttribute('role', 'status');
+  bar.innerHTML = '<span class="page-loader__spinner" aria-hidden="true"></span><span class="visually-hidden" data-loader-text></span>';
+  document.body.appendChild(bar);
+  var text = bar.querySelector('[data-loader-text]');
+  var timer;
+  var hide = function () { clearTimeout(timer); bar.classList.remove('is-loading'); text.textContent = ''; };
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if ((a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    var url = new URL(a.href, window.location.href);
+    if (url.origin !== window.location.origin) return;   // other sites, tel:, mailto:
+    if (url.pathname === window.location.pathname && url.search === window.location.search) return;   // this page (#…)
+    if (/\.(pdf|zip|docx?|xlsx?|pptx?|csv|jpe?g|png|gif|webp|svg|mp4|webm|mov)$/i.test(url.pathname) || /\/actions\//.test(url.pathname)) return;   // files
+    setTimeout(function () {   // after every click listener has run: one may still cancel it (lightbox, filter …)
+      if (e.defaultPrevented) return;
+      bar.classList.add('is-loading');
+      text.textContent = 'Loading page…';
+      clearTimeout(timer);
+      timer = setTimeout(hide, 15000);
+    }, 0);
+  });
+  window.addEventListener('pageshow', hide);
+})();

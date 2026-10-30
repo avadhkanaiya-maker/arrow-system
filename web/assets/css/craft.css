@@ -11,12 +11,31 @@
 .hero__ctrl { flex-shrink: 0; }
 .hero__dots { min-width: 0; }
 .hero__dot { min-width: 0; }
+/* Phones: the 16:5 stage was 117px high at 375px (tiny banners, controls bigger than the slide). As live's mobile
+   slider, the stage is square there and shows the slide's square Mobile Banner Image (a <picture> source,
+   hero-slider.twig); a slide without one shows its whole Banner Image, the video whole too: nothing is cropped.
+   Smaller, centered controls; their top follows the stage height (QA 2026-10-28). */
+.hero-slide__stage picture { display: contents; } /* the <img> stays the stage's flex item */
+@media (max-width: 29.99em) {
+  .hero-slide__stage { aspect-ratio: 1 / 1; }
+  .hero-slide__art { width: 100%; object-fit: contain; }
+  .hero-slide__video video { object-fit: contain; }
+  .hero__controls { top: calc(100cqw + 8px); height: 36px; gap: 4px; justify-content: center; }
+  .hero-caption { padding-top: 52px; }
+  .hero__ctrl { width: 32px; height: 32px; }
+  .hero__ctrl .icon { width: 14px; height: 14px; }
+  .hero__dot { width: 24px; height: 32px; }
+  .hero__dot::before { left: 5px; right: 5px; }
+}
 
 /* Long button labels (e.g. an email address): a button too wide for its row wraps its text instead of running off
-   the screen; on phones the hero's buttons are full width, one per line */
+   the screen; on phones every button is full width, one per line (form buttons and download buttons too), except
+   the Search button inside its search box */
 .btn-row .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 @media (max-width: 29.99em) {
-  .hero-intro__actions .btn { flex: 1 1 100%; }
+  .btn, .fui-btn, .prod__pdf { width: 100%; justify-content: center; white-space: normal; overflow-wrap: anywhere; }
+  .prod__pdf { align-self: stretch; }
+  :is(.blog-search, .site-search__form) .btn { width: auto; }
 }
 
 /* Space above buttons: the design spaced them with the text field above, so with that field left empty the buttons
@@ -34,7 +53,8 @@
    Article Body blocks Quote, Image (width), Gallery, Video, Button, Divider, and plain numbered lists / H4 in Rich Text.
    ========================================================================== */
 .prose h4 { margin-top: 28px; font-size: 1.0625rem; line-height: 1.35; color: var(--c-ink); }
-.prose h3 + p, .prose h4 + p { margin-top: 10px; }
+.prose :is(h5, h6) { margin-top: 24px; font-size: 1rem; line-height: 1.4; color: var(--c-ink); }
+.prose h3 + p, .prose h4 + p, .prose :is(h5, h6) + p { margin-top: 10px; }
 .prose ol:not([class]) { padding-left: 1.4em; list-style: decimal; }
 .prose ol:not([class]) li + li { margin-top: 8px; }
 .prose ol:not([class]) li::marker { font-weight: 600; color: var(--c-maroon); }
@@ -63,10 +83,13 @@
 
 .prose-video { margin-top: 18px; }
 .prose-video__frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 10px; background: var(--c-black); }
-.prose-video__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.prose-video__frame :is(iframe, video) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .prose-video figcaption { margin-top: 10px; text-align: center; font-size: .8125rem; line-height: 1.5; color: var(--c-muted); }
 
 .prose .prose-button { margin-top: 22px; }
+/* Long button labels and unbroken strings (file-name patterns, URLs) wrap instead of making phones scroll sideways */
+.prose-button .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.prose { overflow-wrap: break-word; }
 /* Button block: the design's ".prose a" link colour (maroon) is more specific than the button colours, which made the
    red button's text maroon on maroon. The design only resets .btn--light (blog-detail.css); same fix for the others. */
 .prose .btn--primary, .prose .btn--primary:hover, .prose .btn--primary:active { color: var(--c-white); }
@@ -163,7 +186,7 @@
 
 /* Blog post: several categories, the author and the tags (the design shows one category and no tags / author) */
 .post-hero__meta, .post-foot__filed { flex-wrap: wrap; }
-.prose .post-foot__tags { flex-basis: 100%; order: 1; }
+.prose .post-foot__tags { flex-basis: 100%; } /* own row; the source order keeps "Back to all articles" after it (QA 2026-10-29) */
 .prose .post-tag { font-size: .8125rem; font-weight: 600; color: var(--c-maroon); text-decoration: none; }
 .prose .post-tag:hover { text-decoration: underline; }
 
@@ -172,15 +195,26 @@
 .blog-noresults a, .blog-toolbar__count a { color: var(--c-maroon); font-weight: 600; }
 
 /* Stats Strip (Globals → Stats Strip; _partials/stats-strip.twig): the design's product-page strip, here so it works on any page */
-.pd-stats { border-block: 1px solid var(--c-line); background: var(--c-surface); }
+/* Four in a row by the strip's own width, not the screen's: in a blog post's ~740px column four figures ran into each
+   other, so narrow places (blog posts, Columns blocks) get two rows of two (QA 2026-10-28). Only rules here
+   (product-detail.css repeated them with the screen-width version). */
+.pd-stats { border-block: 1px solid var(--c-line); background: var(--c-surface); container-type: inline-size; }
 .pd-stats__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 64em) { .pd-stats__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@container (min-width: 60rem) { .pd-stats__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .pd-stats__list li { display: flex; align-items: center; gap: 14px; min-width: 0; padding: clamp(18px, 2.5vw, 28px) 8px; }
-@media (min-width: 64em) { .pd-stats__list li + li { padding-left: 28px; border-left: 1px solid var(--c-line); } }
+@container (min-width: 60rem) { .pd-stats__list li + li { padding-left: 28px; border-left: 1px solid var(--c-line); } }
 .pd-stats__list .icon { flex-shrink: 0; width: 44px; height: 44px; padding: 11px; border-radius: 50%; background: var(--c-white); color: var(--c-maroon); }
 .pd-stats__list strong { display: block; font-family: var(--font-display); font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem); font-weight: 800; line-height: 1.1; color: var(--c-ink); }
 .pd-stats__list span { display: block; margin-top: 2px; font-size: .8125rem; line-height: 1.4; color: var(--c-muted); }
 .prose .pd-stats { margin-block: 28px; border: 1px solid var(--c-line); border-radius: 12px; } /* inside a blog post */
+/* HTML block (_builder/html.twig, every page builder): the admin's code had no box of its own, so it sat on the block
+   above and its floats / absolute or fixed positioning / heights painted over the blocks after it. Now it is spaced
+   like a paragraph or figure (18px) and nothing in it paints outside its box (QA 2026-10-28). */
+.prose-html { margin-top: 18px; display: flow-root; position: relative; isolation: isolate; contain: paint; }
+.prose > .prose-html:first-child { margin-top: 0; }
+.prose .prose-html > :first-child { margin-top: 0; } /* the box's gap replaces its first element's ... */
+:is(.cols__col--card, .cols__col--panel) .prose > .prose-html:has(> iframe:first-child) { margin-top: 22px; } /* ... so a map in a card / panel column keeps its 22px (below) */
+.prose .pd-stats .container { width: auto; } /* the list's 16px is the inset here, not the page gutter too */
 .prose .pd-stats__list { margin: 0; padding: 0 16px; list-style: none; }
 .prose .pd-stats__list li::before { content: none; }
 .prose .pd-stats__list p { margin: 0; }
@@ -235,6 +269,26 @@
 }
 .formie-block .fui-label { color: var(--c-ink); }
 .formie-block .fui-btn-wrapper { margin-top: 8px; }
+/* Every form's submit button (Formie forms, newsletter, searches, Contact block): the site's display font, Manrope (QA 2026-10-29) */
+form [type="submit"] { font-family: var(--font-display); }
+/* Form messages (newsletter …): success green, as the error is red (site.css .is-error), QA 2026-10-29 */
+.form-status.is-success { color: #027a48; font-weight: 600; }
+
+/* Page loader (craft.js): the whole page covered, a red spinner in the middle, while a menu link's page loads; above the
+   sticky header (z 50). Fades in after .1 s so a page that opens at once doesn't flash it; it also stops double clicks. */
+.page-loader {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
+  background: rgba(255, 255, 255, .55); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px);   /* light: the page stays visible (QA) */
+  opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility 0s linear .2s;
+}
+.page-loader.is-loading { opacity: 1; visibility: visible; transition: opacity .2s ease .1s, visibility 0s; }
+.page-loader__spinner {
+  width: 52px; height: 52px; border: 4px solid var(--c-line); border-top-color: var(--c-red); border-radius: 50%;
+  background: rgba(255, 255, 255, .9); box-shadow: 0 0 0 10px rgba(255, 255, 255, .9), 0 6px 24px rgba(0, 0, 0, .12);   /* a white disc: visible over photos */
+  animation: page-loader-spin .8s linear infinite;
+}
+@keyframes page-loader-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .page-loader__spinner { animation-duration: 2.4s; } }
 .prose .formie-block ul li::before { content: none; }   /* Formie's lists (errors, options) aren't article bullets */
 .prose .formie-block ul { padding: 0; }
 
@@ -373,6 +427,17 @@
 .prose .formie-block__title { margin-top: 0; }
 .section.ind-prose + .card-grid { padding-top: 0; }   /* a heading / text right before a Card Grid belongs to it: no double gap */
 
+/* Benefit cards: the link's last word and its arrow stay on one line (benefit-strip.twig; QA 2026-10-28) */
+.benefit__more-end { white-space: nowrap; }
+/* Industries carousel: a lighter shadow under the active chip (site.css: 0 8px 16px -10px at .9; QA 2026-10-28) */
+.industries__chip[aria-current="true"] { box-shadow: 0 4px 8px -6px rgba(205, 36, 45, .45); }
+
+/* One section rhythm site-wide (QA 2026-10-28): every section, content, the benefits row, CTA bands (.sustain), the
+   One-Stop video band and the newsletter, has --section-y (56px on phones … 104px) at the top and the bottom, on every
+   page. The page headers and the hero slider keep their own spacing; the admin's Space Above / Below (below) still wins.
+   site.css spaced these tighter; the page CSS overrides (blog, blog post, industries, answers, product/Tabs) are removed. */
+.benefits, .benefits + .section, .sustain, .onestop, .newsletter { padding-block: var(--section-y); }
+
 /* Section Settings (_macros/layout.twig sectionClass): the admin's Space Above / Below on a section block */
 .section--pt-none { padding-top: 0; } .section--pt-small { padding-top: calc(var(--section-y) / 2.5); } .section--pt-large { padding-top: calc(var(--section-y) * 1.5); }
 .section--pb-none { padding-bottom: 0; } .section--pb-small { padding-bottom: calc(var(--section-y) / 2.5); } .section--pb-large { padding-bottom: calc(var(--section-y) * 1.5); }
@@ -444,14 +509,19 @@ video.mcar__media { background: var(--c-black); object-fit: contain; }
   .pd-sample { order: 3; }
 }
 
-/* Blog post cover (blog/_entry.twig): a fixed full-width frame, 21:9 (4:3 on phones); the image whole inside it at most at
+/* Blog post cover (blog/_entry.twig): a fixed full-width frame, 21:9 (the image's own shape on phones); the image whole inside it at most at
    its own size (never stretched or cropped), centred on the light grey frame. Overrides blog-detail.css's
    full-width <img>. */
 .post-cover__frame { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 21 / 9;
   overflow: hidden; border-radius: 12px; box-shadow: var(--shadow-md); background: var(--c-surface); }
-@media (max-width: 47.99em) { .post-cover__frame { aspect-ratio: 4 / 3; } }
 .post-cover .post-cover__frame img { position: relative; width: auto; height: auto; max-width: 100%; max-height: 100%;
   border-radius: 0; box-shadow: none; background: none; }
+/* Phones: the frame takes the image's own shape (a fixed 4:3 left wide covers in big grey bands, QA 2026-10-29); tall
+   covers stop at a square */
+@media (max-width: 47.99em) {
+  .post-cover__frame { aspect-ratio: auto; }
+  .post-cover .post-cover__frame img { max-height: 100vw; }
+}
 
 /* Error pages (templates/404.twig, 403.twig → _layouts/error.twig): the page header look (industries.css .page-hero)
    with the status code drawn large and outlined at the right, then the main pages as link cards */

@@ -105,3 +105,20 @@
     });
     Garnish.on(Craft.BaseElementSelectorModal, 'show', function (ev) { hold(ev.target); });   // reopened after a chosen item was removed
 })();
+
+// Matrix blocks (the page builders' sections and every other Matrix field): Delete and Disable wait for the entry's Save
+// (bug report 2026-10-29). Craft autosaves each change into the editor's own draft, so a block deleted and the page
+// reloaded without saving stayed gone. After a Delete or Disable (one block or the selected ones) autosave stops for that
+// entry: Save saves it, together with anything done after it; leaving without saving asks first, and the block stays.
+// Adding and moving blocks autosave as before, up to the first Delete / Disable.
+(function () {
+    if (!window.Craft || !Craft.MatrixInput || !Craft.MatrixInput.Entry) return;
+
+    ['selfDestruct', 'disable'].forEach(function (name) {
+        var original = Craft.MatrixInput.Entry.prototype[name];
+        Craft.MatrixInput.Entry.prototype[name] = function () {
+            if (this.matrix && this.matrix.elementEditor) this.matrix.elementEditor.enableAutosave = false;
+            return original.apply(this, arguments);
+        };
+    });
+})();

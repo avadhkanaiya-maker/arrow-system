@@ -123,15 +123,16 @@
 .collage:hover .collage__inset { transform: rotate(0deg) translateY(-3px); }
 .photo-tag {
   position: absolute; right: 14px; bottom: 14px; z-index: 1;
+  max-width: calc(58% - 14px); /* stop before the inset photo (≈40% wide); long captions wrap */
   display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
   background: rgba(255, 255, 255, .94); border-radius: 4px; box-shadow: var(--shadow-sm);
   font-size: .8125rem; font-weight: 600; color: var(--c-ink);
 }
-.photo-tag .icon { width: 15px; height: 15px; color: var(--c-maroon); }
+.photo-tag .icon { flex: none; width: 15px; height: 15px; color: var(--c-maroon); }
 .dot-grid--hero { --cols: 8; --rows: 5; top: 0; right: 0; }
 .rings--hero { right: -50px; bottom: -20px; width: 140px; }
 @media (max-width: 47.99em) {
-  .photo-tag { top: 12px; bottom: auto; left: 12px; right: auto; }
+  .photo-tag { top: 12px; bottom: auto; left: 12px; right: auto; max-width: calc(100% - 24px); }
 }
 @media (min-width: 48em) {
   .rings--hero { right: -70px; bottom: -40px; width: 220px; }

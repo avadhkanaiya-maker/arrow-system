@@ -62,11 +62,16 @@ class Module extends \yii\base\Module
         });
 
         // Video uploads (the Video File field of hero slides, carousel slides and the One Stop section, or the Assets
-        // screen): at most 5 MB each, so the autoplaying videos stay light (client request 2026-10-26)
+        // screen): at most 5 MB each, so the autoplaying videos stay light (client request 2026-10-26). Not in the blog
+        // folder: article videos play only when clicked (live's posts have 6–34 MB videos; decided 2026-10-28)
         Event::on(Asset::class, Model::EVENT_DEFINE_RULES, function(DefineRulesEvent $event) {
             /** @var Asset $asset */
             $asset = $event->sender;
             $event->rules[] = ['tempFilePath', function() use ($asset) {
+                $folderId = $asset->newLocation ? AssetsHelper::parseFileLocation($asset->newLocation)[0] : $asset->folderId;
+                if ($folderId && Craft::$app->getAssets()->getFolderById((int)$folderId)?->path === 'blog/') {
+                    return;
+                }
                 if ($error = self::videoSizeError($asset->getFilename(), $asset->tempFilePath)) {
                     $asset->addError('tempFilePath', $error);
                 }

@@ -47,7 +47,7 @@
           {% if points|length %}
           <ul class="ctrl-points">
             {% for row in points %}
-            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true) }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true)|parseRefs }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true)|parseRefs }}</p>{% endif %}</div></li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -71,7 +71,7 @@
           {% if points|length %}
           <ul class="ctrl-points">
             {% for row in points %}
-            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true) }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true) }}</p>{% endif %}</div></li>
+            <li><span class="ico" aria-hidden="true"><svg class="icon"><use href="#i-{{ row.icon ?: 'check' }}"/></svg></span><div>{% if row.title %}<h3>{{ row.title|md(inlineOnly=true, encode=true)|parseRefs }}</h3>{% endif %}{% if row.text %}<p>{{ row.text|md(inlineOnly=true, encode=true)|parseRefs }}</p>{% endif %}</div></li>
             {% endfor %}
           </ul>
           {% endif %}
